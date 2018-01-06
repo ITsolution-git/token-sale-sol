@@ -1,0 +1,42 @@
+<div class="header-section">
+  <div class="header-wrapper">
+    <div class="header-logo">
+      <img class="site-logo" src="/assets/images/img-logo.png">
+    </div>
+    <div class="header-logo-social">
+      <img class="site-logo-social" src="/assets/images/img-social-share.png">
+    </div>
+    <div class="header-user-block">
+      <div class="btn-treasure custom-button">
+        <img class="button-image" src="/assets/icons/icon-treasure.png">
+        <span class="button-text">Open Treasure</span>
+      </div>
+      <div class="btn-gizer-amount custom-button">
+        <img class="button-image" src="/assets/icons/icon-gizer.png">
+        <span class="button-text">1490 GZR</span>
+      </div>
+      <div class="btn-user-info custom-button">
+        <img class="button-image" src="/assets/icons/icon-user.png">
+        <span class="button-text">0xbvd82sd72kj97..</span>
+      </div>
+      <div class="btn-etherum-info">
+        <span class="info-text">2.872 ETH</span>
+      </div>
+    </div>
+  </div>
+  <nav class="navbar navbar-expand-lg">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mr-auto">
+        <li *ngFor="let menuItem of menuItems"
+          class="nav-item" routerLinkActive="active"
+          [ngClass]="getMenuItemClasses(menuItem)">
+          <img *ngIf="menuItem.title === 'Home'" class="icon-home" src="/assets/icons/icon-home.png">
+          <a class="nav-item nav-link" [routerLink]="[menuItem.path]" routerLinkActive="active">{{menuItem.title}}</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>

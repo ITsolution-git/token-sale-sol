@@ -1,0 +1,90 @@
+.header-wrapper {
+    padding: 11px 8%;
+    .header-logo {
+        display: inline-block;
+        .site-logo {
+
+        }
+    }
+    .header-logo-social {
+        display: inline-block;
+        padding: 0 34px;
+        .site-logo-social {
+
+        }
+    }
+    .header-user-block {
+        display: inline-block;
+        float: right;
+        .custom-button {
+            display: inline-block;
+            cursor: pointer;
+            padding: 0 15px;
+            .button-image {
+                vertical-align: bottom;
+            }
+            .button-text {
+                padding-left: 5px;
+                vertical-align: text-bottom;
+                font-size: 16px;
+                font-family: "Century Gothic";
+                color: #fff;
+                line-height: 1.2;
+                text-align: left;
+                -webkit-font-smoothing: antialiased;
+            }
+        }
+        .btn-gizer-amount {
+            .button-text {
+                font-family: "Century Gothic Bold";
+                color: #fff;
+                -webkit-font-smoothing: antialiased;
+            }
+        }
+        .btn-etherum-info {
+            display: inline-block;
+            background-color: #28a103;
+            padding: 0px 14px;
+            border-radius: 20px;
+            .info-text {
+                font-family: "Century Gothic";
+                color: #fff;
+                font-size: 14px;
+                -webkit-font-smoothing: antialiased;
+            }
+        }
+          
+    }
+}
+.navbar {
+    padding: 0 10%;
+    background-color: #151627;
+    .navbar-collapse {
+        .navbar-nav {
+            height: 43px;
+            text-align: center;
+            padding: 5px;
+            li.nav-item {
+                position: relative;
+                img.icon-home {
+                    position: absolute;
+                    left: 15px;
+                    top: 6px;
+                }
+                a.nav-link {
+                    font-size: 16px;
+                    font-family: "Century Gothic";
+                    color: #fff;
+                    line-height: 1.2;
+                    -webkit-font-smoothing: antialiased;
+                    padding: 6px 0;
+                    width: 128px;
+                    border-right: solid 1px #2d2e3d;
+                }
+                &:active {
+                    background-color: aqua;
+                }
+            }
+        }
+    }
+}
