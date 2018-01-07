@@ -1,0 +1,45 @@
+.inventory-item {
+    .col-md-15 {
+        width: 20%;
+        float: left;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+    .item-wrapper {
+        border-style: solid;
+        border-width: 5px;
+        border-radius: 15px;
+        text-align: center;
+        font-size: 18px;
+        font-family: "Century Gothic";
+        color: #ffffff;
+        line-height: 1.2;
+        -webkit-font-smoothing: antialiased;
+        text-align: center;
+        margin-bottom: 30px;
+        .item-img {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 45px;
+            height: 110px;
+        }
+        .item-name {
+            font-size: 18px;
+            font-family: "Century Gothic";
+            color: #ffffff;
+            line-height: 1.2;
+            -webkit-font-smoothing: antialiased;
+            text-align: center;
+            margin-bottom: 22px;
+        }
+        .btn-view {
+            margin-bottom: 30px;
+            background-color: #ca8500;
+            display: inline-block;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+    }
+}
+  
