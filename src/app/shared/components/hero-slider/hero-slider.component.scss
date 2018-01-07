@@ -1,0 +1,22 @@
+.carousel {
+    .slick-dots {
+        bottom: 25px;
+        .slick-active {
+            background: #fff;
+        }
+        li {
+            background: #010102;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            margin: 0 8px;
+            button {
+                width: 16px;
+                height: 16px;
+                &:before {
+                    display: none;
+                }
+            }
+        }
+    }
+}
