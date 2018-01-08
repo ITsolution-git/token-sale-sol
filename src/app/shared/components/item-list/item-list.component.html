@@ -3,12 +3,14 @@
     <div class="list-title">
       <p>Just Released</p>
     </div>
-    <app-item
-      *ngFor="let number of [0,1,2,3,4,5,6,7,8,9]"
-      [index]="number % 5"
-      [itemImageLink]="itemImageLink[number % 5]"
-      >
-    </app-item>
+    <div class="item-list">
+        <app-item
+          *ngFor="let number of [0,1,2,3,4,5,6,7,8,9]"
+          [index]="number % 5"
+          [itemImageLink]="itemImageLink[number % 5]"
+          >
+        </app-item>
+    </div>
   </div>
 </div>
 

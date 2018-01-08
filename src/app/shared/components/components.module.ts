@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HeaderModule } from './header/header.module';
 import { HeroSliderModule } from './hero-slider/hero-slider.module';
 import { ItemListModule } from './item-list/item-list.module';
+import { WelcomeModule } from './welcome/welcome.module';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -11,12 +13,14 @@ import { ItemListModule } from './item-list/item-list.module';
     HeaderModule,
     HeroSliderModule,
     ItemListModule,
+    WelcomeModule,
   ],
   declarations: [],
   exports: [
     HeaderModule,
     HeroSliderModule,
     ItemListModule,
+    WelcomeModule,
   ]
 })
 export class ComponentsModule { }
