@@ -1,0 +1,59 @@
+.container {
+    padding: 50px 0;
+    .section-header {
+        display: inline-block;
+        vertical-align: middle;
+        padding-left: 18px;
+        font-size: 30px;
+        font-family: "Century Gothic";
+        color: #ffffff80;
+        text-transform: uppercase;
+    }
+    .text_content {
+        margin-top: 40px;
+        margin-bottom: 90px;
+        font-size: 18px;
+        font-family: "Century Gothic";
+        color: #ffffff80;
+        -webkit-font-smoothing: antialiased;
+    }
+    .pdf_btn {
+        #techonepage, #gzrterms {
+            margin-right: 27px;
+            padding: 11px 20px;
+            border-radius: 20px;
+            background: #ffffff;
+            font-size: 18px;
+            font-family: "Century Gothic";
+            color: #626674;
+            img {
+                vertical-align: top;
+            }
+            span {
+                vertical-align: top;
+                padding-left: 10px;
+                -webkit-font-smoothing: antialiased;
+            }
+        }
+    }
+    .img-group {
+        padding: 20px;
+    }
+    .item_type {
+        h4 {
+            font-size: 17px;
+            margin-bottom: 16px;
+            margin-left: 10px;
+            font-family: "Century Gothic";
+            color: #42456b;
+            text-transform: uppercase;
+        }
+        h5 {
+            font-size: 16px;
+            margin-top: 10px;
+            font-family: "Century Gothic";
+            color: #36385a;
+        }
+    }
+}
+  
