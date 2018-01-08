@@ -7,7 +7,7 @@ import { ItemListModule } from './item-list/item-list.module';
 import { WelcomeModule } from './welcome/welcome.module';
 import { GzrTokenModule } from './gzr-token/gzr-token.module';
 import { PartnersModule } from './partners/partners.module';
-
+import { FooterModule } from './footer/footer.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -18,6 +18,7 @@ import { PartnersModule } from './partners/partners.module';
     WelcomeModule,
     GzrTokenModule,
     PartnersModule,
+    FooterModule,
   ],
   declarations: [],
   exports: [
@@ -27,6 +28,7 @@ import { PartnersModule } from './partners/partners.module';
     WelcomeModule,
     GzrTokenModule,
     PartnersModule,
+    FooterModule,
   ]
 })
 export class ComponentsModule { }

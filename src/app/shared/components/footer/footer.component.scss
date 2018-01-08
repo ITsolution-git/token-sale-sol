@@ -1,0 +1,82 @@
+.footer {
+    padding-top: 42px;
+    background: #17192b;
+    .title {
+        font-size: 18px;
+        font-family: "Century Gothic";
+        color: #ffffff;
+    }
+    .menu {
+        display: inline-block;
+        .list-unstyled {
+            display: inline-block;
+            margin-right: 30px;
+            li {
+                padding: 5px 0;
+                a {
+                    font-family: "Century Gothic";
+                    color: #7777a9;
+                    font-size: 15px;
+                    vertical-align: middle;
+                }
+            }
+        }
+        .img {
+            display: inline-block;
+            width: 40px;
+            text-align: center;
+        }
+    }
+    .subscription {
+        .sub-title {
+            font-size: 18px;
+            font-family: "Century Gothic";
+            color: #ffffff;
+            width: 100%;
+        }
+        .email {
+            width: 100%;
+            border-radius: 8px;
+            background-color: #212232;
+            border: 0;
+            font-size: 14px;
+            font-family: "Century Gothic";
+            color: #949494;
+            padding: 8px 20px;
+        }
+        .btn-submit {
+            border-style: solid;
+            border-width: 3px;
+            border-color: #24c9f0;
+            border-radius: 7px;
+            background-color: transparent;
+            font-size: 15px;
+            font-family: "Century Gothic Bold";
+            color: #24c9f0;
+            padding: 8px 40px;
+            margin-left: 20px;
+            vertical-align: middle;
+            vertical-align: -webkit-baseline-middle;
+            cursor: pointer;
+        }
+        .download-gizer {
+            margin-top: 23px;
+            width: 100%;
+            img {
+                width: 100%;
+                padding-right: 10px;
+            }
+        }
+    }
+    .copyright {
+        margin-top: 10px;
+        background-color: #111220;
+        .text-copyright {
+            font-size: 15px;
+            font-family: "Century Gothic";
+            color: rgba(255, 255, 255, 0.078);
+            line-height: 3.2;
+            margin: 0;
+        }
+    }
+}
