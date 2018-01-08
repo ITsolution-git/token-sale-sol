@@ -6,6 +6,7 @@ import { HeroSliderModule } from './hero-slider/hero-slider.module';
 import { ItemListModule } from './item-list/item-list.module';
 import { WelcomeModule } from './welcome/welcome.module';
 import { GzrTokenModule } from './gzr-token/gzr-token.module';
+import { PartnersModule } from './partners/partners.module';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { GzrTokenModule } from './gzr-token/gzr-token.module';
     ItemListModule,
     WelcomeModule,
     GzrTokenModule,
+    PartnersModule,
   ],
   declarations: [],
   exports: [
@@ -24,6 +26,7 @@ import { GzrTokenModule } from './gzr-token/gzr-token.module';
     ItemListModule,
     WelcomeModule,
     GzrTokenModule,
+    PartnersModule,
   ]
 })
 export class ComponentsModule { }

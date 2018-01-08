@@ -1,0 +1,24 @@
+.partners-section {
+    padding-top: 50px;
+    padding-bottom: 10px;
+    text-align: center;
+    background-image: url('/assets/images/img-partners-bg.png');
+    background-size: cover;
+    .title-section {
+        margin-bottom: 40px;
+        h2 {
+            letter-spacing: 2px;
+            font-size: 30px;
+            font-family: "Roboto";
+            color: rgba(255, 255, 255, 0.502);
+            text-transform: uppercase;
+        }
+    }
+    .partners-logo {
+        .partners {
+            margin-bottom: 40px;
+            align-items: center;
+        }
+    }
+}
+  
