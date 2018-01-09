@@ -31,8 +31,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav mr-auto">
         <li *ngFor="let menuItem of menuItems"
-          class="nav-item" routerLinkActive="active"
-          [ngClass]="getMenuItemClasses(menuItem)">
+          class="nav-item" routerLinkActive="active">
           <img *ngIf="menuItem.title === 'Home'" class="icon-home" src="/assets/icons/icon-home.png">
           <a class="nav-item nav-link" [routerLink]="[menuItem.path]" routerLinkActive="active">{{menuItem.title}}</a>
         </li>

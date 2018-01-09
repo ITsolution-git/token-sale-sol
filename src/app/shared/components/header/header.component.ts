@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ROUTES } from './header-routing.module';
+import { HeaderRoutes } from './header-routing.module';
 import { MenuType } from './header.metadata';
 
 @Component({
@@ -15,17 +15,10 @@ export class HeaderComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.menuItems = ROUTES.filter(menuItem => menuItem.menuType !== MenuType.BRAND);
-    this.brandMenu = ROUTES.filter(menuItem => menuItem.menuType === MenuType.BRAND)[0];
+    this.menuItems = HeaderRoutes;
   }
 
   public get menuIcon(): string {
     return this.isCollapsed ? '☰' : '✖';
-  }
-
-  public getMenuItemClasses(menuItem: any) {
-    return {
-      'pull-xs-right': this.isCollapsed && menuItem.menuType === MenuType.RIGHT
-    };
   }
 }

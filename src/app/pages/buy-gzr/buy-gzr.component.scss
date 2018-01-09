@@ -1,0 +1,52 @@
+.buy-gzr {
+    .title {
+        font-size: 22px;
+        font-family: "Century Gothic";
+        color: #ffffff;
+        -webkit-font-smoothing: antialiased;
+    }
+    .gizer-value {
+        font-size: 53px;
+        font-family: "Century Gothic Bold";
+        color: #ffffff;
+        -webkit-font-smoothing: antialiased;
+    }
+    .description {
+        background-color: #272942;
+        .description-text {
+            font-size: 16px;
+            font-family: "Century Gothic";
+            color: #ffffff;
+            -webkit-font-smoothing: antialiased;
+        }
+    }
+    .label {
+        background-color: #545778;
+        .unit-text {
+            font-size: 17px;
+            font-family: "Century Gothic";
+            color: #ffffff;
+            -webkit-font-smoothing: antialiased;
+        }
+    }
+    .input-amount {
+        height: 38px;
+        background-color: #2f314e;
+        font-size: 17px;
+        font-family: "Century Gothic";
+        color: #ffffff;
+        border: 0;
+        -webkit-font-smoothing: antialiased;
+        &:focus{
+            outline: none;
+        }
+    }
+    .txt-equal {
+        color: #24c9f0;
+        font-size: 25px;
+    }
+    .btn-buy-now {
+        cursor: pointer;
+    }
+}
+  

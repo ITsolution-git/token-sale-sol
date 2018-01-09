@@ -9,6 +9,11 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: './pages/home/home.module#HomeModule',
+      },
+      {
+        path: 'buy-gzr',
+        loadChildren: './pages/buy-gzr/buy-gzr.module#BuyGzrModule',
+        pathMatch: 'full'
       }
     ]
   },
