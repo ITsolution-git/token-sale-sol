@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HeaderRoutes } from './header-routing.module';
-import { MenuType } from './header.metadata';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -12,10 +12,14 @@ export class HeaderComponent implements OnInit {
   public brandMenu: any;
   isCollapsed = true;
 
-  constructor() {}
+  constructor( private router: Router ) {}
 
   ngOnInit() {
     this.menuItems = HeaderRoutes;
+  }
+
+  navgiateToTreasure() {
+    this.router.navigate(['/open-treasure']);
   }
 
   public get menuIcon(): string {

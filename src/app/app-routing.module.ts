@@ -19,6 +19,11 @@ const routes: Routes = [
         path: 'meta-mask',
         loadChildren: './pages/meta-mask/meta-mask.module#MetaMaskModule',
         pathMatch: 'full'
+      },
+      {
+        path: 'open-treasure',
+        loadChildren: './pages/open-treasure/open-treasure.module#OpenTreasureModule',
+        pathMatch: 'full'
       }
     ]
   },

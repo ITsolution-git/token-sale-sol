@@ -1,0 +1,35 @@
+.treasure {
+    .treasure-info-box {
+        border: solid 1px #7777a9;
+        background-color: #1c1e33;
+        background-image: url('/assets/images/treasure-box-bg.png');
+        background-size: cover;
+        .title {
+            font-size: 30px;
+            font-family: "Century Gothic Bold";
+            color: #f7d05a;
+        }
+        .description {
+            font-size: 18px;
+            font-family: "Century Gothic";
+            color: #ffffff;
+            line-height: 20px;
+        }
+        .open-treasure-button-deco {
+            border: solid 2px #ffffff;
+            border-radius: 12px;
+            background-color: rgba(0, 0, 0, 0.639);
+            .open-treasure-button-img {
+                cursor: pointer;
+            }
+            .gizer-price {
+                .gizer-price {
+                    font-size: 26px;
+                    font-family: "Century Gothic Bold";
+                    color: #ffffff;
+                }
+            }
+        }
+    }
+}
+  
