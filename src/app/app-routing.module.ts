@@ -14,6 +14,11 @@ const routes: Routes = [
         path: 'buy-gzr',
         loadChildren: './pages/buy-gzr/buy-gzr.module#BuyGzrModule',
         pathMatch: 'full'
+      },
+      {
+        path: 'meta-mask',
+        loadChildren: './pages/meta-mask/meta-mask.module#MetaMaskModule',
+        pathMatch: 'full'
       }
     ]
   },

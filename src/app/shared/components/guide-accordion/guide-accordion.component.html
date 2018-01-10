@@ -1,0 +1,82 @@
+<div class="guide-accordion">
+  <div class="row justify-content-center">
+    <div class="title py-4">
+      <h3>Getting started</h3>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <accordion class="w-100">
+      <accordion-group
+      [isOpen]="status.ggid"
+      (click)="status.ggid = !status.ggid"
+      >
+        <div accordion-heading class="clearfix">
+            What do I need to unlock GGid Items?
+          <span class="float-right pull-right">{{status.ggid ? '‒' : '+'}}</span>
+        </div>
+        <p class="description">Here's what you'll need to get started with GGiD:</p>
+        <ul class="guide-list">
+          <li class="guide-item">
+            <p class="description">A computer running the desktop Chrome, Firefox, Opera or Brave</p>
+          </li>
+          <li class="guide-item">
+            <p class="description">MetaMask, a digital wallet specifically for your web browser</p>
+          </li>
+          <li class="guide-item">
+            <p class="description">Ether, the cryptocurrency that powers GGiD</p>
+          </li>
+        </ul>
+      </accordion-group>
+      <accordion-group
+        [isOpen]="status.buy"
+        (click)="status.buy = !status.buy">
+        <div accordion-heading class="clearfix">
+            How to buy GZR
+          <span class="float-right pull-right">{{status.buy ? '‒' : '+'}}</span>
+        </div>
+        <p class="description">To Login to our web application and purchase GZR, you will need to install MetaMask and send ETH to your wallet.</p>
+        <p class="description">MetaMask will act as your login to our website, meaning you do not need an extra password to protect your account.</p>
+      </accordion-group>
+      <accordion-group
+          [isOpen]="status.install"
+          (click)="status.install = !status.install">
+          <div accordion-heading class="clearfix">
+            Installing MetaMask, your digital wallet
+            <span class="float-right pull-right">{{status.install ? '‒' : '+'}}</span>
+          </div>
+        <p class="description">To Login to our web application and purchase GZR, you will need to install MetaMask and send ETH to your wallet.</p>
+        <p class="description">MetaMask will act as your login to our website, meaning you do not need an extra password to protect your account.</p>
+      </accordion-group>
+      <accordion-group
+        [isOpen]="status.locked"
+        (click)="status.locked = !status.locked">
+        <div accordion-heading class="clearfix">
+          Why is MetaMask locked?
+          <span class="float-right pull-right">{{status.locked ? '‒' : '+'}}</span>
+        </div>
+        <p class="description">To Login to our web application and purchase GZR, you will need to install MetaMask and send ETH to your wallet.</p>
+        <p class="description">MetaMask will act as your login to our website, meaning you do not need an extra password to protect your account.</p>
+      </accordion-group>
+      <accordion-group
+        [isOpen]="status.ether"
+        (click)="status.ether = !status.ether">
+        <div accordion-heading class="clearfix">
+          Acquiring Ether
+          <span class="float-right pull-right">{{status.ether ? '‒' : '+'}}</span>
+        </div>
+        <p class="description">To Login to our web application and purchase GZR, you will need to install MetaMask and send ETH to your wallet.</p>
+        <p class="description">MetaMask will act as your login to our website, meaning you do not need an extra password to protect your account.</p>
+      </accordion-group>
+      <accordion-group
+        [isOpen]="status.wallet"
+        (click)="status.wallet = !status.wallet">
+        <div accordion-heading class="clearfix">
+          How to send ETH to your MetaMask wallet
+          <span class="float-right pull-right">{{status.wallet ? '‒' : '+'}}</span>
+        </div>
+        <p class="description">To Login to our web application and purchase GZR, you will need to install MetaMask and send ETH to your wallet.</p>
+        <p class="description">MetaMask will act as your login to our website, meaning you do not need an extra password to protect your account.</p>
+      </accordion-group>
+    </accordion>
+  </div>
+</div>

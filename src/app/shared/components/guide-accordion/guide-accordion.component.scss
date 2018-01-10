@@ -1,0 +1,56 @@
+.guide-accordion {
+    -webkit-font-smoothing: antialiased;
+    .title {
+        h3 {
+            font-size: 24px;
+            font-family: "Century Gothic Bold";
+            color: #f7d05a;
+        }
+    }
+    .description {
+        font-size: 18px;
+        font-family: "Century Gothic";
+        color: #ffffff;
+    }
+    .panel {
+        border: 0;
+        background-color: #1c1e33;
+        .card {
+            border: 0;
+            background-color: #1c1e33;
+            .panel-heading {
+                border: 0;
+                border-top: solid 1px #333548;
+                border-radius: 0;
+                background-color: #1c1e33;
+                padding: 25px 0;
+                cursor: pointer;
+                .panel-title {
+                    font-size: 18px;
+                    font-family: "Century Gothic Bold";
+                    color: #f7d05a;
+                }
+                span {
+                    font-size: 30px;
+                    line-height: 24px;
+                }
+            }
+            .panel-collapse {
+                .panel-body {
+                    padding-top: 0;
+                    padding-left: 0;
+                    .guide-list {
+                        .guide-item {
+                            font-size: 30px;
+                            line-height: 18px;
+                            color: #757786;
+                            &:before {
+                                margin-top: 15px;
+                             }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,19 @@
+.locked-meta {
+    .title {
+        h2 {
+            font-size: 30px;
+            font-family: "Century Gothic Bold";
+            color: #f7d05a;
+        }
+    }
+    .description {
+        font-size: 18px;
+        font-family: "Century Gothic";
+        color: #ffffff;
+    }
+    .btn-unlock-meta-mask {
+        img {
+            cursor: pointer;
+        }
+    }
+}

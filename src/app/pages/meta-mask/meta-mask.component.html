@@ -1,0 +1,17 @@
+<div class="meta-mask pb-5">
+  <div class="meta-section pt-5">
+    <div class="container">
+      <div *ngIf="!isInstalled">
+        <app-install-meta [isInstalled]="isInstalled" (onInstall)="onInstall($event)" ></app-install-meta>
+      </div>
+      <div *ngIf="isInstalled">
+        <app-locked-meta></app-locked-meta>
+      </div>
+    </div>
+  </div>
+  <div class="getting-started">
+    <div class="container">
+      <app-guide-accordion></app-guide-accordion>
+    </div>
+  </div>
+</div>

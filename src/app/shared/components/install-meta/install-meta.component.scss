@@ -1,0 +1,26 @@
+.install-meta {
+    .title {
+        h2 {
+            font-size: 30px;
+            font-family: "Century Gothic Bold";
+            color: #f7d05a;
+        }
+    }
+    .description {
+        font-size: 18px;
+        font-family: "Century Gothic";
+        color: #ffffff;
+    }
+    .btn-install-meta-mask {
+        padding: 15px 60px;
+        border-radius: 50px;
+        background: #2ba206;
+        cursor: pointer;
+        .btn-meta-mask {
+            font-size: 26px;
+            font-family: "Century Gothic";
+            color: #ffffff;
+            text-shadow: 0px 1px 2px rgba(1, 2, 2, 0.38);
+        }
+    }
+}
