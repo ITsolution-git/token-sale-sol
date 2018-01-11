@@ -34,6 +34,11 @@ const routes: Routes = [
         path: 'faq',
         loadChildren: './pages/faq/faq.module#FaqModule',
         pathMatch: 'full'
+      },
+      {
+        path: 'team',
+        loadChildren: './pages/team/team.module#TeamModule',
+        pathMatch: 'full'
       }
     ]
   },

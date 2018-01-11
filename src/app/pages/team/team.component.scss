@@ -1,0 +1,59 @@
+.meet-team {
+    .team-page {
+        .title {
+            font-size: 24px;
+            font-family: "Century Gothic Bold";
+            color: #2acae7;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .person-card {
+            .person-info {
+                .name {
+                    font-size: 18px;
+                    font-family: "Century Gothic Bold";
+                    color: #ffffff;
+                    white-space: nowrap;
+                }
+                .role {
+                    font-size: 16px;
+                    font-family: "Century Gothic";
+                    color: rgba(255, 255, 255, 0.2);
+                    white-space: nowrap;
+                }
+                .left-adjust {
+                    margin-left: -10px;
+                }
+            }
+        }
+    }
+    .advisory-page {
+        background-color: #151627;
+        .title {
+            font-size: 24px;
+            font-family: "Century Gothic Bold";
+            color: #2acae7;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .person-card {
+            .person-info {
+                .name {
+                    font-size: 18px;
+                    font-family: "Century Gothic Bold";
+                    color: #ffffff;
+                    white-space: nowrap;
+                }
+                .role {
+                    font-size: 16px;
+                    font-family: "Century Gothic";
+                    color: rgba(255, 255, 255, 0.2);
+                    white-space: nowrap;
+                }
+                .left-adjust {
+                    margin-left: -10px !important;
+                }
+            }
+        }
+    }
+}
