@@ -24,6 +24,11 @@ const routes: Routes = [
         path: 'open-treasure',
         loadChildren: './pages/open-treasure/open-treasure.module#OpenTreasureModule',
         pathMatch: 'full'
+      },
+      {
+        path: 'save-account',
+        loadChildren: './pages/save-account/save-account.module#SaveAccountModule',
+        pathMatch: 'full'
       }
     ]
   },

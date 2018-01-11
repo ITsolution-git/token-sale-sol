@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-locked-meta',
@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LockedMetaComponent implements OnInit {
 
+  @Input() isMetaLocked: boolean;
+  @Output() onShowForm = new EventEmitter<boolean>();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  unlockMetaMask() {
+    this.isMetaLocked = true;
+    this.onShowForm.emit(this.isMetaLocked);
   }
 
 }

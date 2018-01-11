@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-guide-accordion',
   templateUrl: './guide-accordion.component.html',
@@ -12,9 +12,12 @@ export class GuideAccordionComponent implements OnInit {
     ggid: true,
   };
 
-  constructor() { }
+  constructor( private router: Router ) { }
 
   ngOnInit() {
   }
 
+  navigateToFAQ() {
+    this.router.navigate(['/faq']);
+  }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-meta-mask',
   templateUrl: './meta-mask.component.html',
@@ -7,13 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MetaMaskComponent implements OnInit {
   isInstalled = false;
+  isMetaLocked = false;
 
-  constructor() { }
+  constructor( private router: Router ) { }
 
   ngOnInit() {
   }
 
   onInstall(isInstalled: boolean) {
     this.isInstalled = isInstalled;
+  }
+
+  onShowForm(isMetaLocked: boolean) {
+    this.isMetaLocked = isMetaLocked;
+    this.router.navigate(['/save-account']);
   }
 }

@@ -5,7 +5,7 @@
         <app-install-meta [isInstalled]="isInstalled" (onInstall)="onInstall($event)" ></app-install-meta>
       </div>
       <div *ngIf="isInstalled">
-        <app-locked-meta></app-locked-meta>
+        <app-locked-meta [isMetaLocked]="isMetaLocked" (onShowForm)="onShowForm($event)"></app-locked-meta>
       </div>
     </div>
   </div>

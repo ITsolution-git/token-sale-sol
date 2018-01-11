@@ -1,0 +1,53 @@
+.save-account {
+    .title {
+        font-size: 30px;
+        font-family: "Century Gothic Bold";
+        color: #f7d05a;
+    }
+    .description {
+        font-size: 18px;
+        font-family: "Century Gothic";
+        color: #ffffff;
+    }
+    .input-info {
+        height: 38px;
+        background-color: #2f314e;
+        font-size: 17px;
+        font-family: "Century Gothic";
+        color: #ffffff;
+        border: 0;
+        -webkit-font-smoothing: antialiased;
+        &:focus{
+            outline: none;
+        }
+    }
+    .input-label {
+        font-size: 18px;
+        font-family: "Century Gothic";
+        color: #7777a9;
+    }
+    .notice-block {
+        .content {
+            border: solid 1px #f7d05a;
+            background-color: rgba(247, 208, 90, 0.051);
+            border-radius: 12px;
+        }
+    }
+    .save-info {
+        display: inline-block;
+        padding: 15px 60px;
+        border-radius: 50px;
+        background: #2ba206;
+        cursor: pointer;
+        .btn-save-info {
+            font-size: 26px;
+            font-family: "Century Gothic";
+            color: #ffffff;
+            text-shadow: 0px 1px 2px rgba(1, 2, 2, 0.38);
+        }
+    }
+    .disabled {
+        opacity: 0.271;
+        cursor: not-allowed;
+    }
+}
