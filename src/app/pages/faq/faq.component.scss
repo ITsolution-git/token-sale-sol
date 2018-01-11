@@ -1,0 +1,86 @@
+.faq-page {
+    .faq-banner {
+        background-image: url('/assets/images/install-meta-bg.png');
+        background-size: cover;
+    }
+    .guide-accordion {
+        -webkit-font-smoothing: antialiased;
+        .title {
+            border-top: solid 1px #333548;
+            h3 {
+                font-size: 24px;
+                font-family: "Century Gothic Bold";
+                color: #f7d05a;
+            }
+        }
+        .description {
+            font-size: 18px;
+            font-family: "Century Gothic";
+            color: #ffffff;
+            .link {
+                font-size: 18px;
+                font-family: "Century Gothic";
+                color: #00b4ff;
+            }
+        }
+        .note {
+            font-size: 18px;
+            font-family: "Century Gothic";
+            color: #ffbf59;
+        }
+        .view-faq {
+            display: inline-block;
+            padding: 15px 80px;
+            border-radius: 50px;
+            background: #f89220;
+            cursor: pointer;
+            .btn-view-faq {
+                font-size: 26px;
+                font-family: "Century Gothic";
+                color: #ffffff;
+                text-shadow: 0px 1px 2px rgba(1, 2, 2, 0.38);
+            }
+        }
+        .panel {
+            border: 0;
+            background-color: #1c1e33;
+            .card {
+                border: 0;
+                background-color: #1c1e33;
+                .panel-heading {
+                    border: 0;
+                    border-top: solid 1px #333548;
+                    border-radius: 0;
+                    background-color: #1c1e33;
+                    padding: 25px 0;
+                    cursor: pointer;
+                    .panel-title {
+                        font-size: 18px;
+                        font-family: "Century Gothic Bold";
+                        color: #f7d05a;
+                    }
+                    span {
+                        font-size: 30px;
+                        line-height: 24px;
+                    }
+                }
+                .panel-collapse {
+                    .panel-body {
+                        padding-top: 0;
+                        padding-left: 0;
+                        .guide-list {
+                            .guide-item {
+                                font-size: 30px;
+                                line-height: 18px;
+                                color: #757786;
+                                &:before {
+                                    margin-top: 15px;
+                                 }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

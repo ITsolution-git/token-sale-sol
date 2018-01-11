@@ -29,6 +29,11 @@ const routes: Routes = [
         path: 'save-account',
         loadChildren: './pages/save-account/save-account.module#SaveAccountModule',
         pathMatch: 'full'
+      },
+      {
+        path: 'faq',
+        loadChildren: './pages/faq/faq.module#FaqModule',
+        pathMatch: 'full'
       }
     ]
   },
