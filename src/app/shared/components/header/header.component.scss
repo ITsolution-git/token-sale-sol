@@ -17,13 +17,14 @@
         .header-logo-social {
             display: inline-block;
             padding: 0 34px;
-            .site-logo-social {
-
+            .twitter {
+                vertical-align: top;
+                padding-top: 4px;
             }
         }
         .header-user-block {
-            display: inline-block;
             float: right;
+            padding-top: 8px;
             .custom-button {
                 display: inline-block;
                 cursor: pointer;
