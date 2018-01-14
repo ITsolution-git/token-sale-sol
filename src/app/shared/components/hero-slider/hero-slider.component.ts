@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-hero-slider',
   templateUrl: './hero-slider.component.html',
@@ -22,9 +22,12 @@ export class HeroSliderComponent implements OnInit {
     'fade': true,
   };
 
-  constructor() { }
+  constructor( private router: Router ) { }
 
   ngOnInit() {
   }
 
+  navigateToBuyGzr() {
+    this.router.navigate(['/buy-gzr']);
+  }
 }
