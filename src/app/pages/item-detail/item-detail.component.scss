@@ -1,0 +1,71 @@
+.item-detail-page {
+    .page-title {
+        font-size: 22px;
+        font-family: "Century Gothic";
+        color: #ffffff;
+    }
+    .item-title {
+        font-size: 30px;
+        font-family: "Century Gothic Bold";
+        color: #ffffff;
+    }
+    .description {
+        font-size: 17px;
+        font-family: "Century Gothic";
+        color: #ffffff;
+        line-height: 1.2;
+    }
+    .item {
+        border: solid 2px #2a2c45;
+        cursor: pointer;
+    }
+    .item-name {
+        font-size: 22px;
+        font-family: "Century Gothic Bold";
+        color: #ffffff;
+    }
+    .open-treasure-button-deco {
+        border: solid 2px #ffffff;
+        border-radius: 12px;
+        background-color: rgba(0, 0, 0, 0.639);
+        .open-treasure-button-img {
+            cursor: pointer;
+        }
+        .gizer-price {
+            .gizer-price {
+                font-size: 18px;
+                font-family: "Century Gothic Bold";
+                color: #ffffff;
+            }
+        }
+    }
+    .into-text {
+        font-size: 18px;
+        font-family: "Century Gothic Bold";
+        color: #7777a9;
+    }
+    .item-list {
+        .item-area {
+            width: 92%;
+            display: inline-block;
+        }
+        .arrow {
+            display: inline-block;
+            height: 100%;
+            vertical-align: top;
+            position: relative;
+            text-align: center;
+            .arrow-padding {
+                cursor: pointer;
+                position: absolute;
+                top: 35%;
+                padding-top: 12px;
+                padding-left: 5px;
+                height: 50px;
+                width: 50px;
+                border-radius: 50%;
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+        }
+    }
+}

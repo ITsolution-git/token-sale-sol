@@ -39,6 +39,11 @@ const routes: Routes = [
         path: 'team',
         loadChildren: './pages/team/team.module#TeamModule',
         pathMatch: 'full'
+      },
+      {
+        path: 'item-detail',
+        loadChildren: './pages/item-detail/item-detail.module#ItemDetailModule',
+        pathMatch: 'full'
       }
     ]
   },

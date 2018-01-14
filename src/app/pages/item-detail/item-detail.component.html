@@ -1,0 +1,76 @@
+<div class="item-detail-page">
+  <div class="container">
+    <div class="page-title py-4">
+      <h3>Item Detail</h3>
+    </div>
+    <div class="item-title py-2">
+      <h2>Classical sword lorem ipsum dor  sit amet readable.</h2>
+    </div>
+    <div class="row no-gutters">
+      <div class="col-md-9 border rounded border-secondary border-right-0">
+        <img class="w-100" src="/assets/images/img-player.png">
+        <div class="description p-4 pl-5">
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley.</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="item rounded item-knife text-center p-5">
+          <img class="" src="/assets/images/img-item-knife.png">
+        </div>
+        <div class="item rounded item-lamp text-center p-5">
+          <img class="" src="/assets/images/img-item-lamp.png">
+        </div>
+        <div class="item rounded item-social p-5">
+          <div class="text-center py-4">
+            <img src="/assets/images/img-item-heart.png">
+          </div>
+          <div class="text-center py-4">
+            <img src="/assets/images/img-item-share.png">
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="row no-gutters mt-4 border border-secondary">
+    <div class="col-md-6">
+      <div class="px-5 pt-5 pb-3">
+        <h3 class="item-name">Item Name here</h3>
+        <p class="description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dumm.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dumm.</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="treasure-image d-inline-block p-3 pb-5">
+        <img class="align-top mr-4" src="/assets/images/img-item-treasure-box.png">
+        <div class="open-treasure-button-deco d-inline-block align-bottom pt-5 pb-4 px-4">
+          <div class="open-treasure-button-img mb-2">
+            <img src="/assets/images/btn-open-treasure-small.png">
+          </div>
+          <div class="gizer-price text-center">
+            <img src="/assets/icons/icon-gizer-tiny.png">
+            <span class="gizer-price align-middle pl-1">1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row no-gutters p-3 mb-5 border border-secondary">
+    <div class="w-100 p-3">
+      <p class="into-text">Other items from this Treasure</p>
+    </div>
+    <div class="item-list w-100">
+      <div class="item-area">
+        <app-item
+          *ngFor="let number of [0,1,2,3,4]"
+          [index]="number % 5"
+          [itemImageLink]="itemImageLink[number % 5]"
+          [showButton] = false
+          >
+        </app-item>
+      </div>
+      <div class="arrow pl-2">
+        <span class="arrow-padding">
+          <img src="/assets/icons/icon-greater-than.png">
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

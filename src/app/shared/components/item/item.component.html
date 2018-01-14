@@ -6,7 +6,7 @@
     <div class="item-name">
       Item Name
     </div>
-    <div class="btn-view">
+    <div *ngIf="showButton" (click)="navigateToItemDetails()" class="btn-view">
       <span>View</span>
     </div>
   </div>
