@@ -13,17 +13,14 @@ const routes: Routes = [
       {
         path: 'buy-gzr',
         loadChildren: './pages/buy-gzr/buy-gzr.module#BuyGzrModule',
-        pathMatch: 'full'
       },
       {
         path: 'meta-mask',
         loadChildren: './pages/meta-mask/meta-mask.module#MetaMaskModule',
-        pathMatch: 'full'
       },
       {
         path: 'open-treasure',
         loadChildren: './pages/open-treasure/open-treasure.module#OpenTreasureModule',
-        pathMatch: 'full'
       },
       {
         path: 'save-account',
@@ -33,22 +30,18 @@ const routes: Routes = [
       {
         path: 'faq',
         loadChildren: './pages/faq/faq.module#FaqModule',
-        pathMatch: 'full'
       },
       {
         path: 'team',
         loadChildren: './pages/team/team.module#TeamModule',
-        pathMatch: 'full'
       },
       {
         path: 'item-detail',
         loadChildren: './pages/item-detail/item-detail.module#ItemDetailModule',
-        pathMatch: 'full'
       },
       {
         path: 'terms-and-conditions',
         loadChildren: './pages/terms-and-conditions/terms-and-conditions.module#TermsAndConditionsModule',
-        pathMatch: 'full'
       }
     ]
   },

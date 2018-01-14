@@ -1,4 +1,22 @@
 .hero-slider {
+    .btn-buy-gzr {
+        cursor: pointer;
+    }
+    .item-0 {
+        position: absolute;
+        top: 63%;
+        left: calc(50% - 108px);
+    }
+    .item-1 {
+        position: absolute;
+        top: 60%;
+        left: 10%;
+    }
+    .item-2 {
+        position: absolute;
+        top: 63%;
+        left: calc(50% - 108px);
+    }
     .carousel {
         .slick-dots {
             bottom: 25px;

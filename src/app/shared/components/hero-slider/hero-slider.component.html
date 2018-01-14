@@ -4,8 +4,9 @@
     #slickModal="slick-modal"
     [config]="slideConfig"
     >
-      <div ngxSlickItem *ngFor="let slide of slides" class="slide">
+      <div ngxSlickItem *ngFor="let slide of slides; let i = index" class="slide">
         <img src="{{ slide.img }}" alt="" width="100%">
+        <img class="btn-buy-gzr item-{{i}}" src="/assets/images/btn-buy-gzr.png">
       </div>
   </ngx-slick>
 </div>
