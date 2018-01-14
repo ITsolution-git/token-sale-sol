@@ -42,6 +42,10 @@ const routes: Routes = [
       {
         path: 'terms-and-conditions',
         loadChildren: './pages/terms-and-conditions/terms-and-conditions.module#TermsAndConditionsModule',
+      },
+      {
+        path: 'partners',
+        loadChildren: './pages/partners/partners.module#PartnersModule',
       }
     ]
   },

@@ -7,7 +7,7 @@ import { ItemModule } from './item/item.module';
 import { ItemListModule } from './item-list/item-list.module';
 import { WelcomeModule } from './welcome/welcome.module';
 import { GzrTokenModule } from './gzr-token/gzr-token.module';
-import { PartnersModule } from './partners/partners.module';
+import { PartnersListModule } from './partners-list/partners-list.module';
 import { FooterModule } from './footer/footer.module';
 import { GuideAccordionModule } from './guide-accordion/guide-accordion.module';
 import { InstallMetaModule } from './install-meta/install-meta.module';
@@ -23,7 +23,7 @@ import { TreasureModule } from './treasure/treasure.module';
     ItemListModule,
     WelcomeModule,
     GzrTokenModule,
-    PartnersModule,
+    PartnersListModule,
     FooterModule,
     GuideAccordionModule,
     InstallMetaModule,
@@ -38,7 +38,7 @@ import { TreasureModule } from './treasure/treasure.module';
     ItemListModule,
     WelcomeModule,
     GzrTokenModule,
-    PartnersModule,
+    PartnersListModule,
     FooterModule,
     GuideAccordionModule,
     InstallMetaModule,
