@@ -1,0 +1,45 @@
+.terms-and-conditions {
+    .banner {
+        background-image: url('/assets/images/img-terms-and-conditions-bg.png');
+        background-size: cover;
+        .title {
+            font-size: 24px;
+            font-family: "Century Gothic Bold";
+            color: #2acae7;
+            letter-spacing: 2px;
+        }
+        .line {
+            background-color: #2acae7;
+            padding: 2px 40px;
+            display: inline-block;
+        }
+    }
+    .note {
+        font-size: 16px;
+        font-family: "Century Gothic";
+        color: #ffa800;
+    }
+    .description {
+        font-size: 16px;
+        font-family: "Century Gothic";
+        color: #8b8da0;
+    }
+    .heading {
+        font-size: 16px;
+        font-family: "Century Gothic Bold";
+        color: #ffffff;
+    }
+    .guide-list {
+        .guide-item {
+            font-size: 16px;
+            font-family: "Century Gothic";
+            line-height: 35px;
+            color: #8b8da0;
+            &:before {
+                margin-top: 15px;
+                color: #ffffff;
+             }
+        }
+    }
+}
+  

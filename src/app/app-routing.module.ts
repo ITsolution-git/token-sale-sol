@@ -44,6 +44,11 @@ const routes: Routes = [
         path: 'item-detail',
         loadChildren: './pages/item-detail/item-detail.module#ItemDetailModule',
         pathMatch: 'full'
+      },
+      {
+        path: 'terms-and-conditions',
+        loadChildren: './pages/terms-and-conditions/terms-and-conditions.module#TermsAndConditionsModule',
+        pathMatch: 'full'
       }
     ]
   },
@@ -54,4 +59,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }
