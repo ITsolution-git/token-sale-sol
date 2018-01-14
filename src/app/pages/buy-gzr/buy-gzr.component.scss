@@ -1,4 +1,10 @@
 .buy-gzr {
+    background-image: url('/assets/images/img-get-gzr-bg.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    .gizer-value-wrapper, .buy-gzr-wrapper {
+        background-color: #1c1e33;
+    }
     .title {
         font-size: 22px;
         font-family: "Century Gothic";
@@ -16,8 +22,13 @@
         .description-text {
             font-size: 16px;
             font-family: "Century Gothic";
-            color: #ffffff;
+            color: #8a8da4;
             -webkit-font-smoothing: antialiased;
+        }
+        .strong-text {
+            font-family: "Century Gothic Bold";
+            font-size: 16px;
+            color: #ffffff;
         }
     }
     .label {
