@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from './shared';
 import { LayoutComponent } from './pages/layout';
+
 const routes: Routes = [
   {
     path: '',
@@ -12,6 +14,7 @@ const routes: Routes = [
       },
       {
         path: 'buy-gzr',
+        canActivateChild: [AuthGuard],
         loadChildren: './pages/buy-gzr/buy-gzr.module#BuyGzrModule',
       },
       {
@@ -20,12 +23,12 @@ const routes: Routes = [
       },
       {
         path: 'open-treasure',
+        canActivateChild: [AuthGuard],
         loadChildren: './pages/open-treasure/open-treasure.module#OpenTreasureModule',
       },
       {
         path: 'save-account',
         loadChildren: './pages/save-account/save-account.module#SaveAccountModule',
-        pathMatch: 'full'
       },
       {
         path: 'faq',
@@ -37,6 +40,7 @@ const routes: Routes = [
       },
       {
         path: 'item-detail',
+        canActivateChild: [AuthGuard],
         loadChildren: './pages/item-detail/item-detail.module#ItemDetailModule',
       },
       {

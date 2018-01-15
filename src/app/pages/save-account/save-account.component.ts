@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LocalStorageService } from 'ngx-webstorage';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-save-account',
@@ -13,7 +15,9 @@ export class SaveAccountComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private localStorage: LocalStorageService,
     private router: Router,
+    private authService: AuthService,
   ) {
     this.createForm();
   }
@@ -32,7 +36,7 @@ export class SaveAccountComponent implements OnInit {
   onSaveInfo() {
     this.isSaving = true;
     setTimeout(() => {
-      this.router.navigate(['/']);
+      this.authService.login();
     }, 5000);
   }
 }

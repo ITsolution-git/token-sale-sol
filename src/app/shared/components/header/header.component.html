@@ -14,15 +14,18 @@
       </div>
       <div class="btn-gizer-amount custom-button">
         <img class="button-image" src="/assets/icons/icon-gizer.png">
-        <span class="button-text">1490 GZR</span>
+        <span *ngIf="isAuthenticated" class="button-text">1490 GZR</span>
+        <span *ngIf="!isAuthenticated" class="button-text">0 GZR</span>
       </div>
       <div class="btn-user-info custom-button">
         <img class="button-image" src="/assets/icons/icon-user.png">
-        <span class="button-text">0xbvd82sd72kj97..</span>
+        <span *ngIf="isAuthenticated" class="button-text" (click)="logout()">0xbvd82sd72kj97..</span>
+        <span *ngIf="!isAuthenticated" class="button-text" (click)="login()">Sign in</span>
       </div>
-      <div class="btn-etherum-info">
+      <div *ngIf="isAuthenticated" class="btn-etherum-info">
         <span class="info-text">2.872 ETH</span>
       </div>
+      
     </div>
   </div>
   <nav class="navbar navbar-expand-lg">
