@@ -34,18 +34,33 @@
             How to buy GZR
           <span class="float-right pull-right">{{status.buy ? '‒' : '+'}}</span>
         </div>
-        <p class="description">To Login to our web application and purchase GZR, you will need to install MetaMask and send ETH to your wallet.</p>
-        <p class="description">MetaMask will act as your login to our website, meaning you do not need an extra password to protect your account.</p>
+        <ul class="guide-list">
+          <li class="guide-item">
+            <p class="description">To login to our web application and purchase GZR, you will need to install MetaMask and send ETH to your wallet.</p>
+          </li>
+          <li class="guide-item">
+            <p class="description">MetaMask will act as your login to our website, meaning you do not need an extra password to protect your account.</p>
+          </li>
+        </ul>
       </accordion-group>
       <accordion-group
-          [isOpen]="status.install"
-          (click)="status.install = !status.install">
-          <div accordion-heading class="clearfix">
-            Installing MetaMask, your digital wallet
-            <span class="float-right pull-right">{{status.install ? '‒' : '+'}}</span>
-          </div>
-        <p class="description">To Login to our web application and purchase GZR, you will need to install MetaMask and send ETH to your wallet.</p>
-        <p class="description">MetaMask will act as your login to our website, meaning you do not need an extra password to protect your account.</p>
+        [isOpen]="status.install"
+        (click)="status.install = !status.install">
+        <div accordion-heading class="clearfix">
+          Installing MetaMask, your digital wallet
+          <span class="float-right pull-right">{{status.install ? '‒' : '+'}}</span>
+        </div>
+        <ul class="guide-list">
+          <li class="guide-item">
+            <p class="description">To purchase GZR and unlock your Global Gaming Identity you will first need to install MetaMask, a digital cryptocurrency wallet for Ethereum. You’ll need to fund your wallet with ETH in order to purchase GZR.</p>
+          </li>
+          <li class="guide-item">
+            <p class="note">Note: MetaMask is like your bank account -- make sure you don’t forget your password or lose your seed words.</p>
+          </li>
+        </ul>
+        <div class="text-center">
+          <iframe class="youtube-video" width="467" height="267" src="https://www.youtube.com/embed/4RXnH6HtCYc" frameborder="0" allowfullscreen></iframe>
+        </div>
       </accordion-group>
       <accordion-group
         [isOpen]="status.locked"

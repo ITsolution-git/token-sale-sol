@@ -14,4 +14,7 @@ export class FaqComponent implements OnInit {
   ngOnInit() {
   }
 
+  stopCollapse(event: any) {
+    event.stopPropagation();
+  }
 }
