@@ -10,62 +10,43 @@
         background: linear-gradient(to top, rgba(44, 221, 251, 0.5), transparent, transparent);
         border-bottom: solid 2px #2cddfb;
     }
-      
-    .header-wrapper {
-        padding: 11px 8%;
-        .header-logo {
-            display: inline-block;
+    .menu-text {
+        padding-left: 5px;
+        vertical-align: text-bottom;
+        font-size: 16px;
+        font-family: "Century Gothic";
+        color: #fff;
+        line-height: 1.2;
+        text-align: left;
+        -webkit-font-smoothing: antialiased;
+    }
+    .custom-button {
+        cursor: pointer;
+        padding: 0 15px;
+        .button-image {
+            margin-top: -10px;
         }
-        .header-logo-social {
-            display: inline-block;
-            padding: 0 34px;
-            .twitter {
-                vertical-align: top;
-                padding-top: 4px;
-            }
+    }
+    .btn-gizer-amount {
+        .menu-text {
+            font-family: "Century Gothic Bold";
+            color: #fff;
+            -webkit-font-smoothing: antialiased;
         }
-        .header-user-block {
-            float: right;
-            padding-top: 8px;
-            .custom-button {
-                display: inline-block;
-                cursor: pointer;
-                padding: 0 15px;
-                .button-image {
-                    vertical-align: bottom;
-                }
-                .button-text {
-                    padding-left: 5px;
-                    vertical-align: text-bottom;
-                    font-size: 16px;
-                    font-family: "Century Gothic";
-                    color: #fff;
-                    line-height: 1.2;
-                    text-align: left;
-                    -webkit-font-smoothing: antialiased;
-                }
-            }
-            .btn-gizer-amount {
-                .button-text {
-                    font-family: "Century Gothic Bold";
-                    color: #fff;
-                    -webkit-font-smoothing: antialiased;
-                }
-            }
-            .btn-etherum-info {
-                display: inline-block;
-                background-color: #28a103;
-                padding: 0px 14px;
-                border-radius: 20px;
-                .info-text {
-                    font-family: "Century Gothic";
-                    color: #fff;
-                    font-size: 14px;
-                    -webkit-font-smoothing: antialiased;
-                }
-            }
-            
+    }
+    .btn-etherum-info {
+        background-color: #28a103;
+        padding: 0px 14px;
+        border-radius: 20px;
+        .info-text {
+            font-family: "Century Gothic";
+            color: #fff;
+            font-size: 14px;
+            -webkit-font-smoothing: antialiased;
         }
+    }
+    .btn-treasure, .btn-gizer-amount {
+        border-right: solid 1px #333548;
     }
     .navbar {
         padding: 0 10%;
@@ -91,7 +72,7 @@
                         color: #fff;
                         line-height: 1.2;
                         -webkit-font-smoothing: antialiased;
-                        padding: 8px 0;
+                        padding: 9px 0;
                         width: 128px;
                         border-right: solid 1px #2d2e3d;
                     }

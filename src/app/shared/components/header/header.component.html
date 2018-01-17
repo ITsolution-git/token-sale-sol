@@ -1,46 +1,49 @@
 <div class="header-section">
-  <div class="header-wrapper">
-    <div class="header-logo">
-      <a href="/"><img class="site-logo" src="/assets/images/img-logo.png"></a>
-    </div>
-    <div class="header-logo-social">
-      <div class="fb-like d-inline-block" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
-      <div class="twitter d-inline-block"><a class="twitter-share-button" href="https://twitter.com/intent/tweet">Tweet</a></div>
-    </div>
-    <div class="header-user-block">
-      <div class="btn-treasure custom-button" (click)="navgiateToTreasure()">
-        <img class="button-image" src="/assets/icons/icon-treasure.png">
-        <span class="button-text">Open Treasure</span>
+  <div class="container">
+    <div class="row align-items-center py-2">
+      <div class="col-md-2">
+        <a href="/"><img class="site-logo" src="/assets/images/img-logo.png"></a>
       </div>
-      <div class="btn-gizer-amount custom-button">
-        <img class="button-image" src="/assets/icons/icon-gizer.png">
-        <span *ngIf="isAuthenticated" class="button-text">1490 GZR</span>
-        <span *ngIf="!isAuthenticated" class="button-text">0 GZR</span>
+      <div class="col-md-4 d-flex text-left">
+        <div class="fb-like d-inline-flex" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        <div class="twitter d-inline-flex ml-2"><a class="twitter-share-button" href="https://twitter.com/intent/tweet">Tweet</a></div>
       </div>
-      <div class="btn-user-info custom-button">
-        <img class="button-image" src="/assets/icons/icon-user.png">
-        <span *ngIf="isAuthenticated" class="button-text" (click)="logout()">0xbvd82sd72kj97..</span>
-        <span *ngIf="!isAuthenticated" class="button-text" (click)="login()">Sign in</span>
+      <div class="col-md-6 d-flex justify-content-end align-items-center">
+        <div class="d-inline-flex btn-treasure align-items-center custom-button" (click)="navgiateToTreasure()">
+          <img class="button-image" src="/assets/icons/icon-treasure.png">
+          <span class="menu-text">Open Treasure</span>
+        </div>
+        <div class="d-inline-flex btn-gizer-amount align-items-center custom-button">
+          <img src="/assets/icons/icon-gizer.png">
+          <span *ngIf="isAuthenticated" class="menu-text">1490 GZR</span>
+          <span *ngIf="!isAuthenticated" class="menu-text">0 GZR</span>
+        </div>
+        <div class="d-inline-flex btn-user-info align-items-center custom-button">
+          <img src="/assets/icons/icon-user.png">
+          <span *ngIf="isAuthenticated" class="menu-text" (click)="logout()">0xbvd82sd72kj97..</span>
+          <span *ngIf="!isAuthenticated" class="menu-text" (click)="login()">Sign in</span>
+        </div>
+        <div *ngIf="isAuthenticated" class="d-inline-flex align-items-center btn-etherum-info">
+          <span class="info-text">2.872 ETH</span>
+        </div>
       </div>
-      <div *ngIf="isAuthenticated" class="btn-etherum-info">
-        <span class="info-text">2.872 ETH</span>
-      </div>
-      
     </div>
   </div>
   <nav class="navbar navbar-expand-lg">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav mr-auto">
-        <li *ngFor="let menuItem of menuItems"
-          class="nav-item">
-          <img *ngIf="menuItem.title === 'Home'" class="icon-home" src="/assets/icons/icon-home.png">
-          <a *ngIf="menuItem.title === 'Home'" class="nav-item nav-link nav-home" [routerLink]="[menuItem.path]" routerLinkActive="router-active" [routerLinkActiveOptions]="{exact: true}">{{menuItem.title}}</a>
-          <a *ngIf="menuItem.title !== 'Home'" class="nav-item nav-link" [routerLink]="[menuItem.path]" routerLinkActive="router-active" [routerLinkActiveOptions]="{exact: true}">{{menuItem.title}}</a>
-        </li>
-      </ul>
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+          <li *ngFor="let menuItem of menuItems"
+            class="nav-item">
+            <img *ngIf="menuItem.title === 'Home'" class="icon-home" src="/assets/icons/icon-home.png">
+            <a *ngIf="menuItem.title === 'Home'" class="nav-item nav-link nav-home" [routerLink]="[menuItem.path]" routerLinkActive="router-active" [routerLinkActiveOptions]="{exact: true}">{{menuItem.title}}</a>
+            <a *ngIf="menuItem.title !== 'Home'" class="nav-item nav-link" [routerLink]="[menuItem.path]" routerLinkActive="router-active" [routerLinkActiveOptions]="{exact: true}">{{menuItem.title}}</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
 </div>
