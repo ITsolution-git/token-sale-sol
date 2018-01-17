@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LocalStorageService } from 'ngx-webstorage';
 import { AuthService } from '../../../core/services/auth.service';
 import { Observable } from 'rxjs/Observable';
+import { debounce } from 'rxjs/operators/debounce';
 
 @Component({
   selector: 'app-header',
@@ -25,9 +26,14 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.menuItems = HeaderRoutes;
-    this.authService.isLoggedIn$.subscribe(flag => {
-      this.isAuthenticated = flag;
-    });
+    const token = this.localStorage.retrieve('token');
+    if (token) {
+      this.isAuthenticated = true;
+    } else {
+      this.authService.isLoggedIn$.subscribe(flag => {
+        this.isAuthenticated = flag;
+      });
+    }
   }
 
   login() {
@@ -35,6 +41,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
+    this.isAuthenticated = false;
     this.authService.logout();
   }
 
