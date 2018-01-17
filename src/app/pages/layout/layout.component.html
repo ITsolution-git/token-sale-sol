@@ -2,7 +2,7 @@
   <div class="page-container">
       <app-header></app-header>
       <div class="page-content">
-        <router-outlet></router-outlet>
+        <router-outlet (deactivate)="onDeactivate()"></router-outlet>
       </div>
       <app-footer></app-footer>
     </div>

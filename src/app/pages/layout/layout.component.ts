@@ -12,4 +12,7 @@ export class LayoutComponent implements OnInit {
   ngOnInit() {
   }
 
+  onDeactivate() {
+    window.scrollTo(0, 0);
+  }
 }
