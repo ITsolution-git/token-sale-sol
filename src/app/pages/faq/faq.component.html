@@ -50,7 +50,7 @@
               <p class="description">To purchase GZR and unlock your Global Gaming Identity you will first need to install MetaMask, a digital cryptocurrency wallet for Ethereum. You’ll need to fund your wallet with ETH in order to purchase GZR.</p>
               <p class="note">Note: MetaMask is like your bank account -- make sure you don’t forget your password or lose your seed words</p>
               <div class="text-center">
-                <iframe class="youtube-video" width="467" height="267" src="https://www.youtube.com/embed/jJ4EXiZk2zA" frameborder="0" allowfullscreen></iframe>
+                <iframe class="youtube-video" width="467" height="267" src="https://www.youtube.com/embed/4RXnH6HtCYc" frameborder="0" allowfullscreen></iframe>
               </div>
             </div>
           </accordion-group>
@@ -63,7 +63,14 @@
               <span class="float-right pull-right">{{status.locked ? '‒' : '+'}}</span>
             </div>
             <div (click)="stopCollapse($event)">
-              <p class="description">Sometimes the ‘My Items’ and ‘Get GZR’ screens display a lock screen. This happens because after a certain amount of time MetaMask automatically locks your account. To unlock MetaMask, simply click the MetaMask icon in your browser and type in your password.</p>
+              <ul class="guide-list">
+                <li class="guide-item">
+                  <p class="description">Sometimes the ‘My Items’ and ‘Get GZR’ screens display a lock screen. This happens because after a certain amount of time MetaMask automatically locks your account. To unlock MetaMask, simply click the MetaMask icon in your browser and type in your password.</p>
+                </li>
+              </ul>
+              <div class="text-center">
+                <img src="/assets/images/meta-mask-locked.png">
+              </div>
             </div>
           </accordion-group>
 
@@ -75,10 +82,20 @@
               <span class="float-right pull-right">{{status.ether ? '‒' : '+'}}</span>
             </div>
             <div (click)="stopCollapse($event)">
-              <p class="description">US citizens can buy Ether directly through MetaMask using Coinbase.</p>
-              <p class="description">If you have other cryptocurrencies like Bitcoin or Litecoin, you can use MetaMask to convert your coins using ShapeShift.</p>
-              <p class="description">If neither of these solutions work for you, you can purchase ETH from an exchange like Binance, Bittrex, KuCoin or Poloniex. Once purchased, you can transfer the ETH from your exchange account to your MetaMask wallet. You cannot purchase GZR or unlock GGiD items without MetaMask.</p>
-              <p class="description">You can only purchase GZR with ETH. No other currencies are accepted.</p>
+              <ul class="guide-list">
+                <li class="guide-item">
+                  <p class="description">US citizens can buy Ether directly through MetaMask using Coinbase.</p>
+                </li>
+                <li class="guide-item">
+                  <p class="description">If you have other cryptocurrencies like Bitcoin or Litecoin, you can use MetaMask to convert your coins using ShapeShift.</p>
+                </li>
+                <li class="guide-item">
+                  <p class="description">If neither of these solutions work for you, you can purchase ETH from an exchange like Binance, Bittrex, KuCoin or Poloniex. Once purchased, you can transfer the ETH from your exchange account to your MetaMask wallet. You cannot purchase GZR or unlock GGiD items without MetaMask.</p>
+                </li>
+                <li class="guide-item">
+                  <p class="note">You can only purchase GZR with ETH. No other currencies are accepted.</p>
+                </li>
+              </ul>
             </div>
           </accordion-group>
 
@@ -90,8 +107,17 @@
               <span class="float-right pull-right">{{status.wallet ? '‒' : '+'}}</span>
             </div>
             <div (click)="stopCollapse($event)">
-              <p class="description">Open your MetaMask wallet and copy your receiving address by clicking the ‘…’ and then clicking ‘Copy Address to Clipboard’. Go to your chosen exchange and withdraw your ETH to the address you copied in order to send your ETH to MetaMask.</p>
-              <p class="note">Note: If you use another wallet like Jaxx, MyEtherWallet, imToken or Eidoo, you have the ability to import your wallet into MetaMask using your private key. Remember to NEVER share your private key with anyone as it gives them full access to all of your funds.</p>
+              <ul class="guide-list">
+                <li class="guide-item">
+                  <p class="description">Open your MetaMask wallet and copy your receiving address by clicking the ‘…’ and then click ‘Copy Address to Clipboard’. Go to your chosen exchange and withdraw your ETH to the address you copied in order to send your ETH to MetaMask.</p>
+                </li>
+                <li class="guide-item">
+                  <p class="note">Note: If you use another wallet like Jaxx, MyEtherWallet, imToken or Eidoo, you have the ability to import your wallet into MetaMask using your private key. Remember to NEVER share your private key with anyone as it gives them full access to all of your funds.</p>
+                </li>
+              </ul>
+              <div class="text-center">
+                <img src="/assets/images/meta-mask-copy-address.png">
+              </div>
             </div>
           </accordion-group>
           
