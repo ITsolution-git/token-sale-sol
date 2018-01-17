@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ApiRoutingService } from './core/api-routing.service';
 import { LayoutModule } from './pages/layout/layout.module';
 import { AuthService } from './core/services/auth.service';
+import { HttpHelperService } from './core/http-helper.service';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { AuthService } from './core/services/auth.service';
     LayoutModule,
   ],
   providers: [
+    HttpHelperService,
     ApiRoutingService,
     AuthGuard,
     AuthService,

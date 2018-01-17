@@ -59,10 +59,11 @@
     <div class="item-list w-100">
       <div class="item-area">
         <app-item
-          *ngFor="let number of [0,1,2,3,4]"
-          [index]="number % 5"
-          [itemImageLink]="itemImageLink[number % 5]"
-          [showButton] = false
+          class="item-wrapper"
+          *ngFor="let item of items; let i = index"
+          [index]="i"
+          [itemImageLink]="item.itemImageLink"
+          [itemName]="item.itemName"
           >
         </app-item>
       </div>

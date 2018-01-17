@@ -1,21 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ItemService } from '../../../core/services/ItemService/item.service';
+import { Item } from '../../models/item.module';
+
 @Component({
   selector: 'app-item-list',
   templateUrl: './item-list.component.html',
   styleUrls: ['./item-list.component.scss']
 })
 export class ItemListComponent implements OnInit {
-  itemImageLink = [
-    '/assets/images/item-mask.png',
-    '/assets/images/item-shot.png',
-    '/assets/images/item-knife.png',
-    '/assets/images/item-umbrella.png',
-    '/assets/images/item-lamp.png'
-  ];
-  constructor() { }
+  items: Item[];
+  constructor(
+    private itemService: ItemService
+  ) { }
 
   ngOnInit() {
+    this.itemService.getItems().subscribe(res => {
+      this.items = res;
+    });
   }
 
 }

@@ -1,0 +1,42 @@
+[
+    {
+      "itemImageLink": "/assets/images/weapons/1.png",
+      "itemName": "Cerberus"
+    },
+    {
+      "itemImageLink": "/assets/images/weapons/2.png",
+      "itemName": "Super Sledge"
+    },
+    {
+      "itemImageLink": "/assets/images/weapons/3.png",
+      "itemName": "Ice Axe"
+    },
+    {
+      "itemImageLink": "/assets/images/weapons/4.png",
+      "itemName": "Warden Shield"
+    },
+    {
+      "itemImageLink": "/assets/images/weapons/5.png",
+      "itemName": "Guardian Staff"
+    },
+    {
+      "itemImageLink": "/assets/images/weapons/6.png",
+      "itemName": "Gear Blade"
+    },
+    {
+      "itemImageLink": "/assets/images/weapons/7.png",
+      "itemName": "Gas Mask"
+    },
+    {
+      "itemImageLink": "/assets/images/weapons/8.png",
+      "itemName": "Spec Ops Helmet"
+    },
+    {
+      "itemImageLink": "/assets/images/weapons/9.png",
+      "itemName": "Plasma Hand Cannon"
+    },
+    {
+      "itemImageLink": "/assets/images/weapons/10.png",
+      "itemName": "Commando Helmet"
+    }
+]

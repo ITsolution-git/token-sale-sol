@@ -40,7 +40,6 @@ const routes: Routes = [
       },
       {
         path: 'item-detail',
-        canActivateChild: [AuthGuard],
         loadChildren: './pages/item-detail/item-detail.module#ItemDetailModule',
       },
       {

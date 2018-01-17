@@ -7,4 +7,8 @@ export class ApiRoutingService {
 
   constructor() {}
 
+  getItemsUrl() {
+    // return this.baseUrl + '/items';
+    return '../../../assets/items.json';
+  }
 }

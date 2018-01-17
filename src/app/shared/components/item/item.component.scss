@@ -1,28 +1,22 @@
 .inventory-item {
-    display: inline-block;
-    width: 20%;
     padding-right: 15px;
     padding-left: 15px;
     .item-wrapper {
-        border-style: solid;
-        border-width: 5px;
+        cursor: pointer;
+        border: solid 1px #393b4d;
         border-radius: 15px;
         text-align: center;
-        font-size: 18px;
-        font-family: "Century Gothic";
-        color: #ffffff;
-        line-height: 1.2;
-        -webkit-font-smoothing: antialiased;
+        box-shadow: 0px -1px 4px 0px #010202;
         text-align: center;
         margin-bottom: 30px;
         .item-img {
             text-align: center;
-            margin-top: 40px;
-            margin-bottom: 45px;
-            height: 110px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            height: 150px;
         }
         .item-name {
-            font-size: 18px;
+            font-size: 16px;
             font-family: "Century Gothic";
             color: #ffffff;
             line-height: 1.2;
@@ -32,6 +26,7 @@
         }
         .btn-view {
             cursor: pointer;
+            color: #ffffff;
             margin-bottom: 30px;
             background-color: #ca8500;
             display: inline-block;

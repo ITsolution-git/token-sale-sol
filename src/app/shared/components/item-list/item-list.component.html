@@ -3,13 +3,20 @@
     <div class="list-title">
       <p>Just Released</p>
     </div>
-    <div class="item-list">
-        <app-item
-          *ngFor="let number of [0,1,2,3,4,5,6,7,8,9]"
-          [index]="number % 5"
-          [itemImageLink]="itemImageLink[number % 5]"
-          >
-        </app-item>
+    <div class="row justify-content-center position-relative">
+      <app-item
+        class="item-wrapper"
+        *ngFor="let item of items; let i = index"
+        [index]="i"
+        [itemImageLink]="item.itemImageLink"
+        [itemName]="item.itemName"
+        >
+      </app-item>
+      <div class="arrow pl-2">
+        <span class="arrow-padding">
+          <img src="/assets/icons/icon-greater-than.png">
+        </span>
+      </div>
     </div>
   </div>
 </div>

@@ -6,12 +6,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./item.component.scss']
 })
 export class ItemComponent implements OnInit {
-  @Input() index: Number = 0;
-  @Input() itemImageLink: String = '';
+  @Input() index = 0;
+  @Input() itemImageLink = '';
   @Input() showButton = true;
-
-  private colorArray = ['#458fe7', '#ffffff', '#e06d56', '#f2a924', '#62eac7'];
-
+  @Input() itemName = '';
   constructor( private router: Router ) { }
 
   ngOnInit() {
