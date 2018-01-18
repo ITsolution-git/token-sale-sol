@@ -1,4 +1,5 @@
 .hero-slider {
+    max-height: 450px;
     .btn-buy-gzr {
         cursor: pointer;
     }
@@ -18,6 +19,9 @@
         left: calc(50% - 108px);
     }
     .carousel {
+        .slick-slide img {
+            max-height: 450px;
+        }
         .slick-dots {
             bottom: 25px;
             .slick-active {
