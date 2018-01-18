@@ -20,4 +20,8 @@ export class GuideAccordionComponent implements OnInit {
   navigateToFAQ() {
     this.router.navigate(['/faq']);
   }
+
+  stopCollapse(event: any) {
+    event.stopPropagation();
+  }
 }
