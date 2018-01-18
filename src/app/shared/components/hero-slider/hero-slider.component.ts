@@ -16,7 +16,7 @@ export class HeroSliderComponent implements OnInit {
   slideConfig = {
     'slidesToShow': 1,
     'infinite': true,
-    'arrows': false,
+    'arrows': true,
     'dots': true,
     'centerMode': true,
     'fade': true,

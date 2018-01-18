@@ -1,24 +1,96 @@
 .hero-slider {
     max-height: 450px;
-    .btn-buy-gzr {
-        cursor: pointer;
+    .slide-1 {
+        background-image: url('/assets/images/banners/img-banner1-bg.png');
+        background-size: cover;
+        height: 450px;
+        .center-title {
+            position: absolute;
+            width: 100%;
+            z-index: 100;
+            .title {
+                padding-top: 90px;
+            }
+            .btn-buy-gzr {
+                cursor: pointer;
+                margin: 0 auto;
+            }
+        }
+        .weapons {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+        
     }
-    .item-0 {
-        position: absolute;
-        top: 63%;
-        left: calc(50% - 108px);
+    .slide-2 {
+        background-image: url('/assets/images/banners/img-banner2-bg.png');
+        background-size: cover;
+        height: 450px;
+        .center-title {
+            position: absolute;
+            width: 100%;
+            z-index: 100;
+            padding-top: 140px;
+            padding-left: 140px;
+            .btn-buy-gzr {
+                cursor: pointer;
+            }
+        }
+        .weapons {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+        
     }
-    .item-1 {
-        position: absolute;
-        top: 60%;
-        left: 10%;
-    }
-    .item-2 {
-        position: absolute;
-        top: 63%;
-        left: calc(50% - 108px);
+    .slide-3 {
+        background-image: url('/assets/images/banners/img-banner3-bg.png');
+        background-size: cover;
+        height: 450px;
+        .center-title {
+            position: absolute;
+            width: 100%;
+            z-index: 100;
+            .title {
+                padding-top: 90px;
+            }
+            .btn-buy-gzr {
+                cursor: pointer;
+                margin: 0 auto;
+            }
+        }
+        .weapons {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+        
     }
     .carousel {
+        .slick-next {
+            right: 50px;
+            height: 53px;
+            width: 53px;
+            z-index: 99;
+            background-image: url('/assets/images/banners/img-banner-button-right.png');
+            &:before {
+                display: none;
+            }
+        }
+        .slick-prev {
+            left: 50px;
+            height: 53px;
+            width: 53px;
+            z-index: 99;
+            background-image: url('/assets/images/banners/img-banner-button-left.png');
+            &:before {
+                display: none;
+            }
+        }
         .slick-slide img {
             max-height: 450px;
         }

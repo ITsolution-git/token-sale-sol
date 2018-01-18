@@ -4,13 +4,56 @@
     #slickModal="slick-modal"
     [config]="slideConfig"
     >
-      <div ngxSlickItem *ngFor="let slide of slides; let i = index" class="slide">
-        <img src="{{ slide.img }}" alt="" width="100%">
+    <div ngxSlickItem class="slide-1">
+      <div class="center-title text-center">
+        <img class="title d-inline-block" src="/assets/images/banners/img-banner1-title.png">
         <img
-          class="btn-buy-gzr item-{{i}}"
+          class="btn-buy-gzr pt-5"
+          src="/assets/images/btn-buy-gzr.png"
+          (click)="navigateToBuyGzr()"
+        >
+        </div>
+      <div class="weapons">
+        <div class="left-weapon pull-left">
+          <img src="/assets/images/banners/img-banner1-left-weapons.png">
+        </div>
+        <div class="right-weapon pull-right">
+          <img src="/assets/images/banners/img-banner1-right-weapons.png">
+        </div>
+      </div>
+    </div>
+    <div ngxSlickItem class="slide-2">
+      <div class="center-title text-center">
+        <img class="title" src="/assets/images/banners/img-banner2-title.png">
+        <img
+          class="btn-buy-gzr pt-5"
+          src="/assets/images/btn-buy-gzr.png"
+          (click)="navigateToBuyGzr()"
+        >
+        </div>
+      <div class="weapons">
+        <div class="right-weapon pull-right">
+          <img src="/assets/images/banners/img-banner2-weapons.png">
+        </div>
+      </div>
+    </div>
+    <div ngxSlickItem class="slide-3">
+      <div class="center-title text-center">
+        <img class="title d-inline-block" src="/assets/images/banners/img-banner3-title.png">
+        <img
+          class="btn-buy-gzr pt-5"
           src="/assets/images/btn-buy-gzr.png"
           (click)="navigateToBuyGzr()"
         >
       </div>
+      <div class="weapons">
+        <div class="left-weapon pull-left">
+          <img src="/assets/images/banners/img-banner3-left-gizer.png">
+        </div>
+        <div class="right-weapon pull-right">
+          <img src="/assets/images/banners/img-banner3-right-ether.png">
+        </div>
+      </div>
+    </div>
   </ngx-slick>
 </div>

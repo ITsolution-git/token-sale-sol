@@ -14,7 +14,6 @@ import { debounce } from 'rxjs/operators/debounce';
 export class HeaderComponent implements OnInit {
   public menuItems: any[];
   public brandMenu: any;
-  private twitter: any;
   isCollapsed = true;
   isAuthenticated = false;
 
@@ -23,10 +22,11 @@ export class HeaderComponent implements OnInit {
     private localStorage: LocalStorageService,
     private authService: AuthService,
   ) {
+    this.initTwitterWidget();
+    this.initFacebookWidget();
   }
 
   ngOnInit() {
-    this.initTwitterWidget();
     this.menuItems = HeaderRoutes;
     const token = this.localStorage.retrieve('token');
     if (token) {
@@ -60,33 +60,40 @@ export class HeaderComponent implements OnInit {
   }
 
   initTwitterWidget() {
-    this.twitter = this.router.events.subscribe(val => {
-      if (val instanceof NavigationEnd) {
-        (<any>window).twttr = (function (d, s, id) {
+    (<any>window).twttr = (function (d, s, id) {
+      // tslint:disable-next-line:prefer-const
+      let js: any, fjs = d.getElementsByTagName(s)[0],
           // tslint:disable-next-line:prefer-const
-          let js: any, fjs = d.getElementsByTagName(s)[0],
-              // tslint:disable-next-line:prefer-const
-              t = (<any>window).twttr || {};
-          // tslint:disable-next-line:curly
-          if (d.getElementById(id)) return t;
-          js = d.createElement(s);
-          js.id = id;
-          js.src = 'https://platform.twitter.com/widgets.js';
-          fjs.parentNode.insertBefore(js, fjs);
+          t = (<any>window).twttr || {};
+      // tslint:disable-next-line:curly
+      if (d.getElementById(id)) return t;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = 'https://platform.twitter.com/widgets.js';
+      fjs.parentNode.insertBefore(js, fjs);
 
-          t._e = [];
-          t.ready = function (f: any) {
-              t._e.push(f);
-          };
+      t._e = [];
+      t.ready = function (f: any) {
+          t._e.push(f);
+      };
+      return t;
+    }(document, 'script', 'twitter-wjs'));
 
-          return t;
-        }(document, 'script', 'twitter-wjs'));
+    // tslint:disable-next-line:curly
+    if ((<any>window).twttr.ready()) {
+      (<any>window).twttr.widgets.load();
+    }
+  }
 
-        // tslint:disable-next-line:curly
-        if ((<any>window).twttr.ready())
-          (<any>window).twttr.widgets.load();
-
-      }
-    });
+  initFacebookWidget() {
+    (<any>window).facebook = (function(d, s, id) {
+      // tslint:disable-next-line:prefer-const
+      let js, fjs = d.getElementsByTagName(s)[0];
+      // tslint:disable-next-line:curly
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
   }
 }
