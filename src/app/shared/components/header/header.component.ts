@@ -55,6 +55,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/meta-mask']);
   }
 
+  navgiateToBuyGizer() {
+    this.router.navigate(['/buy-gzr']);
+  }
+
   public get menuIcon(): string {
     return this.isCollapsed ? '☰' : '✖';
   }

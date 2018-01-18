@@ -15,7 +15,7 @@
           <img class="button-image" src="/assets/icons/icon-treasure.png">
           <span class="menu-text">Open Treasure</span>
         </div>
-        <div class="d-inline-flex btn-gizer-amount align-items-center custom-button">
+        <div class="d-inline-flex btn-gizer-amount align-items-center custom-button" (click)="navgiateToBuyGizer()">
           <img src="/assets/icons/icon-gizer.png">
           <span *ngIf="isAuthenticated" class="menu-text">1490 GZR</span>
           <span *ngIf="!isAuthenticated" class="menu-text">0 GZR</span>
