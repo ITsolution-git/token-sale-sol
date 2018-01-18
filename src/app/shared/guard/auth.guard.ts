@@ -36,7 +36,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     if (this.isLoggedIn) { return true; }
 
     // Navigate to the login page with extras
-    this.router.navigate(['/']);
+    this.router.navigate(['/meta-mask']);
     return false;
   }
 }

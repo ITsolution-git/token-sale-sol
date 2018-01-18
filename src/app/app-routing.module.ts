@@ -14,6 +14,7 @@ const routes: Routes = [
       },
       {
         path: 'buy-gzr',
+        canActivateChild: [AuthGuard],
         loadChildren: './pages/buy-gzr/buy-gzr.module#BuyGzrModule',
       },
       {
