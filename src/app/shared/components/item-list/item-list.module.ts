@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { SlickModule } from 'ngx-slick';
 import { ItemListComponent } from './item-list.component';
 import { ItemModule } from '../item/item.module';
-import { ItemService } from '../../../core/services/ItemService/item.service';
+import { ItemService } from '../../services/ItemService/item.service';
 
 @NgModule({
   imports: [

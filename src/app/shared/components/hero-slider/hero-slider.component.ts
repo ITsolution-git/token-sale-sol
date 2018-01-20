@@ -21,7 +21,7 @@ export class HeroSliderComponent implements OnInit {
     'centerMode': true,
     'fade': true,
     'autoplay': true,
-    'autoplaySpeed': 2000,
+    'autoplaySpeed': 5000,
   };
 
   constructor( private router: Router ) { }

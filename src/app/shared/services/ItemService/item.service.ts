@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpHelperService } from '../../http-helper.service';
-import { ApiRoutingService } from '../../api-routing.service';
+import { HttpHelperService } from '../../../core/http-helper.service';
+import { ApiRoutingService } from '../../../core/api-routing.service';
 
 @Injectable()
 export class ItemService {
