@@ -1,5 +1,6 @@
 <div class="hero-slider">
   <ngx-slick
+    *ngIf="!isMobile"
     class="carousel"
     #slickModal="slick-modal"
     [config]="slideConfig"
@@ -53,6 +54,21 @@
         <div class="right-weapon float-right">
           <img src="/assets/images/banners/img-banner3-right-ether.png">
         </div>
+      </div>
+    </div>
+  </ngx-slick>
+  <ngx-slick
+    *ngIf="isMobile"
+    class="carousel"
+    #slickModal="slick-modal"
+    [config]="mobileSlideConfig"
+    >
+    <div ngxSlickItem *ngFor="let slide of slides">
+      <div class="center-title text-center">
+        <img
+          src="{{slide.imgUrl}}"
+          (click)="navigateToBuyGzr()"
+        >
       </div>
     </div>
   </ngx-slick>

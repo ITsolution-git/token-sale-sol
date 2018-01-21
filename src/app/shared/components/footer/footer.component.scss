@@ -79,4 +79,25 @@
             margin: 0;
         }
     }
+    @media (max-width: 450px) {
+        .menu {
+            .list-unstyled {
+                margin-right: 15px;
+            }
+        }
+        .subscription {
+            .button-wrapper {
+                padding-top: 20px;
+                .btn-submit {
+                    margin-left: 0px;
+                }
+            }
+        }
+        .copyright {
+            .text-copyright {
+                font-size: 14px;
+                text-align: center;
+            }
+        }
+    }
 }

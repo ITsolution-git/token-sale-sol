@@ -27,4 +27,15 @@
             background-color: rgba(255, 255, 255, 0.1);
         }
     }
+    @media (max-width: 450px) {
+        padding-top: 40px;
+        padding-left: 5px;
+        padding-right: 5px;
+        .list-title {
+            display: none;
+        }
+        .item-wrapper {
+            width: 50%;
+        }
+    }
 }

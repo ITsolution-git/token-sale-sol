@@ -13,7 +13,7 @@
         [rarity]="item.meta.rarity"
         >
       </app-item>
-      <div class="arrow pl-2">
+      <div *ngIf="!isMobile" class="arrow pl-2">
         <span class="arrow-padding" (click)="loadNextWeapons()">
           <img src="/assets/icons/icon-greater-than.png">
         </span>

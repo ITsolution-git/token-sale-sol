@@ -81,4 +81,9 @@
             }
         }
     }
+    @media (max-width: 450px) {
+        .site-logo {
+            height: 36px;
+        }
+    }
 }

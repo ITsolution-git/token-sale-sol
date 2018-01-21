@@ -46,5 +46,17 @@
             }
         }
     }
+    @media (max-width: 450px) {
+        padding-left: 5px;
+        padding-right: 5px;
+        .item-wrapper {
+            .item-img {
+                padding: 15px;
+            }
+            .item-name {
+                height: 38px;
+            }
+        }
+    }
 }
   

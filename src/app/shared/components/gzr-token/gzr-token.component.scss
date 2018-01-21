@@ -1,5 +1,6 @@
-.container {
-    padding: 50px 0;
+.gzr-token {
+    padding-top: 40px;
+    padding-bottom: 40px;
     .section-header {
         display: inline-block;
         vertical-align: middle;
@@ -19,7 +20,6 @@
     }
     .pdf_btn {
         #techonepage, #gzrterms {
-            margin-right: 27px;
             padding: 11px 20px;
             border-radius: 20px;
             background: #ffffff;
@@ -53,6 +53,23 @@
             margin-top: 10px;
             font-family: "Century Gothic";
             color: #b6b9df;
+        }
+    }
+    @media (max-width: 450px) {
+        .section-header {
+            h2 {
+                font-size: 1em;
+            }
+        }
+        .text_content {
+            margin-bottom: 30px;
+        }
+        .pdf_btn {
+            margin-bottom: 20px;
+        }
+        .mobileimgg {
+            margin-bottom: 20px;
+            margin-top: 20px;
         }
     }
 }

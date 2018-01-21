@@ -115,4 +115,11 @@
             }
         }
     }
+    @media (max-width: 450px) {
+        .carousel {
+            .slick-slide img {
+                width: 100%;
+            }
+        }
+    }
 }

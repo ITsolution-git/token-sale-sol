@@ -27,6 +27,11 @@
             left: 161px;
         }
     }
+    @media (max-width: 450px) {
+        .youtube {
+            display: none;
+        }
+    }
 }
 .no-gutters {
     margin-right: 0;
