@@ -6,12 +6,14 @@ import Web3 from 'web3';
 import Contract from 'truffle-contract';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import { Subscription } from 'rxjs/Subscription';
 
+const metaincoinArtifacts = require('../../../../../build/contracts/MetaCoin.json');
 declare var window: any;
 
 @Injectable()
 export class MetaMaskService {
-  metaCoin: any;
+  metaCoin = Contract(metaincoinArtifacts);
 
   accounts: any;
   web3: any;
@@ -20,51 +22,38 @@ export class MetaMaskService {
   sendingAmount: number;
   recipientAddress: string;
   status: string;
-
-  private account = new Subject<any>();
-  account$ = this.account.asObservable();
+  account: string;
+  private accountSubject = new Subject<any>();
+  accountObservable$ = this.accountSubject.asObservable();
+  loadMetaObservable: any;
+  loadMetaSubscription$: Subscription = new Subscription();
 
   constructor(
     private _ngZone: NgZone,
     private http: HttpHelperService,
     private apiRoutingService: ApiRoutingService
-  ) { }
+  ) {
+    this.loadMetaObservable = Observable
+    .interval(5000);
 
-  getMetaCoin() {
-    return this.http.get(
-      this.apiRoutingService.getMetaCoinUrl(),
-      {},
-      true,
-      null
-    );
+    this.loadMetaSubscription$ = this.loadMetaObservable.subscribe(x => {
+      this.loadMetaCoin();
+    });
   }
 
-  getUserWalletAddress(): Observable<any> {
-    return this.account$;
+  unloadAccountInfo() {
+    this.loadMetaSubscription$.unsubscribe();
   }
 
-  setUserWalletAddress(account: any): void {
-    this.account.next(account);
-  }
-
-  @HostListener('window:load')
-  windowLoaded() {
+  loadMetaCoin() {
     this.checkAndInstantiateWeb3();
     this.onReady();
   }
 
-  checkAndInstantiateWeb3 = () => {
+  checkAndInstantiateWeb3() {
     if (typeof window.web3 !== 'undefined') {
-      console.warn(
-        // tslint:disable-next-line:max-line-length
-        'Using web3 detected from external source. If you find that your accounts don\'t appear or you have 0 MetaCoin, ensure you\'ve configured that source properly. If using MetaMask, see the following link. Feel free to delete this warning. :) http://truffleframework.com/tutorials/truffle-and-metamask'
-      );
       this.web3 = new Web3(window.web3.currentProvider);
     } else {
-      console.warn(
-        // tslint:disable-next-line:max-line-length
-        'No web3 detected. Falling back to http://localhost:8545. You should remove this fallback when you deploy live, as it\'s inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask'
-      );
       this.web3 = new Web3(
         new Web3.providers.HttpProvider('http://localhost:8545')
       );
@@ -88,20 +77,19 @@ export class MetaMaskService {
       }
       this.accounts = accs;
       this.account = this.accounts[0];
-      console.log(this.account);
+      this.accountSubject.next(this.account);
       this._ngZone.run(() =>
         this.refreshBalance()
       );
     });
   }
 
-  refreshBalance = () => {
+  refreshBalance() {
     let meta;
     this.metaCoin
       .deployed()
       .then(instance => {
         meta = instance;
-        console.log(meta);
         return meta.getBalance.call(this.account, {
           from: this.account
         });
@@ -115,11 +103,11 @@ export class MetaMaskService {
       });
   }
 
-  setStatus = message => {
+  setStatus(message) {
     this.status = message;
   }
 
-  sendCoin = () => {
+  sendCoin() {
     const amount = this.sendingAmount;
     const receiver = this.recipientAddress;
     let meta;

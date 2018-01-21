@@ -16,9 +16,6 @@ export class InstallMetaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.metaMaskService.getUserWalletAddress().subscribe(res => {
-      console.log('REsponse from Service!', res);
-    });
   }
 
   installMetaMask() {

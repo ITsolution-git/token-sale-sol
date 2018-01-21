@@ -4,7 +4,10 @@
       <h3 class="title w-100 text-center">One last thing...</h3>
       <p class="description">We need an email address for your account</p>
     </div>
-    <div class="row justify-content-center">
+    <div *ngIf="!loaded" class="row justify-content-center">
+      Loading from MetaMask...
+    </div>
+    <div *ngIf="loaded" class="row justify-content-center">
       <div class="col-md-8">
         <div class="form-detail-info py-5 w-100">
           <form [formGroup]="accountInfo" novalidate>
