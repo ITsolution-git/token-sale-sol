@@ -1,11 +1,11 @@
 <div class="meta-mask pb-5">
   <div class="meta-section pt-5">
     <div class="container">
-      <div *ngIf="!isInstalled">
-        <app-install-meta [isInstalled]="isInstalled" (onInstall)="onInstall($event)" ></app-install-meta>
+      <div *ngIf="!installed">
+        <app-install-meta></app-install-meta>
       </div>
-      <div *ngIf="isInstalled">
-        <app-locked-meta [isMetaLocked]="isMetaLocked" (onShowForm)="onShowForm($event)"></app-locked-meta>
+      <div *ngIf="!unlocked">
+        <app-locked-meta></app-locked-meta>
       </div>
     </div>
   </div>

@@ -1,5 +1,4 @@
-import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
-import { MetaMaskService } from '../../services/MetaMaskService/meta-mask.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-install-meta',
@@ -8,18 +7,9 @@ import { MetaMaskService } from '../../services/MetaMaskService/meta-mask.servic
 })
 
 export class InstallMetaComponent implements OnInit {
-  @Input() isInstalled: boolean;
-  @Output() onInstall = new EventEmitter<boolean>();
 
-  constructor(
-    private metaMaskService: MetaMaskService
-  ) { }
+  constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
-  installMetaMask() {
-    this.isInstalled = true;
-    this.onInstall.emit(this.isInstalled);
-  }
 }

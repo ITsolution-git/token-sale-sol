@@ -17,12 +17,12 @@
         </div>
         <div class="d-inline-flex btn-gizer-amount align-items-center custom-button" (click)="navgiateToBuyGizer()">
           <img src="/assets/icons/icon-gizer.png">
-          <span *ngIf="isAuthenticated" class="menu-text">1490 GZR</span>
+          <span *ngIf="isAuthenticated" class="menu-text">{{balance}} GZR</span>
           <span *ngIf="!isAuthenticated" class="menu-text">0 GZR</span>
         </div>
         <div class="d-inline-flex btn-user-info align-items-center custom-button">
           <img src="/assets/icons/icon-user.png">
-          <span *ngIf="isAuthenticated" class="menu-text" (click)="logout()">0xbvd82sd72kj97..</span>
+          <span *ngIf="isAuthenticated" class="menu-text" (click)="logout()">{{walletAddress.slice(0, 10)}}...</span>
           <span *ngIf="!isAuthenticated" class="menu-text" (click)="login()">Sign in</span>
         </div>
         <div *ngIf="isAuthenticated" class="d-inline-flex align-items-center btn-etherum-info">

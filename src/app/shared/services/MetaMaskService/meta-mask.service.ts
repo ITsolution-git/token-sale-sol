@@ -19,12 +19,25 @@ export class MetaMaskService {
   web3: any;
 
   balance: number;
+  balanceSubject = new Subject<number>();
+  balanceObservable$ = this.balanceSubject.asObservable();
+
   sendingAmount: number;
   recipientAddress: string;
   status: string;
   account: string;
-  private accountSubject = new Subject<any>();
+
+  unlocked = false;
+  unlockedSubject = new Subject<boolean>();
+  unlockedObservable$ = this.unlockedSubject.asObservable();
+
+  installed = false;
+  installedSubject = new Subject<boolean>();
+  installedObservable$ = this.installedSubject.asObservable();
+
+  accountSubject = new Subject<any>();
   accountObservable$ = this.accountSubject.asObservable();
+
   loadMetaObservable: any;
   loadMetaSubscription$: Subscription = new Subscription();
 
@@ -33,9 +46,10 @@ export class MetaMaskService {
     private http: HttpHelperService,
     private apiRoutingService: ApiRoutingService
   ) {
-    this.loadMetaObservable = Observable
-    .interval(5000);
+  }
 
+  getAccountInfo() {
+    this.loadMetaObservable = Observable.interval(5000);
     this.loadMetaSubscription$ = this.loadMetaObservable.subscribe(x => {
       this.loadMetaCoin();
     });
@@ -65,51 +79,58 @@ export class MetaMaskService {
 
     this.web3.eth.getAccounts((err, accs) => {
       if (err != null) {
-        alert('There was an error fetching your accounts.');
+        console.log('No MetaMask installed! Please install MetaMask Chrome Extension!');
+        this.installed = false;
+        this.installedSubject.next(this.installed);
+        return;
+      }
+      this.installed = true;
+      this.installedSubject.next(this.installed);
+
+      if (accs.length === 0) {
+        console.log('Your MetaMask is Locked!');
+        this.unlocked = false;
+        this.unlockedSubject.next(this.unlocked);
         return;
       }
 
-      if (accs.length === 0) {
-        alert(
-          'Couldn\'t get any accounts! Make sure your Ethereum client is configured correctly.'
-        );
-        return;
-      }
+      this.unlocked = true;
+      this.unlockedSubject.next(this.unlocked);
       this.accounts = accs;
       this.account = this.accounts[0];
       this.accountSubject.next(this.account);
-      this._ngZone.run(() =>
-        this.refreshBalance()
-      );
+      this.refreshBalance();
+    });
+  }
+
+  getBalance(address) {
+    return new Promise ((resolve, reject) => {
+      this.web3.eth.getBalance(address, (error, result) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(this.web3.fromWei(result, 'ether').toString(10));
+        }
+      });
     });
   }
 
   refreshBalance() {
-    let meta;
-    this.metaCoin
-      .deployed()
-      .then(instance => {
-        meta = instance;
-        return meta.getBalance.call(this.account, {
-          from: this.account
-        });
-      })
-      .then(value => {
-        this.balance = value;
-      })
-      .catch(e => {
-        console.log(e);
-        this.setStatus('Error getting balance; see log.');
-      });
+    this.getBalance(this.account)
+    .then(balance => {
+      this.balance = parseFloat(balance.toString());
+      this.balanceSubject.next(this.balance);
+    });
   }
 
   setStatus(message) {
     this.status = message;
   }
 
-  sendCoin() {
-    const amount = this.sendingAmount;
-    const receiver = this.recipientAddress;
+  sendCoin(amount, receiver) {
+    console.log('sending coin');
+    // const amount = this.sendingAmount;
+    // const receiver = this.recipientAddress;
     let meta;
 
     this.setStatus('Initiating transaction... (please wait)');
@@ -118,6 +139,7 @@ export class MetaMaskService {
       .deployed()
       .then(instance => {
         meta = instance;
+        console.log(meta);
         return meta.sendCoin(receiver, amount, {
           from: this.account
         });
