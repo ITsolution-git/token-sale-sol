@@ -10,6 +10,11 @@ export class GuideAccordionComponent implements OnInit {
   isFirstOpen: Boolean = true;
   status = {
     ggid: true,
+    buy: false,
+    install: false,
+    locked: false,
+    wallet: false,
+    ether: false,
   };
 
   constructor( private router: Router ) { }
