@@ -44,6 +44,9 @@
             <a *ngIf="menuItem.title === 'Home'" class="nav-item nav-link nav-home" [routerLink]="[menuItem.path]" routerLinkActive="router-active" [routerLinkActiveOptions]="{exact: true}">{{menuItem.title}}</a>
             <a *ngIf="menuItem.title !== 'Home'" class="nav-item nav-link" [routerLink]="[menuItem.path]" routerLinkActive="router-active" [routerLinkActiveOptions]="{exact: true}">{{menuItem.title}}</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-item nav-link" (click)="navigateToTokenSection()">What is GZR?</a>
+          </li>
         </ul>
       </div>
     </div>

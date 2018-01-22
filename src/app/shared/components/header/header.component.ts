@@ -59,6 +59,14 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/buy-gzr']);
   }
 
+  navigateToTokenSection() {
+    document.querySelector('#token').scrollIntoView();
+    const scrolledY = window.scrollY;
+    if (scrolledY) {
+      window.scroll(0, scrolledY - 123);
+    }
+  }
+
   public get menuIcon(): string {
     return this.isCollapsed ? '☰' : '✖';
   }

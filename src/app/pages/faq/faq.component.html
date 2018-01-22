@@ -43,7 +43,7 @@
               [isOpen]="status.install"
               (click)="status.install = !status.install">
             <div accordion-heading class="clearfix">
-              Installing MetaMask, your digital wallet
+              How do I install MetaMask?
               <span class="float-right pull-right">{{status.install ? '‒' : '+'}}</span>
             </div>
             <div (click)="stopCollapse($event)">
@@ -78,13 +78,13 @@
             [isOpen]="status.ether"
             (click)="status.ether = !status.ether">
             <div accordion-heading class="clearfix">
-              Acquiring Ether
+              How do I get Ether?
               <span class="float-right pull-right">{{status.ether ? '‒' : '+'}}</span>
             </div>
             <div (click)="stopCollapse($event)">
               <ul class="guide-list">
                 <li class="guide-item">
-                  <p class="description">US citizens can buy Ether directly through MetaMask using Coinbase.</p>
+                  <p class="description">US citizens can buy ETH directly through MetaMask using Coinbase.</p>
                 </li>
                 <li class="guide-item">
                   <p class="description">If you have other cryptocurrencies like Bitcoin or Litecoin, you can use MetaMask to convert your coins using ShapeShift.</p>
@@ -103,7 +103,7 @@
             [isOpen]="status.wallet"
             (click)="status.wallet = !status.wallet">
             <div accordion-heading class="clearfix">
-              How to send ETH to your MetaMask wallet
+              How do I send ETH to my MetaMask wallet?
               <span class="float-right pull-right">{{status.wallet ? '‒' : '+'}}</span>
             </div>
             <div (click)="stopCollapse($event)">

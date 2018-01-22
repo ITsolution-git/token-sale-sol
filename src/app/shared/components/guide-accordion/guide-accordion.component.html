@@ -33,7 +33,7 @@
         [isOpen]="status.buy"
         (click)="status.buy = !status.buy">
         <div accordion-heading class="clearfix">
-            How to buy GZR
+            How do I buy GZR?
           <span class="float-right pull-right">{{status.buy ? '‒' : '+'}}</span>
         </div>
         <div (click)="stopCollapse($event)">
@@ -90,13 +90,13 @@
         [isOpen]="status.ether"
         (click)="status.ether = !status.ether">
         <div accordion-heading class="clearfix">
-          Acquiring Ether
+          How do I get Ether?
           <span class="float-right pull-right">{{status.ether ? '‒' : '+'}}</span>
         </div>
         <div (click)="stopCollapse($event)">
           <ul class="guide-list">
             <li class="guide-item">
-              <p class="description">US citizens can buy Ether directly through MetaMask using Coinbase.</p>
+              <p class="description">US citizens can buy ETH directly through MetaMask using Coinbase.</p>
             </li>
             <li class="guide-item">
               <p class="description">If you have other cryptocurrencies like Bitcoin or Litecoin, you can use MetaMask to convert your coins using ShapeShift.</p>
