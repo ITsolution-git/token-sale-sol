@@ -3,31 +3,55 @@ import { HeaderRoutes } from './header-routing.module';
 import { Router, NavigationEnd } from '@angular/router';
 import { LocalStorageService } from 'ngx-webstorage';
 import { AuthService } from '../../../core/services/auth.service';
+import { MetaMaskService } from '../../services/MetaMaskService/meta-mask.service';
+import { ApplicationState } from '../../../store/application-state';
+import { UserState } from '../../../store/store-data';
 import { Observable } from 'rxjs/Observable';
-import { debounce } from 'rxjs/operators/debounce';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
+
 export class HeaderComponent implements OnInit {
   public menuItems: any[];
   public brandMenu: any;
+  userState: Observable<UserState>;
+  private user: any;
   isCollapsed = true;
   isAuthenticated = false;
+  walletAddress: String;
+  unlocked = false;
+  balance: number;
+  installed = false;
 
   constructor(
     private router: Router,
     private localStorage: LocalStorageService,
     private authService: AuthService,
+    private store: Store<ApplicationState>,
   ) {
     this.initTwitterWidget();
     this.initFacebookWidget();
+    this.userState = this.store.select('userState');
   }
 
   ngOnInit() {
     this.menuItems = HeaderRoutes;
+    this.userState.subscribe(state => {
+      if (state) {
+        this.walletAddress = state.walletAddress;
+        this.unlocked = state.unlocked;
+        this.balance = state.balance;
+        this.installed = state.installed;
+      }
+    });
+    this.init();
+  }
+
+  init() {
     const token = this.localStorage.retrieve('token');
     if (token) {
       this.isAuthenticated = true;
@@ -39,7 +63,11 @@ export class HeaderComponent implements OnInit {
   }
 
   login() {
-    this.navgiateToInstallMeta();
+    if (this.installed && this.unlocked) {
+      this.navgiateToSaveAccount();
+    } else {
+      this.navgiateToInstallMeta();
+    }
   }
 
   logout() {
@@ -55,16 +83,16 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/meta-mask']);
   }
 
+  navgiateToSaveAccount() {
+    this.router.navigate(['/save-account']);
+  }
+
   navgiateToBuyGizer() {
     this.router.navigate(['/buy-gzr']);
   }
 
   navigateToTokenSection() {
-    document.querySelector('#token').scrollIntoView();
-    const scrolledY = window.scrollY;
-    if (scrolledY) {
-      window.scroll(0, scrolledY - 123);
-    }
+    window.scrollTo(0, 1620);
   }
 
   public get menuIcon(): string {

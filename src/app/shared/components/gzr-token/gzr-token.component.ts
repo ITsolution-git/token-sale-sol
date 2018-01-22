@@ -1,23 +1,14 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-gzr-token',
   templateUrl: './gzr-token.component.html',
   styleUrls: ['./gzr-token.component.scss']
 })
-export class GzrTokenComponent implements OnInit, AfterViewInit {
-  private fragment: string;
-  constructor(private route: ActivatedRoute) { }
+export class GzrTokenComponent implements OnInit {
+  constructor() { }
 
   ngOnInit() {
-    this.route.fragment.subscribe(fragment => {
-      this.fragment = fragment; });
-  }
-  ngAfterViewInit(): void {
-    try {
-      document.querySelector('#token').scrollIntoView();
-    } catch (e) { }
   }
 }
 
