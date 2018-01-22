@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { Ng2Webstorage } from 'ngx-webstorage';
-import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 
 import { AuthGuard } from './shared';
 import { AppComponent } from './app.component';
@@ -27,7 +26,6 @@ import { HttpHelperService } from './core/http-helper.service';
     AppRoutingModule,
     Ng2Webstorage,
     LayoutModule,
-    Ng4LoadingSpinnerModule,
   ],
   providers: [
     HttpHelperService,
