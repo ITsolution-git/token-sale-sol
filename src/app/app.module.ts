@@ -6,8 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { Ng2Webstorage } from 'ngx-webstorage';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { Angulartics2Module } from 'angulartics2';
-import { Angulartics2GoogleTagManager } from 'angulartics2/gtm';
 
 import { AuthGuard } from './shared';
 import { AppComponent } from './app.component';
@@ -38,7 +36,6 @@ export const reducers = {
     LayoutModule,
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({maxAge: 25}),
-    Angulartics2Module.forRoot([Angulartics2GoogleTagManager]),
   ],
   providers: [
     HttpHelperService,
