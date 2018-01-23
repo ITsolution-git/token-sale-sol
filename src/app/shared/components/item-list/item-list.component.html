@@ -8,12 +8,12 @@
         class="item-wrapper"
         *ngFor="let item of items; let i = index"
         [index]="i"
-        [itemImageLink]="item.itemImageLink"
-        [itemName]="item.itemName"
+        [itemImageLink]="item.resources.images[0]"
+        [itemName]="item.meta.name"
         >
       </app-item>
       <div class="arrow pl-2">
-        <span class="arrow-padding">
+        <span class="arrow-padding" (click)="loadNextWeapons()">
           <img src="/assets/icons/icon-greater-than.png">
         </span>
       </div>

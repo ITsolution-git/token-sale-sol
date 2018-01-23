@@ -1,0 +1,286 @@
+[{
+    "id": "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+    "nick": "Johny Bravo",
+    "email": "johny@bravo.io",
+    "type": "user",
+    "username": "jbravo",
+    "password": "hashed",
+    "active": 1,
+    "address": {
+      "street": "7th & 45th, Manhattan",
+      "city": "NYC",
+      "Country": "USA"
+    },
+    "about": "I am a hardcore player!",
+    "reputation": 21000,
+    "timezone": "UTC",
+    "seen": "2013-03-01T01:10:00",
+    "registered": "2013-03-01T01:10:00",
+    "interests": [
+      "Fishing",
+      "Bowling",
+      "Dodgeball"
+    ],
+    "gzr": {
+      "type": "wallet",
+      "id": "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "amount": 130
+    },
+    "boosts": 25200,
+    "avatar": {
+      "type": "2d",
+      "uri": "http://s3.amazonaws.com/gizer/avatars/clown.jpg"
+    },
+    "social": [{
+        "name": "google+",
+        "url": "https://plus.google.com/11730245375828271109"
+      },
+      {
+        "name": "facebook",
+        "url": "https://www.facebook.com/jbravo"
+      }
+    ],
+    "knows": [
+      "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "1dab3646-e2da-01e7-2c3a-1a294xa092aw"
+    ],
+    "owns": [
+      "item/1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "item/1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "chest/1dab3646-e2da-01e7-2c3a-1a294xa092aw"
+    ]
+  },
+  {
+    "id": "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+    "nick": "Johny Bravo",
+    "email": "johny@bravo.io",
+    "type": "user",
+    "username": "jbravo",
+    "password": "hashed",
+    "active": 1,
+    "address": {
+      "street": "7th & 45th, Manhattan",
+      "city": "NYC",
+      "Country": "USA"
+    },
+    "about": "I am a hardcore player!",
+    "reputation": 21000,
+    "timezone": "UTC",
+    "seen": "2013-03-01T01:10:00",
+    "registered": "2013-03-01T01:10:00",
+    "interests": [
+      "Fishing",
+      "Bowling",
+      "Dodgeball"
+    ],
+    "gzr": {
+      "type": "wallet",
+      "id": "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "amount": 130
+    },
+    "boosts": 25200,
+    "avatar": {
+      "type": "2d",
+      "uri": "http://s3.amazonaws.com/gizer/avatars/clown.jpg"
+    },
+    "social": [{
+        "name": "google+",
+        "url": "https://plus.google.com/11730245375828271109"
+      },
+      {
+        "name": "facebook",
+        "url": "https://www.facebook.com/jbravo"
+      }
+    ],
+    "knows": [
+      "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "1dab3646-e2da-01e7-2c3a-1a294xa092aw"
+    ],
+    "owns": [
+      "item/1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "item/1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "chest/1dab3646-e2da-01e7-2c3a-1a294xa092aw"
+    ]
+  },
+  {
+    "id": "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+    "nick": "Johny Bravo",
+    "email": "johny@bravo.io",
+    "type": "user",
+    "username": "jbravo",
+    "password": "hashed",
+    "active": 1,
+    "address": {
+      "street": "7th & 45th, Manhattan",
+      "city": "NYC",
+      "Country": "USA"
+    },
+    "about": "I am a hardcore player!",
+    "reputation": 21000,
+    "timezone": "UTC",
+    "seen": "2013-03-01T01:10:00",
+    "registered": "2013-03-01T01:10:00",
+    "interests": [
+      "Fishing",
+      "Bowling",
+      "Dodgeball"
+    ],
+    "gzr": {
+      "type": "wallet",
+      "id": "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "amount": 130
+    },
+    "boosts": 25200,
+    "avatar": {
+      "type": "2d",
+      "uri": "http://s3.amazonaws.com/gizer/avatars/clown.jpg"
+    },
+    "social": [{
+        "name": "google+",
+        "url": "https://plus.google.com/11730245375828271109"
+      },
+      {
+        "name": "facebook",
+        "url": "https://www.facebook.com/jbravo"
+      }
+    ],
+    "knows": [
+      "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "1dab3646-e2da-01e7-2c3a-1a294xa092aw"
+    ],
+    "owns": [
+      "item/1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "item/1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "chest/1dab3646-e2da-01e7-2c3a-1a294xa092aw"
+    ]
+  },
+  {
+    "id": "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+    "nick": "Johny Bravo",
+    "email": "johny@bravo.io",
+    "type": "user",
+    "username": "jbravo",
+    "password": "hashed",
+    "active": 1,
+    "address": {
+      "street": "7th & 45th, Manhattan",
+      "city": "NYC",
+      "Country": "USA"
+    },
+    "about": "I am a hardcore player!",
+    "reputation": 21000,
+    "timezone": "UTC",
+    "seen": "2013-03-01T01:10:00",
+    "registered": "2013-03-01T01:10:00",
+    "interests": [
+      "Fishing",
+      "Bowling",
+      "Dodgeball"
+    ],
+    "gzr": {
+      "type": "wallet",
+      "id": "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "amount": 130
+    },
+    "boosts": 25200,
+    "avatar": {
+      "type": "2d",
+      "uri": "http://s3.amazonaws.com/gizer/avatars/clown.jpg"
+    },
+    "social": [{
+        "name": "google+",
+        "url": "https://plus.google.com/11730245375828271109"
+      },
+      {
+        "name": "facebook",
+        "url": "https://www.facebook.com/jbravo"
+      }
+    ],
+    "knows": [
+      "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "1dab3646-e2da-01e7-2c3a-1a294xa092aw"
+    ],
+    "owns": [
+      "item/1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "item/1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "chest/1dab3646-e2da-01e7-2c3a-1a294xa092aw"
+    ]
+  },
+  {
+    "id": "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+    "nick": "Johny Bravo",
+    "email": "johny@bravo.io",
+    "type": "user",
+    "username": "jbravo",
+    "password": "hashed",
+    "active": 1,
+    "address": {
+      "street": "7th & 45th, Manhattan",
+      "city": "NYC",
+      "Country": "USA"
+    },
+    "about": "I am a hardcore player!",
+    "reputation": 21000,
+    "timezone": "UTC",
+    "seen": "2013-03-01T01:10:00",
+    "registered": "2013-03-01T01:10:00",
+    "interests": [
+      "Fishing",
+      "Bowling",
+      "Dodgeball"
+    ],
+    "gzr": {
+      "type": "wallet",
+      "id": "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "amount": 130
+    },
+    "boosts": 25200,
+    "avatar": {
+      "type": "2d",
+      "uri": "http://s3.amazonaws.com/gizer/avatars/clown.jpg"
+    },
+    "social": [{
+        "name": "google+",
+        "url": "https://plus.google.com/11730245375828271109"
+      },
+      {
+        "name": "facebook",
+        "url": "https://www.facebook.com/jbravo"
+      }
+    ],
+    "knows": [
+      "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "1dab3646-e2da-01e7-2c3a-1a294xa092aw"
+    ],
+    "owns": [
+      "item/1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "item/1dab3646-e2da-01e7-2c3a-1a294xa092aw",
+      "chest/1dab3646-e2da-01e7-2c3a-1a294xa092aw"
+    ]
+  },
+  {
+    "_resource": {
+      "limit": 5,
+      "page": 1,
+      "total": 123,
+      "home": "https://api.server.io/user?limit=5&page=1",
+      "previews": "https://api.server.io/user?limit=5&page=2",
+      "next": "https://api.server.io/user?limit=5&page=0"
+    }
+  }
+]

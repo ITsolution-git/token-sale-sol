@@ -1,42 +1,715 @@
-[
-    {
-      "itemImageLink": "/assets/images/weapons/1.png",
-      "itemName": "Cerberus"
+[{
+    "id": "4ddb3646-ebda-11e7-8c3f-9a214cf09111",
+    "resources": {
+      "icons": [
+        "http://s3.amazonaws.com/gizer/icon1.jpg",
+        "http://s3.amazonaws.com/gizer/icon2.jpg",
+        "http://s3.amazonaws.com/gizer/icon3.jpg",
+        "http://s3.amazonaws.com/gizer/icon4.jpg",
+        "http://s3.amazonaws.com/gizer/icon5.jpg"
+      ],
+      "images": [
+        "/assets/images/weapons/1.png",
+        "/assets/images/weapons/1.png",
+        "/assets/images/weapons/1.png",
+        "/assets/images/weapons/1.png",
+        "/assets/images/weapons/1.png"
+      ],
+      "videos": [
+        "https://www.youtube.com/q=sdUdw83"
+      ],
+      "model": {
+        "src": "http://s3.amazonaws.com/gizer/models/bow.fbx"
+      }
     },
-    {
-      "itemImageLink": "/assets/images/weapons/2.png",
-      "itemName": "Super Sledge"
+    "current": {
+      "status": "unlocked",
+      "likes": "123",
+      "similar": [
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae"
+      ]
     },
-    {
-      "itemImageLink": "/assets/images/weapons/3.png",
-      "itemName": "Ice Axe"
-    },
-    {
-      "itemImageLink": "/assets/images/weapons/4.png",
-      "itemName": "Warden Shield"
-    },
-    {
-      "itemImageLink": "/assets/images/weapons/5.png",
-      "itemName": "Guardian Staff"
-    },
-    {
-      "itemImageLink": "/assets/images/weapons/6.png",
-      "itemName": "Gear Blade"
-    },
-    {
-      "itemImageLink": "/assets/images/weapons/7.png",
-      "itemName": "Gas Mask"
-    },
-    {
-      "itemImageLink": "/assets/images/weapons/8.png",
-      "itemName": "Spec Ops Helmet"
-    },
-    {
-      "itemImageLink": "/assets/images/weapons/9.png",
-      "itemName": "Plasma Hand Cannon"
-    },
-    {
-      "itemImageLink": "/assets/images/weapons/10.png",
-      "itemName": "Commando Helmet"
+    "meta": {
+      "name": "Shotgun",
+      "description": "This is super awesome Shotgun",
+      "wallet": "7680adec8eabcabac676be9e83854ade0bd22cdb",
+      "use": "item use",
+      "category": "item category",
+      "rarity": "rare",
+      "origin": "won 1st place Doda GSL WW Turnament",
+      "released": "2013-03-01T01:10:00",
+      "unlocked": "2013-03-01T01:10:00",
+      "collection": "collection name",
+      "series": {
+        "item": 5,
+        "of": 10
+      }
     }
+  },
+  {
+    "id": "4ddb3646-ebda-11e7-8c3f-9a214cf09222",
+    "resources": {
+      "icons": [
+        "http://s3.amazonaws.com/gizer/icon1.jpg",
+        "http://s3.amazonaws.com/gizer/icon2.jpg",
+        "http://s3.amazonaws.com/gizer/icon3.jpg",
+        "http://s3.amazonaws.com/gizer/icon4.jpg",
+        "http://s3.amazonaws.com/gizer/icon5.jpg"
+      ],
+      "images": [
+        "/assets/images/weapons/2.png",
+        "/assets/images/weapons/2.png",
+        "/assets/images/weapons/2.png",
+        "/assets/images/weapons/2.png",
+        "/assets/images/weapons/2.png"
+      ],
+      "videos": [
+        "https://www.youtube.com/q=sdUdw83"
+      ],
+      "model": {
+        "src": "http://s3.amazonaws.com/gizer/models/bow.fbx"
+      }
+    },
+    "current": {
+      "status": "unlocked",
+      "likes": "123",
+      "similar": [
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae"
+      ]
+    },
+    "meta": {
+      "name": "Rifle",
+      "description": "This is super awesome Rifle",
+      "wallet": "7680adec8eabcabac676be9e83854ade0bd22cdb",
+      "use": "item use",
+      "category": "item category",
+      "rarity": "rare",
+      "origin": "won 1st place Doda GSL WW Turnament",
+      "released": "2013-03-01T01:10:00",
+      "unlocked": "2013-03-01T01:10:00",
+      "collection": "collection name",
+      "series": {
+        "item": 5,
+        "of": 10
+      }
+    }
+  },
+  {
+    "id": "4ddb3646-ebda-11e7-8c3f-9a214cf09333",
+    "resources": {
+      "icons": [
+        "http://s3.amazonaws.com/gizer/icon1.jpg",
+        "http://s3.amazonaws.com/gizer/icon2.jpg",
+        "http://s3.amazonaws.com/gizer/icon3.jpg",
+        "http://s3.amazonaws.com/gizer/icon4.jpg",
+        "http://s3.amazonaws.com/gizer/icon5.jpg"
+      ],
+      "images": [
+        "/assets/images/weapons/3.png",
+        "/assets/images/weapons/3.png",
+        "/assets/images/weapons/3.png",
+        "/assets/images/weapons/3.png",
+        "/assets/images/weapons/3.png"
+      ],
+      "videos": [
+        "https://www.youtube.com/q=sdUdw83"
+      ],
+      "model": {
+        "src": "http://s3.amazonaws.com/gizer/models/bow.fbx"
+      }
+    },
+    "current": {
+      "status": "unlocked",
+      "likes": "123",
+      "similar": [
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae"
+      ]
+    },
+    "meta": {
+      "name": "Flame Thrower",
+      "description": "This is super awesome Flame Thrower",
+      "wallet": "7680adec8eabcabac676be9e83854ade0bd22cdb",
+      "use": "item use",
+      "category": "item category",
+      "rarity": "rare",
+      "origin": "won 1st place Doda GSL WW Turnament",
+      "released": "2013-03-01T01:10:00",
+      "unlocked": "2013-03-01T01:10:00",
+      "collection": "collection name",
+      "series": {
+        "item": 5,
+        "of": 10
+      }
+    }
+  },
+  {
+    "id": "4ddb3646-ebda-11e7-8c3f-9a214cf09444",
+    "resources": {
+      "icons": [
+        "http://s3.amazonaws.com/gizer/icon1.jpg",
+        "http://s3.amazonaws.com/gizer/icon2.jpg",
+        "http://s3.amazonaws.com/gizer/icon3.jpg",
+        "http://s3.amazonaws.com/gizer/icon4.jpg",
+        "http://s3.amazonaws.com/gizer/icon5.jpg"
+      ],
+      "images": [
+        "/assets/images/weapons/4.png",
+        "/assets/images/weapons/4.png",
+        "/assets/images/weapons/4.png",
+        "/assets/images/weapons/4.png",
+        "/assets/images/weapons/4.png"
+      ],
+      "videos": [
+        "https://www.youtube.com/q=sdUdw83"
+      ],
+      "model": {
+        "src": "http://s3.amazonaws.com/gizer/models/bow.fbx"
+      }
+    },
+    "current": {
+      "status": "unlocked",
+      "likes": "123",
+      "similar": [
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae"
+      ]
+    },
+    "meta": {
+      "name": "Crossbow",
+      "description": "This is super awesome Crossbow",
+      "wallet": "7680adec8eabcabac676be9e83854ade0bd22cdb",
+      "use": "item use",
+      "category": "item category",
+      "rarity": "rare",
+      "origin": "won 1st place Doda GSL WW Turnament",
+      "released": "2013-03-01T01:10:00",
+      "unlocked": "2013-03-01T01:10:00",
+      "collection": "collection name",
+      "series": {
+        "item": 5,
+        "of": 10
+      }
+    }
+  },
+  {
+    "id": "4ddb3646-ebda-11e7-8c3f-9a214cf09555",
+    "resources": {
+      "icons": [
+        "http://s3.amazonaws.com/gizer/icon1.jpg",
+        "http://s3.amazonaws.com/gizer/icon2.jpg",
+        "http://s3.amazonaws.com/gizer/icon3.jpg",
+        "http://s3.amazonaws.com/gizer/icon4.jpg",
+        "http://s3.amazonaws.com/gizer/icon5.jpg"
+      ],
+      "images": [
+        "/assets/images/weapons/5.png",
+        "/assets/images/weapons/5.png",
+        "/assets/images/weapons/5.png",
+        "/assets/images/weapons/5.png",
+        "/assets/images/weapons/5.png"
+      ],
+      "videos": [
+        "https://www.youtube.com/q=sdUdw83"
+      ],
+      "model": {
+        "src": "http://s3.amazonaws.com/gizer/models/bow.fbx"
+      }
+    },
+    "current": {
+      "status": "unlocked",
+      "likes": "123",
+      "similar": [
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae"
+      ]
+    },
+    "meta": {
+      "name": "LSAT light machine gun",
+      "description": "This is super awesome LSAT",
+      "wallet": "7680adec8eabcabac676be9e83854ade0bd22cdb",
+      "use": "item use",
+      "category": "item category",
+      "rarity": "rare",
+      "origin": "won 1st place Doda GSL WW Turnament",
+      "released": "2013-03-01T01:10:00",
+      "unlocked": "2013-03-01T01:10:00",
+      "collection": "collection name",
+      "series": {
+        "item": 5,
+        "of": 10
+      }
+    }
+  },
+  {
+    "id": "4ddb3646-ebda-11e7-8c3f-9a214cf09666",
+    "resources": {
+      "icons": [
+        "http://s3.amazonaws.com/gizer/icon1.jpg",
+        "http://s3.amazonaws.com/gizer/icon2.jpg",
+        "http://s3.amazonaws.com/gizer/icon3.jpg",
+        "http://s3.amazonaws.com/gizer/icon4.jpg",
+        "http://s3.amazonaws.com/gizer/icon5.jpg"
+      ],
+      "images": [
+        "/assets/images/weapons/6.png",
+        "/assets/images/weapons/6.png",
+        "/assets/images/weapons/6.png",
+        "/assets/images/weapons/6.png",
+        "/assets/images/weapons/6.png"
+      ],
+      "videos": [
+        "https://www.youtube.com/q=sdUdw83"
+      ],
+      "model": {
+        "src": "http://s3.amazonaws.com/gizer/models/bow.fbx"
+      }
+    },
+    "current": {
+      "status": "unlocked",
+      "likes": "123",
+      "similar": [
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae"
+      ]
+    },
+    "meta": {
+      "name": "M27 IAR",
+      "description": "This is super awesome M27 IAR",
+      "wallet": "7680adec8eabcabac676be9e83854ade0bd22cdb",
+      "use": "item use",
+      "category": "item category",
+      "rarity": "rare",
+      "origin": "won 1st place Doda GSL WW Turnament",
+      "released": "2013-03-01T01:10:00",
+      "unlocked": "2013-03-01T01:10:00",
+      "collection": "collection name",
+      "series": {
+        "item": 5,
+        "of": 10
+      }
+    }
+  },
+  {
+    "id": "4ddb3646-ebda-11e7-8c3f-9a214cf09777",
+    "resources": {
+      "icons": [
+        "http://s3.amazonaws.com/gizer/icon1.jpg",
+        "http://s3.amazonaws.com/gizer/icon2.jpg",
+        "http://s3.amazonaws.com/gizer/icon3.jpg",
+        "http://s3.amazonaws.com/gizer/icon4.jpg",
+        "http://s3.amazonaws.com/gizer/icon5.jpg"
+      ],
+      "images": [
+        "/assets/images/weapons/7.png",
+        "/assets/images/weapons/7.png",
+        "/assets/images/weapons/7.png",
+        "/assets/images/weapons/7.png",
+        "/assets/images/weapons/7.png"
+      ],
+      "videos": [
+        "https://www.youtube.com/q=sdUdw83"
+      ],
+      "model": {
+        "src": "http://s3.amazonaws.com/gizer/models/bow.fbx"
+      }
+    },
+    "current": {
+      "status": "unlocked",
+      "likes": "123",
+      "similar": [
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae"
+      ]
+    },
+    "meta": {
+      "name": "Breda 30",
+      "description": "This is super awesome Breda 30",
+      "wallet": "7680adec8eabcabac676be9e83854ade0bd22cdb",
+      "use": "item use",
+      "category": "item category",
+      "rarity": "rare",
+      "origin": "won 1st place Doda GSL WW Turnament",
+      "released": "2013-03-01T01:10:00",
+      "unlocked": "2013-03-01T01:10:00",
+      "collection": "collection name",
+      "series": {
+        "item": 5,
+        "of": 10
+      }
+    }
+  },
+  {
+    "id": "4ddb3646-ebda-11e7-8c3f-9a214cf09888",
+    "resources": {
+      "icons": [
+        "http://s3.amazonaws.com/gizer/icon1.jpg",
+        "http://s3.amazonaws.com/gizer/icon2.jpg",
+        "http://s3.amazonaws.com/gizer/icon3.jpg",
+        "http://s3.amazonaws.com/gizer/icon4.jpg",
+        "http://s3.amazonaws.com/gizer/icon5.jpg"
+      ],
+      "images": [
+        "/assets/images/weapons/8.png",
+        "/assets/images/weapons/8.png",
+        "/assets/images/weapons/8.png",
+        "/assets/images/weapons/8.png",
+        "/assets/images/weapons/8.png"
+      ],
+      "videos": [
+        "https://www.youtube.com/q=sdUdw83"
+      ],
+      "model": {
+        "src": "http://s3.amazonaws.com/gizer/models/bow.fbx"
+      }
+    },
+    "current": {
+      "status": "unlocked",
+      "likes": "123",
+      "similar": [
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae"
+      ]
+    },
+    "meta": {
+      "name": "AEK-999",
+      "description": "This is super awesome AEK-999",
+      "wallet": "7680adec8eabcabac676be9e83854ade0bd22cdb",
+      "use": "item use",
+      "category": "item category",
+      "rarity": "rare",
+      "origin": "won 1st place Doda GSL WW Turnament",
+      "released": "2013-03-01T01:10:00",
+      "unlocked": "2013-03-01T01:10:00",
+      "collection": "collection name",
+      "series": {
+        "item": 5,
+        "of": 10
+      }
+    }
+  },
+  {
+    "id": "4ddb3646-ebda-11e7-8c3f-9a214cf09999",
+    "resources": {
+      "icons": [
+        "http://s3.amazonaws.com/gizer/icon1.jpg",
+        "http://s3.amazonaws.com/gizer/icon2.jpg",
+        "http://s3.amazonaws.com/gizer/icon3.jpg",
+        "http://s3.amazonaws.com/gizer/icon4.jpg",
+        "http://s3.amazonaws.com/gizer/icon5.jpg"
+      ],
+      "images": [
+        "/assets/images/weapons/9.png",
+        "/assets/images/weapons/9.png",
+        "/assets/images/weapons/9.png",
+        "/assets/images/weapons/9.png",
+        "/assets/images/weapons/9.png"
+      ],
+      "videos": [
+        "https://www.youtube.com/q=sdUdw83"
+      ],
+      "model": {
+        "src": "http://s3.amazonaws.com/gizer/models/bow.fbx"
+      }
+    },
+    "current": {
+      "status": "unlocked",
+      "likes": "123",
+      "similar": [
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae"
+      ]
+    },
+    "meta": {
+      "name": "AK47",
+      "description": "This is super awesome AK47",
+      "wallet": "7680adec8eabcabac676be9e83854ade0bd22cdb",
+      "use": "item use",
+      "category": "item category",
+      "rarity": "rare",
+      "origin": "won 1st place Doda GSL WW Turnament",
+      "released": "2013-03-01T01:10:00",
+      "unlocked": "2013-03-01T01:10:00",
+      "collection": "collection name",
+      "series": {
+        "item": 5,
+        "of": 10
+      }
+    }
+  },
+  {
+    "id": "4ddb3646-ebda-11e7-8c3f-9a214cf09000",
+    "resources": {
+      "icons": [
+        "http://s3.amazonaws.com/gizer/icon1.jpg",
+        "http://s3.amazonaws.com/gizer/icon2.jpg",
+        "http://s3.amazonaws.com/gizer/icon3.jpg",
+        "http://s3.amazonaws.com/gizer/icon4.jpg",
+        "http://s3.amazonaws.com/gizer/icon5.jpg"
+      ],
+      "images": [
+        "/assets/images/weapons/10.png",
+        "/assets/images/weapons/10.png",
+        "/assets/images/weapons/10.png",
+        "/assets/images/weapons/10.png",
+        "/assets/images/weapons/10.png"
+      ],
+      "videos": [
+        "https://www.youtube.com/q=sdUdw83"
+      ],
+      "model": {
+        "src": "http://s3.amazonaws.com/gizer/models/bow.fbx"
+      }
+    },
+    "current": {
+      "status": "unlocked",
+      "likes": "123",
+      "similar": [
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae"
+      ]
+    },
+    "meta": {
+      "name": "HK PSG1",
+      "description": "This is super awesome HK PSG1",
+      "wallet": "7680adec8eabcabac676be9e83854ade0bd22cdb",
+      "use": "item use",
+      "category": "item category",
+      "rarity": "rare",
+      "origin": "won 1st place Doda GSL WW Turnament",
+      "released": "2013-03-01T01:10:00",
+      "unlocked": "2013-03-01T01:10:00",
+      "collection": "collection name",
+      "series": {
+        "item": 5,
+        "of": 10
+      }
+    }
+  },
+  {
+    "id": "4ddb3646-ebda-11e7-8c3f-9a214cf09aaa",
+    "resources": {
+      "icons": [
+        "http://s3.amazonaws.com/gizer/icon1.jpg",
+        "http://s3.amazonaws.com/gizer/icon2.jpg",
+        "http://s3.amazonaws.com/gizer/icon3.jpg",
+        "http://s3.amazonaws.com/gizer/icon4.jpg",
+        "http://s3.amazonaws.com/gizer/icon5.jpg"
+      ],
+      "images": [
+        "/assets/images/weapons/5.png",
+        "/assets/images/weapons/5.png",
+        "/assets/images/weapons/5.png",
+        "/assets/images/weapons/5.png",
+        "/assets/images/weapons/5.png"
+      ],
+      "videos": [
+        "https://www.youtube.com/q=sdUdw83"
+      ],
+      "model": {
+        "src": "http://s3.amazonaws.com/gizer/models/bow.fbx"
+      }
+    },
+    "current": {
+      "status": "unlocked",
+      "likes": "123",
+      "similar": [
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae"
+      ]
+    },
+    "meta": {
+      "name": "HK 417",
+      "description": "This is super awesome HK 417",
+      "wallet": "7680adec8eabcabac676be9e83854ade0bd22cdb",
+      "use": "item use",
+      "category": "item category",
+      "rarity": "rare",
+      "origin": "won 1st place Doda GSL WW Turnament",
+      "released": "2013-03-01T01:10:00",
+      "unlocked": "2013-03-01T01:10:00",
+      "collection": "collection name",
+      "series": {
+        "item": 5,
+        "of": 10
+      }
+    }
+  },
+  {
+    "id": "4ddb3646-ebda-11e7-8c3f-9a214cf09bbb",
+    "resources": {
+      "icons": [
+        "http://s3.amazonaws.com/gizer/icon1.jpg",
+        "http://s3.amazonaws.com/gizer/icon2.jpg",
+        "http://s3.amazonaws.com/gizer/icon3.jpg",
+        "http://s3.amazonaws.com/gizer/icon4.jpg",
+        "http://s3.amazonaws.com/gizer/icon5.jpg"
+      ],
+      "images": [
+        "/assets/images/weapons/7.png",
+        "/assets/images/weapons/7.png",
+        "/assets/images/weapons/7.png",
+        "/assets/images/weapons/7.png",
+        "/assets/images/weapons/7.png"
+      ],
+      "videos": [
+        "https://www.youtube.com/q=sdUdw83"
+      ],
+      "model": {
+        "src": "http://s3.amazonaws.com/gizer/models/bow.fbx"
+      }
+    },
+    "current": {
+      "status": "unlocked",
+      "likes": "123",
+      "similar": [
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae"
+      ]
+    },
+    "meta": {
+      "name": "Grenade Launcher",
+      "description": "This is super awesome Grenade Launcher",
+      "wallet": "7680adec8eabcabac676be9e83854ade0bd22cdb",
+      "use": "item use",
+      "category": "item category",
+      "rarity": "rare",
+      "origin": "won 1st place Doda GSL WW Turnament",
+      "released": "2013-03-01T01:10:00",
+      "unlocked": "2013-03-01T01:10:00",
+      "collection": "collection name",
+      "series": {
+        "item": 5,
+        "of": 10
+      }
+    }
+  },
+  {
+    "id": "4ddb3646-ebda-11e7-8c3f-9a214cf09ccc",
+    "resources": {
+      "icons": [
+        "http://s3.amazonaws.com/gizer/icon1.jpg",
+        "http://s3.amazonaws.com/gizer/icon2.jpg",
+        "http://s3.amazonaws.com/gizer/icon3.jpg",
+        "http://s3.amazonaws.com/gizer/icon4.jpg",
+        "http://s3.amazonaws.com/gizer/icon5.jpg"
+      ],
+      "images": [
+        "/assets/images/weapons/6.png",
+        "/assets/images/weapons/6.png",
+        "/assets/images/weapons/6.png",
+        "/assets/images/weapons/6.png",
+        "/assets/images/weapons/6.png"
+      ],
+      "videos": [
+        "https://www.youtube.com/q=sdUdw83"
+      ],
+      "model": {
+        "src": "http://s3.amazonaws.com/gizer/models/bow.fbx"
+      }
+    },
+    "current": {
+      "status": "unlocked",
+      "likes": "123",
+      "similar": [
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae"
+      ]
+    },
+    "meta": {
+      "name": "HK MG43",
+      "description": "This is super awesome HK MG43",
+      "wallet": "7680adec8eabcabac676be9e83854ade0bd22cdb",
+      "use": "item use",
+      "category": "item category",
+      "rarity": "rare",
+      "origin": "won 1st place Doda GSL WW Turnament",
+      "released": "2013-03-01T01:10:00",
+      "unlocked": "2013-03-01T01:10:00",
+      "collection": "collection name",
+      "series": {
+        "item": 5,
+        "of": 10
+      }
+    }
+  },
+  {
+    "id": "4ddb3646-ebda-11e7-8c3f-9a214cf09eee",
+    "resources": {
+      "icons": [
+        "http://s3.amazonaws.com/gizer/icon1.jpg",
+        "http://s3.amazonaws.com/gizer/icon2.jpg",
+        "http://s3.amazonaws.com/gizer/icon3.jpg",
+        "http://s3.amazonaws.com/gizer/icon4.jpg",
+        "http://s3.amazonaws.com/gizer/icon5.jpg"
+      ],
+      "images": [
+        "/assets/images/weapons/4.png",
+        "/assets/images/weapons/4.png",
+        "/assets/images/weapons/4.png",
+        "/assets/images/weapons/4.png",
+        "/assets/images/weapons/4.png"
+      ],
+      "videos": [
+        "https://www.youtube.com/q=sdUdw83"
+      ],
+      "model": {
+        "src": "http://s3.amazonaws.com/gizer/models/bow.fbx"
+      }
+    },
+    "current": {
+      "status": "unlocked",
+      "likes": "123",
+      "similar": [
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+        "4ddb3646-ebda-11e7-8c3f-9a214cf093ae"
+      ]
+    },
+    "meta": {
+      "name": "MP7",
+      "description": "This is super awesome MP7",
+      "wallet": "7680adec8eabcabac676be9e83854ade0bd22cdb",
+      "use": "item use",
+      "category": "item category",
+      "rarity": "rare",
+      "origin": "won 1st place Doda GSL WW Turnament14",
+      "released": "2013-03-01T01:10:00",
+      "unlocked": "2013-03-01T01:10:00",
+      "collection": "collection name",
+      "series": {
+        "item": 5,
+        "of": 10
+      }
+    }
+  }
 ]

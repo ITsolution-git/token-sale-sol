@@ -4,7 +4,6 @@ import * as UserActions from '../actions/user.actions';
 export type Action = UserActions.All;
 
 export function userReducer(state: UserState = INITIAL_USER_STATE, action: Action) {
-    console.log(state);
     switch (action.type) {
 
         case UserActions.UPDATE_INSTALL_STATUS:
