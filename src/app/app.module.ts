@@ -6,17 +6,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { Ng2Webstorage } from 'ngx-webstorage';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { Angulartics2Module } from 'angulartics2';
+import { Angulartics2GoogleTagManager } from 'angulartics2/gtm';
+
 import { AuthGuard } from './shared';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-
 import { ApiRoutingService } from './core/api-routing.service';
 import { LayoutModule } from './pages/layout/layout.module';
 import { AuthService } from './core/services/auth.service';
 import { HttpHelperService } from './core/http-helper.service';
 
 import { INITIAL_APPLICATION_STATE } from './store/application-state';
-
 import { userReducer } from './store/reducers/user.reducer';
 
 export const reducers = {
@@ -37,6 +38,7 @@ export const reducers = {
     LayoutModule,
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({maxAge: 25}),
+    Angulartics2Module.forRoot([Angulartics2GoogleTagManager]),
   ],
   providers: [
     HttpHelperService,
