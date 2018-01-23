@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Item } from '../../shared/models/item.module';
+import { Item } from '../../shared/models/item.model';
 import { ItemService } from '../../shared/services/ItemService/item.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
