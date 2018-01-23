@@ -6,8 +6,8 @@
     <div class="row justify-content-center position-relative">
       <app-item
         class="item-wrapper"
-        *ngFor="let item of items; let i = index"
-        [index]="i"
+        *ngFor="let item of items"
+        [id]="item.id"
         [itemImageLink]="item.resources.images[0]"
         [itemName]="item.meta.name"
         >

@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./item.component.scss']
 })
 export class ItemComponent implements OnInit {
-  @Input() index = 0;
+  @Input() id = '';
   @Input() itemImageLink = '';
   @Input() showButton = true;
   @Input() itemName = '';
@@ -16,6 +16,6 @@ export class ItemComponent implements OnInit {
   }
 
   navigateToItemDetails() {
-    this.router.navigate(['/item-detail']);
+    this.router.navigate(['/item-detail', this.id]);
   }
 }

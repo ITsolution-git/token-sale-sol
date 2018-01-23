@@ -18,4 +18,14 @@ export class ItemService {
       null
     );
   }
+
+  getItem(id) {
+    return this.http.get(
+      this.apiRoutingService.getItemsUrl(),
+      {},
+      true,
+      null
+    )
+    .map(items => items.find(item => item.id === id));
+  }
 }
