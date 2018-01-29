@@ -2,8 +2,119 @@
     background-image: url('/assets/images/img-get-gzr-bg.png');
     background-repeat: no-repeat;
     background-size: contain;
-    .gizer-value-wrapper, .buy-gzr-wrapper {
+    .form-wrapper, .buy-gzr-wrapper {
         background-color: #1c1e33;
+    }
+    .send-ether-block {
+        background-color: #1c1e33;
+        .title-wrapper {
+            h4 {
+                font-size: 18px;
+                font-family: "Century Gothic Bold";
+                color: #ffffff;
+            }
+            .warn {
+                font-size: 15px;
+                font-family: "Century Gothic";
+                color: #ff0000;
+            }
+        }
+        .address-block {
+            .separator {
+                position: relative;
+                height: 24px;
+                .line {
+                    border-top: solid 0.5px #fff;
+                    display: block;
+                    margin-top: 10px;
+                }
+                .text {
+                    position: absolute;
+                    top: -13px;
+                    left: 47%;
+                    color: #fff;
+                    padding: 0 10px;
+                    background: #1d1e34;
+                }
+            }
+        }
+        .buy-gzr-wrapper {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            .text-label {
+                font-size: 14px;
+                .link {
+                    font-size: 14px;
+                }
+            }
+            .buy-now {
+                padding: 8px 30px;
+                .btn-buy-now {
+                    font-size: 21px;
+                    font-family: "Century Gothic";
+                    text-shadow: none;
+                }
+            }
+        }
+    }
+    .check-terms {
+        .terms-checkbox {
+            position: absolute; // take it out of document flow
+            opacity: 0; // hide it
+          
+            & + label {
+              position: relative;
+              cursor: pointer;
+              padding: 0;
+            }
+          
+            // Box.
+            & + label:before {
+              content: '';
+              margin-right: 10px;
+              display: inline-block;
+              vertical-align: text-top;
+              width: 20px;
+              height: 20px;
+              background: #2f314e;
+              border: solid 1px #676876;
+            }
+          
+          
+            // Box checked
+            &:checked + label:before {
+              background: #24c9f0;
+            }
+          
+            // Checkmark. Could be replaced with an image
+            &:checked + label:after {
+              content: '';
+              position: absolute;
+              left: 5px;
+              top: 12px;
+              width: 2px;
+              height: 2px;
+              box-shadow: 
+                2px 0 0 white,
+                4px 0 0 white,
+                4px -2px 0 white,
+                4px -4px 0 white,
+                4px -6px 0 white,
+                4px -8px 0 white;
+              transform: rotate(45deg);
+            }
+        }
+        .link {
+            font-size: 16px;
+            font-family: "Century Gothic";
+            color: #00fcff;
+        }
+    }
+    .text-label {
+        font-size: 16px;
+        font-family: "Century Gothic";
+        color: #ffffff;
     }
     .title {
         font-size: 22px;
@@ -11,24 +122,92 @@
         color: #ffffff;
         -webkit-font-smoothing: antialiased;
     }
-    .gizer-value {
-        font-size: 53px;
-        font-family: "Century Gothic Bold";
-        color: #ffffff;
-        -webkit-font-smoothing: antialiased;
+    .eth-form {
+        .txt-value-input {
+            width: 93%;
+        }
+        .icons {
+            padding-left: 8px;
+            vertical-align: text-bottom;
+        }
+        .icons-1 {
+            padding-left: 4px;
+            vertical-align: text-bottom;
+        }
+        
+        .value-text {
+            font-size: 12px;
+            font-family: "Century Gothic";
+            color: #ffffff;
+        }
+        .irs {
+            margin-top: -20px;
+            .irs-bar {
+                background: #24c9f0;
+                height: 5px;
+                border: 0;
+            }
+            .irs-bar-edge {
+                border: 0;
+                height: 5px;
+                background: #24c9f0;
+            }
+            .irs-slider {
+                height: 20px;
+                width: 20px;
+            }
+            .irs-line {
+                height: 5px;
+            }
+        }
+        .range-slider {
+            -webkit-appearance: none;
+            height: 4px;
+            border-radius: 4px;
+            &::-webkit-slider-thumb {
+                appearance: none;
+                height: 20px;
+                width: 20px;
+                border-radius: 50%;
+                background: #ffffff;
+            }
+            &::-ms-fill-lower {
+                background: #24c9f0;
+            }
+            &::-ms-fill-upper {
+                background: #ffffff;
+            }
+        }
+    }
+    .buy-now {
+        display: inline-block;
+        padding: 5px 45px;
+        border-radius: 50px;
+        background: #f89220;
+        cursor: pointer;
+        .btn-buy-now {
+            font-size: 24px;
+            font-family: "Century Gothic Bold";
+            color: #ffffff;
+            text-shadow: 2px 2px 2px rgba(1, 2, 2, 0.38);
+        }
     }
     .description {
         background-color: #272942;
-        .description-text {
-            font-size: 16px;
-            font-family: "Century Gothic";
+        .discription-list {
+            padding-left: 20px;
             color: #8a8da4;
-            -webkit-font-smoothing: antialiased;
-        }
-        .strong-text {
-            font-family: "Century Gothic Bold";
-            font-size: 16px;
-            color: #ffffff;
+            .description-text {
+                font-size: 16px;
+                font-family: "Century Gothic";
+                color: #8a8da4;
+                -webkit-font-smoothing: antialiased;
+            }
+            .strong-text {
+                font-family: "Century Gothic Bold";
+                font-size: 16px;
+                color: #ffffff;
+            }
         }
     }
     .label {
@@ -40,7 +219,7 @@
             -webkit-font-smoothing: antialiased;
         }
     }
-    .input-amount {
+    .txt-value-input {
         height: 38px;
         background-color: #2f314e;
         font-size: 17px;

@@ -6,10 +6,10 @@
       <img class="mw-100 mh-100" [src]="itemImageLink">
     </div>
     <div class="item-name">
-      {{itemName}}
+      <span class="align-middle">{{itemName}}</span>
     </div>
-    <div *ngIf="showButton" class="btn-view">
-      <span>View</span>
+    <div class="rarity">
+      <img [src]="rarityType">
     </div>
   </div>
 </div>

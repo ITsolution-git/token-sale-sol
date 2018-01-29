@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ItemService } from '../../services/ItemService/item.service';
 import { Item } from '../../models/item.model';
+
 
 @Component({
   selector: 'app-item-list',
@@ -8,6 +9,7 @@ import { Item } from '../../models/item.model';
   styleUrls: ['./item-list.component.scss']
 })
 export class ItemListComponent implements OnInit {
+  @Input() showTitle = true;
   items: Item[];
   itemArray: Item[];
   counter = 0;

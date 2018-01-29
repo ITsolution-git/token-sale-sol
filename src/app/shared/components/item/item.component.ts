@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { Rarity } from '../../models/item.model';
+
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
@@ -8,11 +10,15 @@ import { Router } from '@angular/router';
 export class ItemComponent implements OnInit {
   @Input() id = '';
   @Input() itemImageLink = '';
-  @Input() showButton = true;
+  @Input() rarity = '';
   @Input() itemName = '';
+
+  rarityType: string;
+
   constructor( private router: Router ) { }
 
   ngOnInit() {
+    this.rarityType = `/assets/images/img-item-type-${this.rarity.toLocaleLowerCase()}.png`;
   }
 
   navigateToItemDetails() {

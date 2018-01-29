@@ -1,6 +1,6 @@
 <div class="inventory-list">
   <div class="container">
-    <div class="list-title">
+    <div *ngIf="showTitle" class="list-title">
       <p>Just Released</p>
     </div>
     <div class="row justify-content-center position-relative">
@@ -10,6 +10,7 @@
         [id]="item.id"
         [itemImageLink]="item.resources.images[0]"
         [itemName]="item.meta.name"
+        [rarity]="item.meta.rarity"
         >
       </app-item>
       <div class="arrow pl-2">
