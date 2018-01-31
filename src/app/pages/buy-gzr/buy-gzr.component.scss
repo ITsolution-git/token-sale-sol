@@ -1,7 +1,11 @@
+.modal-lg {
+    width: 620px !important;
+}
 .buy-gzr {
     background-image: url('/assets/images/img-get-gzr-bg.png');
     background-repeat: no-repeat;
     background-size: contain;
+    background-color: #19192d;
     .form-wrapper, .buy-gzr-wrapper {
         background-color: #1c1e33;
     }
@@ -20,6 +24,15 @@
             }
         }
         .address-block {
+            .copy-icon {
+                cursor: pointer;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                font-size: 12px;
+                font-family: "Century Gothic";
+                color: #ffffff;
+            }
             .separator {
                 position: relative;
                 height: 24px;
@@ -49,6 +62,7 @@
                 }
             }
             .buy-now {
+                cursor: pointer;
                 padding: 8px 30px;
                 .btn-buy-now {
                     font-size: 21px;

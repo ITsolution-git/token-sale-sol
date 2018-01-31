@@ -1,0 +1,27 @@
+.locked-modal {
+    .modal-title {
+        font-size: 30px;
+        font-family: "Century Gothic Bold";
+        color: #3171a2;
+    }
+    .description {
+        font-size: 18px;
+        font-family: "Century Gothic";
+        color: #0b0c14;
+    }
+    .confused {
+        font-size: 20px;
+        font-family: "Century Gothic";
+        color: #313131;
+    }
+    .view-faq {
+        font-family: "Century Gothic";
+        font-size: 24px;
+        color: #ffffff;
+        cursor: pointer;
+        display: inline-block;
+        padding: 5px 45px;
+        border-radius: 50px;
+        background: #f89220;
+    }
+}

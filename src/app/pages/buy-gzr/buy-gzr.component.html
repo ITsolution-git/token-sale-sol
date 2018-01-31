@@ -1,33 +1,39 @@
-<div class="buy-gzr mb-5">
+<div class="buy-gzr pb-5">
   <div class="container">
     <div class="row justify-content-md-center">
       <div class="col-md-5">
         <div class="row justify-content-md-center">
           <h3 class="title pt-5 pb-4">Buy GZR</h3>
         </div>
-        <div class="row justify-content-md-center pb-3">
+        <div *ngIf="isFromModal" class="row justify-content-md-center pb-3">
           <div class="send-ether-block border border-secondary p-3 w-100">
             <div class="title-wrapper text-center pt-2 pb-4">
               <h4>Send Ether to the address below</h4>
               <p class="warn">*Do not send ETH from an exchange</p>
             </div>
-            <div class="address-block">
-              <input class="txt-value-input w-100 pl-3 mb-3" placeholder="0x90dw90fh382hfsjenf032ru9oafj3092fh" type="text" readonly>
+            <div *ngIf="isAccepted && showAddress" class="address-block">
+              <div class="position-relative">
+                <input class="txt-value-input w-100 pl-3 mb-3" placeholder="0x90dw90fh382hfsjenf032ru9oafj3092fh" type="text" readonly>
+                <span class="copy-icon"><img class="pr-1" src="/assets/icons/icon-copy.png">Copy</span>
+              </div>
               <div class="separator">
                 <span class="line"></span>
                 <span class="text">or</span>
               </div>
-              <input class="txt-value-input w-100 pl-3 mb-3" placeholder="gizergaming.eth" type="text" readonly>
+              <div class="position-relative">
+                <input class="txt-value-input w-100 pl-3 mb-3" placeholder="gizergaming.eth" type="text" readonly>
+                <span class="copy-icon"><img class="pr-1" src="/assets/icons/icon-copy.png">Copy</span>
+              </div>
             </div>
-            <div class="buy-gzr-wrapper border border-secondary p-3 w-100">
-              <div class="check-terms pb-5">
+            <div *ngIf="!showAddress" class="buy-gzr-wrapper border border-secondary p-3 w-100">
+              <div class="check-terms pb-4">
                   <span class="checkbox">
-                  <input class="terms-checkbox" id="terms-checkbox" type="checkbox">
+                  <input [(ngModel)]="isAccepted" class="terms-checkbox" id="terms-checkbox" type="checkbox">
                   <label for="terms-checkbox"></label>
                 </span>
                 <span class="text-label">I have read the Gzr <a href="#" class="link">Whitepaper</a> and I accept the <a href="#" class="ml-4 link" >Terms & Conditions</a></span>
               </div>
-              <div class="buy-now mb-3">
+              <div class="buy-now mb-3" (click)="showAddressForm()">
                 <span class="btn-buy-now">Show Me the Contract Address</span>
               </div>
             </div>
@@ -64,20 +70,20 @@
                 <span class="icons-1"><img src="/assets/icons/icon-gizer-small-buy.png"></span>
               </div>
               
-              <div class="check-terms pb-5">
+              <div *ngIf="!isFromModal" class="check-terms pb-5">
                 <span class="checkbox">
-                  <input class="terms-checkbox" id="terms-checkbox" type="checkbox">
+                  <input [(ngModel)]="isAccepted" class="terms-checkbox" id="terms-checkbox" type="checkbox">
                   <label for="terms-checkbox"></label>
                 </span>
                 <span class="text-label">I have read the Gzr <a href="#" class="link">Whitepaper</a> and I accept the <a href="#" class="ml-4 link" >Terms & Conditions</a></span>
               </div>
             </div>
-            <div class="buy-now mb-3">
+            <div *ngIf="!isFromModal" (click)="openModalWithComponent()" class="buy-now mb-3">
               <span class="btn-buy-now">Buy Now</span>
             </div>
           </div>
         </div>
-        <div class="row justify-content-md-center">
+        <div *ngIf="!isFromModal" class="row justify-content-md-center">
           <div class="buy-gzr-wrapper border border-secondary p-3 w-100">
             <div class="p-3 description">
               <ul class="discription-list">
@@ -89,6 +95,35 @@
                 </li>
                 <li>
                     <p class="description-text">Enter the amount of ETH you want to spend, accept the Terms & Conditions and then click Buy Now. A MetaMask transaction will be generated for you automatically. Click Accept in order to confirm your purchase of GZR and send ETH to our smart contract.</p>
+                </li>
+                <li>
+                    <p class="description-text">You will receive GZR within 6 confirmation on your ETH Transaction.</p>
+                </li>
+                <li>
+                    <p class="description-text">Minimum purchase is 10 GZR (0.01 ETH)</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="isFromModal" class="row justify-content-md-center">
+          <div class="buy-gzr-wrapper border border-secondary p-3 w-100">
+            <div class="p-3 description">
+              <ul class="discription-list">
+                <li>
+                    <p class="strong-text">The price of GZR is 1000 GZR per 1 ETH.</p>
+                </li>
+                <li>
+                    <p class="description-text">Set Gas limit to 100,000</p>
+                </li>
+                <li>
+                    <p class="description-text">Only ETH payments are accepted</p>
+                </li>
+                <li>
+                    <p class="description-text">We <span class="strong-text">strongly</span> recommended using MetaMask to make your purchase</p>
+                </li>
+                <li>
+                    <p class="description-text">The smart contract instantly generates GZR and sends it to your wallet after you make a purchase.</p>
                 </li>
                 <li>
                     <p class="description-text">You will receive GZR within 6 confirmation on your ETH Transaction.</p>

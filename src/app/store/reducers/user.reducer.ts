@@ -18,6 +18,9 @@ export function userReducer(state: UserState = INITIAL_USER_STATE, action: Actio
         case UserActions.UPDATE_GZR_BALANCE:
                 return { ...state, balance: action.payload };
 
+        case UserActions.UPDATE_SHOW_ADDRESS_FORM:
+                return { ...state, showAddressForm: action.payload };
+
         default: {
             return state;
         }
