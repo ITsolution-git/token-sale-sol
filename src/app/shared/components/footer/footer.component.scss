@@ -80,23 +80,48 @@
         }
     }
     @media (max-width: 450px) {
+        padding-top: 10px;
         .menu {
+            width: 100%;
             .list-unstyled {
-                margin-right: 15px;
+                width: 49%;
+                margin-right: 0px;
+                li {
+                    padding: 2px 0px;;
+                    .img {
+                        width: 20px;
+                        img {
+                            height: 15px;
+                        }
+                    }
+                }
+            }
+            .title {
+                font-size: 15px;
             }
         }
         .subscription {
+            .sub-title {
+                font-size: 15px;
+            }
             .button-wrapper {
-                padding-top: 20px;
                 .btn-submit {
-                    margin-left: 0px;
+                    border: solid 2px;
+                    padding: 8px 30px;
+                    margin-left: 5px;
                 }
+            }
+        }
+        .download-gizer {
+            .sub-title {
+                font-size: 15px;
             }
         }
         .copyright {
             .text-copyright {
-                font-size: 14px;
+                font-size: 12px;
                 text-align: center;
+                color: #1e1f2c;
             }
         }
     }

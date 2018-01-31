@@ -56,21 +56,57 @@
         }
     }
     @media (max-width: 450px) {
+        padding: 20px 0;
+        .img-responsive {
+            height: 28px;
+        }
         .section-header {
             h2 {
-                font-size: 1em;
+                font-size: 14px;
+                font-family: "Century Gothic Bold";
             }
         }
         .text_content {
+            margin-top: 20px;
             margin-bottom: 30px;
+            font-size: 13px;
         }
         .pdf_btn {
             margin-bottom: 20px;
+            text-align: left !important;
+            a {
+                font-size: 14px !important;
+                padding: 10px 16px !important;
+                .img-responsive {
+                    height: 24px !important;
+                }
+            }
         }
-        .mobileimgg {
-            margin-bottom: 20px;
+        .img-group {
+            padding: 0 !important;
             margin-top: 20px;
+            .mobileimgg {
+                height: 100% !important;
+            }
         }
+        .item_type {
+            h4 {
+                font-size: 15px;
+                margin: 15px -10px;
+                font-family: "Century Gothic Bold";
+            }
+            h5 {
+                font-size: 14px;
+            }
+            img {
+                width: 100%;
+                padding: 0 5px;
+            }
+            .no-padding {
+                padding: 0 !important;
+            }
+        }
+        
     }
 }
   

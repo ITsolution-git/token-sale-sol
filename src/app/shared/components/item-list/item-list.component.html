@@ -1,7 +1,8 @@
 <div class="inventory-list">
   <div class="container">
-    <div *ngIf="showTitle" class="list-title">
-      <p>Just Released</p>
+    <div  *ngIf="showTitle" class="list-title">
+      <p *ngIf="!isMobile">Just Released</p>
+      <p *ngIf="isMobile">Other Items from This Treasure</p>
     </div>
     <div class="row justify-content-center position-relative">
       <app-item

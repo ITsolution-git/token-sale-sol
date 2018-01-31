@@ -47,14 +47,26 @@
         }
     }
     @media (max-width: 450px) {
-        padding-left: 5px;
-        padding-right: 5px;
+        padding-left: 8px;
+        padding-right: 8px;
         .item-wrapper {
+            margin-bottom: 16px;
             .item-img {
-                padding: 15px;
+                padding: 5px;
+                margin: 0;
             }
             .item-name {
                 height: 38px;
+                margin-bottom: 5px;
+                font-size: 14px;
+            }
+        }
+        .rarity {
+            margin-bottom: 20px !important;
+            height: 35px !important;
+            img {
+                height: 35px;
+                vertical-align: middle;
             }
         }
     }
