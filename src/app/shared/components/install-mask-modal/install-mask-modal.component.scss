@@ -36,5 +36,37 @@
         font-family: "Century Gothic";
         color: #0b0c14;
     }
+    @media (max-width: 450px) {
+        .gizer-mask {
+            margin: 0 !important;
+            img {
+                height: 70px;
+                margin-bottom: 20px;
+            }
+        }
+        .btn-install-metamask {
+            font-size: 14px;
+            padding: 6px 30px;
+        }
+        .modal-title {
+            font-size: 18px;
+        }
+        .description {
+            font-size: 12px;
+        }
+        .view-faq {
+            font-size: 13px;
+        }
+        .link {
+            cursor: pointer;
+            font-size: 12px;
+            font-family: "Century Gothic Bold";
+            color: #0f9cd1;
+            text-decoration: underline;
+        }
+        .heading, .sub-description {
+            font-size: 12px;
+        }
+    }
 }
   

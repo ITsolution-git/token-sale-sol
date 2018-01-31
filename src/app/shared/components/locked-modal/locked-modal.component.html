@@ -1,5 +1,5 @@
 <div class="locked-modal">
-  <div class="modal-body text-center">
+  <div *ngIf="!isMobile" class="modal-body text-center">
     <h3 class="modal-title py-3">Your MetaMask is Locked.</h3>
     <div class="px-5 mx-4">
       <p class="description px-5">All you need to do is open MetaMask and follow the instructions to unlock it in order to purchase GZR.</p>
@@ -12,4 +12,20 @@
       <span class="view-faq" (click)="navigateToFAQ()">View the FAQ</span>
     </div>
   </div>
+  <div *ngIf="isMobile" class="modal-body text-center">
+      <h3 class="modal-title py-3">MetaMask Not Detected</h3>
+      <div class="text-center">
+        <p class="description">We <strong>*strongly*</strong> recommend using MetaMask on your <br> Desktop in order to purchase GZR tokens</p>
+      </div>
+      <div class="locked-mask m-3">
+        <img src="/assets/images/img-metamask-modal-desktop.png">
+      </div>
+      <div class="text-center">
+        <p class="description">MetaMask is a secure crptocurrency wallet for your desktop web browser. Using MetaMask to purchase GZR will give you the best possible experience and allow you to take full advantage of your tokens right away. It will also act as your login to our website and give you access to our referral system and priority customer support.</p>
+      </div>
+      <div class="mt-5 mb-2">
+        <span class="view-faq" (click)="showAddressForm()">Let me Buy GZR anyways</span>
+      </div>
+      <a class="link" (click)="navigateToFAQ()">I'm confused, show me the FAQ</a>
+    </div>
 </div>

@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row justify-content-md-center">
       <div class="col-md-5">
-        <div class="row justify-content-md-center">
+        <div class="row justify-content-center">
           <h3 class="title pt-5 pb-4">Buy GZR</h3>
         </div>
         <div *ngIf="isFromModal" class="row justify-content-md-center pb-3">
@@ -31,7 +31,7 @@
                   <input [(ngModel)]="isAccepted" class="terms-checkbox" id="terms-checkbox" type="checkbox">
                   <label for="terms-checkbox"></label>
                 </span>
-                <span class="text-label">I have read the Gzr <a href="#" class="link">Whitepaper</a> and I accept the <a href="#" class="ml-4 link" >Terms & Conditions</a></span>
+                <span class="text-label">I have read the Gzr <a href="#" class="link">Whitepaper</a> and I accept the <a href="#" class="ml-4 link terms" >Terms & Conditions</a></span>
               </div>
               <div class="buy-now mb-3" (click)="showAddressForm()">
                 <span class="btn-buy-now">Show Me the Contract Address</span>
@@ -75,7 +75,7 @@
                   <input [(ngModel)]="isAccepted" class="terms-checkbox" id="terms-checkbox" type="checkbox">
                   <label for="terms-checkbox"></label>
                 </span>
-                <span class="text-label">I have read the Gzr <a href="#" class="link">Whitepaper</a> and I accept the <a href="#" class="ml-4 link" >Terms & Conditions</a></span>
+                <span class="text-label">I have read the Gzr <a href="#" class="link">Whitepaper</a> and I accept the <a href="#" class="ml-4 link terms" >Terms & Conditions</a></span>
               </div>
             </div>
             <div *ngIf="!isFromModal" (click)="openModalWithComponent()" class="buy-now mb-3">

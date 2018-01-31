@@ -24,4 +24,22 @@
         border-radius: 50px;
         background: #f89220;
     }
+    @media (max-width: 450px) {
+        .modal-title {
+            font-size: 18px;
+        }
+        .description {
+            font-size: 12px;
+        }
+        .view-faq {
+            font-size: 13px;
+        }
+        .link {
+            cursor: pointer;
+            font-size: 12px;
+            font-family: "Century Gothic Bold";
+            color: #0f9cd1;
+            text-decoration: underline;
+        }
+    }
 }

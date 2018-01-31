@@ -1,5 +1,8 @@
 .modal-lg {
     width: 620px !important;
+    @media (max-width: 450px) {
+        width: 357px !important;
+    }
 }
 .buy-gzr {
     background-image: url('/assets/images/img-get-gzr-bg.png');
@@ -250,6 +253,82 @@
     }
     .btn-buy-now {
         cursor: pointer;
+    }
+    
+    @media (max-width: 450px) {
+        padding: 0 15px;
+        .title {
+            font-size: 16px;
+            margin: 0;
+            padding: 20px 0 !important;
+        }
+        .text-label {
+            font-size: 14px;
+            .link {
+                font-size: 14px;
+            }
+        }
+        .eth-form {
+            .txt-value-input {
+                width: 90%;
+                height: 28px;
+                font-size: 12px;
+                padding-left: 10px !important;
+            }
+        }
+        .check-terms {
+            padding-bottom: 30px !important;
+        }
+        .buy-now {
+            margin: 0 !important;
+            .btn-buy-now {
+                font-size: 18px;
+            }
+        }
+        .terms {
+            margin-left: 0px !important;
+        }
+        .description{
+            .discription-list {
+                .strong-text, .description-text {
+                    font-size: 12px;
+                    margin-bottom: 5px;
+                }
+            }
+        }
+        .send-ether-block{
+            .title-wrapper {
+                padding-bottom: 0 !important;
+                h4 {
+                    font-size: 15px;
+                }
+                .warn {
+                    font-size: 13px;
+                }
+            }
+            .address-block {
+                .txt-value-input {
+                    height: 30px;
+                    font-size: 12px;
+                    padding-left: 10px !important;
+                }
+                .copy-icon {
+                    top: 5px;
+                    right: 5px;
+                }
+            }
+            .buy-gzr-wrapper {
+                .text-label {
+                    font-size: 12px;
+                }
+                .buy-now {
+                    padding: 8px 20px;
+                    .btn-buy-now {
+                        font-size: 15px;
+                    }
+                }
+            }
+        }
     }
 }
   
