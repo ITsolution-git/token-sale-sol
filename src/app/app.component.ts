@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { NgSpinningPreloader } from 'ng2-spinning-preloader';
 
 interface AppState {
   token: boolean;
@@ -11,9 +12,13 @@ interface AppState {
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>, private ngSpinningPreloader: NgSpinningPreloader) {
 
+  }
+
+  ngAfterViewInit() {
+  	this.ngSpinningPreloader.stop()
   }
 }

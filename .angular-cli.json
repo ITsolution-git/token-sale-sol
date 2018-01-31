@@ -19,7 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.scss"
+        "styles.scss",
+        "../node_modules/ng2-spinning-preloader/dist/ng-spinning-preloader.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

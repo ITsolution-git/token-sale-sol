@@ -32,6 +32,7 @@ export class HeaderComponent implements OnInit {
     private localStorage: LocalStorageService,
     private authService: AuthService,
     private store: Store<ApplicationState>,
+    private metaMaskService: MetaMaskService,
   ) {
     this.initTwitterWidget();
     this.initFacebookWidget();
@@ -40,6 +41,8 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.menuItems = HeaderRoutes;
+    this.metaMaskService.getAccountInfo();
+    
     this.userState.subscribe(state => {
       if (state) {
         this.walletAddress = state.walletAddress;

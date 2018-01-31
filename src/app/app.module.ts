@@ -6,6 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { Ng2Webstorage } from 'ngx-webstorage';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { NgSpinningPreloader } from 'ng2-spinning-preloader';
+
 import { AuthGuard } from './shared';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -43,6 +45,7 @@ export const reducers = {
     ApiRoutingService,
     AuthGuard,
     AuthService,
+    NgSpinningPreloader
   ],
   bootstrap: [AppComponent]
 })
