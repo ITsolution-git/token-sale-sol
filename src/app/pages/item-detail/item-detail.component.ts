@@ -83,4 +83,8 @@ export class ItemDetailComponent implements OnInit {
       this.counter += 1;
     }
   }
+
+  navigateToTreasure() {
+    this.router.navigate(['/open-treasure']);
+  }
 }
