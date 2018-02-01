@@ -12,6 +12,7 @@ declare const $: any;
 
 export class ItemListComponent implements OnInit {
   @Input() showTitle = true;
+  @Input() itemCountToShow = 10;
   private isMobile = false;
   items: Item[];
   itemArray: Item[];
@@ -30,8 +31,8 @@ export class ItemListComponent implements OnInit {
   }
 
   loadNextWeapons() {
-    if (this.counter < this.itemArray.length - 10) {
-      this.items = this.itemArray.slice(this.counter, this.counter + 10);
+    if (this.counter < this.itemArray.length - this.itemCountToShow) {
+      this.items = this.itemArray.slice(this.counter, this.counter + this.itemCountToShow);
       this.counter += 1;
     }
   }
