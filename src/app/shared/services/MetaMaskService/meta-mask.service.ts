@@ -105,6 +105,7 @@ export class MetaMaskService {
       this.accounts = accs;
       this.account = this.accounts[0];
       this.accountSubject.next(this.account);
+      this.refreshBalance();
       this._ngZone.run(() =>
         this.createGZR()
       );
@@ -157,7 +158,6 @@ export class MetaMaskService {
       this.balanceSubject.next(this.balance);
     });
 
-    debugger
     this.balanceOf(this.account)
     .then(balance => {
         this.gzrBalance = parseFloat( balance.c[1] ? balance.c[1] : 0 );
