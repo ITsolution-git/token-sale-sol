@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit {
   unlocked = false;
   balance: number;
   installed = false;
+  gzrBalance: number;
 
   constructor(
     private router: Router,
@@ -42,13 +43,14 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.menuItems = HeaderRoutes;
     this.metaMaskService.getAccountInfo();
-    
+
     this.userState.subscribe(state => {
       if (state) {
         this.walletAddress = state.walletAddress;
         this.unlocked = state.unlocked;
         this.balance = state.balance;
         this.installed = state.installed;
+        this.gzrBalance = state.gzrBalance;
       }
     });
     this.init();
@@ -59,8 +61,8 @@ export class HeaderComponent implements OnInit {
     if (token) {
       this.isAuthenticated = true;
     } else {
-      this.authService.isLoggedIn$.subscribe(flag => {
-        this.isAuthenticated = flag;
+      this.authService.isLoggedIn$.subscribe(flag => {        
+        this.isAuthenticated = flag;        
       });
     }
   }

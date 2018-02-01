@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import { MetaMaskService } from '../../shared/services/MetaMaskService/meta-mask.service';
-import { UPDATE_WALLET_ADDRESS, UPDATE_LOCK_STATUS, UPDATE_GZR_BALANCE, UPDATE_INSTALL_STATUS } from './../../store/actions/user.actions';
+import { UPDATE_WALLET_ADDRESS, UPDATE_LOCK_STATUS, UPDATE_GZR_BALANCE, UPDATE_BALANCE, UPDATE_INSTALL_STATUS } from './../../store/actions/user.actions';
 import { ApplicationState } from '../../store/application-state';
 import { UserState } from '../../store/store-data';
 
@@ -19,6 +19,8 @@ export class LayoutComponent implements OnInit {
   unlocked = false;
   walletAddress: String;
   balance: number;
+  gzrBalance: number;
+
   constructor(
     private metaMaskService: MetaMaskService,
     private store: Store<ApplicationState>,
@@ -28,12 +30,14 @@ export class LayoutComponent implements OnInit {
 
   ngOnInit() {
     this.metaMaskService.getAccountInfo();
+
     this.userState.subscribe(state => {
       if (state) {
         this.installed = state.installed;
         this.unlocked = state.unlocked;
         this.walletAddress = state.walletAddress;
         this.balance = state.balance;
+        this.gzrBalance = state.gzrBalance;
       }
     });
     this.metaMaskService.installedObservable$.subscribe(status => {
@@ -59,6 +63,12 @@ export class LayoutComponent implements OnInit {
         this.updateBalance(res);
       }
     });
+
+    this.metaMaskService.gzrBalanceObservable$.subscribe(res => {
+      if (this.gzrBalance !== res) {
+        this.updateGZRBalance(res);
+      }
+    });
   }
 
   updateInstallStatus(data) {
@@ -74,6 +84,10 @@ export class LayoutComponent implements OnInit {
   }
 
   updateBalance(data) {
+    this.store.dispatch({type: UPDATE_BALANCE, payload: data});
+  }
+  
+  updateGZRBalance(data) {
     this.store.dispatch({type: UPDATE_GZR_BALANCE, payload: data});
   }
 

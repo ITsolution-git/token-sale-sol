@@ -9,11 +9,13 @@ import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 
 const metaincoinArtifacts = require('../../../../../build/contracts/MetaCoin.json');
+const gzrArtifacts = require('../../../../../build/contracts/GZR.json');
 declare var window: any;
 
 @Injectable()
 export class MetaMaskService {
   metaCoin = Contract(metaincoinArtifacts);
+  GZR = Contract(gzrArtifacts);
 
   accounts: any;
   web3: any;
@@ -21,6 +23,10 @@ export class MetaMaskService {
   balance: number;
   balanceSubject = new Subject<number>();
   balanceObservable$ = this.balanceSubject.asObservable();
+
+  gzrBalance: number;
+  gzrBalanceSubject = new Subject<number>();
+  gzrBalanceObservable$ = this.gzrBalanceSubject.asObservable();
 
   sendingAmount: number;
   recipientAddress: string;
@@ -76,6 +82,7 @@ export class MetaMaskService {
 
   onReady() {
     this.metaCoin.setProvider(this.web3.currentProvider);
+    this.GZR.setProvider(this.web3.currentProvider);
 
     this.web3.eth.getAccounts((err, accs) => {
       if (err != null) {
@@ -115,12 +122,24 @@ export class MetaMaskService {
     });
   }
 
+  balanceOf(address) {
+    return this.GZR.deployed()
+    .then(instance => instance.balanceOf(address))
+    .catch(err=> console.log(err))    
+  }
+
   refreshBalance() {
     this.getBalance(this.account)
     .then(balance => {
       this.balance = parseFloat(balance.toString());
       this.balanceSubject.next(this.balance);
     });
+
+    this.balanceOf(this.account)
+    .then(balance => {
+        this.gzrBalance = parseFloat( balance.c[1] ? balance.c[1] : 0 );
+        this.gzrBalanceSubject.next(this.gzrBalance);
+    })
   }
 
   setStatus(message) {
