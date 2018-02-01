@@ -9,6 +9,7 @@ import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 
 const GZRArtifacts = require('../../../../../build/contracts/GZR.json');
+
 declare var window: any;
 
 @Injectable()
@@ -21,6 +22,10 @@ export class MetaMaskService {
   balance: number;
   balanceSubject = new Subject<number>();
   balanceObservable$ = this.balanceSubject.asObservable();
+
+  gzrBalance: number;
+  gzrBalanceSubject = new Subject<number>();
+  gzrBalanceObservable$ = this.gzrBalanceSubject.asObservable();
 
   sendingAmount: number;
   recipientAddress: string;
@@ -100,6 +105,7 @@ export class MetaMaskService {
       this.accounts = accs;
       this.account = this.accounts[0];
       this.accountSubject.next(this.account);
+      this.refreshBalance();
       this._ngZone.run(() =>
         this.createGZR()
       );
@@ -139,12 +145,24 @@ export class MetaMaskService {
     });
   }
 
+  balanceOf(address) {
+    return this.GzrToken.deployed()
+    .then(instance => instance.balanceOf(address))
+    .catch(err=> console.log(err))    
+  }
+
   refreshBalance() {
     this.getBalance(this.account)
     .then(balance => {
       this.balance = parseFloat(balance.toString());
       this.balanceSubject.next(this.balance);
     });
+
+    this.balanceOf(this.account)
+    .then(balance => {
+        this.gzrBalance = parseFloat( balance.c[1] ? balance.c[1] : 0 );
+        this.gzrBalanceSubject.next(this.gzrBalance);
+    })
   }
 
   setStatus(message) {

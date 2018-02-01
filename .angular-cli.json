@@ -20,6 +20,7 @@
       "prefix": "app",
       "styles": [
         "styles.scss",
+        "../node_modules/ng2-spinning-preloader/dist/ng-spinning-preloader.css",
         "../node_modules/font-awesome/css/font-awesome.css",
         "../node_modules/ion-rangeslider/css/ion.rangeSlider.css",
         "../node_modules/ion-rangeslider/css/ion.rangeSlider.skinHTML5.css"

@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Ng2Webstorage } from 'ngx-webstorage';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { NgSpinningPreloader } from 'ng2-spinning-preloader';
 import { ModalModule } from 'ngx-bootstrap';
 
 import { AuthGuard } from './shared';
@@ -49,6 +50,7 @@ export const reducers = {
     ApiRoutingService,
     AuthGuard,
     AuthService,
+    NgSpinningPreloader
   ],
   entryComponents: [
     LockedModalComponent,
