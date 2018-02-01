@@ -7,18 +7,20 @@ import { Ng2Webstorage } from 'ngx-webstorage';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NgSpinningPreloader } from 'ng2-spinning-preloader';
+import { ModalModule } from 'ngx-bootstrap';
 
 import { AuthGuard } from './shared';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-
 import { ApiRoutingService } from './core/api-routing.service';
 import { LayoutModule } from './pages/layout/layout.module';
 import { AuthService } from './core/services/auth.service';
 import { HttpHelperService } from './core/http-helper.service';
 
-import { INITIAL_APPLICATION_STATE } from './store/application-state';
+import { LockedModalComponent } from './shared/components/locked-modal/locked-modal.component';
+import { InstallMaskModalComponent } from './shared/components/install-mask-modal/install-mask-modal.component';
 
+import { INITIAL_APPLICATION_STATE } from './store/application-state';
 import { userReducer } from './store/reducers/user.reducer';
 
 export const reducers = {
@@ -28,6 +30,8 @@ export const reducers = {
 @NgModule({
   declarations: [
     AppComponent,
+    LockedModalComponent,
+    InstallMaskModalComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +41,7 @@ export const reducers = {
     AppRoutingModule,
     Ng2Webstorage,
     LayoutModule,
+    ModalModule.forRoot(),
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({maxAge: 25}),
   ],
@@ -47,6 +52,10 @@ export const reducers = {
     AuthService,
     NgSpinningPreloader
   ],
-  bootstrap: [AppComponent]
+  entryComponents: [
+    LockedModalComponent,
+    InstallMaskModalComponent
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

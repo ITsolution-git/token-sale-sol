@@ -27,6 +27,38 @@
             left: 161px;
         }
     }
+    @media (max-width: 450px) {
+        background-image: url('/assets/images/img-welcome-small.png');
+        background-size: cover;
+        .title {
+            font-size: 15px;
+            padding-top: 20px !important;
+            padding-bottom: 0px !important;
+        }
+        .description {
+            font-size: 14px;
+            padding-bottom: 0px !important;
+        }
+        .download-wrapper {
+            padding-bottom: 0 !important;
+        }
+        .no-padding {
+            padding: 0 !important;
+        }
+        .youtube {
+            height: 175px !important;
+            background-image: url('/assets/images/img-youtube-small.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin-bottom: 30px;
+            margin-top: 20px;
+            .youtube-video {
+                position: static;
+                margin: 38px 78px;
+            }
+        }
+    }
 }
 .no-gutters {
     margin-right: 0;

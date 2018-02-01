@@ -1,3 +1,11 @@
+export const Rarity = {
+    common: 'Common',
+    rare: 'rare',
+    insane: 'Insane',
+    legendary: 'Legendary',
+    unfathomable: 'Unfathomable',
+};
+
 export class Item {
     id: string;
     resources: {

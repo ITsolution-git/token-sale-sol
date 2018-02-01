@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { HeaderRoutes } from './header-routing.module';
 import { Router, NavigationEnd } from '@angular/router';
 import { LocalStorageService } from 'ngx-webstorage';
@@ -8,6 +8,8 @@ import { ApplicationState } from '../../../store/application-state';
 import { UserState } from '../../../store/store-data';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
+
+declare const $: any;
 
 @Component({
   selector: 'app-header',
@@ -20,6 +22,7 @@ export class HeaderComponent implements OnInit {
   public brandMenu: any;
   userState: Observable<UserState>;
   private user: any;
+  private isMobile = false;
   isCollapsed = true;
   isAuthenticated = false;
   walletAddress: String;
@@ -57,6 +60,7 @@ export class HeaderComponent implements OnInit {
   }
 
   init() {
+    this.isMobile = this.isMobileMenu();
     const token = this.localStorage.retrieve('token');
     if (token) {
       this.isAuthenticated = true;
@@ -65,6 +69,18 @@ export class HeaderComponent implements OnInit {
         this.isAuthenticated = flag;        
       });
     }
+  }
+
+  isMobileMenu() {
+    if ($(window).width() > 425) {
+        return false;
+    }
+    return true;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+     this.isMobile = this.isMobileMenu();
   }
 
   login() {

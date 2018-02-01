@@ -1,0 +1,11 @@
+{
+    "id": "4ddb3646-ebda-11e7-8c3f-9a214cf093ae",
+    "name": "Chest 12345555",
+    "collection": "collection name",
+    "price": 1,
+    "status": "locked",
+    "user":"user-id",
+    "items": [
+        "2adc3646-1bda-a1e7-8c3f-9a214cf093ae"
+    ]
+}

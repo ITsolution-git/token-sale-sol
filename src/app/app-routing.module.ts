@@ -14,7 +14,6 @@ const routes: Routes = [
       },
       {
         path: 'buy-gzr',
-        canActivateChild: [AuthGuard],
         loadChildren: './pages/buy-gzr/buy-gzr.module#BuyGzrModule',
       },
       {
@@ -53,6 +52,10 @@ const routes: Routes = [
       {
         path: 'partners',
         loadChildren: './pages/partners/partners.module#PartnersModule',
+      },
+      {
+        path: 'thank-you',
+        loadChildren: './pages/thank-you/thank-you.module#ThankYouModule',
       }
     ]
   },

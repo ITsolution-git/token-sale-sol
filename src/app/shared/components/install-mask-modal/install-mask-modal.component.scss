@@ -1,0 +1,72 @@
+.install-mask-modal {
+    .modal-title {
+        font-size: 30px;
+        font-family: "Century Gothic Bold";
+        color: #3171a2;
+    }
+    .description {
+        font-size: 18px;
+        font-family: "Century Gothic";
+        color: #0b0c14;
+    }
+    .btn-install-metamask {
+        font-family: "Century Gothic";
+        font-size: 20px;
+        color: #ffffff;
+        cursor: pointer;
+        display: inline-block;
+        padding: 10px 45px;
+        border-radius: 50px;
+        background: #2ba206;
+    }
+    .link {
+        cursor: pointer;
+        font-size: 18px;
+        font-family: "Century Gothic Bold";
+        color: #0f9cd1;
+        text-decoration: underline;
+    }
+    .heading {
+        font-size: 18px;
+        font-family: "Century Gothic Bold";
+        color: #0b0c14;
+    }
+    .sub-description {
+        font-size: 18px;
+        font-family: "Century Gothic";
+        color: #0b0c14;
+    }
+    @media (max-width: 450px) {
+        .gizer-mask {
+            margin: 0 !important;
+            img {
+                height: 70px;
+                margin-bottom: 20px;
+            }
+        }
+        .btn-install-metamask {
+            font-size: 14px;
+            padding: 6px 30px;
+        }
+        .modal-title {
+            font-size: 18px;
+        }
+        .description {
+            font-size: 12px;
+        }
+        .view-faq {
+            font-size: 13px;
+        }
+        .link {
+            cursor: pointer;
+            font-size: 12px;
+            font-family: "Century Gothic Bold";
+            color: #0f9cd1;
+            text-decoration: underline;
+        }
+        .heading, .sub-description {
+            font-size: 12px;
+        }
+    }
+}
+  

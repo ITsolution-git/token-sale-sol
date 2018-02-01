@@ -1,57 +1,137 @@
-<div class="buy-gzr mb-5">
+<div class="buy-gzr pb-5">
   <div class="container">
     <div class="row justify-content-md-center">
       <div class="col-md-5">
-        <div class="row justify-content-md-center">
-          <h3 class="title pt-5 pb-4">My GZR Balance</h3>
+        <div class="row justify-content-center">
+          <h3 class="title pt-5 pb-4">Buy GZR</h3>
         </div>
-        <div class="row justify-content-md-center pb-4">
-          <div class="gizer-value-wrapper border border-secondary p-5 w-100 text-center">
-            <span class="gizer-value align-middle">10,000 GZR</span>
-            <span class="align-middle pl-3"><img src="/assets/icons/icon-gizer-big.png"></span>
+        <div *ngIf="isFromModal" class="row justify-content-md-center pb-3">
+          <div class="send-ether-block border border-secondary p-3 w-100">
+            <div class="title-wrapper text-center pt-2 pb-4">
+              <h4>Send Ether to the address below</h4>
+              <p class="warn">*Do not send ETH from an exchange</p>
+            </div>
+            <div *ngIf="isAccepted && showAddress" class="address-block">
+              <div class="position-relative">
+                <input class="txt-value-input w-100 pl-3 mb-3" placeholder="0x90dw90fh382hfsjenf032ru9oafj3092fh" type="text" readonly>
+                <span class="copy-icon"><img class="pr-1" src="/assets/icons/icon-copy.png">Copy</span>
+              </div>
+              <div class="separator">
+                <span class="line"></span>
+                <span class="text">or</span>
+              </div>
+              <div class="position-relative">
+                <input class="txt-value-input w-100 pl-3 mb-3" placeholder="gizergaming.eth" type="text" readonly>
+                <span class="copy-icon"><img class="pr-1" src="/assets/icons/icon-copy.png">Copy</span>
+              </div>
+            </div>
+            <div *ngIf="!showAddress" class="buy-gzr-wrapper border border-secondary p-3 w-100">
+              <div class="check-terms pb-4">
+                  <span class="checkbox">
+                  <input [(ngModel)]="isAccepted" class="terms-checkbox" id="terms-checkbox" type="checkbox">
+                  <label for="terms-checkbox"></label>
+                </span>
+                <span class="text-label">I have read the Gzr <a href="#" class="link">Whitepaper</a> and I accept the <a href="#" class="ml-4 link terms" >Terms & Conditions</a></span>
+              </div>
+              <div class="buy-now mb-3" (click)="showAddressForm()">
+                <span class="btn-buy-now">Show Me the Contract Address</span>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="row justify-content-md-center">
+        <div class="row justify-content-md-center pb-3">
+          <div class="form-wrapper border border-secondary p-3 pt-4 w-100 text-center">
+            <div class="eth-form text-left">
+              <div class="w-100">
+                <p class="text-label">I want to spend (ETH)</p>
+                <input [(ngModel)]="ethValue" class="txt-value-input pl-3 mb-3" type="text" readonly>
+                <span class="icons"><img src="/assets/icons/icon-etherum-buy.png"></span>
+              </div>
+              <ion-range-slider #sliderElement
+                type="single"
+                min="0"
+                max="1000"
+                step="0.01"
+                from="0.01"
+                from_min="0.01"
+                hide_min_max="true"
+                hide_from_to="true"
+                (onChange)="OnSliderChange($event)"
+              >
+              </ion-range-slider>
+              <div class="unit-label-wrapper d-flex justify-content-between">
+                <span class="value-text">0.01 ETH</span>
+                <span class="value-text">1000 ETH</span>
+              </div>
+
+              <div class="w-100">
+                <p class="text-label mt-3">I will receive (GZR)</p>
+                <input [(ngModel)]="gzrValue" class="txt-value-input pl-3 mb-3" type="text" readonly>
+                <span class="icons-1"><img src="/assets/icons/icon-gizer-small-buy.png"></span>
+              </div>
+              
+              <div *ngIf="!isFromModal" class="check-terms pb-5">
+                <span class="checkbox">
+                  <input [(ngModel)]="isAccepted" class="terms-checkbox" id="terms-checkbox" type="checkbox">
+                  <label for="terms-checkbox"></label>
+                </span>
+                <span class="text-label">I have read the Gzr <a href="#" class="link">Whitepaper</a> and I accept the <a href="#" class="ml-4 link terms" >Terms & Conditions</a></span>
+              </div>
+            </div>
+            <div *ngIf="!isFromModal" (click)="openModalWithComponent()" class="buy-now mb-3">
+              <span class="btn-buy-now">Buy Now</span>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!isFromModal" class="row justify-content-md-center">
           <div class="buy-gzr-wrapper border border-secondary p-3 w-100">
-            <div class="p-3 mb-4 description">
-              <p class="description-text">Here is where you can purchase GZR tokens using Ethereum (ETH) and MetaMask. GZR tokens can be used to unlock unique, collectible items for your Global Gaming Identity. These items exist on the Ethereum blockchain and once unlocked, are yours forever (unless you trade them to someone else). </p>
-              <p class="strong-text">The price of GZR is 1000 GZR per 1 ETH.</p>
-              <p class="description-text">In order to purchase GZR, you must have MetaMask installed and must have ETH in your wallet.If you purchase using ETH and MetaMask, you will instantly receive your GZR tokens.</p>
-              <p class="description-text">To purchase, simply type in the number of GZR you would like to purchase and hit the “Buy GZR” button. A signed MetaMask transaction will be generated for you, all you need to do is click Accept and your ETH will be sent to our smart contract. Shortly after, you will receive GZR tokens right in your MetaMask.</p>
+            <div class="p-3 description">
+              <ul class="discription-list">
+                <li>
+                    <p class="strong-text">The price of GZR is 1000 GZR per 1 ETH.</p>
+                </li>
+                <li>
+                    <p class="description-text">Only ETH payment are accepted</p>
+                </li>
+                <li>
+                    <p class="description-text">Enter the amount of ETH you want to spend, accept the Terms & Conditions and then click Buy Now. A MetaMask transaction will be generated for you automatically. Click Accept in order to confirm your purchase of GZR and send ETH to our smart contract.</p>
+                </li>
+                <li>
+                    <p class="description-text">You will receive GZR within 6 confirmation on your ETH Transaction.</p>
+                </li>
+                <li>
+                    <p class="description-text">Minimum purchase is 10 GZR (0.01 ETH)</p>
+                </li>
+              </ul>
             </div>
-            <div class="row justify-content-between">
-              <div class="col-md-5">
-                <div class="row no-gutters">
-                  <span class="col-md-5">
-                    <div class="label h-100 py-1">
-                      <img class="pl-2 pr-1 align-middle" src="/assets/icons/icon-gizer-small.png"><span class="unit-text align-middle">GZR</span>
-                    </div>
-                  </span>
-                  <span class="col-md-7">
-                    <input class="w-100 pl-2 input-amount" type="text" value="0">
-                  </span>
-                </div>
-              </div>
-              <div class="col-md-1">
-                <span class="txt-equal">=</span>
-              </div>
-              <div class="col-md-5">
-                <div class="row no-gutters">
-                  <span class="col-md-5">
-                    <div class="label h-100 py-1">
-                      <img class="pl-2 pr-1 align-middle" src="/assets/icons/icon-etherum.png"><span class="unit-text align-middle">ETH</span>
-                    </div>
-                  </span>
-                  <span class="col-md-7">
-                    <input class="w-100 pl-2 input-amount" type="text" value="0">
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div class="row justify-content-md-center">
-              <div class="col-md-4">
-                <span class="btn-buy-now"><img class="mt-4 mb-2" src="/assets/images/btn-buy-now.png"></span>
-              </div>
+          </div>
+        </div>
+        <div *ngIf="isFromModal" class="row justify-content-md-center">
+          <div class="buy-gzr-wrapper border border-secondary p-3 w-100">
+            <div class="p-3 description">
+              <ul class="discription-list">
+                <li>
+                    <p class="strong-text">The price of GZR is 1000 GZR per 1 ETH.</p>
+                </li>
+                <li>
+                    <p class="description-text">Set Gas limit to 100,000</p>
+                </li>
+                <li>
+                    <p class="description-text">Only ETH payments are accepted</p>
+                </li>
+                <li>
+                    <p class="description-text">We <span class="strong-text">strongly</span> recommended using MetaMask to make your purchase</p>
+                </li>
+                <li>
+                    <p class="description-text">The smart contract instantly generates GZR and sends it to your wallet after you make a purchase.</p>
+                </li>
+                <li>
+                    <p class="description-text">You will receive GZR within 6 confirmation on your ETH Transaction.</p>
+                </li>
+                <li>
+                    <p class="description-text">Minimum purchase is 10 GZR (0.01 ETH)</p>
+                </li>
+              </ul>
             </div>
           </div>
         </div>

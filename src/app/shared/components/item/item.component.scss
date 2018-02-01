@@ -16,6 +16,9 @@
             height: 150px;
         }
         .item-name {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             font-size: 16px;
             font-family: "Century Gothic";
             color: #ffffff;
@@ -24,16 +27,47 @@
             text-align: center;
             margin-bottom: 22px;
             height: 38px;
+            
         }
-        .btn-view {
-            cursor: pointer;
-            color: #ffffff;
+        :host-context(.item-area) .rarity {
             margin-bottom: 30px;
-            background-color: #ca8500;
-            display: inline-block;
-            padding: 5px 20px;
-            border-radius: 20px;
-            font-weight: 600;
+            height: 40px;
+            padding: 0 15px;
+            img {
+                max-width: 100%;
+                max-height: 100%;
+            }
+        }
+        .rarity {
+            margin-bottom: 30px;
+            height: 40px;
+            img {
+                vertical-align: middle;
+            }
+        }
+    }
+    @media (max-width: 450px) {
+        padding-left: 8px;
+        padding-right: 8px;
+        .item-wrapper {
+            margin-bottom: 16px;
+            .item-img {
+                padding: 5px;
+                margin: 0;
+            }
+            .item-name {
+                height: 38px;
+                margin-bottom: 5px;
+                font-size: 14px;
+            }
+        }
+        .rarity {
+            margin-bottom: 20px !important;
+            height: 35px !important;
+            img {
+                height: 35px;
+                vertical-align: middle;
+            }
         }
     }
 

@@ -11,7 +11,18 @@ export class ApiRoutingService {
     // return this.baseUrl + '/items';
     return '../../../assets/items.json';
   }
+
   getMetaCoinUrl() {
     return '/contracts/MetaCoin.json';
+  }
+
+  getChestUrl() {
+    // return this.baseUrl + '/chest';
+    return '../../../assets/chestId.json';
+  }
+
+  getChestDataFromID(id) {
+    // return this.baseUrl + `/chest/${id}`;
+    return '../../../assets/chest.json';
   }
 }

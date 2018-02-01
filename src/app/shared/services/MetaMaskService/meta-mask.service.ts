@@ -8,14 +8,13 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 
-const metaincoinArtifacts = require('../../../../../build/contracts/MetaCoin.json');
-const gzrArtifacts = require('../../../../../build/contracts/GZR.json');
+const GZRArtifacts = require('../../../../../build/contracts/GZR.json');
+
 declare var window: any;
 
 @Injectable()
 export class MetaMaskService {
-  metaCoin = Contract(metaincoinArtifacts);
-  GZR = Contract(gzrArtifacts);
+  GzrToken = Contract(GZRArtifacts);
 
   accounts: any;
   web3: any;
@@ -52,6 +51,7 @@ export class MetaMaskService {
     private http: HttpHelperService,
     private apiRoutingService: ApiRoutingService
   ) {
+    console.log(this.GzrToken);
   }
 
   getAccountInfo() {
@@ -81,8 +81,7 @@ export class MetaMaskService {
   }
 
   onReady() {
-    this.metaCoin.setProvider(this.web3.currentProvider);
-    this.GZR.setProvider(this.web3.currentProvider);
+    this.GzrToken.setProvider(this.web3.currentProvider);
 
     this.web3.eth.getAccounts((err, accs) => {
       if (err != null) {
@@ -106,8 +105,31 @@ export class MetaMaskService {
       this.accounts = accs;
       this.account = this.accounts[0];
       this.accountSubject.next(this.account);
-      this.refreshBalance();
+      this._ngZone.run(() =>
+        this.createGZR()
+      );
     });
+  }
+
+  createGZR() {
+    let gzr;
+    this.GzrToken
+      .deployed()
+      .then(instance => {
+        gzr = instance;
+        gzr.create.call(2000);
+      })
+      .then(() => {
+        return gzr.balanceOf(this.account);
+      })
+      .then(value => {
+        // this.balance = value;
+        console.log(this.web3.fromWei(value, 'ether').toString(10));
+      })
+      .catch(e => {
+        console.log(e);
+        this.setStatus('Error getting balance; see log.');
+      });
   }
 
   getBalance(address) {
@@ -123,7 +145,7 @@ export class MetaMaskService {
   }
 
   balanceOf(address) {
-    return this.GZR.deployed()
+    return this.GzrToken.deployed()
     .then(instance => instance.balanceOf(address))
     .catch(err=> console.log(err))    
   }
@@ -135,6 +157,7 @@ export class MetaMaskService {
       this.balanceSubject.next(this.balance);
     });
 
+    debugger
     this.balanceOf(this.account)
     .then(balance => {
         this.gzrBalance = parseFloat( balance.c[1] ? balance.c[1] : 0 );
@@ -154,7 +177,7 @@ export class MetaMaskService {
 
     this.setStatus('Initiating transaction... (please wait)');
 
-    this.metaCoin
+    this.GzrToken
       .deployed()
       .then(instance => {
         meta = instance;

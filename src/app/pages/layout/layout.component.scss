@@ -8,3 +8,9 @@
   margin-top: 123px;
   -webkit-font-smoothing: antialiased;
 }
+@media (max-width: 450px) {
+  .page-content {
+    margin-top: 56px;
+    overflow: hidden;
+  }
+}

@@ -1,7 +1,8 @@
 <div class="inventory-list">
   <div class="container">
-    <div class="list-title">
-      <p>Just Released</p>
+    <div  *ngIf="showTitle" class="list-title">
+      <p *ngIf="!isMobile">Just Released</p>
+      <p *ngIf="isMobile">Other Items from This Treasure</p>
     </div>
     <div class="row justify-content-center position-relative">
       <app-item
@@ -10,9 +11,10 @@
         [id]="item.id"
         [itemImageLink]="item.resources.images[0]"
         [itemName]="item.meta.name"
+        [rarity]="item.meta.rarity"
         >
       </app-item>
-      <div class="arrow pl-2">
+      <div *ngIf="!isMobile" class="arrow pl-2">
         <span class="arrow-padding" (click)="loadNextWeapons()">
           <img src="/assets/icons/icon-greater-than.png">
         </span>
