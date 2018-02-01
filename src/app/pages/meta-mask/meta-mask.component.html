@@ -1,5 +1,5 @@
-<div class="meta-mask pb-5">
-  <div class="meta-section pt-5">
+<div class="meta-mask pb-md-5">
+  <div *ngIf="!isMobile" class="meta-section pt-5">
     <div class="container">
       <div *ngIf="!installed">
         <app-install-meta></app-install-meta>
@@ -9,7 +9,19 @@
       </div>
     </div>
   </div>
-  <div class="getting-started">
+  <div *ngIf="isMobile" class="meta-install-mobile text-center justify-content-center pb-4">
+    <h3 class="title py-3">Oops, What’s this?</h3>
+    <div class="text-center px-3">
+      <p class="description">GGiD requires MetaMask to function. In order to unlock items or sign in, you must be on a desktop browser like Chrome or Firefox and you must have MetaMask installed.</p>
+    </div>
+    <div class="locked-mask mx-3 my-5">
+      <img src="/assets/images/img-metamask-desktop.png">
+    </div>
+    <div class="mb-2">
+      <span class="view-faq" (click)="navigateToFAQ()">View FAQ</span>
+    </div>
+  </div>
+  <div *ngIf="!isMobile" class="getting-started">
     <div class="container">
       <app-guide-accordion></app-guide-accordion>
     </div>

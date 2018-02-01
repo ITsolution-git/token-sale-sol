@@ -81,4 +81,90 @@
             }
         }
     }
+    @media (max-width: 450px) {
+        .item-title {
+            h2 {
+                font-size: 15px;
+            }
+        }
+        .type-gallery {
+            img {
+                width: 66px;
+            }
+        }
+        .item-wrapper {
+            width: 50%;
+            display: inline-block;
+        }
+        .viewer {
+            border-radius: 25px !important;
+        }
+        .description {
+            font-size: 13px;
+            p {
+                margin-bottom: 7px;
+                font-size: 13px;
+            }
+        }
+        .item-name {
+            font-size: 17px;
+            font-family: "Century Gothic Bold";
+            color: #ffffff;
+        }
+        .script {
+            font-size: 13px;
+            font-family: "Century Gothic";
+            color: #ffffff45;
+        }
+        .treasure {
+            width: 117px;
+        }
+        .item {
+            border: solid 2px #2a2c45;
+            cursor: pointer;
+        }
+        .open-treasure-button-deco {
+            .open-treasure-button-img {
+                cursor: pointer;
+                img {
+                    height: 30px;
+                }
+            }
+            .gizer-price {
+                .gizer-price {
+                    font-size: 18px;
+                    font-family: "Century Gothic Bold";
+                    color: #ffffff;
+                }
+            }
+        }
+        .into-text {
+            font-size: 13px;
+        }
+        .item-list {
+            .item-area {
+                width: 100%;
+                display: inline-block;
+            }
+            .arrow {
+                display: inline-block;
+                height: 100%;
+                vertical-align: top;
+                position: relative;
+                text-align: center;
+                .arrow-padding {
+                    cursor: pointer;
+                    position: absolute;
+                    top: 35%;
+                    left: 0;
+                    padding-top: 12px;
+                    padding-left: 5px;
+                    height: 50px;
+                    width: 50px;
+                    border-radius: 50%;
+                    background-color: rgba(255, 255, 255, 0.1);
+                }
+            }
+        }
+    }
 }

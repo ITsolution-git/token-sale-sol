@@ -22,7 +22,7 @@
                     white-space: nowrap;
                 }
                 .left-adjust {
-                    margin-left: -10px;
+                    margin-left: -15px;
                 }
             }
         }
@@ -51,7 +51,86 @@
                     white-space: nowrap;
                 }
                 .left-adjust {
-                    margin-left: -10px !important;
+                    margin-left: -15px !important;
+                }
+            }
+        }
+        
+    }
+    .hidden-mobile {
+        display: block !important;
+    }
+    .visible-mobile {
+        display: none !important;
+    }
+    @media (max-width: 450px) {
+        .team-page {
+            .hidden-mobile {
+                display: none !important;
+            }
+            .visible-mobile {
+                display: block !important;
+            }
+            .title {
+                font-size: 14px;
+            }
+            .person-card {
+                .img-person {
+                    img {
+                        height: 64px;
+                    }
+                }
+                .person-info {
+                    .name {
+                        font-size: 11px;
+                    }
+                    .role {
+                        font-size: 10px;
+                    }
+                    .left-sm-adjust {
+                        margin-left: -5px !important;
+                    }
+                    .left-adjust-10 {
+                        margin-left: -10px !important;
+                    }
+                    .icon-linkedin {
+                        height: 20px;
+                    }
+                }
+            }
+        }
+        .advisory-page {
+            .hidden-mobile {
+                display: none !important;
+            }
+            .visible-mobile {
+                display: block !important;
+            }
+            .title {
+                font-size: 14px;
+            }
+            .person-card {
+                .img-person {
+                    img {
+                        height: 64px;
+                    }
+                }
+                .person-info {
+                    .name {
+                        font-size: 11px;
+                    }
+                    .role {
+                        font-size: 10px;
+                    }
+                    .left-sm-adjust {
+                        margin-left: -5px !important;
+                    }
+                    .left-adjust-25 {
+                        margin-left: -25px !important;
+                    }
+                    .icon-linkedin {
+                        height: 20px;
+                    }
                 }
             }
         }

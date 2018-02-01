@@ -1,16 +1,27 @@
 .open-treasure {
     -webkit-font-smoothing: antialiased;
     .treasure-section {
-        border-bottom: solid 1px #353749;
         .title {
             font-size: 22px;
             font-family: "Century Gothic";
             color: #ffffff;
         }
     }
+    .separator {
+        border-bottom: solid 1px #353749;
+    }
     .gallery-title {
         font-size: 18px;
         font-family: "Century Gothic Bold";
         color: #7777a9;
+    }
+
+    @media (max-width: 450px) {
+        .separator {
+            display: none;
+        }
+        .gallery-title {
+            font-size: 14px;
+        }
     }
 }

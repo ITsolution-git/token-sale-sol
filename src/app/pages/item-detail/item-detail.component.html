@@ -1,16 +1,17 @@
 <div class="item-detail-page">
   <div *ngIf="detailItem" class="container">
-    <div class="item-title py-4">
+    <div class="item-title py-2 py-md-4">
       <h2>{{detailItem.meta.name}}</h2>
     </div>
     <div class="row no-gutters">
-      <div class="border rounded border-secondary">
+      <div [ngClass]="{'border rounded border-secondary': !isMobile}">
           <div class="sketchfab-embed-wrapper">
-            <iframe width="1100" height="665" frameborder="0" style="border:0; -moz-border-radius: 25px; border-radius: 25px;" src="https://sketchfab.com/models/d2cd5e96ad2743008bd7ae0f80ab4868/embed?autostart=1" frameborder="0" allowvr allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel=""></iframe>
+            <iframe *ngIf="!isMobile" width="1112" height="665" frameborder="0" style="border:0; -moz-border-radius: 25px; border-radius: 25px;" src="https://sketchfab.com/models/d2cd5e96ad2743008bd7ae0f80ab4868/embed?autostart=1" frameborder="0" allowvr allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel=""></iframe> -->
+            <iframe *ngIf="isMobile" width="345" height="232" frameborder="0" style="border:0; -moz-border-radius: 25px; border-radius: 25px;" src="https://sketchfab.com/models/d2cd5e96ad2743008bd7ae0f80ab4868/embed?autostart=1" frameborder="0" allowvr allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel=""></iframe>
           </div>
-        <div class="description p-4 pl-5">
-          <div class="type-gallery pb-3">
-            <img *ngFor="let image of typeImages" class="pr-3" src="{{image}}">
+        <div class="description p-md-4 pl-md-5">
+          <div class="type-gallery pb-3 pl-2 pl-md-0">
+            <img *ngFor="let image of typeImages" class="pr-2 pr-md-3" src="{{image}}">
           </div>
           <p>{{detailItem.meta.description}}</p>
           <p>{{detailItem.meta.origin}}</p>
@@ -19,7 +20,7 @@
     </div>
     <div class="row no-gutters mt-4 border border-secondary">
       <div class="col-md-6">
-        <div class="pl-5 pt-4 pb-3">
+        <div class="pt-3 px-3 pl-md-5 pt-md-4 pb-md-3">
           <h3 class="item-name">The Founders Edition</h3>
           <p class="script">This item can be unlocked from:</p>
           <p class="description">The Founder's Edition is Gizer's first and most scarce set of items designed for our initial GZR token buyers. There will be many more editions available in the future; some coming from game developers, 3D artists, and licensed gaming items. However, this specific edition is exclusively available for 25 days. The Founder's Edition marks history in Gizer...consider yourself OG.</p>
@@ -27,10 +28,10 @@
       </div>
       <div class="col-md-6">
         <div class="treasure-image d-flex h-100 p-3 align-items-center justify-content-center">
-          <img class="align-top mr-4" src="/assets/images/img-item-treasure-box.png">
-          <div class="open-treasure-button-deco d-inline-block align-bottom pt-5 pb-4 px-4">
+          <img class="treasure align-top mr-2 mr-md-4" src="/assets/images/img-item-treasure-box.png">
+          <div class="open-treasure-button-deco d-inline-block align-bottom pt-4 pb-2 px-4 pt-md-5 pb-md-4 px-md-4">
             <div class="open-treasure-button-img mb-2">
-              <img src="/assets/images/btn-open-treasure-small.png">
+              <img src="/assets/images/btn-open-treasure-small.png" (click)="navigateToTreasure()">
             </div>
             <div class="gizer-price text-center">
               <img src="/assets/icons/icon-gizer-tiny.png">
@@ -41,7 +42,7 @@
       </div>
     </div>
     <div class="row no-gutters p-3 mb-5 border border-secondary">
-      <div class="w-100 p-3">
+      <div class="w-100 p-md-3">
         <p class="into-text">Other items from this Treasure</p>
       </div>
       <div class="item-list w-100">
@@ -56,7 +57,7 @@
             >
           </app-item>
         </div>
-        <div class="arrow pl-2">
+        <div *ngIf="!isMobile" class="arrow pl-2">
           <span class="arrow-padding" (click)="loadNextWeapons()" >
             <img src="/assets/icons/icon-greater-than.png">
           </span>

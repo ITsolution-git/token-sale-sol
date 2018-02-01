@@ -1,11 +1,12 @@
-<div class="open-treasure pt-4 pb-5">
+<div class="open-treasure pt-md-4 pb-md-5">
   <div class="container">
-    <div class="treasure-section pb-5">
+    <div class="treasure-section pb-3 pb-md-5">
       <app-treasure></app-treasure>
     </div>
-    <div class="inventory-item-list pt-4">
-      <h4 class="gallery-title pb-3">You Can  Unlock</h4>
-      <app-item-list [showTitle]="false"></app-item-list>
+    <hr class="separator"/>
+    <div class="inventory-item-list pt-md-4">
+      <h4 class="gallery-title pb-md-3">You Can Unlock</h4>
+      <app-item-list [showTitle]="false" [itemCountToShow]="4"></app-item-list>
     </div>
   </div>
 </div>
