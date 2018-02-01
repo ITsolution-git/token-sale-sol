@@ -4,4 +4,34 @@
         background-image: url('/assets/images/install-meta-bg.png');
         background-size: cover;
     }
+    .meta-install-mobile {
+        background-image: url('/assets/images/install-meta-bg.png');
+        background-size: cover;
+        background-position: center;
+        .title {
+            font-size: 22px;
+            font-family: "Century Gothic Bold";
+            color: #f7d05a;
+        }
+        .description {
+            font-size: 14px;
+            font-family: "Century Gothic";
+            color: #ffffff;
+        }
+        .locked-mask {
+            img {
+                height: 130px;
+            }
+        }
+        .view-faq {
+            font-family: "Century Gothic";
+            font-size: 14px;
+            color: #ffffff;
+            cursor: pointer;
+            display: inline-block;
+            padding: 5px 45px;
+            border-radius: 50px;
+            background: #f89220;
+        }
+    }
 }
