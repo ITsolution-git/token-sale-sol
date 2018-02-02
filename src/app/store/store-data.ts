@@ -4,6 +4,7 @@ export interface UserState {
     showAddressForm: boolean;
     walletAddress: String;
     balance: number;
+    gzrBalance: number;
 }
 
 export const INITIAL_USER_STATE: UserState = {
@@ -11,5 +12,6 @@ export const INITIAL_USER_STATE: UserState = {
     unlocked: true,
     showAddressForm: false,
     walletAddress: '',
-    balance: 0
+    balance: 0,
+    gzrBalance: 0
 };
