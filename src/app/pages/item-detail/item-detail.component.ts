@@ -13,7 +13,7 @@ declare const $: any;
   styleUrls: ['./item-detail.component.scss']
 })
 export class ItemDetailComponent implements OnInit {
-  private isMobile = false;
+  isMobile = false;
   items: Item[];
   detailItem$: Observable<Item>;
   detailItem: Item;

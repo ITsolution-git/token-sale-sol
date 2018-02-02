@@ -15,7 +15,7 @@ declare const $: any;
 
 export class MetaMaskComponent implements OnInit {
 
-  private isMobile = false;
+  isMobile = false;
   userState: Observable<UserState>;
   installed = true;
   unlocked = true;

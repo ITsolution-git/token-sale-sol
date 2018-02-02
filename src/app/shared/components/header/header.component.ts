@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
   public brandMenu: any;
   userState: Observable<UserState>;
   private user: any;
-  private isMobile = false;
+  isMobile = false;
   isCollapsed = true;
   isAuthenticated = false;
   walletAddress: String;

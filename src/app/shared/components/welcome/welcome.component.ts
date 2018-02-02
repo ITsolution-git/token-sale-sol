@@ -9,7 +9,7 @@ declare const $: any;
 })
 
 export class WelcomeComponent implements OnInit {
-  private isMobile = false;
+  isMobile = false;
 
   constructor() { }
 

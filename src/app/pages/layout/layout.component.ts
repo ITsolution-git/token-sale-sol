@@ -38,6 +38,7 @@ export class LayoutComponent implements OnInit {
     });
     this.metaMaskService.installedObservable$.subscribe(status => {
       if (!status) {
+        this.updateInstallStatus(status);
         this.metaMaskService.unloadAccountInfo();
       }
       if (this.installed !== status) {

@@ -17,7 +17,7 @@ declare const $: any;
 export class InstallMaskModalComponent implements OnInit {
 
   userState: Observable<UserState>;
-  private isMobile = false;
+  isMobile = false;
 
   constructor(
     private router: Router,

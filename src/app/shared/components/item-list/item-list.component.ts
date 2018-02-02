@@ -13,7 +13,7 @@ declare const $: any;
 export class ItemListComponent implements OnInit {
   @Input() showTitle = true;
   @Input() itemCountToShow = 10;
-  private isMobile = false;
+  isMobile = false;
   items: Item[];
   itemArray: Item[];
   counter = 0;

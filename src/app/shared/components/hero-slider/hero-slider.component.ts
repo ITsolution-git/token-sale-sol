@@ -12,7 +12,7 @@ declare const $: any;
 
 export class HeroSliderComponent implements OnInit {
 
-  private isMobile = false;
+  isMobile = false;
 
   slides = [
     {imgUrl: '/assets/images/banner-1.jpg'},

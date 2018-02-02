@@ -7,7 +7,7 @@ export interface UserState {
 }
 
 export const INITIAL_USER_STATE: UserState = {
-    installed: false,
+    installed: null,
     unlocked: true,
     showAddressForm: false,
     walletAddress: '',

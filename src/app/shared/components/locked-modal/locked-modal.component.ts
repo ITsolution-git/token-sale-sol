@@ -17,7 +17,7 @@ declare const $: any;
 export class LockedModalComponent implements OnInit {
 
   userState: Observable<UserState>;
-  private isMobile = false;
+  isMobile = false;
 
   title: string;
   closeBtnName: string;

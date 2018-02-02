@@ -40,24 +40,31 @@ export class MetaMaskService {
 
   loadMetaObservable: any;
   loadMetaSubscription$: Subscription = new Subscription();
+  subscribed = false;
 
   constructor(
     private _ngZone: NgZone,
     private http: HttpHelperService,
     private apiRoutingService: ApiRoutingService
-  ) {
-    console.log(this.GzrToken);
-  }
+  ) {}
 
   getAccountInfo() {
-    this.loadMetaObservable = Observable.interval(5000);
-    this.loadMetaSubscription$ = this.loadMetaObservable.subscribe(x => {
-      this.loadMetaCoin();
-    });
+    if (!this.subscribed) {
+      this.subscribed = true;
+      this.loadMetaObservable = Observable.interval(5000);
+      this.loadMetaSubscription$ = this.loadMetaObservable.subscribe(x => {
+        this.loadMetaCoin();
+      });
+    }
   }
 
   unloadAccountInfo() {
     this.loadMetaSubscription$.unsubscribe();
+    this.subscribed = false;
+  }
+
+  checkIfSubscribed(): boolean {
+    return this.subscribed;
   }
 
   loadMetaCoin() {
