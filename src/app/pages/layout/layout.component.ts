@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import { MetaMaskService } from '../../shared/services/MetaMaskService/meta-mask.service';
+// tslint:disable-next-line:max-line-length
 import { UPDATE_WALLET_ADDRESS, UPDATE_LOCK_STATUS, UPDATE_GZR_BALANCE, UPDATE_BALANCE, UPDATE_INSTALL_STATUS } from './../../store/actions/user.actions';
 import { ApplicationState } from '../../store/application-state';
 import { UserState } from '../../store/store-data';
@@ -87,7 +88,7 @@ export class LayoutComponent implements OnInit {
   updateBalance(data) {
     this.store.dispatch({type: UPDATE_BALANCE, payload: data});
   }
-  
+
   updateGZRBalance(data) {
     this.store.dispatch({type: UPDATE_GZR_BALANCE, payload: data});
   }

@@ -155,7 +155,7 @@ export class MetaMaskService {
   balanceOf(address) {
     return this.GzrToken.deployed()
     .then(instance => instance.balanceOf(address))
-    .catch(err=> console.log(err))    
+    .catch(err => console.log(err));
   }
 
   refreshBalance() {
@@ -169,7 +169,7 @@ export class MetaMaskService {
     .then(balance => {
         this.gzrBalance = parseFloat( balance.c[1] ? balance.c[1] : 0 );
         this.gzrBalanceSubject.next(this.gzrBalance);
-    })
+    });
   }
 
   setStatus(message) {

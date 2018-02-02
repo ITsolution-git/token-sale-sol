@@ -53,10 +53,8 @@ export class BuyGzrComponent implements OnInit {
 
   ngOnInit() {
     this.userState.subscribe(state => {
-      console.log('fetched state', state);
       if (state) {
         this.event$.next(state);
-        console.log('emitted state', state);
       }
     });
     this.metaMaskService.getAccountInfo();
