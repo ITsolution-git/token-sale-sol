@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, HostListener } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { LockedModalComponent } from '../../shared/components/locked-modal/locked-modal.component';
@@ -10,6 +10,8 @@ import { UserState } from '../../store/store-data';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { MetaMaskService } from '../../shared/services/MetaMaskService/meta-mask.service';
+
+declare const $: any;
 
 @Component({
   selector: 'app-buy-gzr',
@@ -29,7 +31,7 @@ export class BuyGzrComponent implements OnInit {
   unlocked = true;
 
   isFromModal = false;
-
+  isMobile = false;
   bsModalRef: BsModalRef;
 
   config = {
@@ -52,33 +54,49 @@ export class BuyGzrComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userState.subscribe(state => {
-      if (state) {
-        this.event$.next(state);
-      }
-    });
-    this.metaMaskService.getAccountInfo();
-    this.metaMaskService.installedObservable$.take(1).subscribe(status => {
-      this.installed = status;
-      if (!status) {
-        this.bsModalRef = this.modalService.show(InstallMaskModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
-      }
-      this.metaMaskService.unloadAccountInfo();
-    });
-    this.metaMaskService.getAccountInfo();
-    this.metaMaskService.unlockedObservable$.take(1).subscribe(status => {
-      this.unlocked = status;
-      if (!status) {
-        this.bsModalRef = this.modalService.show(LockedModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
-      }
-      this.metaMaskService.unloadAccountInfo();
-    });
+    this.isMobile = this.isMobileView();
+    if (this.isMobile) {
+      this.bsModalRef = this.modalService.show(LockedModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
+    } else {
+      this.userState.subscribe(state => {
+        if (state) {
+          this.event$.next(state);
+        }
+      });
+      this.metaMaskService.getAccountInfo();
+      this.metaMaskService.installedObservable$.take(1).subscribe(status => {
+        this.installed = status;
+        if (!status) {
+          this.bsModalRef = this.modalService.show(InstallMaskModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
+        }
+        this.metaMaskService.unloadAccountInfo();
+      });
+      this.metaMaskService.getAccountInfo();
+      this.metaMaskService.unlockedObservable$.take(1).subscribe(status => {
+        this.unlocked = status;
+        if (!status) {
+          this.bsModalRef = this.modalService.show(LockedModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
+        }
+        this.metaMaskService.unloadAccountInfo();
+      });
 
-    this.eventSource.debounceTime(300).subscribe(state => {
-      this.isFromModal = state.showAddressForm;
-    });
+      this.eventSource.debounceTime(300).subscribe(state => {
+        this.isFromModal = state.showAddressForm;
+      });
+    }
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+     this.isMobile = this.isMobileView();
+  }
+
+  isMobileView() {
+    if ($(window).width() > 425) {
+        return false;
+    }
+    return true;
+  }
   OnSliderChange(event) {
     this.ethValue = event.from;
     this.gzrValue = this.ethValue * 1000;
