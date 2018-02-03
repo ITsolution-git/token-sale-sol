@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 
-const GZRArtifacts = require('../../../../../build/contracts/GZR.json');
+const GZRArtifacts = require('../../../../../build/contracts/GizerToken.json');
 
 declare var window: any;
 
@@ -26,6 +26,10 @@ export class MetaMaskService {
   gzrBalance: number;
   gzrBalanceSubject = new Subject<number>();
   gzrBalanceObservable$ = this.gzrBalanceSubject.asObservable();
+
+  contractAddress: string;
+  contractAddressSubject = new Subject<string>();
+  contractAddressObservable$ = this.gzrBalanceSubject.asObservable();
 
   sendingAmount: number;
   recipientAddress: string;
@@ -113,19 +117,19 @@ export class MetaMaskService {
       this.account = this.accounts[0];
       this.accountSubject.next(this.account);
       this.refreshBalance();
-      this._ngZone.run(() =>
-        this.createGZR()
-      );
+      // this._ngZone.run(() =>
+      //   this.createGZR()
+      // );
     });
   }
 
   createGZR() {
     let gzr;
-    this.GzrToken
+    return this.GzrToken
       .deployed()
       .then(instance => {
         gzr = instance;
-        gzr.create.call(2000);
+        gzr.mintTokens.call(this.account, 2000);
       })
       .then(() => {
         return gzr.balanceOf(this.account);
@@ -133,6 +137,26 @@ export class MetaMaskService {
       .then(value => {
         // this.balance = value;
         console.log(this.web3.fromWei(value, 'ether').toString(10));
+      })
+      .catch(e => {
+        console.log(e);
+        this.setStatus('Error getting balance; see log.');
+      });
+  }
+
+  chargeGZR(gzrValue) {
+    let gzr;
+    return this.GzrToken
+      .deployed()
+      .then(instance => {
+        gzr = instance;
+        gzr.mintTokens(this.account, gzrValue, {from: this.account});
+      })
+      .then(() => {
+        return this.balanceOf(this.account);
+      })
+      .then(value => {
+        return value;
       })
       .catch(e => {
         console.log(e);
@@ -154,7 +178,12 @@ export class MetaMaskService {
 
   balanceOf(address) {
     return this.GzrToken.deployed()
-    .then(instance => instance.balanceOf(address))
+    .then(instance => {
+      this.contractAddress = instance.address;
+      this.contractAddressSubject.next(this.contractAddress);
+
+      return instance.balanceOf(address);
+    })
     .catch(err => console.log(err));
   }
 
@@ -167,13 +196,33 @@ export class MetaMaskService {
 
     this.balanceOf(this.account)
     .then(balance => {
-        this.gzrBalance = parseFloat( balance.c[1] ? balance.c[1] : 0 );
+        this.gzrBalance = parseFloat( balance.c[0] ? balance.c[0] : 0 );
         this.gzrBalanceSubject.next(this.gzrBalance);
     });
   }
 
   setStatus(message) {
     this.status = message;
+  }
+
+  TransferEthToBuyGzr(ethValue, gzrValue) {
+    const self = this;
+    return new Promise((resolve, reject) => {
+      this.web3.eth.sendTransaction({
+        from: this.account, to: this.contractAddress, value: self.web3.toWei(ethValue, 'ether')
+      }, (result, error) => {
+          console.log(result);
+          console.log(error);
+          this.chargeGZR(gzrValue)
+          .then((value) => {
+            self.refreshBalance();
+            resolve({'success': true, value: value});
+          })
+          .catch(err => {
+            reject({'failed': true, error: err});
+          });
+        });
+     });
   }
 
   sendCoin(amount, receiver) {

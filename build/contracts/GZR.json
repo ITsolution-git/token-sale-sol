@@ -10052,10 +10052,10 @@
     "version": "0.4.18+commit.9cf6e910.Emscripten.clang"
   },
   "networks": {
-    "1517495099341": {
+    "1517602552966": {
       "events": {},
       "links": {},
-      "address": "0xd32285c491af559b1f959e7b369dc1b8584bbb1c"
+      "address": "0x3ac059b334c0d4d8aba83d243c6d491d49334d7c"
     }
   },
   "schemaVersion": "1.0.1",

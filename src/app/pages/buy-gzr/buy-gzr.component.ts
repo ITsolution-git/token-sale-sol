@@ -32,6 +32,8 @@ export class BuyGzrComponent implements OnInit {
 
   isFromModal = false;
   isMobile = false;
+  isBuyClicked = false;
+
   bsModalRef: BsModalRef;
 
   config = {
@@ -85,6 +87,11 @@ export class BuyGzrComponent implements OnInit {
       this.eventSource.debounceTime(300).subscribe(state => {
         this.isFromModal = state.showAddressForm;
       });
+
+      this.event$.subscribe((state) => {
+        this.installed = state.installed;
+        this.unlocked = state.unlocked;
+      });
     }
   }
 
@@ -106,6 +113,7 @@ export class BuyGzrComponent implements OnInit {
 
   openModalWithComponent() {
     if (!this.isAccepted) {
+      this.isBuyClicked = true;
       console.log('you need to accept terms & conditions first');
     } else {
       if (!this.installed) {
