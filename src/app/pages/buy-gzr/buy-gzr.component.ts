@@ -56,6 +56,8 @@ export class BuyGzrComponent implements OnInit {
   ngOnInit() {
     this.isMobile = this.isMobileView();
     if (this.isMobile) {
+      this.installed = false;
+      this.unlocked = false;
       this.bsModalRef = this.modalService.show(LockedModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
     } else {
       this.userState.subscribe(state => {
