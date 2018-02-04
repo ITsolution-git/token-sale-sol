@@ -32,15 +32,17 @@
             position: absolute;
             width: 100%;
             z-index: 100;
-            padding-top: 140px;
-            padding-left: 140px;
+            .title {
+                padding-top: 140px;
+            }
             .btn-buy-gzr {
                 cursor: pointer;
+                margin: 40px auto;
             }
         }
         .weapons {
             position: absolute;
-            top: 0;
+            bottom: 0;
             left: 0;
             width: 100%;
         }
