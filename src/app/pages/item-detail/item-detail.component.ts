@@ -4,6 +4,7 @@ import { ItemService } from '../../shared/services/ItemService/item.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { ParamMap } from '@angular/router/src/shared';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 declare const $: any;
 
@@ -25,6 +26,7 @@ export class ItemDetailComponent implements OnInit {
     private itemService: ItemService,
     private router: Router,
     private route: ActivatedRoute,
+    private domSanitizer: DomSanitizer,
   ) { }
 
   ngOnInit() {
@@ -42,6 +44,7 @@ export class ItemDetailComponent implements OnInit {
       .switchMap((params: ParamMap) => this.itemService.getItem(params.get('id')));
     this.detailItem$.subscribe(item => {
       this.detailItem = item;
+      this.detailItem['safeUrl'] = this.addAutoStart(item.resources.videos[0]);
       this.setItemRarity(item.meta.rarity);
     });
   }
@@ -86,5 +89,10 @@ export class ItemDetailComponent implements OnInit {
 
   navigateToTreasure() {
     this.router.navigate(['/open-treasure']);
+  }
+
+  addAutoStart(url):SafeResourceUrl {
+    console.log(url, '###');
+    return this.domSanitizer.bypassSecurityTrustResourceUrl(url + '?autostart=1');
   }
 }
