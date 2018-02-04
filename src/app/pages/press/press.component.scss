@@ -16,7 +16,6 @@
                 font-size: 16px;
                 font-family: "Century Gothic";
                 color: #ffffff;
-                word-break: break-all;
             }
         }
         .widgets-block {
@@ -24,9 +23,6 @@
                 font-size: 16px;
                 font-family: "Century Gothic";
                 color: #8a8da4;
-            }
-            .category-img {
-
             }
             .category-name {
                 font-size: 18px;
@@ -76,8 +72,12 @@
                 color: #ffffff;
             }
         }
-        .button-block {
+        .contact-form {
+            textarea {
+                height: 200px;
+            }
             .btn-touch {
+                cursor: pointer;
                 font-family: "Century Gothic";
                 font-size: 16px;
                 color: #ffffff;
@@ -85,6 +85,7 @@
                 display: inline-block;
                 padding: 10px 45px;
                 border-radius: 50px;
+                border: 0;
                 background: #f89220;
                 text-shadow: 0px 1px 2px rgba(1, 2, 2, 0.38);
             }
@@ -122,27 +123,27 @@
                     font-size: 15px;
                 }
                 .image-wrapper {
-                    height: 106px;
+                    height: 120px;
+                    img {
+                        max-width: 100%;
+                        max-height: 100%;
+                    }
                 }
                 .asset-detail {
                     .asset-name {
                         font-size: 10.5px;
+                    }
+                    .m-small {
+                        width: 30px;
+                    }
+                    .m-tiny {
+                        width: 24px;
                     }
                 }
             }
         }
         .logo-wrapper {
             background-color: #151627;
-        }
-        .news-wrapper {
-            .content-block {
-                .news-title {
-                    padding-top: 3px;
-                    font-size: 18px;
-                    font-family: "Century Gothic Bold";
-                    color: rgba(255, 255, 255, 0.38);
-                }
-            }
         }
         .inquiries-wrapper {
             background-image: url('/assets/images/img-press-inquiries-bg.png');
@@ -155,7 +156,10 @@
                     color: #ffffff;
                 }
             }
-            .button-block {
+            .contact-form {
+                textarea {
+                    height: 100px;
+                }
                 .btn-touch {
                     font-family: "Century Gothic";
                     font-size: 16px;
@@ -164,6 +168,7 @@
                     display: inline-block;
                     padding: 10px 45px;
                     border-radius: 50px;
+                    border: 0;
                     background: #f89220;
                     text-shadow: 0px 1px 2px rgba(1, 2, 2, 0.38);
                 }

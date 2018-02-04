@@ -55,7 +55,7 @@
                   <span class="float-right"><img src="/assets/icons/icon-download.png"></span>
                 </div>
               </div>
-              <div class="col-6 col-md-4 mb-3">
+              <div *ngIf="!isMobile" class="col-6 col-md-4 mb-3 p-0 px-md-3 pr-2">
                 <div class="image-wrapper border border-secondary p-4 text-center">
                   <img src="/assets/images/img-press-gizer-icon.png">
                 </div>
@@ -67,46 +67,58 @@
             </div>
 
             <div class="row mx-0">
-              <div class="col-6 col-md-4 mb-3">
+              <div *ngIf="isMobile" class="col-6 col-md-4 mb-3 p-0 px-md-3 pr-2">
+                <div class="image-wrapper border border-secondary p-4 text-center">
+                  <img src="/assets/images/img-press-gizer-icon.png">
+                </div>
+                <div class="asset-detail border border-secondary border-top-0 p-1 p-md-2">
+                  <span class="asset-name">
+                    <img class="pr-1 pr-md-2 m-small" src="/assets/icons/icon-type-png.png">
+                    Gizer Logo
+                  </span>
+                  <span class="float-right"><img class="m-tiny" src="/assets/icons/icon-download.png"></span>
+                </div>
+              </div>
+              <div class="col-6 col-md-4 mb-3 p-0 px-md-3 pl-2">
                 <div class="image-wrapper border border-secondary p-4 text-center">
                   <img src="/assets/images/img-press-gizer-coin.png">
                 </div>
-                <div class="asset-detail border border-secondary border-top-0 p-2">
+                <div class="asset-detail border border-secondary border-top-0 p-1 p-md-2">
                   <span class="asset-name">
-                    <img class="pr-2" src="/assets/icons/icon-type-png.png">
+                    <img class="pr-1 pr-md-2 m-small" src="/assets/icons/icon-type-png.png">
                     Gizer Coin
                   </span>
-                  <span class="float-right"><img src="/assets/icons/icon-download.png"></span>
+                  <span class="float-right"><img class="m-tiny" src="/assets/icons/icon-download.png"></span>
                 </div>
               </div>
-              <div class="col-6 col-md-4 p-md-0">
+              <div class="col-6 col-md-4 mb-3 p-md-0 p-0 pr-2">
                 <div class="image-wrapper border border-secondary px-4 pt-2 justify-content-center d-flex align-bottom">
                   <img src="/assets/images/img-press-app-frame.png">
                 </div>
-                <div class="asset-detail border border-secondary border-top-0 p-2">
+                <div class="asset-detail border border-secondary border-top-0 p-1 p-md-2">
                   <span class="asset-name">
-                    <img class="pr-2" src="/assets/icons/icon-type-png.png">
+                    <img class="pr-1 pr-md-2 m-small" src="/assets/icons/icon-type-png.png">
                     Gizer App Frame
                   </span>
-                  <span class="float-right"><img src="/assets/icons/icon-download.png"></span>
+                  <span class="float-right"><img class="m-tiny" src="/assets/icons/icon-download.png"></span>
                 </div>
               </div>
-              <div class="col-6 col-md-4">
+              <div class="col-6 col-md-4 mb-3 p-0 px-md-3 pl-2">
                 <div class="image-wrapper border border-secondary p-4 text-center">
                   <img src="/assets/images/img-press-ggid-logo.png">
                 </div>
-                <div class="asset-detail border border-secondary border-top-0 p-2">
+                <div class="asset-detail border border-secondary border-top-0 p-1 p-md-2">
                   <span class="asset-name">
-                    <img class="pr-2" src="/assets/icons/icon-type-png.png">
+                    <img class="pr-1 pr-md-2 m-small" src="/assets/icons/icon-type-png.png">
                     GGiD Logo
                   </span>
-                  <span class="float-right"><img src="/assets/icons/icon-download.png"></span>
+                  <span class="float-right"><img class="m-tiny" src="/assets/icons/icon-download.png"></span>
                 </div>
               </div>
             </div>
             
-            <div class="row mx-0 mb-3">
-              <div class="col-6 pr-2">
+            <div class="row mx-0">
+              <div class="col-12 col-md-6 p-0 mb-3 pr-md-2">
                 <div class="image-wrapper border border-secondary p-1 text-center">
                   <img class="w-100" src="/assets/images/img-press-screenshot.png">
                 </div>
@@ -118,7 +130,7 @@
                   <span class="float-right"><img src="/assets/icons/icon-download.png"></span>
                 </div>
               </div>
-              <div class="col-6 pl-2">
+              <div class="col-12 col-md-6 p-0 mb-3 pr-md-2">
                 <div class="image-wrapper border border-secondary p-1 text-center">
                   <img class="w-100" src="/assets/images/img-press-buy-gzr.png">
                 </div>
@@ -132,8 +144,8 @@
               </div>
             </div>
 
-            <div class="row mx-0 mb-3">
-              <div class="col-6 pr-2">
+            <div class="row mx-0">
+              <div class="col-12 col-md-6 p-0 mb-3 pr-md-2">
                 <div class="image-wrapper border border-secondary p-1 text-center">
                   <img class="w-100" src="/assets/images/img-press-item-details.png">
                 </div>
@@ -145,7 +157,7 @@
                   <span class="float-right"><img src="/assets/icons/icon-download.png"></span>
                 </div>
               </div>
-              <div class="col-6 pl-2">
+              <div class="col-12 col-md-6 p-0 mb-3 pr-md-2">
                 <div class="image-wrapper border border-secondary p-1 justify-content-center d-flex flex-column">
                   <img class="w-100" src="/assets/images/img-press-gzr-banner-1.png">
                 </div>
@@ -159,8 +171,8 @@
               </div>
             </div>
             
-            <div class="row mx-0 mb-3">
-              <div class="col-6 pr-2">
+            <div class="row mx-0">
+              <div class="col-12 col-md-6 p-0 mb-3 pr-md-2">
                 <div class="image-wrapper border border-secondary p-1 justify-content-center d-flex flex-column">
                   <img class="w-100" src="/assets/images/img-press-gzr-banner-2.png">
                 </div>
@@ -172,7 +184,7 @@
                   <span class="float-right"><img src="/assets/icons/icon-download.png"></span>
                 </div>
               </div>
-              <div class="col-6 pl-2">
+              <div class="col-12 col-md-6 p-0 mb-3 pr-md-2">
                 <div class="image-wrapper border border-secondary p-1 justify-content-center d-flex flex-column">
                   <img class="w-100" src="/assets/images/img-press-gzr-banner-3.png">
                 </div>
@@ -186,10 +198,10 @@
               </div>
             </div>
             
-            <div class="row mx-0 mb-3">
-              <div class="col-4 pr-2">
+            <div class="row mx-0">
+              <div class="col-6 col-md-4 mb-3 p-0 px-md-3 pr-2">
                 <div class="image-wrapper border border-secondary p-4 text-center">
-                  <img src="/assets/images/img-press-item-1.png">
+                  <img class="mw-100" src="/assets/images/img-press-item-1.png">
                 </div>
                 <div class="asset-detail border border-secondary border-top-0 p-2">
                   <span class="asset-name">
@@ -199,9 +211,9 @@
                   <span class="float-right"><img src="/assets/icons/icon-download.png"></span>
                 </div>
               </div>
-              <div class="col-4 px-2">
+              <div class="col-6 col-md-4 mb-3 p-0 px-md-3 pl-2">
                 <div class="image-wrapper border border-secondary px-4 pt-2 justify-content-center d-flex align-bottom">
-                  <img src="/assets/images/img-press-item-2.png">
+                  <img class="mw-100" src="/assets/images/img-press-item-2.png">
                 </div>
                 <div class="asset-detail border border-secondary border-top-0 p-2">
                   <span class="asset-name">
@@ -211,9 +223,9 @@
                   <span class="float-right"><img src="/assets/icons/icon-download.png"></span>
                 </div>
               </div>
-              <div class="col-4 pl-2">
+              <div class="col-6 col-md-4 mb-3 px-md-3 p-0 pr-2">
                 <div class="image-wrapper border border-secondary p-4 text-center">
-                  <img src="/assets/images/img-press-item-3.png">
+                  <img class="mw-100" src="/assets/images/img-press-item-3.png">
                 </div>
                 <div class="asset-detail border border-secondary border-top-0 p-2">
                   <span class="asset-name">
@@ -235,7 +247,7 @@
       <div class="header-block text-center">
         <h3 class="title py-4">Press & Coverage</h3>
       </div>
-      <div class="logo-block pb-4">
+      <div *ngIf="!isMobile" class="logo-block pb-4">
         <div class="row justify-content-center">
           <div class="d-flex flex-column justify-content-center px-4 py-3">
             <img src="/assets/images/img-press-logo-1.png">
@@ -270,36 +282,34 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="news-wrapper">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-12 col-md-8">
-          <div class="header-block">
-            <h3 class="title pt-4">Recent News</h3>
+      <div *ngIf="isMobile" class="logo-block pb-4">
+        <div class="row justify-content-center">
+          <div class="col-6 mb-3">
+            <img class="w-100" src="/assets/images/img-press-logo-1.png">
           </div>
-          <div class="content-block mb-4">
-            <div class="row py-2 m-0">
-              <span><img src="/assets/icons/icon-news-note.png"></span>
-              <span class="pl-3 news-title" >Lorem Ipsum has been the industry's standard dummy text ever</span>
-            </div>
-            <div class="row py-2 m-0">
-              <span><img src="/assets/icons/icon-news-note.png"></span>
-              <span class="pl-3 news-title" >more-or-less normal distribution of letters, as opposed</span>
-            </div>
-            <div class="row py-2 m-0">
-              <span><img src="/assets/icons/icon-news-note.png"></span>
-              <span class="pl-3 news-title" >with desktop publishing software like Aldus PageMaker including</span>
-            </div>
-            <div class="row py-2 m-0">
-              <span><img src="/assets/icons/icon-news-note.png"></span>
-              <span class="pl-3 news-title" >majority have suffered alteration in some form, by injected humou</span>
-            </div>
-            <div class="row py-2 m-0">
-              <span><img src="/assets/icons/icon-news-note.png"></span>
-              <span class="pl-3 news-title" >chunks as necessary, making this the first</span>
-            </div>
+          <div class="col-6 mb-3">
+            <img class="w-100" src="/assets/images/img-press-logo-2.png">
+          </div>
+          <div class="col-6 mb-3">
+            <img class="w-100" src="/assets/images/img-press-logo-3.png">
+          </div>
+          <div class="col-6 mb-3">
+            <img class="w-100" src="/assets/images/img-press-logo-4.png">
+          </div>
+          <div class="col-6 mb-3">
+            <img class="w-100" src="/assets/images/img-press-logo-5.png">
+          </div>
+          <div class="col-6 mb-3">
+            <img class="w-100" src="/assets/images/img-press-logo-6.png">
+          </div>
+          <div class="col-6 mb-3">
+            <img class="w-100" src="/assets/images/img-press-logo-7.png">
+          </div>
+          <div class="col-6 mb-3">
+            <img class="w-100" src="/assets/images/img-press-logo-8.png">
+          </div>
+          <div class="col-6 mb-3">
+            <img class="w-100" src="/assets/images/img-press-logo-9.png">
           </div>
         </div>
       </div>
@@ -311,9 +321,42 @@
         <h3 class="title py-4">Press Inquiries</h3>
         <p class="sub-text">Have a press or media inquiry that you want to talk to the team about?</p>
       </div>
-      <div class="button-block text-center pt-3 pb-5">
-          <span class="btn-touch">Get in Touch</span>
+      <div class="contact-form pb-4">
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-4 text-center">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+              <input
+                class="w-100 mb-3"
+                type="text"
+                placeholder="Name"
+                formControlName="name"
+              >
+              <input
+                class="w-100 mb-3"
+                type="text"
+                placeholder="Email"
+                formControlName="email"
+              >
+              <textarea
+                class="w-100 mb-3"
+                placeholder="Message"
+                formControlName="message"
+              >
+              </textarea>
+              <button
+                class="btn-touch"
+                type="submit"
+                [disabled]="form.invalid"
+              >
+              Get in Touch
+            </button>
+            </form>
+          </div>
+        </div>
       </div>
+      <!-- <div class="button-block text-center pt-3 pb-5">
+          <span class="btn-touch">Get in Touch</span>
+      </div> -->
     </div>
   </div>
 </div>
