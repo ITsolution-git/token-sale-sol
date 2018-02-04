@@ -7,6 +7,7 @@ import Contract from 'truffle-contract';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
+import Tx from 'ethereumjs-tx';
 
 const GZRArtifacts = require('../../../../../build/contracts/GizerToken.json');
 
@@ -117,9 +118,6 @@ export class MetaMaskService {
       this.account = this.accounts[0];
       this.accountSubject.next(this.account);
       this.refreshBalance();
-      // this._ngZone.run(() =>
-      //   this.createGZR()
-      // );
     });
   }
 
@@ -137,26 +135,6 @@ export class MetaMaskService {
       .then(value => {
         // this.balance = value;
         console.log(this.web3.fromWei(value, 'ether').toString(10));
-      })
-      .catch(e => {
-        console.log(e);
-        this.setStatus('Error getting balance; see log.');
-      });
-  }
-
-  chargeGZR(gzrValue) {
-    let gzr;
-    return this.GzrToken
-      .deployed()
-      .then(instance => {
-        gzr = instance;
-        gzr.mintTokens(this.account, gzrValue, {from: this.account});
-      })
-      .then(() => {
-        return this.balanceOf(this.account);
-      })
-      .then(value => {
-        return value;
       })
       .catch(e => {
         console.log(e);
@@ -196,7 +174,7 @@ export class MetaMaskService {
 
     this.balanceOf(this.account)
     .then(balance => {
-        this.gzrBalance = parseFloat( balance.c[0] ? balance.c[0] : 0 );
+        this.gzrBalance = Number(balance.toString()) / 1000000;
         this.gzrBalanceSubject.next(this.gzrBalance);
     });
   }
@@ -206,23 +184,69 @@ export class MetaMaskService {
   }
 
   TransferEthToBuyGzr(ethValue, gzrValue) {
-    const self = this;
+    let gzr;
     return new Promise((resolve, reject) => {
-      this.web3.eth.sendTransaction({
-        from: this.account, to: this.contractAddress, value: self.web3.toWei(ethValue, 'ether')
-      }, (result, error) => {
-          console.log(result);
-          console.log(error);
-          this.chargeGZR(gzrValue)
-          .then((value) => {
-            self.refreshBalance();
-            resolve({'success': true, value: value});
-          })
-          .catch(err => {
-            reject({'failed': true, error: err});
+      this.GzrToken
+        .deployed()
+        .then(instance => {
+          gzr = instance;
+          gzr.sendTransaction({
+            from: this.account, to: this.contractAddress, value: this.web3.toWei(ethValue, 'ether')
+          }, (error, transactionId) => {
+            gzr.balanceOf(this.account)
+            .then((value) => {
+              resolve({'success': true, 'value': value});
+            })
+            .catch((err) => {
+              reject({'failure': true});
+            });
           });
+        })
+        .catch(e => {
+          reject({'failure': true});
+          this.setStatus('Error getting balance; see log.');
         });
-     });
+    });
+  }
+
+  SignInTransaction() {
+    let gzr;
+    return new Promise((resolve, reject) => {
+      this.GzrToken
+        .deployed()
+        .then(instance => {
+          gzr = instance;
+          let code;
+          this.web3.eth.getCode(this.account, (c) => {
+            code = c;
+            const transaction = {
+               nonce: '0x00',
+               to: this.contractAddress,
+               value: '0x00',
+               data: GZRArtifacts['bytecode']
+            };
+            const privateKey = new Buffer('3f23562d2acaf422a33f382dd4d2544e4fb7003116df1d62bb7b78ca77ceb843', 'hex');
+            const tx = new Tx(transaction);
+            tx.sign(privateKey);
+            const serializedTx = tx.serialize();
+            this.web3.eth.sendRawTransaction('0x' + serializedTx.toString('hex'), (error, transactionId) => {
+              console.log(error);
+              gzr.balanceOf(this.account)
+              .then((value) => {
+                resolve({'success': true, 'value': value});
+              })
+              .catch((err) => {
+                reject({'failure': true});
+              });
+            });
+          });
+
+        })
+        .catch(e => {
+          reject({'failure': true});
+          this.setStatus('Error getting balance; see log.');
+        });
+    });
   }
 
   sendCoin(amount, receiver) {

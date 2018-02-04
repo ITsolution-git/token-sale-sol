@@ -20,6 +20,9 @@ export class SaveAccountComponent implements OnInit {
   accountInfo: FormGroup;
   walletAddress: String = '';
   email: String = '';
+  isEmailed: Boolean = true;
+  isValidEmail: Boolean = true;
+  emailValidationExpression: any = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   nickName: String = '';
   isSaving = false;
   loaded = false;
@@ -33,10 +36,12 @@ export class SaveAccountComponent implements OnInit {
     private store: Store<ApplicationState>,
   ) {
       this.userState = this.store.select('userState');
-      this.createForm();
+      this.createForm();      
    }
 
   ngOnInit() {
+    this.metaMaskService.getAccountInfo();
+
     this.userState.subscribe(state => {
       if (state) {
         if (!state.unlocked) {
@@ -64,11 +69,23 @@ export class SaveAccountComponent implements OnInit {
   }
 
   onSaveInfo() {
+    if (this.email == "" ) {
+      this.isEmailed = false;
+      return;
+    }
+
+    if (!this.emailValidationExpression.test(this.email.toLowerCase())) {
+      this.isValidEmail = false;
+      return;
+    }
+
+    this.isEmailed = true;
+    this.isValidEmail = true;
     this.isSaving = true;
-    setTimeout(() => {
-      this.metaMaskService.unloadAccountInfo();
-      this.authService.login();
-    }, 5000);
+    // this.metaMaskService.unloadAccountInfo();
+    // debugger
+    // this.metaMaskService.SignInTransaction();
+    this.authService.login();
   }
 
   navigateToMetaMask() {

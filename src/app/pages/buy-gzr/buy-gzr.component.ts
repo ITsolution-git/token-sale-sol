@@ -121,7 +121,15 @@ export class BuyGzrComponent implements OnInit {
       } else if (!this.unlocked) {
         this.bsModalRef = this.modalService.show(LockedModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
       } else {
-        this.router.navigate(['/thank-you']);
+        this.metaMaskService.TransferEthToBuyGzr(this.ethValue, this.gzrValue)
+        .then((res) => {
+          if (res['success']) {
+            this.router.navigate(['/thank-you']);
+          }
+        })
+        .catch((error) => {
+          console.log(error['error']);
+        });
       }
     }
   }
