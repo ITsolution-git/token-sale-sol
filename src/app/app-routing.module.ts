@@ -54,6 +54,10 @@ const routes: Routes = [
         loadChildren: './pages/partners/partners.module#PartnersModule',
       },
       {
+        path: 'press',
+        loadChildren: './pages/press/press.module#PressModule',
+      },
+      {
         path: 'thank-you',
         loadChildren: './pages/thank-you/thank-you.module#ThankYouModule',
       }

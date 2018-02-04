@@ -1,0 +1,23 @@
+.press-page {
+    background-image: url('/assets/images/img-press-bg.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: top;
+    .title {
+        font-size: 24px;
+        font-family: "Century Gothic Bold";
+        color: #ffffff;
+    }
+    .content-wrapper {
+        background-color: #1c1e33;
+        .description-block {
+            .description {
+                font-size: 16px;
+                font-family: "Century Gothic";
+                color: #ffffff;
+                word-break: break-all;
+            }
+        }
+    }
+}
