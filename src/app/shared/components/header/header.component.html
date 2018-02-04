@@ -57,9 +57,21 @@
         <a href="/"><img class="site-logo" src="/assets/images/img-logo.png"></a>
       </div>
       <div class="col-2 pr-3 pt-1">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"><i class="fa fa-bars fa-2x" aria-hidden="true"></i></span>
+        <button class="navbar-toggler" type="button" (click)="onMenuToggle()">
+          <span *ngIf="!toggled" class="navbar-toggler-icon"><i class="fa fa-bars fa-2x" aria-hidden="true"></i></span>
+          <span *ngIf="toggled" class="navbar-toggler-icon"><img class="menu-close" src="/assets/icons/icon-menu-close.png"></span>
         </button>
       </div>
+    </div>
   </div>
+</div>
+<div *ngIf="toggled" class="mobile-nav-menu justify-content-center">
+  <ul class="navbar-nav mr-auto">
+      <li *ngFor="let menuItem of menuItems" class="nav-item">
+        <a class="nav-item nav-link" [routerLink]="[menuItem.path]">{{menuItem.title}}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-item nav-link" (click)="navigateToTokenSection()">What is GZR?</a>
+      </li>
+    </ul>
 </div>

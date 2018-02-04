@@ -82,14 +82,34 @@
         }
     }
     @media (max-width: 450px) {
+        background-color: #151627;
         .site-logo {
             height: 36px;
         }
         .navbar-toggler {
             outline: none;
         }
+        .menu-close {
+            width: 30px;
+        }
         .navbar-toggler-icon {
             color: #fff;
         }
+    }
+}
+.mobile-nav-menu {
+    position: absolute;
+    right: 0;
+    top: 52px;
+    z-index: 1000;
+    width: 250px;
+    background-color: #151627;
+    height: 100vh;
+    text-align: center;
+    .nav-link {
+        color: #fff;
+        border-bottom: solid 1px #1c1e33;
+        font-size: 18px;
+        padding: 20px 0;
     }
 }

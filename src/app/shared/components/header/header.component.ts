@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { HeaderRoutes } from './header-routing.module';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { LocalStorageService } from 'ngx-webstorage';
 import { AuthService } from '../../../core/services/auth.service';
 import { MetaMaskService } from '../../services/MetaMaskService/meta-mask.service';
@@ -14,7 +14,7 @@ declare const $: any;
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 
 export class HeaderComponent implements OnInit {
@@ -30,6 +30,7 @@ export class HeaderComponent implements OnInit {
   balance: number;
   installed = false;
   gzrBalance: number;
+  toggled = false;
 
   constructor(
     private router: Router,
@@ -40,6 +41,11 @@ export class HeaderComponent implements OnInit {
   ) {
     this.initTwitterWidget();
     this.initFacebookWidget();
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.toggled = false;
+      }
+    });
     this.userState = this.store.select('userState');
   }
 
@@ -65,8 +71,8 @@ export class HeaderComponent implements OnInit {
     if (token) {
       this.isAuthenticated = true;
     } else {
-      this.authService.isLoggedIn$.subscribe(flag => {        
-        this.isAuthenticated = flag;        
+      this.authService.isLoggedIn$.subscribe(flag => {
+        this.isAuthenticated = flag;
       });
     }
   }
@@ -94,6 +100,10 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.isAuthenticated = false;
     this.authService.logout();
+  }
+
+  onMenuToggle() {
+    this.toggled = !this.toggled;
   }
 
   navgiateToTreasure() {
