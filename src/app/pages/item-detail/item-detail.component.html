@@ -3,6 +3,12 @@
     <div class="item-title py-2 py-md-4">
       <h2>{{detailItem.meta.name}}</h2>
     </div>
+    <div class="share-icons">
+      <share-container
+          [platforms]="['facebook','twitter','googlePlus','linkedin','pinterest','reddit','tumblr','stumbleUpon']"
+          [expandable]="false">
+      </share-container>
+    </div>
     <div class="row no-gutters">
       <div [ngClass]="{'border rounded border-secondary': !isMobile}">
           <div class="sketchfab-embed-wrapper">
