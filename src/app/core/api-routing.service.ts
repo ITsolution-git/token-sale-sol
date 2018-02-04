@@ -8,8 +8,8 @@ export class ApiRoutingService {
   constructor() {}
 
   getItemsUrl() {
-    // return this.baseUrl + '/items';
-    return '../../../assets/items.json';
+    return this.baseUrl + '/item';
+    // return '../../../assets/items.json';
   }
 
   getMetaCoinUrl() {

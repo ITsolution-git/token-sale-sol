@@ -80,7 +80,7 @@ export class HttpHelperService {
 
     this.serverError = false;
 
-    return new RequestOptions({ headers, withCredentials: true, search });
+    return new RequestOptions({ headers, withCredentials: false, search });
   }
 
   /***
@@ -97,6 +97,7 @@ export class HttpHelperService {
     requiredAuth = false,
     headers?: Headers
   ): Observable<any> {
+    console.log(this.generateReqOptions(false, requiredAuth, headers, query));
     return this.http
       .get(url, this.generateReqOptions(false, requiredAuth, headers, query))
       .map((response: Response) => {
