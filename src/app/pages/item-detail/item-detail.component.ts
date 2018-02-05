@@ -41,7 +41,10 @@ export class ItemDetailComponent implements OnInit {
 
     });
     this.detailItem$ = this.route.paramMap
-      .switchMap((params: ParamMap) => this.itemService.getItem(params.get('id')));
+      .switchMap((params: ParamMap) => {
+        window.scrollTo(0, 0);
+        return this.itemService.getItem(params.get('id'));
+      });
     this.detailItem$.subscribe(item => {
       this.detailItem = item;
       this.detailItem['safeUrl'] = this.addAutoStart(item.resources.videos[0]);
@@ -91,8 +94,7 @@ export class ItemDetailComponent implements OnInit {
     this.router.navigate(['/open-treasure']);
   }
 
-  addAutoStart(url):SafeResourceUrl {
-    console.log(url, '###');
+  addAutoStart(url): SafeResourceUrl {
     return this.domSanitizer.bypassSecurityTrustResourceUrl(url + '?autostart=1');
   }
 }
