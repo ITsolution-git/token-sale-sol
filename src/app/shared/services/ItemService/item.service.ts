@@ -21,11 +21,10 @@ export class ItemService {
 
   getItem(id) {
     return this.http.get(
-      this.apiRoutingService.getItemsUrl(),
+      this.apiRoutingService.getItemUrl(id),
       {},
       true,
       null
-    )
-    .map(items => items.find(item => item.id === id));
+    );
   }
 }
