@@ -56,4 +56,12 @@ export class InstallMaskModalComponent implements OnInit {
   updateShowAddressForm(data) {
     this.store.dispatch({type: UPDATE_SHOW_ADDRESS_FORM, payload: data});
   }
+
+  navigateToMetaMaskIO() {
+    window.open('https://metamask.io', '_blank');
+  }
+
+  refreshMetaMask() {
+    window.location.reload();
+  }
 }
