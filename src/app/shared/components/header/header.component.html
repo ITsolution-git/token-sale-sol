@@ -5,7 +5,14 @@
         <a href="/"><img class="site-logo" src="/assets/images/img-logo.png"></a>
       </div>
       <div class="col-md-4 d-flex text-left">
-        <div class="fb-like d-inline-flex" data-href="https://www.facebook.com/GizerGaming/" data-layout="button" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+        <div class="fb-like d-inline-flex"
+          data-href="https://www.facebook.com/GizerGaming/"
+          data-layout="button"
+          data-action="like"
+          data-size="small"
+          data-show-faces="false"
+          data-share="true"
+        ></div>
         <div class="twitter d-inline-flex ml-2">
           <a class="twitter-share-button"
             href="https://twitter.com/share"
@@ -48,7 +55,7 @@
           <li *ngFor="let menuItem of menuItems"
             class="nav-item">
             <img *ngIf="menuItem.title === 'Home'" class="icon-home" src="/assets/icons/icon-home.png">
-            <a *ngIf="menuItem.title === 'Home'" class="nav-item nav-link nav-home" [routerLink]="[menuItem.path]" routerLinkActive="router-active" [routerLinkActiveOptions]="{exact: true}">{{menuItem.title}}</a>
+            <a *ngIf="menuItem.title === 'Home'" class="nav-item nav-link nav-home" [routerLink]="[menuItem.path]" fragment="home" routerLinkActive="router-active" [routerLinkActiveOptions]="{exact: true}">{{menuItem.title}}</a>
             <a *ngIf="menuItem.title !== 'Home'" class="nav-item nav-link" [routerLink]="[menuItem.path]" routerLinkActive="router-active" [routerLinkActiveOptions]="{exact: true}">{{menuItem.title}}</a>
           </li>
           <li class="nav-item">
@@ -74,7 +81,7 @@
 </div>
 <div *ngIf="toggled" class="mobile-nav-menu justify-content-center">
   <ul class="navbar-nav mr-auto">
-      <li *ngFor="let menuItem of menuItems" class="nav-item">
+      <li *ngFor="let menuItem of mobileMenuItems" class="nav-item">
         <a class="nav-item nav-link" [routerLink]="[menuItem.path]">{{menuItem.title}}</a>
       </li>
       <li class="nav-item">

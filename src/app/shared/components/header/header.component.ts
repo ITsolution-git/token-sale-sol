@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { HeaderRoutes } from './header-routing.module';
+import { HeaderRoutes, MobileHeaderRoutes } from './header-routing.module';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { LocalStorageService } from 'ngx-webstorage';
 import { AuthService } from '../../../core/services/auth.service';
@@ -19,6 +19,7 @@ declare const $: any;
 
 export class HeaderComponent implements OnInit {
   public menuItems: any[];
+  public mobileMenuItems: any[];
   public brandMenu: any;
   userState: Observable<UserState>;
   private user: any;
@@ -51,6 +52,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.menuItems = HeaderRoutes;
+    this.mobileMenuItems = MobileHeaderRoutes;
     this.metaMaskService.getAccountInfo();
 
     this.userState.subscribe(state => {
@@ -123,7 +125,7 @@ export class HeaderComponent implements OnInit {
   }
 
   navigateToTokenSection() {
-    window.scrollTo(0, 1620);
+    this.router.navigate([''], {fragment: 'whatsgizer'});
   }
 
   public get menuIcon(): string {
