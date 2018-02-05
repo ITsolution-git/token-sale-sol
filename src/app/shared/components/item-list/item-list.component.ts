@@ -31,9 +31,9 @@ export class ItemListComponent implements OnInit {
   }
 
   loadNextWeapons() {
-    if (this.counter < this.itemArray.length - this.itemCountToShow) {
+    if (this.counter < this.itemArray.length) {
       this.items = this.itemArray.slice(this.counter, this.counter + this.itemCountToShow);
-      this.counter += 1;
+      this.counter += this.itemCountToShow;
     }
   }
 
