@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SaveAccountComponent } from './save-account.component';
 import { SaveAccountRoutingModule } from './save-account-routing.module';
 import { MetaMaskService } from '../../shared/services/MetaMaskService/meta-mask.service';
+import { UserService } from '../../shared/services/UserService/user.service';
 
 @NgModule({
   imports: [
@@ -12,6 +13,6 @@ import { MetaMaskService } from '../../shared/services/MetaMaskService/meta-mask
     SaveAccountRoutingModule,
   ],
   declarations: [SaveAccountComponent],
-  providers: [MetaMaskService]
+  providers: [MetaMaskService, UserService]
 })
 export class SaveAccountModule { }

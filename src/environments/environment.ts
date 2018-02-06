@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  BASE_API_URL: '/api',
+  BASE_API_URL: 'https://54.243.54.136',
   localStorage: {
     token: 'gizer.web'
   }

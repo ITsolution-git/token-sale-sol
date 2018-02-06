@@ -19,6 +19,6 @@ export class AppComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-  	this.ngSpinningPreloader.stop()
+    this.ngSpinningPreloader.stop();
   }
 }

@@ -4,6 +4,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { MetaMaskService } from '../../shared/services/MetaMaskService/meta-mask.service';
+import { UserService } from '../../shared/services/UserService/user.service';
 import { Store } from '@ngrx/store';
 import { ApplicationState } from '../../store/application-state';
 import { Observable } from 'rxjs/Observable';
@@ -20,6 +21,9 @@ export class SaveAccountComponent implements OnInit {
   accountInfo: FormGroup;
   walletAddress: String = '';
   email: String = '';
+  isEmailed: Boolean = true;
+  isValidEmail: Boolean = true;
+  emailValidationExpression: any = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   nickName: String = '';
   isSaving = false;
   loaded = false;
@@ -31,12 +35,16 @@ export class SaveAccountComponent implements OnInit {
     private authService: AuthService,
     private metaMaskService: MetaMaskService,
     private store: Store<ApplicationState>,
+    private userService: UserService
   ) {
       this.userState = this.store.select('userState');
       this.createForm();
    }
 
+
   ngOnInit() {
+    this.metaMaskService.getAccountInfo();
+
     this.userState.subscribe(state => {
       if (state) {
         if (!state.unlocked) {
@@ -64,11 +72,40 @@ export class SaveAccountComponent implements OnInit {
   }
 
   onSaveInfo() {
+    if (this.email === '' ) {
+      this.isEmailed = false;
+      return;
+    }
+
+    if (!this.emailValidationExpression.test(this.email.toLowerCase())) {
+      this.isValidEmail = false;
+      return;
+    }
+
+    this.isEmailed = true;
+    this.isValidEmail = true;
     this.isSaving = true;
     setTimeout(() => {
-      this.metaMaskService.unloadAccountInfo();
-      this.authService.login();
-    }, 5000);
+      this.metaMaskService.SignInTransaction()
+      .then(result => {
+        const data = {
+          'nick': this.nickName,
+          'email': this.email,
+          'type': 'user',
+          'gzr': {
+              'type': 'wallet',
+              'id': result['account'],
+              'amount': result['amount']
+          }
+        };
+        this.authService.login();
+        this.metaMaskService.getAccountInfo();
+      })
+      .catch(error => {
+        console.log(error);
+        this.isEmailed = false;
+      });
+    }, 3000);
   }
 
   navigateToMetaMask() {

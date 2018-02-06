@@ -76,6 +76,8 @@
                   <label for="terms-checkbox"></label>
                 </span>
                 <span class="text-label">I have read the Gzr <a href="#" class="link">Whitepaper</a> and I accept the <a href="#" class="ml-4 link terms" >Terms & Conditions</a></span>
+
+                <p *ngIf="!isAccepted && isBuyClicked" class="text-label text-danger">You need to accept terms & conditions first</p>
               </div>
             </div>
             <div *ngIf="!isFromModal && !this.isMobile" (click)="openModalWithComponent()" class="buy-now mb-3">

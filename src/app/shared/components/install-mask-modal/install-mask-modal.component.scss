@@ -36,6 +36,10 @@
         font-family: "Century Gothic";
         color: #0b0c14;
     }
+    .btn-refresh-page {
+        text-decoration: underline;
+        cursor: pointer;
+    }
     @media (max-width: 450px) {
         .gizer-mask {
             margin: 0 !important;

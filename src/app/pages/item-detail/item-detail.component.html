@@ -12,8 +12,8 @@
     <div class="row no-gutters">
       <div [ngClass]="{'border rounded border-secondary': !isMobile}">
           <div class="sketchfab-embed-wrapper">
-            <iframe *ngIf="!isMobile" width="1112" height="665" frameborder="0" style="border:0; -moz-border-radius: 25px; border-radius: 25px;" src="https://sketchfab.com/models/d2cd5e96ad2743008bd7ae0f80ab4868/embed?autostart=1" frameborder="0" allowvr allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel=""></iframe> -->
-            <iframe *ngIf="isMobile" width="345" height="232" frameborder="0" style="border:0; -moz-border-radius: 25px; border-radius: 25px;" src="https://sketchfab.com/models/d2cd5e96ad2743008bd7ae0f80ab4868/embed?autostart=1" frameborder="0" allowvr allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel=""></iframe>
+            <iframe *ngIf="!isMobile" width="1112" height="665" frameborder="0" style="border:0; -moz-border-radius: 25px; border-radius: 25px;" [src]="detailItem.safeUrl" frameborder="0" allowvr allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel=""></iframe> -->
+            <iframe *ngIf="isMobile" width="345" height="232" frameborder="0" style="border:0; -moz-border-radius: 25px; border-radius: 25px;" [src]="detailItem.safeUrl" frameborder="0" allowvr allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel=""></iframe>
           </div>
         <div class="description p-md-4 pl-md-5">
           <div class="type-gallery pb-3 pl-2 pl-md-0">
@@ -57,7 +57,7 @@
             class="item-wrapper"
             *ngFor="let item of items"
             [id]="item.id"
-            [itemImageLink]="item.resources.images[0]"
+            [itemImageLink]="item.resources.icons[0]"
             [itemName]="item.meta.name"
             [rarity]="item.meta.rarity"
             >

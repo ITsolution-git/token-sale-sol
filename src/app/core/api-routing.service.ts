@@ -8,8 +8,11 @@ export class ApiRoutingService {
   constructor() {}
 
   getItemsUrl() {
-    // return this.baseUrl + '/items';
-    return '../../../assets/items.json';
+    return this.baseUrl + '/item';
+  }
+
+  getItemUrl(id) {
+    return this.baseUrl + '/item/' + id;
   }
 
   getMetaCoinUrl() {
@@ -17,12 +20,14 @@ export class ApiRoutingService {
   }
 
   getChestUrl() {
-    // return this.baseUrl + '/chest';
     return '../../../assets/chestId.json';
   }
 
   getChestDataFromID(id) {
-    // return this.baseUrl + `/chest/${id}`;
     return '../../../assets/chest.json';
+  }
+
+  getUsersUrl() {
+    return this.baseUrl + '/user';
   }
 }

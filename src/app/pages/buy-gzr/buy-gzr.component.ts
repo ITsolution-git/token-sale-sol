@@ -10,6 +10,7 @@ import { UserState } from '../../store/store-data';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { MetaMaskService } from '../../shared/services/MetaMaskService/meta-mask.service';
+import { UPDATE_TRANSACTION_ID } from './../../store/actions/user.actions';
 
 declare const $: any;
 
@@ -32,6 +33,8 @@ export class BuyGzrComponent implements OnInit {
 
   isFromModal = false;
   isMobile = false;
+  isBuyClicked = false;
+
   bsModalRef: BsModalRef;
 
   config = {
@@ -85,6 +88,11 @@ export class BuyGzrComponent implements OnInit {
       this.eventSource.debounceTime(300).subscribe(state => {
         this.isFromModal = state.showAddressForm;
       });
+
+      this.event$.subscribe((state) => {
+        this.installed = state.installed;
+        this.unlocked = state.unlocked;
+      });
     }
   }
 
@@ -106,6 +114,7 @@ export class BuyGzrComponent implements OnInit {
 
   openModalWithComponent() {
     if (!this.isAccepted) {
+      this.isBuyClicked = true;
       console.log('you need to accept terms & conditions first');
     } else {
       if (!this.installed) {
@@ -113,7 +122,18 @@ export class BuyGzrComponent implements OnInit {
       } else if (!this.unlocked) {
         this.bsModalRef = this.modalService.show(LockedModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
       } else {
-        this.router.navigate(['/thank-you']);
+        this.metaMaskService.TransferEthToBuyGzr(this.ethValue, this.gzrValue)
+        .then((res) => {
+          if (res['success']) {
+            this.updateTransactionId(res['transaction']);
+            setTimeout(() => {
+              this.router.navigate(['/thank-you']);
+            }, 1000);
+          }
+        })
+        .catch((error) => {
+          console.log(error['error']);
+        });
       }
     }
   }
@@ -122,5 +142,9 @@ export class BuyGzrComponent implements OnInit {
     if (this.isAccepted) {
       this.showAddress = true;
     }
+  }
+
+  updateTransactionId(data) {
+    this.store.dispatch({type: UPDATE_TRANSACTION_ID, payload: data});
   }
 }
