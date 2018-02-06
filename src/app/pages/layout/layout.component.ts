@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { MetaMaskService } from '../../shared/services/MetaMaskService/meta-mask.service';
 // tslint:disable-next-line:max-line-length
-import { UPDATE_WALLET_ADDRESS, UPDATE_LOCK_STATUS, UPDATE_GZR_BALANCE, UPDATE_BALANCE, UPDATE_INSTALL_STATUS } from './../../store/actions/user.actions';
+import { UPDATE_WALLET_ADDRESS, UPDATE_LOCK_STATUS, UPDATE_GZR_BALANCE, UPDATE_BALANCE, UPDATE_INSTALL_STATUS, UPDATE_TRANSACTION_ID } from './../../store/actions/user.actions';
 import { ApplicationState } from '../../store/application-state';
 import { UserState } from '../../store/store-data';
 
@@ -21,6 +21,7 @@ export class LayoutComponent implements OnInit {
   walletAddress: String;
   balance: number;
   gzrBalance: number;
+  transactionId: String;
 
   constructor(
     private metaMaskService: MetaMaskService,
@@ -71,6 +72,12 @@ export class LayoutComponent implements OnInit {
         this.updateGZRBalance(res);
       }
     });
+
+    this.metaMaskService.transactionIdObservable$.subscribe(transactionId => {
+      if (this.transactionId !== transactionId) {
+        this.updateTransactionId(transactionId);
+      }
+    });
   }
 
   updateInstallStatus(data) {
@@ -92,6 +99,12 @@ export class LayoutComponent implements OnInit {
   updateGZRBalance(data) {
     this.store.dispatch({type: UPDATE_GZR_BALANCE, payload: data});
   }
+
+
+  updateTransactionId(data) {
+    this.store.dispatch({type: UPDATE_TRANSACTION_ID, payload: data});
+  }
+
 
   onDeactivate() {
     window.scrollTo(0, 0);

@@ -3,26 +3,17 @@ import { HttpHelperService } from '../../../core/http-helper.service';
 import { ApiRoutingService } from '../../../core/api-routing.service';
 
 @Injectable()
-export class ItemService {
+export class UserService {
 
   constructor(
     private http: HttpHelperService,
     private apiRoutingService: ApiRoutingService
   ) { }
 
-  getItems() {
-    return this.http.get(
-      this.apiRoutingService.getItemsUrl(),
-      {},
-      true,
-      null
-    );
-  }
-
-  getItem(id) {
-    return this.http.get(
-      this.apiRoutingService.getItemUrl(id),
-      {},
+  registerUser(data) {
+    return this.http.put(
+      this.apiRoutingService.getUsersUrl(),
+      data,
       true,
       null
     );

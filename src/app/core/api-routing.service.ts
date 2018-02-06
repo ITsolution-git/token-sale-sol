@@ -9,7 +9,10 @@ export class ApiRoutingService {
 
   getItemsUrl() {
     return this.baseUrl + '/item';
-    // return '../../../assets/items.json';
+  }
+
+  getItemUrl(id) {
+    return this.baseUrl + '/item/' + id;
   }
 
   getMetaCoinUrl() {
@@ -17,12 +20,14 @@ export class ApiRoutingService {
   }
 
   getChestUrl() {
-    // return this.baseUrl + '/chest';
     return '../../../assets/chestId.json';
   }
 
   getChestDataFromID(id) {
-    // return this.baseUrl + `/chest/${id}`;
     return '../../../assets/chest.json';
+  }
+
+  getUsersUrl() {
+    return this.baseUrl + '/user';
   }
 }

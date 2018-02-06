@@ -30,7 +30,11 @@ export class MetaMaskService {
 
   contractAddress: string;
   contractAddressSubject = new Subject<string>();
-  contractAddressObservable$ = this.gzrBalanceSubject.asObservable();
+  contractAddressObservable$ = this.contractAddressSubject.asObservable();
+
+  transactionId: string;
+  transactionIdSubject = new Subject<string>();
+  transactionIdObservable$ = this.transactionIdSubject.asObservable();
 
   sendingAmount: number;
   recipientAddress: string;
@@ -56,7 +60,7 @@ export class MetaMaskService {
     private _ngZone: NgZone,
     private http: HttpHelperService,
     private apiRoutingService: ApiRoutingService
-  ) {}
+  ) { }
 
   getAccountInfo() {
     if (!this.subscribed) {
@@ -133,7 +137,6 @@ export class MetaMaskService {
         return gzr.balanceOf(this.account);
       })
       .then(value => {
-        // this.balance = value;
         console.log(this.web3.fromWei(value, 'ether').toString(10));
       })
       .catch(e => {
@@ -143,7 +146,7 @@ export class MetaMaskService {
   }
 
   getBalance(address) {
-    return new Promise ((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       this.web3.eth.getBalance(address, (error, result) => {
         if (error) {
           reject(error);
@@ -156,27 +159,26 @@ export class MetaMaskService {
 
   balanceOf(address) {
     return this.GzrToken.deployed()
-    .then(instance => {
-      this.contractAddress = instance.address;
-      this.contractAddressSubject.next(this.contractAddress);
-
-      return instance.balanceOf(address);
-    })
-    .catch(err => console.log(err));
+      .then(instance => {
+        this.contractAddress = instance.address;
+        this.contractAddressSubject.next(this.contractAddress);
+        return instance.balanceOf(address);
+      })
+      .catch(err => console.log(err));
   }
 
   refreshBalance() {
     this.getBalance(this.account)
-    .then(balance => {
-      this.balance = parseFloat(balance.toString());
-      this.balanceSubject.next(this.balance);
-    });
+      .then(balance => {
+        this.balance = parseFloat(balance.toString());
+        this.balanceSubject.next(this.balance);
+      });
 
     this.balanceOf(this.account)
-    .then(balance => {
+      .then(balance => {
         this.gzrBalance = Number(balance.toString()) / 1000000;
         this.gzrBalanceSubject.next(this.gzrBalance);
-    });
+      });
   }
 
   setStatus(message) {
@@ -193,17 +195,18 @@ export class MetaMaskService {
           gzr.sendTransaction({
             from: this.account, to: this.contractAddress, value: this.web3.toWei(ethValue, 'ether')
           }, (error, transactionId) => {
-            gzr.balanceOf(this.account)
-            .then((value) => {
-              resolve({'success': true, 'value': value});
-            })
-            .catch((err) => {
+            if (error) {
               reject({'failure': true});
-            });
+            } else {
+              resolve({ 'success': true, 'transaction': transactionId });
+              this.transactionId = transactionId;
+              this.transactionIdSubject.next(this.transactionId);
+              this.refreshBalance();
+            }
           });
         })
         .catch(e => {
-          reject({'failure': true});
+          reject({ 'failure': true });
           this.setStatus('Error getting balance; see log.');
         });
     });
@@ -216,59 +219,47 @@ export class MetaMaskService {
         .deployed()
         .then(instance => {
           gzr = instance;
-          let code;
-          this.web3.eth.getCode(this.account, (c) => {
-            code = c;
-            const transaction = {
-               nonce: '0x00',
-               to: this.contractAddress,
-               value: '0x00',
-               data: GZRArtifacts['bytecode']
-            };
-            const privateKey = new Buffer('3f23562d2acaf422a33f382dd4d2544e4fb7003116df1d62bb7b78ca77ceb843', 'hex');
-            const tx = new Tx(transaction);
-            tx.sign(privateKey);
-            const serializedTx = tx.serialize();
-            this.web3.eth.sendRawTransaction('0x' + serializedTx.toString('hex'), (error, transactionId) => {
-              console.log(error);
-              gzr.balanceOf(this.account)
-              .then((value) => {
-                resolve({'success': true, 'value': value});
-              })
-              .catch((err) => {
-                reject({'failure': true});
+          const hex_string = this.web3.fromAscii('Gizer Sign').toString();
+          this.web3.personal.sign(hex_string, this.account, (error, result) => {
+            if (error) {
+              reject({
+                'failure': true
               });
-            });
+            } else {
+              gzr.balanceOf(this.account)
+                .then((value) => {
+                  resolve({
+                    'success': true,
+                    'token': result,
+                    'account': this.account,
+                    'ammount': Number(value.toString()) / 1000000
+                  });
+                })
+                .catch((err) => {
+                  reject({ 'failure': true });
+                });
+            }
           });
-
         })
         .catch(e => {
-          reject({'failure': true});
+          reject({ 'failure': true });
           this.setStatus('Error getting balance; see log.');
         });
     });
   }
 
-  sendCoin(amount, receiver) {
-    console.log('sending coin');
-    // const amount = this.sendingAmount;
-    // const receiver = this.recipientAddress;
+  sendCoin(amount) {
     let meta;
-
-    this.setStatus('Initiating transaction... (please wait)');
-
+       this.setStatus('Initiating transaction... (please wait)');
     this.GzrToken
       .deployed()
       .then(instance => {
         meta = instance;
-        console.log(meta);
-        return meta.sendCoin(receiver, amount, {
-          from: this.account
-        });
-      })
-      .then(() => {
-        this.setStatus('Transaction complete!');
-        this.refreshBalance();
+        meta.transfer(this.contractAddress, amount, { from: this.account })
+          .then((error, transactionId) => {
+            this.setStatus('Transaction complete!');
+            this.refreshBalance();
+          });
       })
       .catch(e => {
         console.log(e);

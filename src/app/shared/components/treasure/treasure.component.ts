@@ -51,8 +51,7 @@ export class TreasureComponent implements OnInit {
   }
 
   navgiateToTreasurePage() {
-    const amount = 20;
-    const receiver = '0xc07b70A89aD5c4109777825aDE6dDD36Bb91A949';
-    this.metaMaskService.sendCoin(amount, receiver);
+    const amount = 1;
+    this.metaMaskService.sendCoin(amount);
   }
 }

@@ -4,6 +4,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { MetaMaskService } from '../../shared/services/MetaMaskService/meta-mask.service';
+import { UserService } from '../../shared/services/UserService/user.service';
 import { Store } from '@ngrx/store';
 import { ApplicationState } from '../../store/application-state';
 import { Observable } from 'rxjs/Observable';
@@ -34,10 +35,12 @@ export class SaveAccountComponent implements OnInit {
     private authService: AuthService,
     private metaMaskService: MetaMaskService,
     private store: Store<ApplicationState>,
+    private userService: UserService
   ) {
       this.userState = this.store.select('userState');
-      this.createForm();      
+      this.createForm();
    }
+
 
   ngOnInit() {
     this.metaMaskService.getAccountInfo();
@@ -69,7 +72,7 @@ export class SaveAccountComponent implements OnInit {
   }
 
   onSaveInfo() {
-    if (this.email == "" ) {
+    if (this.email === '' ) {
       this.isEmailed = false;
       return;
     }
@@ -82,10 +85,27 @@ export class SaveAccountComponent implements OnInit {
     this.isEmailed = true;
     this.isValidEmail = true;
     this.isSaving = true;
-    this.metaMaskService.unloadAccountInfo();
-    // debugger
-    // this.metaMaskService.SignInTransaction();
-    this.authService.login();
+    setTimeout(() => {
+      this.metaMaskService.SignInTransaction()
+      .then(result => {
+        const data = {
+          'nick': this.nickName,
+          'email': this.email,
+          'type': 'user',
+          'gzr': {
+              'type': 'wallet',
+              'id': result['account'],
+              'amount': result['amount']
+          }
+        };
+        this.authService.login();
+        this.metaMaskService.getAccountInfo();
+      })
+      .catch(error => {
+        console.log(error);
+        this.isEmailed = false;
+      });
+    }, 3000);
   }
 
   navigateToMetaMask() {
