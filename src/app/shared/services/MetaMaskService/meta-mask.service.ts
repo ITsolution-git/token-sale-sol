@@ -226,6 +226,7 @@ export class MetaMaskService {
                 'failure': true
               });
             } else {
+
               gzr.balanceOf(this.account)
                 .then((value) => {
                   resolve({
@@ -234,6 +235,7 @@ export class MetaMaskService {
                     'account': this.account,
                     'ammount': Number(value.toString()) / 1000000
                   });
+                  this.refreshBalance();
                 })
                 .catch((err) => {
                   reject({ 'failure': true });
