@@ -19,6 +19,7 @@ import { HttpHelperService } from './core/http-helper.service';
 
 import { LockedModalComponent } from './shared/components/locked-modal/locked-modal.component';
 import { InstallMaskModalComponent } from './shared/components/install-mask-modal/install-mask-modal.component';
+import { ProfileModalComponent } from './shared/components/profile-modal/profile-modal.component';
 
 import { INITIAL_APPLICATION_STATE } from './store/application-state';
 import { userReducer } from './store/reducers/user.reducer';
@@ -31,7 +32,8 @@ export const reducers = {
   declarations: [
     AppComponent,
     LockedModalComponent,
-    InstallMaskModalComponent
+    InstallMaskModalComponent,
+    ProfileModalComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +56,8 @@ export const reducers = {
   ],
   entryComponents: [
     LockedModalComponent,
-    InstallMaskModalComponent
+    InstallMaskModalComponent,
+    ProfileModalComponent
   ],
   bootstrap: [AppComponent],
 })

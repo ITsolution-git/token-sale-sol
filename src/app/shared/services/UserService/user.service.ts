@@ -13,8 +13,8 @@ export class UserService {
   registerUser(data) {
     return this.http.put(
       this.apiRoutingService.getUsersUrl(),
-      data,
-      true,
+      JSON.stringify(data),
+      false,
       null
     );
   }

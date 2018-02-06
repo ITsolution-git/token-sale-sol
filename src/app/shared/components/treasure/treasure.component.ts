@@ -5,6 +5,9 @@ import { Store } from '@ngrx/store';
 import { ApplicationState } from '../../../store/application-state';
 import { UserState } from '../../../store/store-data';
 import { MetaMaskService } from '../../services/MetaMaskService/meta-mask.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { ProfileModalComponent } from '../profile-modal/profile-modal.component';
 
 
 @Component({
@@ -18,11 +21,21 @@ export class TreasureComponent implements OnInit {
   unlocked = false;
   balance: number;
   installed = false;
+  config = {
+    animated: true,
+    keyboard: true,
+    backdrop: true,
+    ignoreBackdropClick: false
+  };
+
+  bsModalRef: BsModalRef;
+
 
   constructor(
     private router: Router,
     private store: Store<ApplicationState>,
     private metaMaskService: MetaMaskService,
+    private modalService: BsModalService,
   ) {
     this.userState = this.store.select('userState');
   }
@@ -40,7 +53,7 @@ export class TreasureComponent implements OnInit {
 
   openTreasure() {
     if (this.unlocked && this.installed) {
-      this.navgiateToTreasurePage();
+      this.bsModalRef = this.modalService.show(ProfileModalComponent, Object.assign({}, this.config, { class: 'gray modal-md' }));
     } else {
       this.navgiateToInstallMeta();
     }
