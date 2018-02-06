@@ -104,7 +104,6 @@ export class ItemDetailComponent implements OnInit {
   }
 
   navigateToTreasure() {
-    // this.router.navigate(['/open-treasure']);
     this.bsModalRef = this.modalService.show(ProfileModalComponent, Object.assign({}, this.config, { class: 'gray modal-md' }));
   }
 

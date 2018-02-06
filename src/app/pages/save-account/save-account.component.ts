@@ -100,8 +100,8 @@ export class SaveAccountComponent implements OnInit {
         };
         this.authService.login();
         setTimeout(() => {
-          this.metaMaskService.getAccountInfo();          
-        },500)
+          this.metaMaskService.getAccountInfo();
+        }, 500);
       })
       .catch(error => {
         console.log(error);

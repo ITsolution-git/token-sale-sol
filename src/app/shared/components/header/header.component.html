@@ -55,8 +55,7 @@
           <li *ngFor="let menuItem of menuItems"
             class="nav-item">
             <img *ngIf="menuItem.title === 'Home'" class="icon-home" src="/assets/icons/icon-home.png">
-            <a *ngIf="menuItem.title === 'Home'" class="nav-item nav-link nav-home" [routerLink]="[menuItem.path]" fragment="home" routerLinkActive="router-active" [routerLinkActiveOptions]="{exact: true}">{{menuItem.title}}</a>
-            <!-- <a *ngIf="menuItem.title !== 'Home'" class="nav-item nav-link" [routerLink]="[menuItem.path]" routerLinkActive="router-active" [routerLinkActiveOptions]="{exact: true}">{{menuItem.title}}</a> -->
+            <a *ngIf="menuItem.title === 'Home'" class="nav-item nav-link nav-home" [routerLink]="[menuItem.path]" fragment="home" routerLinkActive="router-active" [routerLinkActiveOptions]="{exact: true}">{{menuItem.title}}</a>            
             <a *ngIf="menuItem.title !== 'Home'" class="nav-item nav-link" routerLinkActive="router-active" [routerLinkActiveOptions]="{exact: true}" (click)="navgiateToBuyGizer()">{{menuItem.title}}</a>
           </li>
           <li class="nav-item">
