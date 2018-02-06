@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { ParamMap } from '@angular/router/src/shared';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { title, shareImageUrl, viaUrl, hashTags } from './item-detail.meta';
 
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
@@ -32,6 +33,13 @@ export class ItemDetailComponent implements OnInit {
     keyboard: true,
     backdrop: true,
     ignoreBackdropClick: false
+  };
+
+  description = {
+    title: title,
+    img: shareImageUrl,
+    via: viaUrl,
+    hashtags: hashTags
   };
 
   constructor(
