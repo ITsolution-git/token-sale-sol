@@ -6,6 +6,10 @@ import { Observable } from 'rxjs/Observable';
 import { ParamMap } from '@angular/router/src/shared';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { ProfileModalComponent } from '../../shared/components/profile-modal/profile-modal.component';
+
 declare const $: any;
 
 @Component({
@@ -22,11 +26,20 @@ export class ItemDetailComponent implements OnInit {
   counter = 0;
   typeImages = [];
 
+  bsModalRef: BsModalRef;
+  config = {
+    animated: true,
+    keyboard: true,
+    backdrop: true,
+    ignoreBackdropClick: false
+  };
+
   constructor(
     private itemService: ItemService,
     private router: Router,
     private route: ActivatedRoute,
     private domSanitizer: DomSanitizer,
+    private modalService: BsModalService,
   ) { }
 
   ngOnInit() {
@@ -91,7 +104,8 @@ export class ItemDetailComponent implements OnInit {
   }
 
   navigateToTreasure() {
-    this.router.navigate(['/open-treasure']);
+    // this.router.navigate(['/open-treasure']);
+    this.bsModalRef = this.modalService.show(ProfileModalComponent, Object.assign({}, this.config, { class: 'gray modal-md' }));
   }
 
   addAutoStart(url): SafeResourceUrl {
