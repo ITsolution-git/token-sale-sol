@@ -1,5 +1,9 @@
 import { Component, OnInit, ViewEncapsulation, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { ProfileModalComponent } from '../profile-modal/profile-modal.component';
+
 
 declare const $: any;
 
@@ -42,7 +46,18 @@ export class HeroSliderComponent implements OnInit {
     'autoplaySpeed': 5000,
   };
 
-  constructor( private router: Router ) { }
+  bsModalRef: BsModalRef;
+  config = {
+    animated: true,
+    keyboard: true,
+    backdrop: true,
+    ignoreBackdropClick: false
+  };
+
+  constructor(
+    private router: Router,
+    private modalService: BsModalService,
+  ) { }
 
   ngOnInit() {
     this.isMobile = this.isMobileView();
@@ -61,6 +76,6 @@ export class HeroSliderComponent implements OnInit {
   }
 
   navigateToBuyGzr() {
-    this.router.navigate(['/buy-gzr']);
+    this.bsModalRef = this.modalService.show(ProfileModalComponent, Object.assign({}, this.config, { class: 'gray modal-md' }));
   }
 }

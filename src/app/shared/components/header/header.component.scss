@@ -98,9 +98,8 @@
     }
 }
 .mobile-nav-menu {
-    position: absolute;
+    position: fixed;
     right: 0;
-    top: 52px;
     z-index: 1000;
     width: 250px;
     background-color: #151627;
