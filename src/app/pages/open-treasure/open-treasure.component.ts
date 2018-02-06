@@ -17,7 +17,6 @@ export class OpenTreasureComponent implements OnInit {
     this.chestService.getChest().subscribe(cId => {
       this.chestService.getChestDataFromID(cId).subscribe(c => {
         this.chest = c;
-        console.log(this.chest);
       });
     });
   }

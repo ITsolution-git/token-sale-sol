@@ -115,7 +115,6 @@ export class BuyGzrComponent implements OnInit {
   openModalWithComponent() {
     if (!this.isAccepted) {
       this.isBuyClicked = true;
-      console.log('you need to accept terms & conditions first');
     } else {
       if (!this.installed) {
         this.bsModalRef = this.modalService.show(InstallMaskModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
@@ -132,7 +131,6 @@ export class BuyGzrComponent implements OnInit {
           }
         })
         .catch((error) => {
-          console.log(error['error']);
         });
       }
     }
