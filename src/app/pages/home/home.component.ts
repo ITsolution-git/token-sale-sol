@@ -24,7 +24,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     try {
-      console.log(this.fragment);
       document.querySelector('#' + this.fragment).scrollIntoView();
       window.scrollTo(0, window.scrollY - 123);
     } catch (e) { }
