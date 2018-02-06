@@ -14,7 +14,7 @@ import { UPDATE_TRANSACTION_ID } from './../../store/actions/user.actions';
 })
 export class ThankYouComponent implements OnInit {
 
-  private transactionId: any;
+  public transactionId: any;
   userState: Observable<UserState>;
 
   constructor(
