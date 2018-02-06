@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation, HostListener } from '@angular/cor
 import { Router } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { ProfileModalComponent } from '../../shared/components/profile-modal/profile-modal.component';
+import { ProfileModalComponent } from '../profile-modal/profile-modal.component';
 
 
 declare const $: any;
@@ -54,7 +54,7 @@ export class HeroSliderComponent implements OnInit {
     ignoreBackdropClick: false
   };
 
-  constructor( 
+  constructor(
     private router: Router,
     private modalService: BsModalService,
   ) { }
@@ -76,6 +76,6 @@ export class HeroSliderComponent implements OnInit {
   }
 
   navigateToBuyGzr() {
-    this.bsModalRef = this.modalService.show(ProfileModalComponent, Object.assign({}, this.config, { class: 'gray modal-md' }));    
+    this.bsModalRef = this.modalService.show(ProfileModalComponent, Object.assign({}, this.config, { class: 'gray modal-md' }));
   }
 }
