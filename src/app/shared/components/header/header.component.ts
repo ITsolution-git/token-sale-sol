@@ -2,6 +2,11 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { HeaderRoutes, MobileHeaderRoutes } from './header-routing.module';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { LocalStorageService } from 'ngx-webstorage';
+
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { ProfileModalComponent } from '../profile-modal/profile-modal.component';
+
 import { AuthService } from '../../../core/services/auth.service';
 import { MetaMaskService } from '../../services/MetaMaskService/meta-mask.service';
 import { ApplicationState } from '../../../store/application-state';
@@ -33,12 +38,22 @@ export class HeaderComponent implements OnInit {
   gzrBalance: number;
   toggled = false;
 
+  config = {
+    animated: true,
+    keyboard: true,
+    backdrop: true,
+    ignoreBackdropClick: false
+  };
+
+  bsModalRef: BsModalRef;
+
   constructor(
     private router: Router,
     private localStorage: LocalStorageService,
     private authService: AuthService,
     private store: Store<ApplicationState>,
     private metaMaskService: MetaMaskService,
+    private modalService: BsModalService,
   ) {
     this.initTwitterWidget();
     this.initFacebookWidget();
@@ -121,11 +136,15 @@ export class HeaderComponent implements OnInit {
   }
 
   navgiateToBuyGizer() {
-    this.router.navigate(['/buy-gzr']);
+    this.bsModalRef = this.modalService.show(ProfileModalComponent, Object.assign({}, this.config, { class: 'gray modal-md' }));
   }
 
   navigateToTokenSection() {
     this.router.navigate([''], {fragment: 'whatsgizer'});
+  }
+
+  showProfileModal() {
+    this.bsModalRef = this.modalService.show(ProfileModalComponent, Object.assign({}, this.config, { class: 'gray modal-md' }));
   }
 
   public get menuIcon(): string {
