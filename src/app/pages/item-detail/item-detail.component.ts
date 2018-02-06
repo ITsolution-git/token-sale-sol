@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { ParamMap } from '@angular/router/src/shared';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { title, shareImageUrl, viaUrl, hashTags } from './item-detail.meta';
 
 declare const $: any;
 
@@ -22,6 +23,13 @@ export class ItemDetailComponent implements OnInit {
   counter = 0;
   typeImages = [];
 
+  // tslint:disable-next-line:max-line-length
+  description = {
+    title: title,
+    img: shareImageUrl,
+    via: viaUrl,
+    hashtags: hashTags
+  };
   constructor(
     private itemService: ItemService,
     private router: Router,
