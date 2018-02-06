@@ -104,7 +104,6 @@ export class SaveAccountComponent implements OnInit {
         }, 500);
       })
       .catch(error => {
-        console.log(error);
         this.isEmailed = false;
       });
     }, 3000);

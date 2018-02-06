@@ -22,7 +22,6 @@ const routes: Routes = [
       },
       {
         path: 'open-treasure',
-        canActivateChild: [AuthGuard],
         loadChildren: './pages/open-treasure/open-treasure.module#OpenTreasureModule',
       },
       {

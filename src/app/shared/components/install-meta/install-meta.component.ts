@@ -12,4 +12,8 @@ export class InstallMetaComponent implements OnInit {
 
   ngOnInit() { }
 
+  navigateToMetaMaskIO() {
+    window.open('https://metamask.io', '_blank');
+  }
+
 }
