@@ -10,7 +10,7 @@ export class UserService {
     private apiRoutingService: ApiRoutingService
   ) { }
 
-  updateUser(data) {
+  registerUser(data) {
     return this.http.put(
       this.apiRoutingService.getUsersUrl(),
       data,

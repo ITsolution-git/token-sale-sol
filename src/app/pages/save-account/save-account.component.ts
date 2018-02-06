@@ -98,15 +98,8 @@ export class SaveAccountComponent implements OnInit {
               'amount': result['amount']
           }
         };
-        this.userService.updateUser(data).subscribe(
-          res => {
-            this.authService.login();
-            this.metaMaskService.getAccountInfo();
-          },
-          error => {
-            this.isEmailed = false;
-          }
-         );
+        this.authService.login();
+        this.metaMaskService.getAccountInfo();
       })
       .catch(error => {
         console.log(error);
