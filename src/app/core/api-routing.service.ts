@@ -26,4 +26,8 @@ export class ApiRoutingService {
   getChestDataFromID(id) {
     return '../../../assets/chest.json';
   }
+
+  getUsersUrl() {
+    return this.baseUrl + '/user';
+  }
 }
