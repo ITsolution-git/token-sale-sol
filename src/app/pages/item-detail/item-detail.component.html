@@ -1,17 +1,23 @@
 <div class="item-detail-page">
   <div *ngIf="detailItem" class="container">
-    <div class="item-title py-2 py-md-4">
-      <h2>{{detailItem.meta.name}}</h2>
-    </div>
-    <div class="share-icons py-2">
-      <share-container
-          [platforms]="['facebook','twitter','googlePlus','linkedin','pinterest','reddit','tumblr','stumbleUpon']"
-          [expandable]="false">
-      </share-container>
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <div class="item-title py-2 py-md-4">
+          <h2>{{detailItem.meta.name}}</h2>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center flex-column col-12 col-md-8">
+        <div class="d-flex justify-content-end share-icons py-2">
+          <share-container
+              [platforms]="['facebook','twitter','googlePlus','linkedin','pinterest','reddit','tumblr','stumbleUpon']"
+              [expandable]="false">
+          </share-container>
+        </div>
+      </div>
     </div>
     <div class="row no-gutters">
       <div [ngClass]="{'border rounded border-secondary': !isMobile}">
-          <div class="sketchfab-embed-wrapper">
+          <div class="d-flex justify-content-center flex-column sketchfab-embed-wrapper">
             <iframe *ngIf="!isMobile" width="1112" height="665" frameborder="0" style="border:0; -moz-border-radius: 25px; border-radius: 25px;" [src]="detailItem.safeUrl" frameborder="0" allowvr allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel=""></iframe> -->
             <iframe *ngIf="isMobile" width="345" height="232" frameborder="0" style="border:0; -moz-border-radius: 25px; border-radius: 25px;" [src]="detailItem.safeUrl" frameborder="0" allowvr allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" onmousewheel=""></iframe>
           </div>
