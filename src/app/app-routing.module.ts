@@ -58,6 +58,10 @@ const routes: Routes = [
         loadChildren: './pages/press/press.module#PressModule',
       },
       {
+        path: 'privacy-policy',
+        loadChildren: './pages/privacy-policy/privacy-policy.module#PrivacyPolicyModule',
+      },
+      {
         path: 'thank-you',
         loadChildren: './pages/thank-you/thank-you.module#ThankYouModule',
       }
