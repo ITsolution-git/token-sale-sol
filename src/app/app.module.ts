@@ -8,6 +8,9 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NgSpinningPreloader } from 'ng2-spinning-preloader';
 import { ModalModule } from 'ngx-bootstrap';
+import { Angulartics2Module } from 'angulartics2';
+import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
+import { Angulartics2GoogleTagManager } from 'angulartics2/gtm';
 
 import { AuthGuard } from './shared';
 import { AppComponent } from './app.component';
@@ -46,6 +49,7 @@ export const reducers = {
     ModalModule.forRoot(),
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({maxAge: 25}),
+    Angulartics2Module.forRoot([Angulartics2GoogleAnalytics, Angulartics2GoogleTagManager]),
   ],
   providers: [
     HttpHelperService,
