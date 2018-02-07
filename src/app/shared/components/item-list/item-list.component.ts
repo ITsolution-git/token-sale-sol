@@ -12,6 +12,7 @@ declare const $: any;
 
 export class ItemListComponent implements OnInit {
   @Input() showTitle = true;
+  @Input() showNavigation = true;
   @Input() itemCountToShow = 10;
   isMobile = false;
   items: Item[];
