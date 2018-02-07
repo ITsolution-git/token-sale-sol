@@ -10,10 +10,13 @@ export class ItemService {
     private apiRoutingService: ApiRoutingService
   ) { }
 
-  getItems() {
+  getItems(limit: number = 0, page: number = 1) {
     return this.http.get(
       this.apiRoutingService.getItemsUrl(),
-      {},
+      {
+        page,
+        limit
+      },
       true,
       null
     );
