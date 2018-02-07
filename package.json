@@ -32,7 +32,6 @@
     "ngx-bootstrap": "^2.0.0-rc.0",
     "ngx-webstorage": "1.8.0",
     "rxjs": "^5.4.2",
-    "web3": "^0.18.4",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
@@ -70,7 +69,7 @@
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
     "typescript": "~2.3.3",
-    "web3": "^0.19.0",
+    "web3": "^0.20.0",
     "webpack": "^3.5.2",
     "webpack-dev-server": "^2.3.0"
   }
