@@ -23,7 +23,12 @@ declare const $: any;
 export class BuyGzrComponent implements OnInit {
 
   ethValue = 0.01;
+  slideValue = 0.01;
   gzrValue = 10;
+  minValue = 0.01;
+  maxValue = 500;
+  cashRate = 1000;
+
   isAccepted = false;
   showAddress = false;
 
@@ -107,9 +112,16 @@ export class BuyGzrComponent implements OnInit {
     }
     return true;
   }
+
   OnSliderChange(event) {
-    this.ethValue = event.from;
-    this.gzrValue = this.ethValue * 1000;
+    const sliderValue = event.from;
+    if (sliderValue < this.minValue) {
+      this.ethValue = this.minValue;
+      this.gzrValue = this.ethValue * this.cashRate;
+    } else {
+      this.ethValue = event.from;
+      this.gzrValue = this.ethValue * this.cashRate;
+    }
   }
 
   openModalWithComponent() {
@@ -144,5 +156,15 @@ export class BuyGzrComponent implements OnInit {
 
   updateTransactionId(data) {
     this.store.dispatch({type: UPDATE_TRANSACTION_ID, payload: data});
+  }
+
+  updateSliderValue(value) {
+    if (value > this.maxValue) {
+      this.ethValue = this.maxValue;
+    } else if (value < this.minValue) {
+      this.ethValue = this.minValue;
+    }
+    this.slideValue = this.ethValue;
+    this.gzrValue = this.ethValue * this.cashRate;
   }
 }

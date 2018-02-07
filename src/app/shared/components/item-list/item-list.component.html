@@ -1,8 +1,18 @@
 <div class="inventory-list">
   <div class="container">
-    <div  *ngIf="showTitle" class="list-title">
+    <div  *ngIf="showTitle" class="list-title position-relative">
       <p *ngIf="!isMobile">Just Released</p>
-      <p *ngIf="isMobile">Other Items from This Treasure</p>
+      <p *ngIf="isMobile" class="text-center">Other Items from This Treasure</p>
+      <div *ngIf="isMobile" class="arrow-left arrow pl-2">
+        <span class="arrow-padding" (click)="loadPrevWeapons()">
+          <img src="/assets/icons/icon-smaller-than.png">
+        </span>
+      </div>
+      <div *ngIf="isMobile" class="arrow-right arrow pl-2">
+        <span class="arrow-padding" (click)="loadNextWeapons()">
+          <img src="/assets/icons/icon-greater-than.png">
+        </span>
+      </div>
     </div>
     <div class="row justify-content-center position-relative">
       <app-item
@@ -14,7 +24,12 @@
         [rarity]="item.meta.rarity"
         >
       </app-item>
-      <div *ngIf="!isMobile" class="arrow pl-2">
+      <div *ngIf="!isMobile" class="arrow-left arrow pl-2">
+        <span class="arrow-padding" (click)="loadPrevWeapons()">
+          <img src="/assets/icons/icon-smaller-than.png">
+        </span>
+      </div>
+      <div *ngIf="!isMobile" class="arrow-right arrow pl-2">
         <span class="arrow-padding" (click)="loadNextWeapons()">
           <img src="/assets/icons/icon-greater-than.png">
         </span>
