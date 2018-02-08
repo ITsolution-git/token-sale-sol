@@ -95,14 +95,20 @@ export class SaveAccountComponent implements OnInit {
           'type': 'user',
           'gzr': {
               'type': 'wallet',
-              'id': result['account'],
-              'amount': result['amount']
+              'id': result['account']
           }
         };
         this.authService.login();
+        
         setTimeout(() => {
           this.metaMaskService.getAccountInfo();
         }, 500);
+
+        this.userService.registerUser(data)
+        .subscribe(
+          result => console.log(result),
+          error =>  console.log(error)
+        );
       })
       .catch(error => {
         this.isEmailed = false;
