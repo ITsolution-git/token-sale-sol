@@ -30,4 +30,13 @@ export class ItemService {
       null
     );
   }
+
+  loadUnityPlayer() {
+    return this.http.get(
+      this.apiRoutingService.loadUnityPlayerUrl(),
+      {},
+      true,
+      null
+    );
+  }
 }
