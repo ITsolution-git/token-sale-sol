@@ -97,8 +97,7 @@ export class SaveAccountComponent implements OnInit {
           'type': 'user',
           'gzr': {
               'type': 'wallet',
-              'id': result['account'],
-              'amount': result['amount']
+              'id': result['account']
           }
         };
         this.authService.login();
@@ -106,6 +105,7 @@ export class SaveAccountComponent implements OnInit {
           this.metaMaskService.getAccountInfo();
           this.UpdateNickName(this.nickName);
         }, 500);
+        this.userService.registerUser(data);
       })
       .catch(error => {
         this.isEmailed = false;
