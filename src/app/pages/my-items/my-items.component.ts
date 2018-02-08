@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { ItemService } from '../../shared/services/ItemService/item.service';
+declare const $: any;
 
 @Component({
   selector: 'app-my-items',
@@ -7,9 +10,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyItemsComponent implements OnInit {
 
-  constructor() { }
+  isMobile = false;
+  unityPlayer: any = '';
+  constructor(
+    private itemService: ItemService,
+    private domSanitizer: DomSanitizer,
+  ) { }
 
   ngOnInit() {
+    this.isMobile = this.isMobileView();
+    // this.itemService.loadUnityPlayer().subscribe(res => {
+    //   this.unityPlayer = res;
+    // });
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+     this.isMobile = this.isMobileView();
+  }
+
+  isMobileView() {
+    if ($(window).width() > 425) {
+        return false;
+    }
+    return true;
+  }
+  addAutoStart(url): SafeResourceUrl {
+    return this.domSanitizer.bypassSecurityTrustResourceUrl(url + '?autostart=1');
+  }
 }
