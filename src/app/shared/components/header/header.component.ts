@@ -138,7 +138,7 @@ export class HeaderComponent implements OnInit {
   }
 
   navgiateToBuyGizer() {
-    this.bsModalRef = this.modalService.show(ProfileModalComponent, Object.assign({}, this.config, { class: 'gray modal-md' }));
+    this.router.navigate(['/buy-gzr']);
   }
 
   navigateToTokenSection() {

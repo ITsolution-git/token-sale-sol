@@ -101,11 +101,17 @@ export class SaveAccountComponent implements OnInit {
           }
         };
         this.authService.login();
+        
         setTimeout(() => {
           this.metaMaskService.getAccountInfo();
           this.UpdateNickName(this.nickName);
         }, 500);
-        this.userService.registerUser(data);
+
+        this.userService.registerUser(data)
+        .subscribe(
+          result => console.log(result),
+          error =>  console.log(error)
+        );
       })
       .catch(error => {
         this.isEmailed = false;
