@@ -9,6 +9,7 @@ import { Store } from '@ngrx/store';
 import { ApplicationState } from '../../store/application-state';
 import { Observable } from 'rxjs/Observable';
 import { UserState } from '../../store/store-data';
+import { UPDATE_NICK_NAME } from '../../store/actions/user.actions';
 
 @Component({
   selector: 'app-save-account',
@@ -87,6 +88,7 @@ export class SaveAccountComponent implements OnInit {
     this.isValidEmail = true;
     this.isSaving = true;
     setTimeout(() => {
+      this.UpdateNickName(this.nickName);
       this.metaMaskService.SignInTransaction()
       .then(result => {
         const data = {
@@ -102,6 +104,7 @@ export class SaveAccountComponent implements OnInit {
         
         setTimeout(() => {
           this.metaMaskService.getAccountInfo();
+          this.UpdateNickName(this.nickName);
         }, 500);
 
         this.userService.registerUser(data)
@@ -114,6 +117,10 @@ export class SaveAccountComponent implements OnInit {
         this.isEmailed = false;
       });
     }, 3000);
+  }
+
+  UpdateNickName(data) {
+    this.store.dispatch({type: UPDATE_NICK_NAME, payload: data});
   }
 
   navigateToMetaMask() {
