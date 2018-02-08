@@ -23,6 +23,7 @@ export class SaveAccountComponent implements OnInit {
   email: String = '';
   isEmailed: Boolean = true;
   isValidEmail: Boolean = true;
+  // tslint:disable-next-line:max-line-length
   emailValidationExpression: any = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   nickName: String = '';
   isSaving = false;

@@ -55,4 +55,5 @@ export class UpdateTransactionId implements Action {
     }
 }
 
-export type All = UpdateInstallStatus | UpdateLockStatus | UpdateWallet | UpdateGzrBalance | UpdateShowAddressForm | UpdateBalance | UpdateTransactionId;
+export type All = UpdateInstallStatus | UpdateLockStatus |
+UpdateWallet | UpdateGzrBalance | UpdateShowAddressForm | UpdateBalance | UpdateTransactionId;
