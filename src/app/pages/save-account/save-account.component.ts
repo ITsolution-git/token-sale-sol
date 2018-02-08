@@ -101,7 +101,6 @@ export class SaveAccountComponent implements OnInit {
           }
         };
         this.authService.login();
-        
         setTimeout(() => {
           this.metaMaskService.getAccountInfo();
           this.UpdateNickName(this.nickName);
@@ -109,6 +108,7 @@ export class SaveAccountComponent implements OnInit {
 
         this.userService.registerUser(data)
         .subscribe(
+          // tslint:disable-next-line:no-shadowed-variable
           result => console.log(result),
           error =>  console.log(error)
         );

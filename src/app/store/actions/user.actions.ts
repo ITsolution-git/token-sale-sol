@@ -64,4 +64,4 @@ export class UpdateNickName implements Action {
 }
 
 export type All = UpdateInstallStatus | UpdateLockStatus |
-UpdateWallet | UpdateGzrBalance | UpdateShowAddressForm | UpdateBalance | UpdateTransactionId;
+UpdateWallet | UpdateGzrBalance | UpdateShowAddressForm | UpdateBalance | UpdateTransactionId | UpdateNickName;
