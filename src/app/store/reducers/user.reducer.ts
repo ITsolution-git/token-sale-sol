@@ -12,6 +12,9 @@ export function userReducer(state: UserState = INITIAL_USER_STATE, action: Actio
         case UserActions.UPDATE_LOCK_STATUS:
             return { ...state, unlocked: action.payload };
 
+        case UserActions.UPDATE_NICK_NAME:
+            return { ...state, nickName: action.payload };
+
         case UserActions.UPDATE_WALLET_ADDRESS:
             return { ...state, walletAddress: action.payload };
 
