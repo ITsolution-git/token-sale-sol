@@ -112,7 +112,7 @@ export class ItemDetailComponent implements OnInit {
   }
 
   navigateToTreasure() {
-    this.bsModalRef = this.modalService.show(ProfileModalComponent, Object.assign({}, this.config, { class: 'gray modal-md' }));
+    this.router.navigate(['/open-treasure']);
   }
 
   addAutoStart(url): SafeResourceUrl {
