@@ -101,6 +101,7 @@ export class SaveAccountComponent implements OnInit {
           }
         };
         this.authService.login();
+
         setTimeout(() => {
           this.metaMaskService.getAccountInfo();
           this.UpdateNickName(this.nickName);
