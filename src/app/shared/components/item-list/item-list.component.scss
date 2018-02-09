@@ -12,7 +12,6 @@
     }
     .arrow {
         position: absolute;
-        right: 0;
         top: 44%;
         text-align: center;
         .arrow-padding {
@@ -20,11 +19,22 @@
             position: absolute;
             top: 35%;
             padding-top: 12px;
-            padding-left: 5px;
             height: 50px;
             width: 50px;
             border-radius: 50%;
             background-color: rgba(255, 255, 255, 0.1);
+        }
+    }
+    .arrow-left {
+        left: -60px;
+        .arrow-padding {
+            padding-left: 0px;
+        }
+    }
+    .arrow-right {
+        right: 0;
+        .arrow-padding {
+            padding-left: 5px;
         }
     }
     @media (max-width: 450px) {
@@ -41,6 +51,32 @@
         }
         .item-wrapper {
             width: 50%;
+        }
+        .arrow-left {
+            left: -10px;
+            .arrow-padding {
+                padding-left: 0px;
+            }
+        }
+        .arrow-right {
+            right: 30px;
+            .arrow-padding {
+                padding-left: 5px;
+            }
+        }
+        .arrow {
+            position: absolute;
+            top: -8px;
+            text-align: center;
+            .arrow-padding {
+                cursor: pointer;
+                position: absolute;
+                padding-top: 6px;
+                height: 35px;
+                width: 35px;
+                border-radius: 50%;
+                background-color: rgba(255, 255, 255, 0.1);
+            }
         }
     }
 }

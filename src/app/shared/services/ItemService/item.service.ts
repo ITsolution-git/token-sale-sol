@@ -10,10 +10,13 @@ export class ItemService {
     private apiRoutingService: ApiRoutingService
   ) { }
 
-  getItems() {
+  getItems(limit: number = 0, page: number = 1) {
     return this.http.get(
       this.apiRoutingService.getItemsUrl(),
-      {},
+      {
+        page,
+        limit
+      },
       true,
       null
     );
@@ -22,6 +25,15 @@ export class ItemService {
   getItem(id) {
     return this.http.get(
       this.apiRoutingService.getItemUrl(id),
+      {},
+      true,
+      null
+    );
+  }
+
+  loadUnityPlayer() {
+    return this.http.get(
+      this.apiRoutingService.loadUnityPlayerUrl(),
       {},
       true,
       null

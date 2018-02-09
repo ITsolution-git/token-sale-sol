@@ -53,7 +53,7 @@ export class TreasureComponent implements OnInit {
 
   openTreasure() {
     if (this.unlocked && this.installed) {
-      this.bsModalRef = this.modalService.show(ProfileModalComponent, Object.assign({}, this.config, { class: 'gray modal-md' }));
+      this.navgiateToTreasurePage();
     } else {
       this.navgiateToInstallMeta();
     }

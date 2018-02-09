@@ -22,7 +22,6 @@ const routes: Routes = [
       },
       {
         path: 'open-treasure',
-        canActivateChild: [AuthGuard],
         loadChildren: './pages/open-treasure/open-treasure.module#OpenTreasureModule',
       },
       {
@@ -44,6 +43,10 @@ const routes: Routes = [
       {
         path: 'item-detail/:id',
         loadChildren: './pages/item-detail/item-detail.module#ItemDetailModule',
+      },
+      {
+        path: 'my-items',
+        loadChildren: './pages/my-items/my-items.module#MyItemsModule',
       },
       {
         path: 'terms-and-conditions',

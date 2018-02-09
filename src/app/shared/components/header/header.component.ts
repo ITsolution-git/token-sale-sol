@@ -34,6 +34,7 @@ export class HeaderComponent implements OnInit {
   walletAddress: String;
   unlocked = false;
   balance: number;
+  nickName: String;
   installed = false;
   gzrBalance: number;
   toggled = false;
@@ -75,6 +76,7 @@ export class HeaderComponent implements OnInit {
         this.walletAddress = state.walletAddress;
         this.unlocked = state.unlocked;
         this.balance = state.balance;
+        this.nickName = state.nickName;
         this.installed = state.installed;
         this.gzrBalance = state.gzrBalance;
       }
@@ -136,7 +138,7 @@ export class HeaderComponent implements OnInit {
   }
 
   navgiateToBuyGizer() {
-    this.bsModalRef = this.modalService.show(ProfileModalComponent, Object.assign({}, this.config, { class: 'gray modal-md' }));
+    this.router.navigate(['/buy-gzr']);
   }
 
   navigateToTokenSection() {

@@ -12,11 +12,15 @@ declare const $: any;
 
 export class ItemListComponent implements OnInit {
   @Input() showTitle = true;
+  @Input() showNavigation = true;
   @Input() itemCountToShow = 10;
   isMobile = false;
   items: Item[];
-  itemArray: Item[];
   counter = 0;
+  limit = 10;
+  page = 1;
+  totalPage = 10;
+
   constructor(
     private itemService: ItemService,
   ) {
@@ -24,16 +28,36 @@ export class ItemListComponent implements OnInit {
 
   ngOnInit() {
     this.isMobile = this.isMobileView();
-    this.itemService.getItems().subscribe((res: Item[]) => {
-      this.itemArray = res;
-      this.loadNextWeapons();
+    this.itemService.getItems(this.limit, this.page).subscribe((res: Item[]) => {
+      if (res.length !== 0) {
+        this.items = res;
+      }
     });
   }
 
   loadNextWeapons() {
-    if (this.counter < this.itemArray.length) {
-      this.items = this.itemArray.slice(this.counter, this.counter + this.itemCountToShow);
-      this.counter += this.itemCountToShow;
+    const nextPage = this.page + 1;
+    if (this.totalPage >= nextPage) {
+      this.itemService.getItems(this.limit, nextPage).subscribe((res: Item[]) => {
+        if (res.length !== 0) {
+          this.items = res;
+          this.page += 1;
+        } else {
+          this.totalPage = this.page;
+        }
+      });
+    }
+  }
+
+  loadPrevWeapons() {
+    if (this.page > 1) {
+      const prevPage = this.page - 1;
+      this.itemService.getItems(this.limit, prevPage).subscribe((res: Item[]) => {
+        if (res.length !== 0) {
+          this.items = res;
+          this.page -= 1;
+        }
+      });
     }
   }
 

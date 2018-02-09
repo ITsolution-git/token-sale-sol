@@ -30,4 +30,12 @@ export class ApiRoutingService {
   getUsersUrl() {
     return this.baseUrl + '/user';
   }
+
+  getUserUrl(address) {
+    return this.baseUrl + '/user/' + address;
+  }
+
+  loadUnityPlayerUrl() {
+    return this.baseUrl + '/unity';
+  }
 }

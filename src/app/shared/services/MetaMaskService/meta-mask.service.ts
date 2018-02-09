@@ -101,7 +101,6 @@ export class MetaMaskService {
 
     this.web3.eth.getAccounts((err, accs) => {
       if (err != null) {
-        console.log('No MetaMask installed! Please install MetaMask Chrome Extension!');
         this.installed = false;
         this.installedSubject.next(this.installed);
         return;
@@ -110,7 +109,6 @@ export class MetaMaskService {
       this.installedSubject.next(this.installed);
 
       if (accs.length === 0) {
-        console.log('Your MetaMask is Locked!');
         this.unlocked = false;
         this.unlockedSubject.next(this.unlocked);
         return;
@@ -137,10 +135,8 @@ export class MetaMaskService {
         return gzr.balanceOf(this.account);
       })
       .then(value => {
-        console.log(this.web3.fromWei(value, 'ether').toString(10));
       })
       .catch(e => {
-        console.log(e);
         this.setStatus('Error getting balance; see log.');
       });
   }
@@ -163,8 +159,7 @@ export class MetaMaskService {
         this.contractAddress = instance.address;
         this.contractAddressSubject.next(this.contractAddress);
         return instance.balanceOf(address);
-      })
-      .catch(err => console.log(err));
+      });
   }
 
   refreshBalance() {
@@ -264,7 +259,6 @@ export class MetaMaskService {
           });
       })
       .catch(e => {
-        console.log(e);
         this.setStatus('Error sending coin; see log.');
       });
   }

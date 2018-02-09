@@ -9,6 +9,7 @@ import { Store } from '@ngrx/store';
 import { ApplicationState } from '../../store/application-state';
 import { Observable } from 'rxjs/Observable';
 import { UserState } from '../../store/store-data';
+import { UPDATE_NICK_NAME } from '../../store/actions/user.actions';
 
 @Component({
   selector: 'app-save-account',
@@ -23,6 +24,7 @@ export class SaveAccountComponent implements OnInit {
   email: String = '';
   isEmailed: Boolean = true;
   isValidEmail: Boolean = true;
+  // tslint:disable-next-line:max-line-length
   emailValidationExpression: any = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   nickName: String = '';
   isSaving = false;
@@ -86,6 +88,7 @@ export class SaveAccountComponent implements OnInit {
     this.isValidEmail = true;
     this.isSaving = true;
     setTimeout(() => {
+      this.UpdateNickName(this.nickName);
       this.metaMaskService.SignInTransaction()
       .then(result => {
         const data = {
@@ -94,20 +97,30 @@ export class SaveAccountComponent implements OnInit {
           'type': 'user',
           'gzr': {
               'type': 'wallet',
-              'id': result['account'],
-              'amount': result['amount']
+              'id': result['account']
           }
         };
         this.authService.login();
         setTimeout(() => {
           this.metaMaskService.getAccountInfo();
+          this.UpdateNickName(this.nickName);
         }, 500);
+
+        this.userService.registerUser(data)
+        .subscribe(
+          // tslint:disable-next-line:no-shadowed-variable
+          result => console.log(result),
+          error =>  console.log(error)
+        );
       })
       .catch(error => {
-        console.log(error);
         this.isEmailed = false;
       });
     }, 3000);
+  }
+
+  UpdateNickName(data) {
+    this.store.dispatch({type: UPDATE_NICK_NAME, payload: data});
   }
 
   navigateToMetaMask() {

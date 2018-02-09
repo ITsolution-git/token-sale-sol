@@ -5,6 +5,7 @@ export interface UserState {
     walletAddress: String;
     balance: number;
     gzrBalance: number;
+    nickName: String;
     transactionId: String;
 }
 
@@ -15,5 +16,6 @@ export const INITIAL_USER_STATE: UserState = {
     walletAddress: '',
     balance: 0,
     gzrBalance: 0,
+    nickName: '',
     transactionId: ''
 };

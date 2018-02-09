@@ -1,0 +1,74 @@
+<div class="my-items-page">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-12">
+        <div class="unity-player-wrapper py-4">
+          <img class="w-100" src="/assets/images/img-my-items-unity-player.png">
+          <!-- <div class="unity-plyaer" [innerHtml]="unityPlayer"></div> -->
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-6 col-md-3">
+          <div class="chest-slot-wrapper d-flex align-items-stretch justify-content-center border border-secondary">
+            <div class="chest-slot d-flex flex-column justify-content-between align-items-middle">
+              <div class="image my-auto py-5">
+                <img src="/assets/icons/icon-my-item-chest-placeholder.png">
+              </div>
+              <span class="placeholder py-3">Chest Slot</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="chest-slot-wrapper d-flex align-items-stretch justify-content-center border border-secondary">
+            <div class="chest-slot d-flex flex-column justify-content-between align-items-middle">
+              <div class="image my-auto py-5">
+                <img src="/assets/icons/icon-my-item-chest-placeholder.png">
+              </div>
+              <span class="placeholder py-3">Chest Slot</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="chest-slot-wrapper d-flex align-items-stretch justify-content-center border border-secondary">
+            <div class="chest-slot d-flex flex-column justify-content-between align-items-middle">
+              <div class="image my-auto py-5">
+                <img src="/assets/icons/icon-my-item-chest-placeholder.png">
+              </div>
+              <span class="placeholder py-3">Chest Slot</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="chest-slot-wrapper d-flex align-items-stretch justify-content-center border border-secondary">
+            <div class="chest-slot d-flex flex-column justify-content-between align-items-middle">
+              <div class="image my-auto py-5">
+                <img src="/assets/icons/icon-my-item-chest-placeholder.png">
+              </div>
+              <span class="placeholder py-3">Chest Slot</span>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="row justify-content-between">
+      <div class="col-6 col-md-3">
+        <div class="d-flex py-4">
+          <p class="block-header m-0">My Inventory</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="d-flex justify-content-end py-4">
+          <span><img src="/assets/icons/icon-my-items-sort.png"></span>
+          <span class="block-header text-right">Recently Added</span>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <app-item-list
+        [showTitle]="false"
+        [showNavigation]="false"
+      >
+      </app-item-list>
+    </div>
+  </div>
+</div>
