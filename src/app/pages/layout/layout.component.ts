@@ -1,19 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import { MetaMaskService } from '../../shared/services/MetaMaskService/meta-mask.service';
+import { UserService } from '../../shared/services/UserService/user.service';
 // tslint:disable-next-line:max-line-length
-import { UPDATE_WALLET_ADDRESS, UPDATE_LOCK_STATUS, UPDATE_GZR_BALANCE, UPDATE_BALANCE, UPDATE_INSTALL_STATUS, UPDATE_TRANSACTION_ID } from './../../store/actions/user.actions';
+import { UPDATE_WALLET_ADDRESS, UPDATE_LOCK_STATUS, UPDATE_GZR_BALANCE, UPDATE_BALANCE, UPDATE_INSTALL_STATUS, UPDATE_TRANSACTION_ID, UPDATE_NICK_NAME } from './../../store/actions/user.actions';
 import { ApplicationState } from '../../store/application-state';
 import { UserState } from '../../store/store-data';
+import { User } from '../../shared/models/user.model';
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent implements OnInit, AfterViewInit {
 
   userState: Observable<UserState>;
   installed = true;
@@ -22,9 +24,11 @@ export class LayoutComponent implements OnInit {
   balance: number;
   gzrBalance: number;
   transactionId: String;
+  nickName: String;
 
   constructor(
     private metaMaskService: MetaMaskService,
+    private userService: UserService,
     private store: Store<ApplicationState>,
   ) {
     this.userState = this.store.select('userState');
@@ -40,6 +44,7 @@ export class LayoutComponent implements OnInit {
         this.walletAddress = state.walletAddress;
         this.balance = state.balance;
         this.gzrBalance = state.gzrBalance;
+        this.nickName = state.nickName;
       }
     });
     this.metaMaskService.installedObservable$.subscribe(status => {
@@ -80,6 +85,12 @@ export class LayoutComponent implements OnInit {
     });
   }
 
+  ngAfterViewInit() {
+    this.userService.retriveUser(this.walletAddress).subscribe(user => {
+      this.updateNickName(user.nick);
+    });
+  }
+
   updateInstallStatus(data) {
     this.store.dispatch({type: UPDATE_INSTALL_STATUS, payload: data});
   }
@@ -105,6 +116,9 @@ export class LayoutComponent implements OnInit {
     this.store.dispatch({type: UPDATE_TRANSACTION_ID, payload: data});
   }
 
+  updateNickName(data) {
+    this.store.dispatch({type: UPDATE_NICK_NAME, payload: data});
+  }
 
   onDeactivate() {
     window.scrollTo(0, 0);
