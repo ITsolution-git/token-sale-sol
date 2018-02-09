@@ -10,12 +10,14 @@ import { Subscription } from 'rxjs/Subscription';
 import Tx from 'ethereumjs-tx';
 
 const GZRArtifacts = require('../../../../../build/contracts/GizerToken.json');
+const StandardTokenArtifacts = require('../../../../../build/contracts/StandardToken.json');
 
 declare var window: any;
 
 @Injectable()
 export class MetaMaskService {
   GzrToken = Contract(GZRArtifacts);
+  StandardToken = Contract(StandardTokenArtifacts);
 
   accounts: any;
   web3: any;
@@ -248,10 +250,12 @@ export class MetaMaskService {
   sendCoin(amount) {
     let meta;
        this.setStatus('Initiating transaction... (please wait)');
-    this.GzrToken
+    this.StandardToken
       .deployed()
       .then(instance => {
         meta = instance;
+        debugger;
+        
         meta.transfer(this.contractAddress, amount, { from: this.account })
           .then((error, transactionId) => {
             this.setStatus('Transaction complete!');
