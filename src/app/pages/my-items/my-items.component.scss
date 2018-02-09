@@ -1,4 +1,81 @@
 .my-items-page {
+    .unity-player-wrapper {
+        .unity-player {
+            .webgl-content {
+                .gameContainer {
+                    width: 1100px;
+                    height: 624px
+                }
+                .logo {
+                    background: url('/assets/externals/unity-player/TemplateData/progressLogo.Light.png');
+                    background-size: cover;
+                    background-position: center;
+                    width: 154px;
+                    height: 130px;
+                }
+                .progress {
+                    height: 18px;
+                     width: 141px;
+                     margin-top: 90px;
+                }
+                .progress .empty {
+                    background: url('/assets/externals/unity-player/TemplateData/progressEmpty.Light.png');
+                    background-size: cover;
+                    background-position: center;
+                    float: right;
+                    width: 100%;
+                    height: 100%;
+                    display: inline-block;
+                }
+                .progress .full {
+                    background: url('/assets/externals/unity-player/TemplateData/progressFull.Light.png');
+                    background-size: cover;
+                    background-position: center;
+                    float: left;
+                    width: 0%;
+                    height: 100%;
+                    display: inline-block;
+                }
+                .logo.Dark {
+                    background: url('/assets/externals/unity-player/TemplateData/progressLogo.Dark.png');
+                }
+                .progress.Dark .empty {
+                    background: url('/assets/externals/unity-player/TemplateData/progressEmpty.Dark.png');
+                }
+                .progress.Dark .full {
+                    background: url('/assets/externals/unity-player/TemplateData/progressFull.Dark.png');
+                }
+                .footer {
+                    margin-top: 0px;
+                    background-color: #fff;
+                    width: 1100px;
+                    height: 38px;
+                    line-height: 38px;
+                    font-family: Helvetica, Verdana, Arial, sans-serif;
+                    font-size: 18px;
+                }
+                .footer .webgl-logo, .title, .fullscreen {
+                    height: 100%;
+                    display: inline-block;
+                    background: transparent center no-repeat;
+                }
+                .footer .webgl-logo {
+                    background: url('/assets/externals/unity-player/TemplateData/webgl-logo.png');
+                    width: 204px;
+                    float: left;
+                }
+                .footer .title {
+                    margin-right: 10px;
+                    float: right;
+                }
+                .footer .fullscreen {
+                    background: url('/assets/externals/unity-player/TemplateData/fullscreen.png');
+                    width: 38px;
+                    float: right;
+                }
+            }
+        }
+    }
     .chest-slot-wrapper {
         height: 285px;
         border-radius: 15px;
