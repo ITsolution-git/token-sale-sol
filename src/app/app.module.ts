@@ -11,6 +11,7 @@ import { ModalModule } from 'ngx-bootstrap';
 import { Angulartics2Module } from 'angulartics2';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { Angulartics2GoogleTagManager } from 'angulartics2/gtm';
+import { SimpleNotificationsModule } from 'angular2-notifications-lite';
 
 import { AuthGuard } from './shared';
 import { AppComponent } from './app.component';
@@ -46,6 +47,7 @@ export const reducers = {
     AppRoutingModule,
     Ng2Webstorage,
     LayoutModule,
+    SimpleNotificationsModule.forRoot(),
     ModalModule.forRoot(),
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({maxAge: 25}),

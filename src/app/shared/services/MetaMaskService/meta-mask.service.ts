@@ -252,24 +252,23 @@ export class MetaMaskService {
   }
 
   sendCoin(amount) {
-    let meta;
+    let meta, standard;
     this.setStatus('Initiating transaction... (please wait)');
-    debugger
-    this.GZRTokenToItemGeneration
-      .deployed()
-      .then(instance => {
-        meta = instance;
-        debugger;
-        meta.setUpAddresses('0x90dCdC0AD9813ba963D54ADcCFA9091f4dd2925B', '0x0', {from: this.account})
-        .then(() => {
-          meta.spendGZRToGetAnItem({from: this.account})
-          .then((result) => {
-            debugger;
-          })
-        })
-      })
-      .catch(e => {
-        this.setStatus('Error sending coin; see log.');
-      });
+    this.StandardToken
+    .deployed()
+    .then(ins => {
+      standard = ins;
+      return standard.approve(standard.address, 1, {from: this.account});
+    })
+    .then((tx, error) => {
+      return  this.GZRTokenToItemGeneration.deployed();
+    })
+    .then(instance => {
+      meta = instance;
+      return meta.spendGZRToGetAnItem({from: this.account});
+    })
+    .then(tx => {
+      console.log(tx);
+    });
   }
 }

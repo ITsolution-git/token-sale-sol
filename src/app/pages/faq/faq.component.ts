@@ -20,6 +20,9 @@ export class FaqComponent implements OnInit {
     selling: false,
     unlock: false,
     reach: false,
+    ggiditem: false,
+    founder: false,
+    gzrtoken: false
   };
 
   constructor() { }

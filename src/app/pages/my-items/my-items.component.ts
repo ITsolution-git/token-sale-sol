@@ -19,9 +19,6 @@ export class MyItemsComponent implements OnInit {
 
   ngOnInit() {
     this.isMobile = this.isMobileView();
-    // this.itemService.loadUnityPlayer().subscribe(res => {
-    //   this.unityPlayer = res;
-    // });
   }
 
   @HostListener('window:resize', ['$event'])

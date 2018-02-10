@@ -42,7 +42,7 @@ export class TreasureComponent implements OnInit {
 
   ngOnInit() {
     this.metaMaskService.getAccountInfo();
-    
+
     this.userState.subscribe(state => {
       if (state) {
         this.walletAddress = state.walletAddress;
