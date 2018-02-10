@@ -11,6 +11,7 @@ import Tx from 'ethereumjs-tx';
 
 const GZRArtifacts = require('../../../../../build/contracts/GizerToken.json');
 const StandardTokenArtifacts = require('../../../../../build/contracts/StandardToken.json');
+const GZRTokenToItemGenerationArtifacts = require('../../../../../build/contracts/GZRTokenToItemGeneration.json');
 
 declare var window: any;
 
@@ -18,6 +19,7 @@ declare var window: any;
 export class MetaMaskService {
   GzrToken = Contract(GZRArtifacts);
   StandardToken = Contract(StandardTokenArtifacts);
+  GZRTokenToItemGeneration = Contract(GZRTokenToItemGenerationArtifacts);
 
   accounts: any;
   web3: any;
@@ -100,6 +102,8 @@ export class MetaMaskService {
 
   onReady() {
     this.GzrToken.setProvider(this.web3.currentProvider);
+    this.StandardToken.setProvider(this.web3.currentProvider);
+    this.GZRTokenToItemGeneration.setProvider(this.web3.currentProvider);
 
     this.web3.eth.getAccounts((err, accs) => {
       if (err != null) {
@@ -249,18 +253,20 @@ export class MetaMaskService {
 
   sendCoin(amount) {
     let meta;
-       this.setStatus('Initiating transaction... (please wait)');
-    this.StandardToken
+    this.setStatus('Initiating transaction... (please wait)');
+    debugger
+    this.GZRTokenToItemGeneration
       .deployed()
       .then(instance => {
         meta = instance;
         debugger;
-        
-        meta.transfer(this.contractAddress, amount, { from: this.account })
-          .then((error, transactionId) => {
-            this.setStatus('Transaction complete!');
-            this.refreshBalance();
-          });
+        meta.setUpAddresses('0x90dCdC0AD9813ba963D54ADcCFA9091f4dd2925B', '0x0', {from: this.account})
+        .then(() => {
+          meta.spendGZRToGetAnItem({from: this.account})
+          .then((result) => {
+            debugger;
+          })
+        })
       })
       .catch(e => {
         this.setStatus('Error sending coin; see log.');
