@@ -14,9 +14,18 @@ export class ItemService {
     return this.http.get(
       this.apiRoutingService.getItemsUrl(),
       {
-        page,
-        limit
+        'page': 1,
+        'limit': 1
       },
+      true,
+      null
+    );
+  }
+
+  getItems_by_IDs(ids: string[]) {
+    return this.http.get(
+      this.apiRoutingService.getItemsUrl_ID(ids),
+      {},
       true,
       null
     );

@@ -66,7 +66,7 @@
             <div (click)="stopCollapse($event)">
               <ul class="guide-list">
                 <li class="guide-item">
-                  <p class="description">Sometimes the ‘My Items’ and ‘Get GZR’ screens display a lock screen. This happens because after a certain amount of time MetaMask automatically locks your account. To unlock MetaMask, simply click the MetaMask icon in your browser and type in your password.</p>
+                  <p class="description">Sometimes the ‘My Items’ and ‘Get GZR’ screens display a lock screen. This happens because after a fixed amount of time, MetaMask automatically locks your account. To unlock MetaMask, simply click the MetaMask icon in your browser and type in your password.</p>
                 </li>
               </ul>
               <div class="text-center">
@@ -134,7 +134,7 @@
               <span class="float-right pull-right">{{status.gizer ? '‒' : '+'}}</span>
             </div>
             <div (click)="stopCollapse($event)">
-              <p class="description">Gizer is a real time gaming network for mobile eSports. Find and compete in tournaments in under 20 seconds on the gaming feed or turn your skills into paying gigs on the Gizer Marketplace. Network with other gamers and unlock items to build up your Global Gaming Identity. Duel players and fight to become to ultimate eSports champion.</p>
+              <p class="description">Gizer is a peer-to-peer network, driven by interactions between different parties to create economic opportunity in the global gaming community. Our vision is to create opportunity for all members of the global gaming economy. The Gizer network will connect gamers, hosts, small businesses, freelancing services, and venues to create a more productive gaming world.</p>
               <p class="description">You can download Gizer today on 
                 <a class="link" href="https://itunes.apple.com/us/app/gizer/id1165061479?ls=1&amp;mt=8" target="_blank">iOS</a>
                  or 
@@ -151,7 +151,7 @@
               <span class="float-right pull-right">{{status.whatisggid ? '‒' : '+'}}</span>
             </div>
             <div (click)="stopCollapse($event)">
-              <p class="description">The Global Gaming Identity is a cross platform stat tracking system build on the backbone of the Ethereum blockchain. Compete in tournaments and unlock unique collectible items to build up your profile and show the world that you have what it takes to become an eSports legend.</p>
+              <p class="description">GGID, short for Global Gaming Identity, is a universal profile or identity system built on the Ethereum blockchain. Compete and unlock unique collectible items to build your profile. You have ownership over your collected items via tokens. We’ll allow for more data like stats, gamertags, standings, teams, and more to be stored on your profile in the future. Public data can be accessed by any gamer or game developer.</p>
             </div>
           </accordion-group>
 
@@ -192,7 +192,7 @@
               <span class="float-right pull-right">{{status.selling ? '‒' : '+'}}</span>
             </div>
             <div (click)="stopCollapse($event)">
-              <p class="description">During the tokensale, you will be able to unlock GZR and equip them to your avatar on our web platform. Shortly after the tokensale, we will release the Gizer Marketplace where you will be able to buy and sell items with other players.</p>
+              <p class="description">During the token sale, you will be able to unlock GZR and equip items to your avatar on our website. We’re exploring partnering with third party marketplaces that are interested in adopting our items for trading. Item transfer is as simple as an Ethereum transaction.</p>
             </div>
           </accordion-group>
 
@@ -221,6 +221,65 @@
             </div>
             <div (click)="stopCollapse($event)">
               <p class="description">Feel free to email us <a href="mailto:pr@gizer.io" class="link" target="_top">here</a></p>
+            </div>
+          </accordion-group>
+
+          <accordion-group
+            [isOpen]="status.ggiditem"
+            (click)="status.ggiditem = !status.ggiditem">
+            <div accordion-heading class="clearfix">
+                How many total GGID Items will there be?
+              <span class="float-right pull-right">{{status.ggiditem ? '‒' : '+'}}</span>
+            </div>
+            <div (click)="stopCollapse($event)">
+              <p class="description">Up to 20,000 total items. We have seemingly endless potential with our items, avatars, and data. From game develop licensing to community generated contests to branded items with our partners.</p>
+            </div>
+          </accordion-group>
+
+          <accordion-group
+            [isOpen]="status.founder"
+            (click)="status.founder = !status.founder">
+            <div accordion-heading class="clearfix">
+                What are the probabilities of receiving a specific item in the Founders Collection?
+              <span class="float-right pull-right">{{status.founder ? '‒' : '+'}}</span>
+            </div>
+            <div (click)="stopCollapse($event)" class="row">
+              <div class="col-6">
+                <p class="description">Gas Mask: 6.5%</p>
+                <p class="description">Spec Ops Helmet: 6.5%</p>
+                <p class="description">Plasma Hand Cannon: 6.5%</p>
+                <p class="description">Commando Helmet: 6.5%</p>
+                <p class="description">Katana: 6.5%</p>
+                <p class="description">Heavy Cal Sniper Rifle: 6.5%</p>
+                <p class="description">Fresh Tuxedo: 6.5%</p>
+                <p class="description">Grumpy Cat: 6.5% email us</p>
+                <p class="description">Jet Pack: 2%</p>              
+                <p class="description">Dwarf: 2%</p>
+              </div>
+              <div class="col-6">
+                <p class="description">Gorilla: 2%</p>
+                <p class="description">Cerberus: 2.5%</p>
+                <p class="description">Dragon's Eye: 2.5%</p>
+                <p class="description">Juggernaut Suit: 2.5%</p>
+                <p class="description">Mystic Forest: 2.5%</p>
+                <p class="description">Super Sledge: 5.6%</p>
+                <p class="description">Warden Shield: 5.6%</p>
+                <p class="description">Guardian Staff: 5.6%</p>
+                <p class="description">Beach: 5.6%</p>
+                <p class="description">Swag Mobile: 2%</p>
+              </div>
+            </div>
+          </accordion-group>
+
+          <accordion-group
+            [isOpen]="status.gzrtoken"
+            (click)="status.gzrtoken = !status.gzrtoken">
+            <div accordion-heading class="clearfix">
+                How many GZR tokens are there?
+              <span class="float-right pull-right">{{status.gzrtoken ? '‒' : '+'}}</span>
+            </div>
+            <div (click)="stopCollapse($event)">
+              <p class="description">8 million tokens are circulating. 2 million are held in a reserve account for the future.</p>
             </div>
           </accordion-group>
           

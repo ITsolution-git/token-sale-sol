@@ -25,7 +25,6 @@ export class MyItemsComponent implements OnInit {
 
   ngOnInit() {
     this.isMobile = this.isMobileView();
-    console.log(unityLoader);
     this.gameInstance = UnityLoader.instantiate(this.container, this.projectURL, {onProgress: unityProgress});
   }
 

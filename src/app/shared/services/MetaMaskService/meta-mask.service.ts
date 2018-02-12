@@ -10,12 +10,16 @@ import { Subscription } from 'rxjs/Subscription';
 import Tx from 'ethereumjs-tx';
 
 const GZRArtifacts = require('../../../../../build/contracts/GizerToken.json');
+const StandardTokenArtifacts = require('../../../../../build/contracts/StandardToken.json');
+const GZRTokenToItemGenerationArtifacts = require('../../../../../build/contracts/GZRTokenToItemGeneration.json');
 
 declare var window: any;
 
 @Injectable()
 export class MetaMaskService {
   GzrToken = Contract(GZRArtifacts);
+  StandardToken = Contract(StandardTokenArtifacts);
+  GZRTokenToItemGeneration = Contract(GZRTokenToItemGenerationArtifacts);
 
   accounts: any;
   web3: any;
@@ -98,6 +102,8 @@ export class MetaMaskService {
 
   onReady() {
     this.GzrToken.setProvider(this.web3.currentProvider);
+    this.StandardToken.setProvider(this.web3.currentProvider);
+    this.GZRTokenToItemGeneration.setProvider(this.web3.currentProvider);
 
     this.web3.eth.getAccounts((err, accs) => {
       if (err != null) {
@@ -246,20 +252,23 @@ export class MetaMaskService {
   }
 
   sendCoin(amount) {
-    let meta;
-       this.setStatus('Initiating transaction... (please wait)');
-    this.GzrToken
-      .deployed()
-      .then(instance => {
-        meta = instance;
-        meta.transfer(this.contractAddress, amount, { from: this.account })
-          .then((error, transactionId) => {
-            this.setStatus('Transaction complete!');
-            this.refreshBalance();
-          });
-      })
-      .catch(e => {
-        this.setStatus('Error sending coin; see log.');
-      });
+    let meta, standard;
+    this.setStatus('Initiating transaction... (please wait)');
+    this.StandardToken
+    .deployed()
+    .then(ins => {
+      standard = ins;
+      return standard.approve(standard.address, 1, {from: this.account});
+    })
+    .then((tx, error) => {
+      return  this.GZRTokenToItemGeneration.deployed();
+    })
+    .then(instance => {
+      meta = instance;
+      return meta.spendGZRToGetAnItem({from: this.account});
+    })
+    .then(tx => {
+      console.log(tx);
+    });
   }
 }

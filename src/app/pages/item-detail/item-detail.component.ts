@@ -52,15 +52,17 @@ export class ItemDetailComponent implements OnInit {
 
   ngOnInit() {
     this.isMobile = this.isMobileView();
-    this.itemService.getItems().subscribe(res => {
-      this.itemArray = res;
-      if (this.isMobile) {
-        this.items = res.slice(0, 4);
-      } else {
-        this.items = res.slice(0, 5);
-      }
-
+    this.itemService.getItems().subscribe((res: Item[]) => {
+      this.itemService.getItems_by_IDs(res[0].current.similar).subscribe((resp: Item[]) => {
+        this.itemArray = resp;
+        if (this.isMobile) {
+          this.items = resp.slice(0, 4);
+        } else {
+          this.items = resp.slice(0, 5);
+        }
+      });
     });
+
     this.detailItem$ = this.route.paramMap
       .switchMap((params: ParamMap) => {
         window.scrollTo(0, 0);
@@ -106,8 +108,8 @@ export class ItemDetailComponent implements OnInit {
 
   loadNextWeapons() {
     if (this.counter < this.itemArray.length - 5) {
-      this.items = this.itemArray.slice(this.counter, this.counter + 5);
       this.counter += 1;
+      this.items = this.itemArray.slice(this.counter, this.counter + 5);
     }
   }
 
