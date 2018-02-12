@@ -1,6 +1,10 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ItemService } from '../../shared/services/ItemService/item.service';
+
+const unityProgress = UnityProgress;
+const unityLoader = UnityLoader;
+
 declare const $: any;
 
 @Component({
@@ -9,8 +13,10 @@ declare const $: any;
   styleUrls: ['./my-items.component.scss']
 })
 export class MyItemsComponent implements OnInit {
-
+  projectURL = './../../../assets/externals/unity-player/Build/Project.json';
+  container = 'gameContainer';
   isMobile = false;
+  gameInstance: any;
   unityPlayer: any = '';
   constructor(
     private itemService: ItemService,
@@ -19,6 +25,7 @@ export class MyItemsComponent implements OnInit {
 
   ngOnInit() {
     this.isMobile = this.isMobileView();
+    this.gameInstance = UnityLoader.instantiate(this.container, this.projectURL, {onProgress: unityProgress});
   }
 
   @HostListener('window:resize', ['$event'])
@@ -31,8 +38,5 @@ export class MyItemsComponent implements OnInit {
         return false;
     }
     return true;
-  }
-  addAutoStart(url): SafeResourceUrl {
-    return this.domSanitizer.bypassSecurityTrustResourceUrl(url + '?autostart=1');
   }
 }
