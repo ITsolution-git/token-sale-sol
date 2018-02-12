@@ -26,7 +26,9 @@
         "../node_modules/ion-rangeslider/css/ion.rangeSlider.skinHTML5.css"
       ],
       "scripts": [
-        "../node_modules/ion-rangeslider/js/ion.rangeSlider.min.js"
+        "../node_modules/ion-rangeslider/js/ion.rangeSlider.min.js",
+        "../src/assets/externals/unity-player/Build/UnityLoader.js",
+        "../src/assets/externals/unity-player/TemplateData/UnityProgress.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
