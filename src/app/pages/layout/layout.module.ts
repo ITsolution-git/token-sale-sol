@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { ComponentsModule } from '../../shared/components/components.module';
 import { LayoutComponent } from './layout.component';
 import { MetaMaskService } from '../../shared/services/MetaMaskService/meta-mask.service';
+import { UserService } from '../../shared/services/UserService/user.service';
 
 @NgModule({
   imports: [
@@ -12,6 +13,9 @@ import { MetaMaskService } from '../../shared/services/MetaMaskService/meta-mask
     RouterModule
   ],
   declarations: [LayoutComponent],
-  providers: [ MetaMaskService ]
+  providers: [
+    MetaMaskService,
+    UserService
+  ]
 })
 export class LayoutModule { }

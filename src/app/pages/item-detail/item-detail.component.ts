@@ -59,8 +59,8 @@ export class ItemDetailComponent implements OnInit {
       } else {
         this.items = res.slice(0, 5);
       }
-
     });
+
     this.detailItem$ = this.route.paramMap
       .switchMap((params: ParamMap) => {
         window.scrollTo(0, 0);
