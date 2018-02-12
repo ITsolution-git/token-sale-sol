@@ -16,6 +16,7 @@ export class ItemListComponent implements OnInit {
   @Input() itemCountToShow = 10;
   isMobile = false;
   items: Item[];
+  _items: Item[];
   counter = 0;
   limit = 10;
   page = 1;
@@ -29,35 +30,24 @@ export class ItemListComponent implements OnInit {
   ngOnInit() {
     this.isMobile = this.isMobileView();
     this.itemService.getItems(this.limit, this.page).subscribe((res: Item[]) => {
-      if (res.length !== 0) {
-        this.items = res;
-      }
+      this.itemService.getItems_by_IDs(res[0].current.similar).subscribe((resp: Item[]) => {
+        this._items = resp;
+        this.items = this._items.slice(0, this.limit);
+      });
     });
   }
 
   loadNextWeapons() {
-    const nextPage = this.page + 1;
-    if (this.totalPage >= nextPage) {
-      this.itemService.getItems(this.limit, nextPage).subscribe((res: Item[]) => {
-        if (res.length !== 0) {
-          this.items = res;
-          this.page += 1;
-        } else {
-          this.totalPage = this.page;
-        }
-      });
+    if (this._items.length > this.page * this.limit) {
+      this.items = this._items.slice(this.page * this.limit, (this.page + 1) * this.limit);
+      this.page += 1;
     }
   }
 
   loadPrevWeapons() {
     if (this.page > 1) {
-      const prevPage = this.page - 1;
-      this.itemService.getItems(this.limit, prevPage).subscribe((res: Item[]) => {
-        if (res.length !== 0) {
-          this.items = res;
-          this.page -= 1;
-        }
-      });
+      this.page -= 1;
+      this.items = this._items.slice((this.page - 1) * this.limit, this.page * this.limit);
     }
   }
 
