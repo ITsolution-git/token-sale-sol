@@ -53,7 +53,7 @@ export class TreasureComponent implements OnInit {
 
   openTreasure() {
     if (this.unlocked && this.installed) {
-      this.navgiateToTreasurePage();      
+      this.navgiateToTreasurePage();
     } else {
       this.navgiateToInstallMeta();
     }

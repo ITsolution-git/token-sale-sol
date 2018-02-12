@@ -99,15 +99,13 @@ export class SaveAccountComponent implements OnInit {
           }
         };
         this.authService.login();
-        
+
         setTimeout(() => {
           this.metaMaskService.getAccountInfo();
         }, 500);
 
         this.userService.registerUser(data)
         .subscribe(
-          result => console.log(result),
-          error =>  console.log(error)
         );
       })
       .catch(error => {
