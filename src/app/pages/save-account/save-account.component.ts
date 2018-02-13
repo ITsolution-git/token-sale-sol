@@ -56,31 +56,31 @@ export class SaveAccountComponent implements OnInit {
           if (!state.unlocked) {
             this.navigateToMetaMask();
           }
-          debugger;
           if (this.walletAddress !== state.walletAddress) {
             this.walletAddress = state.walletAddress;
             let registered = false,
                 user_;
-  
-            for (const user of this.users)
-              if (user.gzr.id == state.walletAddress) {
+
+            for (const user of this.users) {
+              if (user.gzr.id === state.walletAddress) {
                 registered = true;
                 user_ = user;
                 break;
               }
-            
+            }
+
             this.loaded = true;
             if (registered) {
               this.accountInfo.setValue({
                 walletAddress: this.walletAddress,
                 email: user_.email,
                 nickName: user_.nick
-              });              
+              });
               this.authService.login();
               setTimeout(() => {
                 this.metaMaskService.getAccountInfo();
                 this.UpdateNickName(user_.nick);
-              }, 500);            
+              }, 500);
             } else {
               this.accountInfo.setValue({
                 walletAddress: this.walletAddress,
