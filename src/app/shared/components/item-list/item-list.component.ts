@@ -30,6 +30,7 @@ export class ItemListComponent implements OnInit {
   ngOnInit() {
     this.isMobile = this.isMobileView();
     this.itemService.getItems(this.limit, this.page).subscribe((res: Item[]) => {
+      console.log(res);
       this.itemService.getItems_by_IDs(res[0].current.similar).subscribe((resp: Item[]) => {
         this._items = resp;
         this.items = this._items.slice(0, this.limit);

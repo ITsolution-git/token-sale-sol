@@ -4,12 +4,10 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 import { LocalStorageService } from 'ngx-webstorage';
-import { ErrorResponse } from '../shared/models';
 import { environment } from '../../environments/environment';
 
 @Injectable()
 export class HttpHelperService {
-  public serverError = false;
 
   constructor(
     private router: Router,
@@ -17,6 +15,15 @@ export class HttpHelperService {
     private localStorage: LocalStorageService
   ) { }
 
+  private checkAuthHeader(response: Response) {
+    let res;
+    try {
+      res = response.json();
+    } catch (e) {
+      res = {};
+    }
+    return res;
+  }
   /***
    * generate request options
    * @param isUrlEncoded
@@ -58,9 +65,8 @@ export class HttpHelperService {
       }
     }
 
-    this.serverError = false;
 
-    return new RequestOptions({ headers, withCredentials: false, search });
+    return new RequestOptions({ headers, withCredentials: true, search });
   }
 
   /***
@@ -80,7 +86,7 @@ export class HttpHelperService {
     return this.http
       .get(url, this.generateReqOptions(false, requiredAuth, headers, query))
       .map((response: Response) => {
-        return response;
+        return this.checkAuthHeader(response);
       })
       .catch(error => {
         return this.handleError(error);
@@ -118,7 +124,7 @@ export class HttpHelperService {
     return this.http
       .post(url, body, requestOptions)
       .map((response: Response) => {
-        return response;
+        return this.checkAuthHeader(response);
       })
       .catch(error => {
         return this.handleError(error);
@@ -151,7 +157,7 @@ export class HttpHelperService {
     return this.http
       .patch(url, body, this.generateReqOptions(isUrlEncoded, requiredAuth, headers))
       .map((response: Response) => {
-        return response;
+        return this.checkAuthHeader(response);
       })
       .catch(error => {
         return this.handleError(error);
@@ -184,7 +190,7 @@ export class HttpHelperService {
     return this.http
       .put(url, body, this.generateReqOptions(isUrlEncoded, requiredAuth, headers))
       .map((response: Response) => {
-        return response;
+        return this.checkAuthHeader(response);
       })
       .catch(error => {
         return this.handleError(error);
@@ -208,7 +214,7 @@ export class HttpHelperService {
     return this.http
       .delete(url, this.generateReqOptions(false, requiredAuth, headers, query))
       .map((response: Response) => {
-        return response;
+        return this.checkAuthHeader(response);
       })
       .catch(error => {
         return this.handleError(error);
@@ -225,13 +231,15 @@ export class HttpHelperService {
     if (error.status === 500) {
       const body = error.json() || '';
       if (body.exception) {
-        this.router.navigate(['login']);
+        if (this.router.url.startsWith('/client')) {
+          this.router.navigate(['/client/login']);
+        } else {
+          this.router.navigate(['login']);
+        }
       } else {
-        this.serverError = true;
         skipThrowingError = true;
       }
     } else if (error.status === 504) {
-      this.serverError = true;
       skipThrowingError = true;
     }
 

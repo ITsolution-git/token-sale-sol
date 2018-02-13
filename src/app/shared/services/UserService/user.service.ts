@@ -12,15 +12,6 @@ export class UserService {
     private apiRoutingService: ApiRoutingService
   ) { }
 
-  getUsers(wallet) {
-    return this.http.get(
-      this.apiRoutingService.getUserUrlWallet(wallet),
-      {},
-      false,
-      null
-    );
-  }
-
   registerUser(data) {
     return this.http.put(
       this.apiRoutingService.getUsersUrl(),

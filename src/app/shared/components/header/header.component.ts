@@ -80,7 +80,7 @@ export class HeaderComponent implements OnInit {
     this.userState.subscribe(state => {
       if (state) {
         if (state.walletAddress && state.walletAddress !== this.walletAddress ) {
-          this.userService.getUsers(state.walletAddress).subscribe((resp: User[]) => {
+          this.userService.retriveUser(state.walletAddress).subscribe((resp: User[]) => {
             if (resp.length) {
               const user_ = resp[0];
               this.nickName = user_.nick;
