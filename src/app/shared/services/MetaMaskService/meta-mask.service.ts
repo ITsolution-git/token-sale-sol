@@ -53,6 +53,18 @@ export class MetaMaskService {
   installedSubject = new Subject<boolean>();
   installedObservable$ = this.installedSubject.asObservable();
 
+  validNetwork = false;
+  validNetworkSubject = new Subject<boolean>();
+  validNetworkObservable$ = this.validNetworkSubject.asObservable();
+
+  signTransactionPending = 0;
+  signTransactionPendingSubject = new Subject<number>();
+  signTransactionPendingObservable$ = this.signTransactionPendingSubject.asObservable();
+
+  buyGZRTransaction = 0;
+  buyGZRTransactionSubject = new Subject<number>();
+  buyGZRTransactionObservable$ = this.buyGZRTransactionSubject.asObservable();
+
   accountSubject = new Subject<any>();
   accountObservable$ = this.accountSubject.asObservable();
 
@@ -86,18 +98,35 @@ export class MetaMaskService {
   }
 
   loadMetaCoin() {
-    this.checkAndInstantiateWeb3();
-    this.onReady();
+    this.checkAndInstantiateWeb3()
+    .then(() => {
+      this.onReady();
+      this.validNetwork = true;
+      this.validNetworkSubject.next(this.validNetwork);
+    })
+    .catch(() => {
+      this.validNetwork = false;
+      this.validNetworkSubject.next(this.validNetwork);
+    })
   }
 
   checkAndInstantiateWeb3() {
-    if (typeof window.web3 !== 'undefined') {
-      this.web3 = new Web3(window.web3.currentProvider);
-    } else {
-      this.web3 = new Web3(
-        new Web3.providers.HttpProvider('http://localhost:8545')
-      );
-    }
+    return new Promise((resolve, reject) => {
+      if (typeof window.web3 !== 'undefined') {
+        window.web3.version.getNetwork((err, netId) => {
+          switch (netId) {
+            case "3":
+              this.web3 = new Web3(window.web3.currentProvider);
+              resolve(true);
+              break;
+            default:
+              reject(false);
+          }
+        });
+      } else {
+        reject(false);
+      }
+    });
   }
 
   onReady() {
@@ -227,7 +256,9 @@ export class MetaMaskService {
                 'failure': true
               });
             } else {
-
+              debugger
+              this.signTransactionPending = this.signTransactionPending + 1;
+              this.signTransactionPendingSubject.next(this.signTransactionPending);
               gzr.balanceOf(this.account)
                 .then((value) => {
                   resolve({
