@@ -65,15 +65,15 @@ export class LayoutComponent implements OnInit {
       }
     });
     this.metaMaskService.accountObservable$.subscribe(res => {
-      if (storageWalletAddress === res) {
-          this.updateNickName(storageNickName);
-      } else {
-        this.localStorage.clear(this.nickNameStr);
-        this.localStorage.clear(this.walletStr);
-        this.updateNickName(this.nickName);
-      }
       if (this.walletAddress !== res) {
+        this.localStorage.clear(this.nickNameStr);
+        this.localStorage.store(this.walletStr, res);
         this.updateWalletAddress(res);
+        this.userService.retriveUser(res).subscribe(user => {
+          if (user.length) {
+            this.updateNickName(user[0].nick);
+          }
+        });
       }
     });
     this.metaMaskService.balanceObservable$.subscribe(res => {
