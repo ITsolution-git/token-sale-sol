@@ -17,19 +17,6 @@ export class HttpHelperService {
     private localStorage: LocalStorageService
   ) { }
 
-  private checkAuthHeader(response: Response) {
-    let res;
-    const authorizationHeader = response.headers.toJSON()['Authorization'] || response.headers.toJSON()['authorization'];
-    if (authorizationHeader) {
-      this.localStorage.store(environment.localStorage.token, authorizationHeader[0]);
-    }
-    try {
-      res = response.json();
-    } catch (e) {
-      res = {};
-    }
-    return res;
-  }
   /***
    * generate request options
    * @param isUrlEncoded
@@ -56,13 +43,6 @@ export class HttpHelperService {
 
     if (isMultipart) {
       headers = new Headers();
-    }
-
-    if (requiredAuth) {
-      const token = this.localStorage.retrieve(
-        environment.localStorage.token
-      );
-      headers.append('Authorization', `${token}`);
     }
 
     if (customHeader) {
@@ -100,7 +80,7 @@ export class HttpHelperService {
     return this.http
       .get(url, this.generateReqOptions(false, requiredAuth, headers, query))
       .map((response: Response) => {
-        return this.checkAuthHeader(response);
+        return response;
       })
       .catch(error => {
         return this.handleError(error);
@@ -138,7 +118,7 @@ export class HttpHelperService {
     return this.http
       .post(url, body, requestOptions)
       .map((response: Response) => {
-        return this.checkAuthHeader(response);
+        return response;
       })
       .catch(error => {
         return this.handleError(error);
@@ -171,7 +151,7 @@ export class HttpHelperService {
     return this.http
       .patch(url, body, this.generateReqOptions(isUrlEncoded, requiredAuth, headers))
       .map((response: Response) => {
-        return this.checkAuthHeader(response);
+        return response;
       })
       .catch(error => {
         return this.handleError(error);
@@ -204,7 +184,7 @@ export class HttpHelperService {
     return this.http
       .put(url, body, this.generateReqOptions(isUrlEncoded, requiredAuth, headers))
       .map((response: Response) => {
-        return this.checkAuthHeader(response);
+        return response;
       })
       .catch(error => {
         return this.handleError(error);
@@ -228,7 +208,7 @@ export class HttpHelperService {
     return this.http
       .delete(url, this.generateReqOptions(false, requiredAuth, headers, query))
       .map((response: Response) => {
-        return this.checkAuthHeader(response);
+        return response;
       })
       .catch(error => {
         return this.handleError(error);
@@ -244,12 +224,8 @@ export class HttpHelperService {
     let skipThrowingError = false;
     if (error.status === 500) {
       const body = error.json() || '';
-      if (body.exception && body.exception === ErrorResponse.TOKEN_EXPIRE) {
-        if (this.router.url.startsWith('/client')) {
-          this.router.navigate(['/client/login']);
-        } else {
-          this.router.navigate(['login']);
-        }
+      if (body.exception) {
+        this.router.navigate(['login']);
       } else {
         this.serverError = true;
         skipThrowingError = true;
@@ -258,12 +234,6 @@ export class HttpHelperService {
       this.serverError = true;
       skipThrowingError = true;
     }
-
-    // go ahead to throw error for upload photo
-    // const url = error.url;
-    // if (url.endsWith('talent/upload-photo')) {
-    //   skipThrowingError = false;
-    // }
 
     if (skipThrowingError) {
       return Observable.never();

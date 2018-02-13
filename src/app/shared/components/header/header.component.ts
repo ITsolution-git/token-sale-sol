@@ -109,14 +109,6 @@ export class HeaderComponent implements OnInit {
 
   init() {
     this.isMobile = this.isMobileMenu();
-    const wid = this.localStorage.retrieve('wid');
-    if (wid === this.walletAddress) {
-      this.isAuthenticated = true;
-    } else {
-      this.authService.isLoggedIn$.subscribe(flag => {
-        this.isAuthenticated = flag;
-      });
-    }
   }
 
   UpdateNickName(data) {
