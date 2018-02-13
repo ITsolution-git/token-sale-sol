@@ -46,6 +46,11 @@ export class LayoutComponent implements OnInit, AfterViewInit {
         this.gzrBalance = state.gzrBalance;
         this.nickName = state.nickName;
       }
+      if (this.walletAddress !== state.walletAddress) {
+        this.userService.retriveUser(this.walletAddress).subscribe(user => {
+          this.updateNickName(user.nick);
+        });
+      }
     });
     this.metaMaskService.installedObservable$.subscribe(status => {
       if (!status) {
@@ -86,9 +91,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.userService.retriveUser(this.walletAddress).subscribe(user => {
-      this.updateNickName(user.nick);
-    });
+    
   }
 
   updateInstallStatus(data) {
