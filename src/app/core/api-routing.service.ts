@@ -44,6 +44,10 @@ export class ApiRoutingService {
     return this.baseUrl + '/user/' + address;
   }
 
+  getUserUrlWallet(wallet) {
+    return this.baseUrl + '/user?wallet=' + wallet.toLowerCase();
+  }
+
   loadUnityPlayerUrl() {
     return this.baseUrl + '/unity';
   }

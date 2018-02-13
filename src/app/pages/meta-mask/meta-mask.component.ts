@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { ApplicationState } from '../../store/application-state';
 import { UserState } from '../../store/store-data';
+import { LocalStorageService } from 'ngx-webstorage';
 
 declare const $: any;
 
@@ -23,6 +24,7 @@ export class MetaMaskComponent implements OnInit {
   constructor(
     private router: Router,
     private store: Store<ApplicationState>,
+    private localStorage: LocalStorageService,
   ) {
     this.userState = this.store.select('userState');
    }
@@ -34,7 +36,10 @@ export class MetaMaskComponent implements OnInit {
         this.installed = state.installed;
         this.unlocked = state.unlocked;
         if (this.installed && this.unlocked) {
-          this.navigateToSaveAccount();
+          const wid = this.localStorage.retrieve('wid');
+          if (wid !== state.walletAddress) {
+            this.navigateToSaveAccount();
+          }
         }
       }
     });
