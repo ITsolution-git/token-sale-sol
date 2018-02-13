@@ -40,10 +40,6 @@ export class ApiRoutingService {
     return this.baseUrl + '/user';
   }
 
-  getUserUrl(address) {
-    return this.baseUrl + '/user/' + address;
-  }
-
   getUserUrlWallet(wallet) {
     return this.baseUrl + '/user?wallet=' + wallet.toLowerCase();
   }
