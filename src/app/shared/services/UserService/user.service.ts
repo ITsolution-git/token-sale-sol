@@ -12,12 +12,10 @@ export class UserService {
     private apiRoutingService: ApiRoutingService
   ) { }
 
-  getUsers(limit: number = 0) {
+  getUsers(wallet) {
     return this.http.get(
-      this.apiRoutingService.getUsersUrl(),
-      {
-        limit
-      },
+      this.apiRoutingService.getUserUrlWallet(wallet),
+      {},
       false,
       null
     );
