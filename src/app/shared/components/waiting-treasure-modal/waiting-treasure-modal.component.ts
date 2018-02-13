@@ -26,7 +26,7 @@ export class WaitingTreasureModalComponent implements OnInit {
 
   constructor(
      public bsModalRef: BsModalRef
-) { 
+) {
 
   }
 
