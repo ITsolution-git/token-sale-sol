@@ -11,6 +11,15 @@ export class ApiRoutingService {
     return this.baseUrl + '/item';
   }
 
+  getItemsUrl_ID(ids) {
+    let url = this.baseUrl + '/item?limit=0';
+    for (const id of ids) {
+      url += '&list[]=' + id;
+    }
+
+    return url;
+  }
+
   getItemUrl(id) {
     return this.baseUrl + '/item/' + id;
   }
@@ -33,6 +42,10 @@ export class ApiRoutingService {
 
   getUserUrl(address) {
     return this.baseUrl + '/user/' + address;
+  }
+
+  getUserUrlWallet(wallet) {
+    return this.baseUrl + '/user?wallet=' + wallet.toLowerCase();
   }
 
   loadUnityPlayerUrl() {

@@ -8,11 +8,15 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ProfileModalComponent } from '../profile-modal/profile-modal.component';
 
 import { AuthService } from '../../../core/services/auth.service';
+import { UserService } from '../../services/UserService/user.service';
 import { MetaMaskService } from '../../services/MetaMaskService/meta-mask.service';
 import { ApplicationState } from '../../../store/application-state';
 import { UserState } from '../../../store/store-data';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
+import { stat } from 'fs';
+import { User } from '../../models/user.model';
+import { UPDATE_NICK_NAME } from '../../../store/actions/user.actions';
 
 declare const $: any;
 
@@ -38,6 +42,7 @@ export class HeaderComponent implements OnInit {
   installed = false;
   gzrBalance: number;
   toggled = false;
+  users: User[] = [];
 
   config = {
     animated: true,
@@ -55,6 +60,7 @@ export class HeaderComponent implements OnInit {
     private store: Store<ApplicationState>,
     private metaMaskService: MetaMaskService,
     private modalService: BsModalService,
+    private userService: UserService
   ) {
     this.initTwitterWidget();
     this.initFacebookWidget();
@@ -73,6 +79,23 @@ export class HeaderComponent implements OnInit {
 
     this.userState.subscribe(state => {
       if (state) {
+        if (state.walletAddress && state.walletAddress !== this.walletAddress ) {
+          this.userService.getUsers(state.walletAddress).subscribe((resp: User[]) => {
+            if (resp.length) {
+              const user_ = resp[0];
+              this.nickName = user_.nick;
+              this.authService.login(this.walletAddress);
+              this.isAuthenticated = true;
+              setTimeout(() => {
+                this.metaMaskService.getAccountInfo();
+                this.UpdateNickName(user_.nick);
+              }, 500);
+            } else {
+              this.isAuthenticated = false;
+            }
+          });
+        }
+
         this.walletAddress = state.walletAddress;
         this.unlocked = state.unlocked;
         this.balance = state.balance;
@@ -86,14 +109,18 @@ export class HeaderComponent implements OnInit {
 
   init() {
     this.isMobile = this.isMobileMenu();
-    const token = this.localStorage.retrieve('token');
-    if (token) {
+    const wid = this.localStorage.retrieve('wid');
+    if (wid === this.walletAddress) {
       this.isAuthenticated = true;
     } else {
       this.authService.isLoggedIn$.subscribe(flag => {
         this.isAuthenticated = flag;
       });
     }
+  }
+
+  UpdateNickName(data) {
+    this.store.dispatch({type: UPDATE_NICK_NAME, payload: data});
   }
 
   isMobileMenu() {
