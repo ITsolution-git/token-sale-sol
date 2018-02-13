@@ -10,6 +10,7 @@ import { ApplicationState } from '../../store/application-state';
 import { Observable } from 'rxjs/Observable';
 import { UserState } from '../../store/store-data';
 import { UPDATE_NICK_NAME } from '../../store/actions/user.actions';
+import { User } from '../../shared/models/user.model';
 
 @Component({
   selector: 'app-save-account',
@@ -29,6 +30,7 @@ export class SaveAccountComponent implements OnInit {
   nickName: String = '';
   isSaving = false;
   loaded = false;
+  users: User[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -47,21 +49,48 @@ export class SaveAccountComponent implements OnInit {
   ngOnInit() {
     this.metaMaskService.getAccountInfo();
 
-    this.userState.subscribe(state => {
-      if (state) {
-        if (!state.unlocked) {
-          this.navigateToMetaMask();
+    this.userService.getUsers().subscribe((resp: User[]) => {
+      this.users = resp;
+      this.userState.subscribe(state => {
+        if (state) {
+          if (!state.unlocked) {
+            this.navigateToMetaMask();
+          }
+          debugger;
+          if (this.walletAddress !== state.walletAddress) {
+            this.walletAddress = state.walletAddress;
+            let registered = false,
+                user_;
+  
+            for (const user of this.users)
+              if (user.gzr.id == state.walletAddress) {
+                registered = true;
+                user_ = user;
+                break;
+              }
+            
+            this.loaded = true;
+            if (registered) {
+              this.accountInfo.setValue({
+                walletAddress: this.walletAddress,
+                email: user_.email,
+                nickName: user_.nick
+              });              
+              this.authService.login();
+              setTimeout(() => {
+                this.metaMaskService.getAccountInfo();
+                this.UpdateNickName(user_.nick);
+              }, 500);            
+            } else {
+              this.accountInfo.setValue({
+                walletAddress: this.walletAddress,
+                email: this.email,
+                nickName: this.nickName
+              });
+            }
+          }
         }
-        if (this.walletAddress !== state.walletAddress) {
-          this.walletAddress = state.walletAddress;
-          this.accountInfo.setValue({
-            walletAddress: this.walletAddress,
-            email: this.email,
-            nickName: this.nickName
-          });
-          this.loaded = true;
-        }
-      }
+      });
     });
   }
 

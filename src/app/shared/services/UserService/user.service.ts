@@ -12,6 +12,17 @@ export class UserService {
     private apiRoutingService: ApiRoutingService
   ) { }
 
+  getUsers(limit: number = 0) {
+    return this.http.get(
+      this.apiRoutingService.getUsersUrl(),
+      {
+        limit
+      },
+      false,
+      null
+    );
+  }
+
   registerUser(data) {
     return this.http.put(
       this.apiRoutingService.getUsersUrl(),
