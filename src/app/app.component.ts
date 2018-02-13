@@ -5,7 +5,7 @@ import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { Angulartics2GoogleTagManager } from 'angulartics2/gtm';
 
 interface AppState {
-  token: boolean;
+  registered: false;
 }
 
 @Component({

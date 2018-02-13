@@ -1,1 +1,1 @@
-export { TermsModalResponse, ValidationMessage, ErrorResponse } from './constVariable';
+export { TermsModalResponse, ValidationMessage } from './constVariable';

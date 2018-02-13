@@ -1,7 +1,7 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-
+import { LocalStorageService } from 'ngx-webstorage';
 import { MetaMaskService } from '../../shared/services/MetaMaskService/meta-mask.service';
 import { UserService } from '../../shared/services/UserService/user.service';
 // tslint:disable-next-line:max-line-length
@@ -15,7 +15,7 @@ import { User } from '../../shared/models/user.model';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit, AfterViewInit {
+export class LayoutComponent implements OnInit {
 
   userState: Observable<UserState>;
   installed = true;
@@ -25,10 +25,12 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   gzrBalance: number;
   transactionId: String;
   nickName: String;
-
+  nickNameStr = 'nickName';
+  walletStr = 'walletAddress';
   constructor(
     private metaMaskService: MetaMaskService,
     private userService: UserService,
+    private localStorage: LocalStorageService,
     private store: Store<ApplicationState>,
   ) {
     this.userState = this.store.select('userState');
@@ -36,7 +38,6 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.metaMaskService.getAccountInfo();
-
     this.userState.subscribe(state => {
       if (state) {
         this.installed = state.installed;
@@ -47,6 +48,8 @@ export class LayoutComponent implements OnInit, AfterViewInit {
         this.nickName = state.nickName;
       }
     });
+    const storageNickName = this.localStorage.retrieve(this.nickNameStr);
+    const storageWalletAddress = this.localStorage.retrieve(this.walletStr);
     this.metaMaskService.installedObservable$.subscribe(status => {
       if (!status) {
         this.updateInstallStatus(status);
@@ -63,7 +66,14 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     });
     this.metaMaskService.accountObservable$.subscribe(res => {
       if (this.walletAddress !== res) {
+        this.localStorage.clear(this.nickNameStr);
+        this.localStorage.store(this.walletStr, res);
         this.updateWalletAddress(res);
+        this.userService.retriveUser(res).subscribe(user => {
+          if (user.length) {
+            this.updateNickName(user[0].nick);
+          }
+        });
       }
     });
     this.metaMaskService.balanceObservable$.subscribe(res => {
@@ -82,12 +92,6 @@ export class LayoutComponent implements OnInit, AfterViewInit {
       if (this.transactionId !== transactionId) {
         this.updateTransactionId(transactionId);
       }
-    });
-  }
-
-  ngAfterViewInit() {
-    this.userService.retriveUser(this.walletAddress).subscribe(user => {
-      this.updateNickName(user.nick);
     });
   }
 

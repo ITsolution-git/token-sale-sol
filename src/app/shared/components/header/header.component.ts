@@ -80,7 +80,7 @@ export class HeaderComponent implements OnInit {
     this.userState.subscribe(state => {
       if (state) {
         if (state.walletAddress && state.walletAddress !== this.walletAddress ) {
-          this.userService.getUsers(state.walletAddress).subscribe((resp: User[]) => {
+          this.userService.retriveUser(state.walletAddress).subscribe((resp: User[]) => {
             if (resp.length) {
               const user_ = resp[0];
               this.nickName = user_.nick;
@@ -109,14 +109,6 @@ export class HeaderComponent implements OnInit {
 
   init() {
     this.isMobile = this.isMobileMenu();
-    const wid = this.localStorage.retrieve('wid');
-    if (wid === this.walletAddress) {
-      this.isAuthenticated = true;
-    } else {
-      this.authService.isLoggedIn$.subscribe(flag => {
-        this.isAuthenticated = flag;
-      });
-    }
   }
 
   UpdateNickName(data) {

@@ -4,12 +4,10 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 import { LocalStorageService } from 'ngx-webstorage';
-import { ErrorResponse } from '../shared/models';
 import { environment } from '../../environments/environment';
 
 @Injectable()
 export class HttpHelperService {
-  public serverError = false;
 
   constructor(
     private router: Router,
@@ -19,10 +17,6 @@ export class HttpHelperService {
 
   private checkAuthHeader(response: Response) {
     let res;
-    const authorizationHeader = response.headers.toJSON()['Authorization'] || response.headers.toJSON()['authorization'];
-    if (authorizationHeader) {
-      this.localStorage.store(environment.localStorage.token, authorizationHeader[0]);
-    }
     try {
       res = response.json();
     } catch (e) {
@@ -58,13 +52,6 @@ export class HttpHelperService {
       headers = new Headers();
     }
 
-    if (requiredAuth) {
-      const token = this.localStorage.retrieve(
-        environment.localStorage.token
-      );
-      headers.append('Authorization', `${token}`);
-    }
-
     if (customHeader) {
       customHeader.forEach((value, key) => {
         headers.append(key, value[0]);
@@ -78,9 +65,8 @@ export class HttpHelperService {
       }
     }
 
-    this.serverError = false;
 
-    return new RequestOptions({ headers, withCredentials: false, search });
+    return new RequestOptions({ headers, withCredentials: true, search });
   }
 
   /***
@@ -244,26 +230,18 @@ export class HttpHelperService {
     let skipThrowingError = false;
     if (error.status === 500) {
       const body = error.json() || '';
-      if (body.exception && body.exception === ErrorResponse.TOKEN_EXPIRE) {
+      if (body.exception) {
         if (this.router.url.startsWith('/client')) {
           this.router.navigate(['/client/login']);
         } else {
           this.router.navigate(['login']);
         }
       } else {
-        this.serverError = true;
         skipThrowingError = true;
       }
     } else if (error.status === 504) {
-      this.serverError = true;
       skipThrowingError = true;
     }
-
-    // go ahead to throw error for upload photo
-    // const url = error.url;
-    // if (url.endsWith('talent/upload-photo')) {
-    //   skipThrowingError = false;
-    // }
 
     if (skipThrowingError) {
       return Observable.never();
