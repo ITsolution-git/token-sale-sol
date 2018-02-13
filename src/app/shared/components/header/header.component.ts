@@ -86,14 +86,6 @@ export class HeaderComponent implements OnInit {
 
   init() {
     this.isMobile = this.isMobileMenu();
-    const token = this.localStorage.retrieve('token');
-    if (token) {
-      this.isAuthenticated = true;
-    } else {
-      this.authService.isLoggedIn$.subscribe(flag => {
-        this.isAuthenticated = flag;
-      });
-    }
   }
 
   isMobileMenu() {
