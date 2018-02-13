@@ -21,12 +21,4 @@ export class UserService {
     );
   }
 
-  retriveUser(address): Observable<User> {
-    return this.http.get(
-      this.apiRoutingService.getUserUrl(address),
-      {},
-      false,
-      null
-    );
-  }
 }
