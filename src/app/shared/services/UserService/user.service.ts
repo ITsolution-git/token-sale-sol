@@ -21,4 +21,12 @@ export class UserService {
     );
   }
 
+  retriveUser(walletAddress) {
+    return this.http.get(
+      this.apiRoutingService.getUsersUrl(),
+      {wallet: walletAddress},
+      false,
+      null
+    );
+  }
 }
