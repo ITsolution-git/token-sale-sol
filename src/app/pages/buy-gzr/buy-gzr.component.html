@@ -10,20 +10,21 @@
             <div class="title-wrapper text-center pt-2 pb-4">
               <h4>Send Ether to the address below</h4>
               <p class="warn">*Do not send ETH from an exchange</p>
+              <p class="warn">The token sale is not live, you may only buy test GZR. The current smart contract is only available on the Ropsten Test Network. Do not send ETH on the Main Network or you will lose your ETH. This address is only for testing.</p>
             </div>
             <div *ngIf="isAccepted && showAddress" class="address-block">
               <div class="position-relative">
-                <input class="txt-value-input w-100 pl-3 mb-3" placeholder="0x90dw90fh382hfsjenf032ru9oafj3092fh" type="text" readonly>
+                <input class="txt-value-input w-100 pl-3 mb-3" value="0x90dCdC0AD9813ba963D54ADcCFA9091f4dd2925B" type="text" readonly>
                 <span class="copy-icon"><img class="pr-1" src="/assets/icons/icon-copy.png">Copy</span>
               </div>
-              <div class="separator">
+              <!-- <div class="separator">
                 <span class="line"></span>
                 <span class="text">or</span>
-              </div>
-              <div class="position-relative">
+              </div> -->
+              <!-- <div class="position-relative">
                 <input class="txt-value-input w-100 pl-3 mb-3" placeholder="gizergaming.eth" type="text" readonly>
                 <span class="copy-icon"><img class="pr-1" src="/assets/icons/icon-copy.png">Copy</span>
-              </div>
+              </div> -->
             </div>
             <div *ngIf="!showAddress" class="buy-gzr-wrapper border border-secondary p-3 w-100">
               <div class="check-terms pb-4">
@@ -31,7 +32,7 @@
                   <input [(ngModel)]="isAccepted" class="terms-checkbox" id="terms-checkbox" type="checkbox">
                   <label for="terms-checkbox"></label>
                 </span>
-                <span class="text-label">I have read the Gzr <a href="#" class="link">Whitepaper</a> and I accept the <a href="#" class="ml-4 link terms" >Terms & Conditions</a></span>
+                <span class="text-label">I have read and accept the <a routerLink="/terms-and-conditions" class="link terms" >Terms & Conditions</a></span>
               </div>
               <div class="buy-now mb-3" (click)="showAddressForm()">
                 <span class="btn-buy-now">Show Me the Contract Address</span>
@@ -81,7 +82,7 @@
                   <input [(ngModel)]="isAccepted" class="terms-checkbox" id="terms-checkbox" type="checkbox">
                   <label for="terms-checkbox"></label>
                 </span>
-                <span class="text-label">I have read the Gzr <a href="#" class="link">Whitepaper</a> and I accept the <a href="#" class="ml-4 link terms" >Terms & Conditions</a></span>
+                <span class="text-label">I have read and accept the <a routerLink="/terms-and-conditions" class="link terms" target="_blank">Terms & Conditions</a></span>
 
                 <p *ngIf="!isAccepted && isBuyClicked" class="text-label text-danger">You need to accept terms & conditions first</p>
               </div>
