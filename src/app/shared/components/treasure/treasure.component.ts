@@ -79,16 +79,12 @@ export class TreasureComponent implements OnInit {
       .then(ctc => {
         this.tokenContract = ctc;
         this.metaMaskService.approveTokenSend(this.tokenContract, amount)
-        .then(
-          res => {
-            this.metaMaskService.getItemGenerationContract()
-              .then(ctr => {
-                this.itemGenerationContract = ctr;
-                this.metaMaskService.getItem(this.itemGenerationContract);
-                this.bsModalRef = this.modalService.show(WaitingItemComponent);
-              });
-          }
-         );
+        this.metaMaskService.getItemGenerationContract()
+          .then(ctr => {
+            this.itemGenerationContract = ctr;
+            this.metaMaskService.getItem(this.itemGenerationContract);
+            this.bsModalRef = this.modalService.show(WaitingItemComponent);
+          });
       });
   }
 }

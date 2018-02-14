@@ -13,7 +13,6 @@ import { GuideAccordionModule } from './guide-accordion/guide-accordion.module';
 import { InstallMetaModule } from './install-meta/install-meta.module';
 import { LockedMetaModule } from './locked-meta/locked-meta.module';
 import { TreasureModule } from './treasure/treasure.module';
-import { WaitingItemModule } from './waiting-item/waiting-item.module';
 
 @NgModule({
   imports: [
@@ -31,7 +30,6 @@ import { WaitingItemModule } from './waiting-item/waiting-item.module';
     LockedMetaModule,
     TreasureModule,
     ItemModule,
-    WaitingItemModule,
   ],
   declarations: [],
   exports: [
@@ -47,7 +45,6 @@ import { WaitingItemModule } from './waiting-item/waiting-item.module';
     LockedMetaModule,
     TreasureModule,
     ItemModule,
-    WaitingItemModule,
   ]
 })
 export class ComponentsModule { }
