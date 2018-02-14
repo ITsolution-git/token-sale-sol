@@ -8,7 +8,7 @@ import { MetaMaskService } from '../../services/MetaMaskService/meta-mask.servic
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ProfileModalComponent } from '../profile-modal/profile-modal.component';
-
+import { WaitingTreasureModalComponent } from '../waiting-treasure-modal/waiting-treasure-modal.component';
 
 @Component({
   selector: 'app-treasure',
@@ -27,6 +27,10 @@ export class TreasureComponent implements OnInit {
     backdrop: true,
     ignoreBackdropClick: false
   };
+  tokenContract: {};
+  standardContract: {};
+  itemGenerationContract: {};
+
 
   bsModalRef: BsModalRef;
 
@@ -55,18 +59,38 @@ export class TreasureComponent implements OnInit {
 
   openTreasure() {
     if (this.unlocked && this.installed) {
-      this.navgiateToTreasurePage();
+      this.openTreasureModal();
     } else {
-      this.navgiateToInstallMeta();
+      this.navigateToInstallMeta();
     }
   }
 
-  navgiateToInstallMeta() {
+  navigateToInstallMeta() {
     this.router.navigate(['/meta-mask']);
   }
 
-  navgiateToTreasurePage() {
+  openTreasureModal() {
     const amount = 1;
-    this.metaMaskService.sendCoin(amount);
+
+
+
+    this.metaMaskService.getTokenContract()
+      .then(ctc => {
+        this.tokenContract = ctc;
+        // Prompt user for approval
+        this.metaMaskService.approveTokenSend(this.tokenContract, amount)
+        .then(
+          res => {
+            // triggering getitem
+            this.metaMaskService.getItemGenerationContract()
+              .then(ctr => {
+                this.itemGenerationContract = ctr;
+                this.metaMaskService.getItem(this.itemGenerationContract);
+                // once approved, spinning animation pending
+                this.bsModalRef = this.modalService.show(WaitingTreasureModalComponent);
+              });
+          }
+         );
+      });
   }
 }

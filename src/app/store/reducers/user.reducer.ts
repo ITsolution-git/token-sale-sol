@@ -29,7 +29,7 @@ export function userReducer(state: UserState = INITIAL_USER_STATE, action: Actio
 
         case UserActions.UPDATE_TRANSACTION_ID:
             return { ...state, transactionId: action.payload };
-        
+
         case UserActions.UPDATE_VALID_NETWORK:
             return { ...state, validNetwork: action.payload };
 

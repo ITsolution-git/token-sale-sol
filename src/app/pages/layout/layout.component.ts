@@ -30,10 +30,10 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   gzrBalance: number;
   transactionId: String;
   nickName: String;
-  validNetwork: boolean = false;
+  validNetwork = false;
 
   options = {
-      position: ["top", "right"],
+      position: ['top', 'right'],
       timeOut: 2000,
       lastOnBottom: true
   };
@@ -46,7 +46,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   };
 
   bsModalRef: BsModalRef;
-  
+
   constructor(
     private metaMaskService: MetaMaskService,
     private userService: UserService,
@@ -59,7 +59,6 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.metaMaskService.getAccountInfo();
-
     this.userState.subscribe(state => {
       if (state) {
         this.installed = state.installed;
@@ -89,6 +88,11 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     this.metaMaskService.accountObservable$.subscribe(res => {
       if (this.walletAddress !== res) {
         this.updateWalletAddress(res);
+        this.userService.retriveUser(res).subscribe(user => {
+          if (user.length) {
+            this.updateNickName(user[0].nick);
+          }
+        });
       }
     });
     this.metaMaskService.balanceObservable$.subscribe(res => {
@@ -137,7 +141,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.userService.retriveUser(this.walletAddress).subscribe(user => {
       this.updateNickName(user.nick);
-    });    
+    });
   }
 
   updateInstallStatus(data) {
