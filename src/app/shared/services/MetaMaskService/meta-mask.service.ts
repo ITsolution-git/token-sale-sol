@@ -298,7 +298,6 @@ export class MetaMaskService {
       return meta.spendGZRToGetAnItem({from: this.account});
     })
     .then(tx => {
-      console.log(tx);
     });
   }
 
