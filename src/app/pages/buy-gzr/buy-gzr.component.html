@@ -15,7 +15,7 @@
             <div *ngIf="isAccepted && showAddress" class="address-block">
               <div class="position-relative">
                 <input class="txt-value-input w-100 pl-3 mb-3" value="0x90dCdC0AD9813ba963D54ADcCFA9091f4dd2925B" type="text" readonly>
-                <span class="copy-icon"><img class="pr-1" src="/assets/icons/icon-copy.png">Copy</span>
+                <span id="copy-wallet-address" class="copy-icon"><img class="pr-1" src="/assets/icons/icon-copy.png">Copy</span>
               </div>
               <!-- <div class="separator">
                 <span class="line"></span>
@@ -54,7 +54,8 @@
                 >
                 <span class="icons"><img src="/assets/icons/icon-etherum-buy.png"></span>
               </div>
-              <ion-range-slider #sliderElement
+              <ion-range-slider #ethSlider
+                id="eth-slider"
                 type="single"
                 min="0"
                 max="500"

@@ -14,10 +14,11 @@ export class ItemComponent implements OnInit {
   @Input() itemName = '';
 
   rarityType: string;
-
+  itemId: string;
   constructor( private router: Router ) { }
 
   ngOnInit() {
+    this.itemId = this.id;
     this.rarityType = `/assets/images/img-item-type-${this.rarity.toLocaleLowerCase()}.png`;
   }
 

@@ -5,6 +5,7 @@ export enum MenuType {
 }
 
 export interface RouteInfo {
+    id: string;
     path: string;
     title: string;
     fragment: string;
