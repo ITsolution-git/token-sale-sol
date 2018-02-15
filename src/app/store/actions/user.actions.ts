@@ -8,6 +8,7 @@ export const UPDATE_BALANCE = 'UPDATE_BALANCE';
 export const UPDATE_SHOW_ADDRESS_FORM = 'UPDATE_SHOW_ADDRESS_FORM';
 export const UPDATE_TRANSACTION_ID = 'UPDATE_TRANSACTION_ID';
 export const UPDATE_NICK_NAME = 'UPDATE_NICK_NAME';
+export const UPDATE_VALID_NETWORK = 'UPDATE_VALID_NETWORK';
 
 export class UpdateInstallStatus implements Action {
     readonly type = UPDATE_INSTALL_STATUS;
@@ -63,5 +64,12 @@ export class UpdateNickName implements Action {
     }
 }
 
+export class UpdateValidNetwork implements Action {
+    readonly type = UPDATE_VALID_NETWORK;
+
+    constructor(public payload: boolean) {
+    }
+}
+
 export type All = UpdateInstallStatus | UpdateLockStatus |
-UpdateWallet | UpdateGzrBalance | UpdateShowAddressForm | UpdateBalance | UpdateTransactionId | UpdateNickName;
+UpdateWallet | UpdateGzrBalance | UpdateShowAddressForm | UpdateBalance | UpdateTransactionId | UpdateNickName | UpdateValidNetwork;
