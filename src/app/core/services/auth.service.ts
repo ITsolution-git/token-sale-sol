@@ -13,8 +13,6 @@ export class AuthService {
     private router: Router,
     private localStorage: LocalStorageService,
   ) {
-    const token = this.localStorage.retrieve('token');
-    if (token) { this.isLoggedIn.next(true); }
   }
 
   setLoginFlag(flag: boolean) {
@@ -23,15 +21,11 @@ export class AuthService {
 
   login(wallet: String = '') {
     this.isLoggedIn.next(true);
-    this.localStorage.store('token', 'afgeFb596hHHHPlKEgnzafSFcceR3xXCfiUvHKAVvb25IZn8pZiqFxtFoBVxzfA');
-    this.localStorage.store('wid', wallet);
     this.router.navigate(['/']);
   }
 
   logout() {
     this.isLoggedIn.next(false);
-    this.localStorage.clear('token');
-    this.localStorage.clear('wid');
     this.router.navigate(['/meta-mask']);
   }
 }

@@ -29,7 +29,8 @@ export class SaveAccountComponent implements OnInit {
   nickName: String = '';
   isSaving = false;
   loaded = false;
-
+  saveNikNameStr = 'nickName';
+  saveWalletStr = 'walletAddress';
   constructor(
     private fb: FormBuilder,
     private localStorage: LocalStorageService,
@@ -88,7 +89,6 @@ export class SaveAccountComponent implements OnInit {
     this.isValidEmail = true;
     this.isSaving = true;
     setTimeout(() => {
-      this.UpdateNickName(this.nickName);
       this.metaMaskService.SignInTransaction()
       .then(result => {
         const data = {
@@ -104,6 +104,8 @@ export class SaveAccountComponent implements OnInit {
         setTimeout(() => {
           this.metaMaskService.getAccountInfo();
           this.UpdateNickName(this.nickName);
+          this.localStorage.store(this.saveNikNameStr, this.nickName);
+          this.localStorage.store(this.saveWalletStr, this.walletAddress);
         }, 500);
 
         this.userService.registerUser(data)

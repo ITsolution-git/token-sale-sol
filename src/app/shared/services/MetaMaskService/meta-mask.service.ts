@@ -301,4 +301,29 @@ export class MetaMaskService {
       console.log(tx);
     });
   }
+
+// similar item procedure than above in small functions to facilitate observation
+
+
+  getTokenContract() {
+    return this.StandardToken.deployed();
+  }
+
+   getStandardContract() {
+    return this.GZRTokenToItemGeneration.deployed();
+  }
+   getItemGenerationContract() {
+    return this.GZRTokenToItemGeneration.deployed();
+  }
+
+  approveTokenSend(tokenContract, amount) {
+      return tokenContract.approve(tokenContract.address, amount, {from: this.account});
+  }
+
+  getItem(tokenContract) {
+      return tokenContract.spendGZRToGetAnItem({from: this.account});
+  }
+
+
+
 }

@@ -1,11 +1,10 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ValidNetworkModalComponent } from '../../shared/components/valid-network/valid-network.component';
-
+import { LocalStorageService } from 'ngx-webstorage';
 import { MetaMaskService } from '../../shared/services/MetaMaskService/meta-mask.service';
 import { UserService } from '../../shared/services/UserService/user.service';
 // tslint:disable-next-line:max-line-length
@@ -20,7 +19,7 @@ import { NotificationsService } from 'angular2-notifications-lite';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit, AfterViewInit {
+export class LayoutComponent implements OnInit {
 
   userState: Observable<UserState>;
   installed = true;
@@ -46,10 +45,13 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   };
 
   bsModalRef: BsModalRef;
+  nickNameStr = 'nickName';
+  walletStr = 'walletAddress';
 
   constructor(
     private metaMaskService: MetaMaskService,
     private userService: UserService,
+    private localStorage: LocalStorageService,
     private store: Store<ApplicationState>,
     private notificationService: NotificationsService,
     private modalService: BsModalService,
@@ -59,7 +61,6 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.metaMaskService.getAccountInfo();
-
     this.userState.subscribe(state => {
       if (state) {
         this.installed = state.installed;
@@ -71,6 +72,8 @@ export class LayoutComponent implements OnInit, AfterViewInit {
         this.validNetwork = state.validNetwork;
       }
     });
+    const storageNickName = this.localStorage.retrieve(this.nickNameStr);
+    const storageWalletAddress = this.localStorage.retrieve(this.walletStr);
     this.metaMaskService.installedObservable$.subscribe(status => {
       if (!status) {
         this.updateInstallStatus(status);
@@ -88,7 +91,14 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     });
     this.metaMaskService.accountObservable$.subscribe(res => {
       if (this.walletAddress !== res) {
+        this.localStorage.clear(this.nickNameStr);
+        this.localStorage.store(this.walletStr, res);
         this.updateWalletAddress(res);
+        this.userService.retriveUser(res).subscribe(user => {
+          if (user.length) {
+            this.updateNickName(user[0].nick);
+          }
+        });
       }
     });
     this.metaMaskService.balanceObservable$.subscribe(res => {
@@ -131,12 +141,6 @@ export class LayoutComponent implements OnInit, AfterViewInit {
               maxLength: 10
           }
       );
-    });
-  }
-
-  ngAfterViewInit() {
-    this.userService.retriveUser(this.walletAddress).subscribe(user => {
-      this.updateNickName(user.nick);
     });
   }
 
