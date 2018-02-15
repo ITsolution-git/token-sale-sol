@@ -41,7 +41,7 @@ export const reducers = {
     LockedModalComponent,
     InstallMaskModalComponent,
     ValidNetworkModalComponent,
-    WaitingTreasureModalComponent
+    WaitingTreasureModalComponent,
     WaitingItemComponent,
   ],
   imports: [
