@@ -23,7 +23,7 @@ import { HttpHelperService } from './core/http-helper.service';
 
 import { LockedModalComponent } from './shared/components/locked-modal/locked-modal.component';
 import { InstallMaskModalComponent } from './shared/components/install-mask-modal/install-mask-modal.component';
-import { ProfileModalComponent } from './shared/components/profile-modal/profile-modal.component';
+import { ValidNetworkModalComponent } from './shared/components/valid-network/valid-network.component';
 
 import { INITIAL_APPLICATION_STATE } from './store/application-state';
 import { userReducer } from './store/reducers/user.reducer';
@@ -37,7 +37,7 @@ export const reducers = {
     AppComponent,
     LockedModalComponent,
     InstallMaskModalComponent,
-    ProfileModalComponent
+    ValidNetworkModalComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +63,7 @@ export const reducers = {
   entryComponents: [
     LockedModalComponent,
     InstallMaskModalComponent,
-    ProfileModalComponent
+    ValidNetworkModalComponent
   ],
   bootstrap: [AppComponent],
 })

@@ -11,7 +11,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications-lite';
   imports: [
     CommonModule,
     ComponentsModule,
-    RouterModule,    
+    RouterModule,
     SimpleNotificationsModule.forRoot()
   ],
   declarations: [LayoutComponent],

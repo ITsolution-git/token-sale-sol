@@ -1,42 +1,18 @@
-.profile-modal {
-
-	
-	
-	.modal-title {
-        font-size: 30px;
-        font-family: "Century Gothic Bold";
-        color: #3171a2;
+.locked-meta {
+    .title {
+        h2 {
+            font-size: 30px;
+            font-family: "Century Gothic Bold";
+            color: #3171a2;
+        }
     }
     .description {
-        font-size: 18px;
+        font-size: 21px;
         font-family: "Century Gothic";
-        color: #0b0c14;
     }
-
-
-    .btn-back {
-    	color: #79b0e4;
-    	border: 1px solid #bdbdbd
-    }
-
-    @media (max-width: 450px) {
-        .modal-title {
-            font-size: 18px;
-        }
-        .description {
-            font-size: 12px;
-        }
-        .view-faq {
-            font-size: 13px;
-        }
-        .link {
+    .btn-unlock-meta-mask {
+        img {
             cursor: pointer;
-            font-size: 12px;
-            font-family: "Century Gothic Bold";
-            color: #0f9cd1;
-            text-decoration: underline;
         }
     }
-
 }
-

@@ -30,10 +30,10 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   gzrBalance: number;
   transactionId: String;
   nickName: String;
-  validNetwork: boolean = false;
+  validNetwork = false;
 
   options = {
-      position: ["top", "right"],
+      position: ['top', 'right'],
       timeOut: 2000,
       lastOnBottom: true
   };
@@ -46,7 +46,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   };
 
   bsModalRef: BsModalRef;
-  
+
   constructor(
     private metaMaskService: MetaMaskService,
     private userService: UserService,
@@ -114,7 +114,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
         this.updateNetworkStatus(status);
       }
 
-      if (!status) {
+      if (!status && !this.bsModalRef) {
           this.bsModalRef = this.modalService.show(ValidNetworkModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
       }
     });
@@ -137,7 +137,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.userService.retriveUser(this.walletAddress).subscribe(user => {
       this.updateNickName(user.nick);
-    });    
+    });
   }
 
   updateInstallStatus(data) {

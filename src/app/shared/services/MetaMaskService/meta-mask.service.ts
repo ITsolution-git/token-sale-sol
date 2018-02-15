@@ -107,7 +107,7 @@ export class MetaMaskService {
     .catch(() => {
       this.validNetwork = false;
       this.validNetworkSubject.next(this.validNetwork);
-    })
+    });
   }
 
   checkAndInstantiateWeb3() {
@@ -115,7 +115,7 @@ export class MetaMaskService {
       if (typeof window.web3 !== 'undefined') {
         window.web3.version.getNetwork((err, netId) => {
           switch (netId) {
-            case "3":
+            case '3':
               this.web3 = new Web3(window.web3.currentProvider);
               resolve(true);
               break;
@@ -256,7 +256,6 @@ export class MetaMaskService {
                 'failure': true
               });
             } else {
-              debugger
               this.signTransactionPending = this.signTransactionPending + 1;
               this.signTransactionPendingSubject.next(this.signTransactionPending);
               gzr.balanceOf(this.account)
