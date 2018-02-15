@@ -28,6 +28,8 @@ import { ValidNetworkModalComponent } from './shared/components/valid-network/va
 import { INITIAL_APPLICATION_STATE } from './store/application-state';
 import { userReducer } from './store/reducers/user.reducer';
 import { WaitingTreasureModalComponent } from './shared/components/waiting-treasure-modal/waiting-treasure-modal.component';
+import { WaitingItemComponent } from './shared/components/waiting-item/waiting-item.component';
+
 
 export const reducers = {
   userState: userReducer
@@ -40,6 +42,7 @@ export const reducers = {
     InstallMaskModalComponent,
     ValidNetworkModalComponent,
     WaitingTreasureModalComponent
+    WaitingItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,7 +69,8 @@ export const reducers = {
     LockedModalComponent,
     InstallMaskModalComponent,
     ValidNetworkModalComponent,
-    WaitingTreasureModalComponent
+    WaitingTreasureModalComponent,
+    WaitingItemComponent,
   ],
   bootstrap: [AppComponent],
 })

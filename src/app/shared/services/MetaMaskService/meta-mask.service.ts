@@ -301,9 +301,6 @@ export class MetaMaskService {
     });
   }
 
-// similar item procedure than above in small functions to facilitate observation
-
-
   getTokenContract() {
     return this.StandardToken.deployed();
   }

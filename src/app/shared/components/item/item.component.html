@@ -1,15 +1,15 @@
-<div class="inventory-item">
-  <div class="item-wrapper"
+<div [id]="itemTagId" class="inventory-item">
+  <div [id]="itemTagId" class="item-wrapper"
     (click)="navigateToItemDetails()"
     >
-    <div class="item-img align-items-center d-flex justify-content-center">
-      <img class="mw-100 mh-100" [src]="itemImageLink">
+    <div [id]="itemTagId" class="item-img align-items-center d-flex justify-content-center">
+      <img [id]="itemTagId" class="mw-100 mh-100" [src]="itemImageLink">
     </div>
-    <div class="item-name">
-      <span class="align-middle">{{itemName}}</span>
+    <div [id]="itemTagId" class="item-name">
+      <span [id]="itemTagId" class="align-middle">{{itemName}}</span>
     </div>
-    <div class="rarity">
-      <img [src]="rarityType">
+    <div [id]="itemTagId" class="rarity">
+      <img [id]="itemTagId" [src]="rarityType">
     </div>
   </div>
 </div>

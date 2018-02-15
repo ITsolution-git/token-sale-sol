@@ -47,8 +47,8 @@
               </div>
             </div>
             <div class="save-info-block text-center">
-              <div *ngIf="!isSaving" class="save-info mb-3" (click)="onSaveInfo()">
-                <span class="btn-save-info">Save account info</span>
+              <div id="save-account-info" *ngIf="!isSaving" class="save-info mb-3" (click)="onSaveInfo()">
+                <span id="save-account-info" class="btn-save-info" (click)="onSaveInfo()">Save account info</span>
               </div>
               <div *ngIf="isSaving" class="save-info disabled mb-3">
                 <span class="btn-save-info">Updating Accounts...</span>
