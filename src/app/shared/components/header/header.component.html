@@ -5,7 +5,9 @@
         <a href="/"><img class="site-logo" src="/assets/images/img-logo.png"></a>
       </div>
       <div class="col-md-4 d-flex text-left">
-        <div class="fb-like d-inline-flex"
+        <div
+          id="like-facebook"
+          class="fb-like d-inline-flex"
           data-href="https://www.facebook.com/GizerGaming/"
           data-layout="button"
           data-action="like"
@@ -13,7 +15,9 @@
           data-show-faces="false"
           data-share="false">
         </div>
-        <div class="fb-share-button d-inline-flex ml-1"
+        <div
+          id="share-facebook"
+          class="fb-share-button d-inline-flex ml-1"
           data-href="https://www.facebook.com/GizerGaming/"
           data-layout="button"
           data-size="small"
@@ -26,7 +30,9 @@
             </a>
         </div>
         <div class="twitter d-inline-flex ml-2">
-          <a class="twitter-share-button"
+          <a
+            id="share-twitter" 
+            class="twitter-share-button"
             href="https://twitter.com/share"
             data-url="http://54.243.54.136/"
             data-text="Live token sale with a working product? That's something I haven't seen before... I'm ready to build my gaming identity on the blockchain with Gizer and GGID! Check it out https://tokensale.gizer.io"
@@ -37,19 +43,19 @@
         </div>
       </div>
       <div class="col-md-6 d-flex justify-content-end align-items-center p-0">
-        <div class="d-inline-flex btn-treasure align-items-center custom-button" (click)="navgiateToTreasure()">
-          <img class="button-image" src="/assets/icons/icon-treasure.png">
-          <span class="menu-text">Open Treasure</span>
+        <div id="open-treasure" (click)="navgiateToTreasure()" class="d-inline-flex btn-treasure align-items-center custom-button">
+          <img id="open-treasure" (click)="navgiateToTreasure()" class="button-image" src="/assets/icons/icon-treasure.png">
+          <span id="open-treasure" (click)="navgiateToTreasure()" class="menu-text">Open Treasure</span>
         </div>
-        <div class="d-inline-flex btn-gizer-amount align-items-center custom-button" (click)="navgiateToBuyGizer()">
-          <img src="/assets/icons/icon-gizer.png">
-          <span *ngIf="isAuthenticated" class="menu-text">{{gzrBalance | number}} GZR</span>
-          <span *ngIf="!isAuthenticated" class="menu-text">0 GZR</span>
+        <div id="gzr-balance-header" (click)="navgiateToBuyGizer()" class="d-inline-flex btn-gizer-amount align-items-center custom-button">
+          <img id="gzr-balance-header" (click)="navgiateToBuyGizer()" src="/assets/icons/icon-gizer.png">
+          <span id="gzr-balance-header" *ngIf="isAuthenticated" class="menu-text" (click)="navgiateToBuyGizer()">{{gzrBalance | number}} GZR</span>
+          <span id="gzr-balance-header" *ngIf="!isAuthenticated" class="menu-text" (click)="navgiateToBuyGizer()">0 GZR</span>
         </div>
         <div class="d-inline-flex btn-user-info align-items-center custom-button">
           <img src="/assets/icons/icon-user.png">
-          <span *ngIf="isAuthenticated" class="menu-text" (click)="logout()">{{nickName.slice(0, 10)}}</span>
-          <span *ngIf="!isAuthenticated" class="menu-text" (click)="login()">Register</span>
+          <span id="myprofile-header" *ngIf="isAuthenticated" class="menu-text" (click)="logout()">{{nickName.slice(0, 10)}}</span>
+          <span id="register-metamask-header" *ngIf="!isAuthenticated" class="menu-text" (click)="login()">Register</span>
         </div>
         <div *ngIf="isAuthenticated" class="d-inline-flex align-items-center btn-etherum-info">
           <span class="info-text">{{balance | number}} ETH</span>
@@ -67,11 +73,11 @@
           <li *ngFor="let menuItem of menuItems"
             class="nav-item">
             <img *ngIf="menuItem.title === 'Home'" class="icon-home" src="/assets/icons/icon-home.png">
-            <a *ngIf="menuItem.title === 'Home'" class="nav-item nav-link nav-home" [routerLink]="[menuItem.path]" fragment="home" routerLinkActive="router-active" [routerLinkActiveOptions]="{exact: true}">{{menuItem.title}}</a>            
-            <a *ngIf="menuItem.title !== 'Home'" class="nav-item nav-link" routerLinkActive="router-active" [routerLinkActiveOptions]="{exact: true}" [routerLink]="[menuItem.path]">{{menuItem.title}}</a>
+            <a id="home-navbar" *ngIf="menuItem.title === 'Home'" class="nav-item nav-link nav-home" [routerLink]="[menuItem.path]" fragment="home" routerLinkActive="router-active" [routerLinkActiveOptions]="{exact: true}">{{menuItem.title}}</a>            
+            <a *ngIf="menuItem.title !== 'Home'" [id]="menuItem.id" class="nav-item nav-link" routerLinkActive="router-active" [routerLinkActiveOptions]="{exact: true}" [routerLink]="[menuItem.path]">{{menuItem.title}}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-item nav-link" (click)="navigateToTokenSection()">What is GZR?</a>
+            <a id="whatisgzr-navbar" class="nav-item nav-link" (click)="navigateToTokenSection()">What is GZR?</a>
           </li>
         </ul>
       </div>
@@ -94,10 +100,10 @@
 <div *ngIf="toggled" class="mobile-nav-menu justify-content-center">
   <ul class="navbar-nav mr-auto">
       <li *ngFor="let menuItem of mobileMenuItems" class="nav-item">
-        <a class="nav-item nav-link" [routerLink]="[menuItem.path]">{{menuItem.title}}</a>
+        <a class="nav-item nav-link" [id]="menuItem.id" [routerLink]="[menuItem.path]">{{menuItem.title}}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-item nav-link" (click)="navigateToTokenSection()">What is GZR?</a>
+        <a id="whatisgzr-navbar" class="nav-item nav-link" (click)="navigateToTokenSection()">What is GZR?</a>
       </li>
     </ul>
 </div>

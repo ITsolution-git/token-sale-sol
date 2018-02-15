@@ -9,7 +9,7 @@
     </div>
     <p class="confused">Confused?</p>
     <div class="mb-5">
-      <span class="view-faq" (click)="navigateToFAQ()">View the FAQ</span>
+      <span id="view-faq-mmlocked" class="view-faq" (click)="navigateToFAQ()">View the FAQ</span>
     </div>
   </div>
   <div *ngIf="isMobile" class="modal-body text-center">
@@ -26,6 +26,6 @@
       <div class="mt-5 mb-2">
         <span class="view-faq" (click)="showAddressForm()">Let me Buy GZR anyways</span>
       </div>
-      <a class="link" (click)="navigateToFAQ()">I'm confused, show me the FAQ</a>
+      <a id="view-faq-mmlocked" class="link" (click)="navigateToFAQ()">I'm confused, show me the FAQ</a>
     </div>
 </div>
