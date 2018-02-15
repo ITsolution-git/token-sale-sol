@@ -78,7 +78,7 @@ export class TreasureComponent implements OnInit {
     this.metaMaskService.getTokenContract()
       .then(ctc => {
         this.tokenContract = ctc;
-        this.metaMaskService.approveTokenSend(this.tokenContract, amount)
+        this.metaMaskService.approveTokenSend(this.tokenContract, amount);
         this.metaMaskService.getItemGenerationContract()
           .then(ctr => {
             this.itemGenerationContract = ctr;
