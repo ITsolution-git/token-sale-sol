@@ -9,6 +9,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ProfileModalComponent } from '../profile-modal/profile-modal.component';
 import { WaitingTreasureModalComponent } from '../waiting-treasure-modal/waiting-treasure-modal.component';
+import { WaitingItemComponent } from '../waiting-item/waiting-item.component';
 
 @Component({
   selector: 'app-treasure',
@@ -77,20 +78,13 @@ export class TreasureComponent implements OnInit {
     this.metaMaskService.getTokenContract()
       .then(ctc => {
         this.tokenContract = ctc;
-        // Prompt user for approval
         this.metaMaskService.approveTokenSend(this.tokenContract, amount)
-        .then(
-          res => {
-            // triggering getitem
-            this.metaMaskService.getItemGenerationContract()
-              .then(ctr => {
-                this.itemGenerationContract = ctr;
-                this.metaMaskService.getItem(this.itemGenerationContract);
-                // once approved, spinning animation pending
-                this.bsModalRef = this.modalService.show(WaitingTreasureModalComponent);
-              });
-          }
-         );
+        this.metaMaskService.getItemGenerationContract()
+          .then(ctr => {
+            this.itemGenerationContract = ctr;
+            this.metaMaskService.getItem(this.itemGenerationContract);
+            this.bsModalRef = this.modalService.show(WaitingItemComponent);
+          });
       });
   }
 }
