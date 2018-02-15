@@ -43,14 +43,14 @@
         </div>
       </div>
       <div class="col-md-6 d-flex justify-content-end align-items-center p-0">
-        <div id="open-treasure" class="d-inline-flex btn-treasure align-items-center custom-button" (click)="navgiateToTreasure()">
-          <img class="button-image" src="/assets/icons/icon-treasure.png">
-          <span class="menu-text">Open Treasure</span>
+        <div id="open-treasure" (click)="navgiateToTreasure()" class="d-inline-flex btn-treasure align-items-center custom-button">
+          <img id="open-treasure" (click)="navgiateToTreasure()" class="button-image" src="/assets/icons/icon-treasure.png">
+          <span id="open-treasure" (click)="navgiateToTreasure()" class="menu-text">Open Treasure</span>
         </div>
-        <div id="gzr-balance-header" class="d-inline-flex btn-gizer-amount align-items-center custom-button" (click)="navgiateToBuyGizer()">
-          <img src="/assets/icons/icon-gizer.png">
-          <span *ngIf="isAuthenticated" class="menu-text">{{gzrBalance | number}} GZR</span>
-          <span *ngIf="!isAuthenticated" class="menu-text">0 GZR</span>
+        <div id="gzr-balance-header" (click)="navgiateToBuyGizer()" class="d-inline-flex btn-gizer-amount align-items-center custom-button">
+          <img id="gzr-balance-header" (click)="navgiateToBuyGizer()" src="/assets/icons/icon-gizer.png">
+          <span id="gzr-balance-header" *ngIf="isAuthenticated" class="menu-text" (click)="navgiateToBuyGizer()">{{gzrBalance | number}} GZR</span>
+          <span id="gzr-balance-header" *ngIf="!isAuthenticated" class="menu-text" (click)="navgiateToBuyGizer()">0 GZR</span>
         </div>
         <div class="d-inline-flex btn-user-info align-items-center custom-button">
           <img src="/assets/icons/icon-user.png">

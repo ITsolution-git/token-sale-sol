@@ -18,7 +18,8 @@
       <app-item
         class="item-wrapper"
         *ngFor="let item of items"
-        [id]="item.meta.name"
+        id="item.meta.name"
+        [itemId]="item.id"
         [itemImageLink]="item.resources.icons[0]"
         [itemName]="item.meta.name"
         [rarity]="item.meta.rarity"
