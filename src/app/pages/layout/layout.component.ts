@@ -5,6 +5,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ValidNetworkModalComponent } from '../../shared/components/valid-network/valid-network.component';
 import { LocalStorageService } from 'ngx-webstorage';
+import { Intercom } from 'ng-intercom';
 
 import { MetaMaskService } from '../../shared/services/MetaMaskService/meta-mask.service';
 import { UserService } from '../../shared/services/UserService/user.service';
@@ -50,6 +51,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   walletStr = 'walletAddress';
 
   constructor(
+    public intercom: Intercom,
     private metaMaskService: MetaMaskService,
     private userService: UserService,
     private store: Store<ApplicationState>,
@@ -93,6 +95,8 @@ export class LayoutComponent implements OnInit, AfterViewInit {
         this.userService.retriveUser(res).subscribe(user => {
           if (user.length) {
             this.updateNickName(user[0].nick);
+            const {email, id} = user[0];
+            this.loadIntercom(email, id);
           }
         });
       }
@@ -181,5 +185,23 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
   onDeactivate() {
     window.scrollTo(0, 0);
+  }
+
+  loadIntercom(email, userId) {
+    (<any>window).Intercom('boot', {
+      app_id: 'e46tjta5',
+      custom_launcher_selector: '#IntercomDefaultWidget',
+      email: email,
+      user_id: userId,
+      created_at: Date.now(),
+   });
+  }
+
+  updateIntercom() {
+    (<any>window).Intercom('update', {email: 'someuser@example.com', apples: 2});
+  }
+
+  updateIntercomRefresh() {
+    (<any>window).Intercom('update');
   }
 }

@@ -12,6 +12,7 @@ import { Angulartics2Module } from 'angulartics2';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { Angulartics2GoogleTagManager } from 'angulartics2/gtm';
 import { SimpleNotificationsModule } from 'angular2-notifications-lite';
+import { IntercomModule } from 'ng-intercom';
 
 import { AuthGuard } from './shared';
 import { AppComponent } from './app.component';
@@ -57,6 +58,7 @@ export const reducers = {
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({maxAge: 25}),
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics, Angulartics2GoogleTagManager]),
+    IntercomModule.forRoot()
   ],
   providers: [
     HttpHelperService,
