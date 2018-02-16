@@ -67,12 +67,10 @@ export class GenerateItemComponent implements OnInit, AfterViewInit {
       this.stars.push(this.createStar());
     }
     this.main.appendChild(this.frag);
-    setTimeout(() => {
-      TweenMax.staggerTo(this.coins, 5,  {left: '100%', ease: Expo.easeOut, repeat: -1}, .5);
-      TweenMax.staggerTo(this.chests, 5,  {left: '90%', delay: 5, ease: SlowMo.ease.config(0.7, 0.7, false), repeat: -1}, 2.5);
-      TweenMax.staggerTo(this.gears, 1,  {rotation: 360, ease: Linear.easeNone, repeat: -1}, 0.1);
-      this.createSmoke();
-    }, 5000);
+    TweenMax.staggerTo(this.coins, 5,  {left: '100%', ease: Expo.easeOut, repeat: -1}, .5);
+    TweenMax.staggerTo(this.chests, 5,  {left: '90%', delay: 5, ease: SlowMo.ease.config(0.7, 0.7, false), repeat: -1}, 2.5);
+    TweenMax.staggerTo(this.gears, 1,  {rotation: 360, ease: Linear.easeNone, repeat: -1}, 0.1);
+    this.createSmoke();
   }
 
   createSmoke() {
