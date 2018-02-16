@@ -15,6 +15,7 @@ import { ApplicationState } from '../../store/application-state';
 import { UserState } from '../../store/store-data';
 import { User } from '../../shared/models/user.model';
 import { NotificationsService } from 'angular2-notifications-lite';
+import { environment } from '../../../environments/environment.prod';
 
 @Component({
   selector: 'app-layout',
@@ -62,6 +63,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.initIntercom();
     this.metaMaskService.getAccountInfo();
     this.userState.subscribe(state => {
       if (state) {
@@ -187,9 +189,16 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     window.scrollTo(0, 0);
   }
 
+  initIntercom() {
+    (<any>window).Intercom('boot', {
+      app_id: environment.INTERCOM_APP_ID,
+      custom_launcher_selector: '#IntercomDefaultWidget',
+   });
+  }
+
   loadIntercom(email, userId) {
     (<any>window).Intercom('boot', {
-      app_id: 'e46tjta5',
+      app_id: environment.INTERCOM_APP_ID,
       custom_launcher_selector: '#IntercomDefaultWidget',
       email: email,
       user_id: userId,
@@ -197,8 +206,8 @@ export class LayoutComponent implements OnInit, AfterViewInit {
    });
   }
 
-  updateIntercom() {
-    (<any>window).Intercom('update', {email: 'someuser@example.com', apples: 2});
+  updateIntercom(email, userId) {
+    (<any>window).Intercom('update', {email: email, user_id: userId});
   }
 
   updateIntercomRefresh() {
