@@ -49,6 +49,10 @@ const routes: Routes = [
         loadChildren: './pages/my-items/my-items.module#MyItemsModule',
       },
       {
+        path: 'generate-item',
+        loadChildren: './pages/generate-item/generate-item.module#GenerateItemModule',
+      },
+      {
         path: 'terms-and-conditions',
         loadChildren: './pages/terms-and-conditions/terms-and-conditions.module#TermsAndConditionsModule',
       },
