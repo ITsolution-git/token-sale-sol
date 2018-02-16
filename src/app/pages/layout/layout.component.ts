@@ -62,6 +62,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.initIntercom();
     this.metaMaskService.getAccountInfo();
     this.userState.subscribe(state => {
       if (state) {
@@ -185,6 +186,13 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
   onDeactivate() {
     window.scrollTo(0, 0);
+  }
+
+  initIntercom() {
+    (<any>window).Intercom('boot', {
+      app_id: 'e46tjta5',
+      custom_launcher_selector: '#IntercomDefaultWidget',
+   });
   }
 
   loadIntercom(email, userId) {
