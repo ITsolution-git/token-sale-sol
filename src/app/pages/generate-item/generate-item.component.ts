@@ -79,7 +79,7 @@ export class GenerateItemComponent implements OnInit, AfterViewInit {
   }
 
   createSmoke() {
-    const startY = 300;
+    const startY = 200;
     const endY = 0;
     const tl = new TimelineMax();
     for (let i = 0; i < 10; i++) {
@@ -93,7 +93,7 @@ export class GenerateItemComponent implements OnInit, AfterViewInit {
   }
 
   createSmallSmoke() {
-    const startY = 250;
+    const startY = 150;
     const endY = 0;
     const tl = new TimelineMax();
     for (let i = 0; i < 10; i++) {
@@ -101,7 +101,7 @@ export class GenerateItemComponent implements OnInit, AfterViewInit {
       const bubble = this.smallBubbles[sizeIndex].cloneNode(true);
       const speed = 6;
       tl.set(bubble, {y: startY}, 0);
-      tl.to(bubble, speed, {y: endY, x: this.random(0, 50), scale: 1, opacity: 0, repeatDelay: 0, repeat: -1}, Math.random() * 3);
+      tl.to(bubble, speed, {y: endY, x: this.random(0, 50), scale: 0.9, opacity: 0, repeatDelay: 0, repeat: -1}, Math.random() * 3);
       this.smallSmoke.appendChild(bubble);
     }
   }

@@ -44,7 +44,7 @@
         }
         .smoke {
             position: absolute;
-            top: -30%;
+            top: -5%;
             right: 48%;
         }
         .smokeList {
@@ -76,26 +76,26 @@
 
         .smallSmoke {
             position: absolute;
-            top: -40%;
-            left: calc(50% - 100px);
+            top: -10%;
+            left: calc(50% - 110px);
         }
         .smallSmokeList {
             display: none;
             .smallBubble{
-                width:40px;
-                height:40px;
+                width:20px;
+                height:20px;
                 background-color:#fffff0;
             }
             
             .mediumBubble{
-                width:70px;
-                height:70px;
+                width:20px;
+                height:20px;
                 background-color:#ffffff;
             }
             
             .largeBubble{
-                width:100px;
-                height:100px;
+                width:20px;
+                height:20px;
                 background-color:#fff;
             }
         }
