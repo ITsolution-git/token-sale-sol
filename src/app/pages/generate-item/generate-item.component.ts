@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { TweenMax, TweenLite, TimelineMax, RoughEase, Linear, SlowMo, Expo } from 'gsap';
+import { TweenMax, TweenLite, TimelineMax, RoughEase, Linear, SlowMo, Power1, Expo } from 'gsap';
 
 @Component({
   selector: 'app-generate-item',
@@ -34,6 +34,8 @@ export class GenerateItemComponent implements OnInit, AfterViewInit {
   gears: any;
   bubbles: any;
   smoke: any;
+  smallBubbles: any;
+  smallSmoke: any;
   constructor() {
 
   }
@@ -62,19 +64,22 @@ export class GenerateItemComponent implements OnInit, AfterViewInit {
     this.gears = window.document.getElementsByClassName('gear');
     this.bubbles = window.document.getElementsByClassName('bubble');
     this.smoke = window.document.querySelector('.smoke');
+    this.smallBubbles = window.document.getElementsByClassName('small-bubble');
+    this.smallSmoke = window.document.querySelector('.smallSmoke');
 
     for (let i = 0; i < this.numStars; i++) {
       this.stars.push(this.createStar());
     }
     this.main.appendChild(this.frag);
-    TweenMax.staggerTo(this.coins, 5,  {left: '100%', ease: Expo.easeOut, repeat: -1}, .5);
+    TweenMax.staggerTo(this.coins, 7,  {left: '100%', ease: Power1.easeOut, repeat: -1}, 2);
     TweenMax.staggerTo(this.chests, 5,  {left: '90%', delay: 5, ease: SlowMo.ease.config(0.7, 0.7, false), repeat: -1}, 2.5);
     TweenMax.staggerTo(this.gears, 1,  {rotation: 360, ease: Linear.easeNone, repeat: -1}, 0.1);
     this.createSmoke();
+    this.createSmallSmoke();
   }
 
   createSmoke() {
-    const startY = 300;
+    const startY = 200;
     const endY = 0;
     const tl = new TimelineMax();
     for (let i = 0; i < 10; i++) {
@@ -82,8 +87,22 @@ export class GenerateItemComponent implements OnInit, AfterViewInit {
       const bubble = this.bubbles[sizeIndex].cloneNode(true);
       const speed = 5;
       tl.set(bubble, {y: startY}, 0);
-      tl.to(bubble, speed, {y: endY, x: this.random(0, 150), scale: 2, opacity: 0, repeatDelay: 0.1, repeat: 500}, Math.random() * 5);
+      tl.to(bubble, speed, {y: endY, x: this.random(0, 150), scale: 2, opacity: 0, repeatDelay: 0.1, repeat: -1}, Math.random() * 5);
       this.smoke.appendChild(bubble);
+    }
+  }
+
+  createSmallSmoke() {
+    const startY = 150;
+    const endY = 0;
+    const tl = new TimelineMax();
+    for (let i = 0; i < 10; i++) {
+      const sizeIndex = parseInt(this.random(0, 2), 0);
+      const bubble = this.smallBubbles[sizeIndex].cloneNode(true);
+      const speed = 6;
+      tl.set(bubble, {y: startY}, 0);
+      tl.to(bubble, speed, {y: endY, x: this.random(0, 50), scale: 0.9, opacity: 0, repeatDelay: 0, repeat: -1}, Math.random() * 3);
+      this.smallSmoke.appendChild(bubble);
     }
   }
 

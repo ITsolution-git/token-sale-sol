@@ -26,7 +26,10 @@ export class ItemDetailComponent implements OnInit {
   itemArray: Item[];
   counter = 0;
   typeImages = [];
-
+  _items: Item[];
+  limit = 5;
+  page = 1;
+  totalPage = 10;
   bsModalRef: BsModalRef;
   config = {
     animated: true,
@@ -107,9 +110,16 @@ export class ItemDetailComponent implements OnInit {
   }
 
   loadNextWeapons() {
-    if (this.counter < this.itemArray.length - 5) {
-      this.counter += 1;
-      this.items = this.itemArray.slice(this.counter, this.counter + 5);
+    if (this.itemArray.length > this.page * this.limit) {
+      this.items = this.itemArray.slice(this.page * this.limit, (this.page + 1) * this.limit);
+      this.page += 1;
+    }
+  }
+
+  loadPrevWeapons() {
+    if (this.page > 1) {
+      this.page -= 1;
+      this.items = this.itemArray.slice((this.page - 1) * this.limit, this.page * this.limit);
     }
   }
 

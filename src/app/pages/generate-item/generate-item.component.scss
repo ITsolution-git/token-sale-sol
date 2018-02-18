@@ -44,7 +44,7 @@
         }
         .smoke {
             position: absolute;
-            top: -30%;
+            top: -5%;
             right: 48%;
         }
         .smokeList {
@@ -73,6 +73,39 @@
             height:160px;
             background-color:#fff;
         }
+
+        .smallSmoke {
+            position: absolute;
+            top: -10%;
+            left: calc(50% - 110px);
+        }
+        .smallSmokeList {
+            display: none;
+            .smallBubble{
+                width:20px;
+                height:20px;
+                background-color:#fffff0;
+            }
+            
+            .mediumBubble{
+                width:20px;
+                height:20px;
+                background-color:#ffffff;
+            }
+            
+            .largeBubble{
+                width:20px;
+                height:20px;
+                background-color:#fff;
+            }
+        }
+
+        .small-bubble{
+            border-radius: 50%;
+            position: absolute;
+
+        }
+        
 
         .flow-wrapper {
             position: absolute;
