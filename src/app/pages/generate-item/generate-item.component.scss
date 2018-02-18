@@ -74,6 +74,39 @@
             background-color:#fff;
         }
 
+        .smallSmoke {
+            position: absolute;
+            top: -40%;
+            left: calc(50% - 100px);
+        }
+        .smallSmokeList {
+            display: none;
+            .smallBubble{
+                width:40px;
+                height:40px;
+                background-color:#fffff0;
+            }
+            
+            .mediumBubble{
+                width:70px;
+                height:70px;
+                background-color:#ffffff;
+            }
+            
+            .largeBubble{
+                width:100px;
+                height:100px;
+                background-color:#fff;
+            }
+        }
+
+        .small-bubble{
+            border-radius: 50%;
+            position: absolute;
+
+        }
+        
+
         .flow-wrapper {
             position: absolute;
             left: 0;

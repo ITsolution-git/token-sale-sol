@@ -70,9 +70,14 @@
             >
           </app-item>
         </div>
-        <div *ngIf="!isMobile" class="arrow pl-2">
+        <div *ngIf="!isMobile" class="arrow-right arrow pl-2">
           <span class="arrow-padding" (click)="loadNextWeapons()" >
             <img src="/assets/icons/icon-greater-than.png">
+          </span>
+        </div>
+        <div *ngIf="!isMobile" class="arrow-left arrow pl-2">
+          <span id="viewmore_itemsavailable" class="arrow-padding" (click)="loadPrevWeapons()">
+            <img src="/assets/icons/icon-smaller-than.png">
           </span>
         </div>
       </div>
