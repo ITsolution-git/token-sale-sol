@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { MetaMaskService } from '../../shared/services/MetaMaskService/meta-mask.service';
 import { UPDATE_TRANSACTION_ID } from './../../store/actions/user.actions';
+import * as Moment from 'moment';
 
 declare const $: any;
 
@@ -63,6 +64,7 @@ export class BuyGzrComponent implements OnInit {
 
   ngOnInit() {
     this.isMobile = this.isMobileView();
+    this.eventTrack('viewed-buy-gzr-page', null);
     if (this.isMobile) {
       this.installed = false;
       this.unlocked = false;
@@ -133,11 +135,28 @@ export class BuyGzrComponent implements OnInit {
       } else if (!this.unlocked) {
         this.bsModalRef = this.modalService.show(LockedModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
       } else {
+        const meta = {
+          amount: this.gzrValue,
+        };
+        this.eventTrack('purchased-gzr', meta);
         this.metaMaskService.TransferEthToBuyGzr(this.ethValue, this.gzrValue)
         .then((res) => {
           if (res['success']) {
             this.updateTransactionId(res['transaction']);
             setTimeout(() => {
+              // Track Event with Intercom
+              const metadata = {
+                'transaction-id': res['transaction'],
+                ether_spent: this.ethValue,
+                gzr_purchased: this.gzrValue,
+                purchased_at: Moment().unix(),
+              };
+              const customData =  {
+                purchased_gzr: this.gzrValue,
+                last_purchased_at: Moment().unix(),
+              };
+              this.eventTrack('purchased-gzr', metadata);
+              this.updateUser(customData);
               this.router.navigate(['/thank-you']);
             }, 1000);
           }
@@ -166,5 +185,21 @@ export class BuyGzrComponent implements OnInit {
     }
     this.slideValue = this.ethValue;
     this.gzrValue = this.ethValue * this.cashRate;
+  }
+
+  updateUser(customData) {
+    (<any>window).Intercom('update', {
+        custom_data: customData
+    });
+    return true;
+  }
+
+  eventTrack(event, metadata) {
+    if (!(metadata)) {
+      (<any>window).Intercom('trackEvent', event);
+    } else {
+      (<any>window).Intercom('trackEvent', event, metadata);
+    }
+    return true;
   }
 }
