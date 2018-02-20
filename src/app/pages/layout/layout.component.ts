@@ -208,7 +208,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
   initIntercom() {
     (<any>window).Intercom('boot', {
-      app_id: environment.INTERCOM_APP_ID.toString(),
+      app_id: environment.INTERCOM_APP_ID,
     });
   }
 

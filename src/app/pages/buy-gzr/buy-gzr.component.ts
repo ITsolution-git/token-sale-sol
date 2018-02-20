@@ -154,8 +154,6 @@ export class BuyGzrComponent implements OnInit {
               const customData =  {
                 purchased_gzr: this.gzrValue,
                 last_purchased_at: Moment().unix(),
-                total_gzr_purchased: this.gzrValue,
-                total_ether_spent: this.ethValue
               };
               this.eventTrack('purchased-gzr', metadata);
               this.updateUser(customData);
