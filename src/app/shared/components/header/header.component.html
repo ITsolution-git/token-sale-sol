@@ -1,103 +1,85 @@
 <div class="header-section">
-  <div *ngIf="!isMobile" class="container">
-    <div class="row align-items-center py-2">
-      <div class="col-md-2">
-        <a href="/"><img class="site-logo" src="/assets/images/img-logo.png"></a>
-      </div>
-      <div class="col-md-4 d-flex text-left">
-        <div class="fb-like d-inline-flex"
-          data-href="https://www.facebook.com/GizerGaming/"
-          data-layout="button"
-          data-action="like"
-          data-size="small"
-          data-show-faces="false"
-          data-share="false">
-        </div>
-        <div class="fb-share-button d-inline-flex ml-1"
-          data-href="https://www.facebook.com/GizerGaming/"
-          data-layout="button"
-          data-size="small"
-          data-mobile-iframe="true">
-            <a
-              class="fb-xfbml-parse-ignore"
-              target="_blank"
-              href="https://www.facebook.com/sharer/sharer.php?s=100&p[title]=Gizer&p[summary]=Text123123123123123&p[url]=https://www.facebook.com/GizerGaming/">
+    <div *ngIf="!isMobile" class="container">
+        <div class="row align-items-center py-2">
+            <div class="col-md-2">
+                <a href="/"><img class="site-logo" src="/assets/images/img-logo.png"></a>
+            </div>
+            <div class="col-md-4 d-flex text-left">
+                <div class="fb-like d-inline-flex" data-href="https://www.facebook.com/GizerGaming/" data-layout="button" data-action="like" data-size="small" data-show-faces="false" data-share="false">
+                </div>
+                <div class="fb-share-button d-inline-flex ml-1" data-href="https://www.facebook.com/GizerGaming/" data-layout="button" data-size="small" data-mobile-iframe="true">
+                    <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?s=100&p[title]=Gizer&p[summary]=Text123123123123123&p[url]=https://www.facebook.com/GizerGaming/">
               Share
             </a>
-        </div>
-        <div class="twitter d-inline-flex ml-2">
-          <a class="twitter-share-button"
-            href="https://twitter.com/share"
-            data-url="http://54.243.54.136/"
-            data-text="Live token sale with a working product? That's something I haven't seen before... I'm ready to build my gaming identity on the blockchain with Gizer and GGID! Check it out https://tokensale.gizer.io"
-            data-hashtags="gizer,tokensale,ethereum,gaming,blockchain,esports"
-          >
+                </div>
+                <div class="twitter d-inline-flex ml-2">
+                    <a class="twitter-share-button" href="https://twitter.com/share" data-url="http://54.243.54.136/" data-text="Live token sale with a working product? That's something I haven't seen before... I'm ready to build my gaming identity on the blockchain with Gizer and GGID! Check it out https://tokensale.gizer.io"
+                        data-hashtags="gizer,tokensale,ethereum,gaming,blockchain,esports">
           Tweet
           </a>
+                </div>
+            </div>
+            <div class="col-md-6 d-flex justify-content-end align-items-center p-0">
+                <div class="d-inline-flex btn-treasure align-items-center custom-button" (click)="navgiateToTreasure()">
+                    <img class="button-image" src="/assets/icons/icon-treasure.png">
+                    <span class="menu-text">Open Treasure</span>
+                </div>
+                <div class="d-inline-flex btn-gizer-amount align-items-center custom-button" (click)="navgiateToBuyGizer()">
+                    <img src="/assets/icons/icon-gizer.png">
+                    <span *ngIf="isAuthenticated" class="menu-text">{{gzrBalance | number}} GZR</span>
+                    <span *ngIf="!isAuthenticated" class="menu-text">0 GZR</span>
+                </div>
+                <div class="d-inline-flex btn-user-info align-items-center custom-button">
+                    <img src="/assets/icons/icon-user.png">
+                    <span *ngIf="isAuthenticated" class="menu-text" (click)="logout()">{{displayNick}}</span>
+                    <span *ngIf="!isAuthenticated" class="menu-text" (click)="login()">Sign in</span>
+                </div>
+                <div *ngIf="isAuthenticated" class="d-inline-flex align-items-center btn-etherum-info">
+                    <span class="info-text">{{balance | number}} ETH</span>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col-md-6 d-flex justify-content-end align-items-center p-0">
-        <div class="d-inline-flex btn-treasure align-items-center custom-button" (click)="navgiateToTreasure()">
-          <img class="button-image" src="/assets/icons/icon-treasure.png">
-          <span class="menu-text">Open Treasure</span>
-        </div>
-        <div class="d-inline-flex btn-gizer-amount align-items-center custom-button" (click)="navgiateToBuyGizer()">
-          <img src="/assets/icons/icon-gizer.png">
-          <span *ngIf="isAuthenticated" class="menu-text">{{gzrBalance | number}} GZR</span>
-          <span *ngIf="!isAuthenticated" class="menu-text">0 GZR</span>
-        </div>
-        <div class="d-inline-flex btn-user-info align-items-center custom-button">
-          <img src="/assets/icons/icon-user.png">
-          <span *ngIf="isAuthenticated" class="menu-text" (click)="logout()">{{nickName.slice(0, 10)}}</span>
-          <span *ngIf="!isAuthenticated" class="menu-text" (click)="login()">Sign in</span>
-        </div>
-        <div *ngIf="isAuthenticated" class="d-inline-flex align-items-center btn-etherum-info">
-          <span class="info-text">{{balance | number}} ETH</span>
-        </div>
-      </div>
     </div>
-  </div>
-  <nav *ngIf="!isMobile" class="navbar navbar-expand-lg">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <nav *ngIf="!isMobile" class="navbar navbar-expand-lg">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mr-auto">
-          <li *ngFor="let menuItem of menuItems"
-            class="nav-item">
-            <img *ngIf="menuItem.title === 'Home'" class="icon-home" src="/assets/icons/icon-home.png">
-            <a *ngIf="menuItem.title === 'Home'" class="nav-item nav-link nav-home" [routerLink]="[menuItem.path]" fragment="home" routerLinkActive="router-active" [routerLinkActiveOptions]="{exact: true}">{{menuItem.title}}</a>            
-            <a *ngIf="menuItem.title !== 'Home'" class="nav-item nav-link" routerLinkActive="router-active" [routerLinkActiveOptions]="{exact: true}" [routerLink]="[menuItem.path]">{{menuItem.title}}</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-item nav-link" (click)="navigateToTokenSection()">What is GZR?</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <div *ngIf="isMobile" class="mobile-menu">
-    <div class="row no-gutters justify-content-between">
-      <div class="col-4 px-4 py-2">
-        <a href="/"><img class="site-logo" src="/assets/images/img-logo.png"></a>
-      </div>
-      <div class="col-2 pr-3 pt-1">
-        <button class="navbar-toggler" type="button" (click)="onMenuToggle()">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li *ngFor="let menuItem of menuItems" class="nav-item">
+                        <img *ngIf="menuItem.title === 'Home'" class="icon-home" src="/assets/icons/icon-home.png">
+                        <a *ngIf="menuItem.title === 'Home'" class="nav-item nav-link nav-home" [routerLink]="[menuItem.path]" fragment="home" routerLinkActive="router-active" [routerLinkActiveOptions]="{exact: true}">{{menuItem.title}}</a>
+                        <a *ngIf="menuItem.title !== 'Home'" class="nav-item nav-link" routerLinkActive="router-active" [routerLinkActiveOptions]="{exact: true}" [routerLink]="[menuItem.path]">{{menuItem.title}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-item nav-link" (click)="navigateToTokenSection()">What is GZR?</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div *ngIf="isMobile" class="mobile-menu">
+        <div class="row no-gutters justify-content-between">
+            <div class="col-4 px-4 py-2">
+                <a href="/"><img class="site-logo" src="/assets/images/img-logo.png"></a>
+            </div>
+            <div class="col-2 pr-3 pt-1">
+                <button class="navbar-toggler" type="button" (click)="onMenuToggle()">
           <span *ngIf="!toggled" class="navbar-toggler-icon"><i class="fa fa-bars fa-2x" aria-hidden="true"></i></span>
           <span *ngIf="toggled" class="navbar-toggler-icon"><img class="menu-close" src="/assets/icons/icon-menu-close.png"></span>
         </button>
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <div *ngIf="toggled" class="mobile-nav-menu justify-content-center">
-  <ul class="navbar-nav mr-auto">
-      <li *ngFor="let menuItem of mobileMenuItems" class="nav-item">
-        <a class="nav-item nav-link" [routerLink]="[menuItem.path]">{{menuItem.title}}</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-item nav-link" (click)="navigateToTokenSection()">What is GZR?</a>
-      </li>
+    <ul class="navbar-nav mr-auto">
+        <li *ngFor="let menuItem of mobileMenuItems" class="nav-item">
+            <a class="nav-item nav-link" [routerLink]="[menuItem.path]">{{menuItem.title}}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-item nav-link" (click)="navigateToTokenSection()">What is GZR?</a>
+        </li>
     </ul>
 </div>

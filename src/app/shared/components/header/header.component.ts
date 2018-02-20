@@ -35,6 +35,7 @@ export class HeaderComponent implements OnInit {
   unlocked = false;
   balance: number;
   nickName: String;
+  displayNick: string;
   installed = false;
   gzrBalance: number;
   toggled = false;
@@ -77,6 +78,7 @@ export class HeaderComponent implements OnInit {
         this.unlocked = state.unlocked;
         this.balance = state.balance;
         this.nickName = state.nickName;
+        this.displayNick = state.nickName.slice(0, 10);
         this.installed = state.installed;
         this.gzrBalance = state.gzrBalance;
       }
