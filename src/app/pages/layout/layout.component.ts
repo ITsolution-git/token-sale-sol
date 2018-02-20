@@ -112,7 +112,6 @@ export class LayoutComponent implements OnInit, AfterViewInit {
             };
             this.updateNickName(nick);
             this.updateUser(nick, email, id, customData);
-            this.eventTrack('registered-metamask', metadata);
           }
         });
       }
@@ -231,16 +230,4 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     return true;
   }
 
-  updateIntercomRefresh() {
-    (<any>window).Intercom('update');
-  }
-
-  eventTrack(event, metadata) {
-    if (!(metadata)) {
-      (<any>window).Intercom('trackEvent', event);
-    } else {
-      (<any>window).Intercom('trackEvent', event, metadata);
-    }
-    return true;
-  }
 }
