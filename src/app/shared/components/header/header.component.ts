@@ -161,6 +161,7 @@ export class HeaderComponent implements OnInit {
   }
 
   navigateToTokenSection() {
+    this.eventTrack('viewed-what-is-gzr-page', null);
     this.router.navigate([''], {fragment: 'whatsgizer'});
   }
 
@@ -208,5 +209,14 @@ export class HeaderComponent implements OnInit {
       js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11';
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
+  }
+
+  eventTrack(event, metadata) {
+    if (!(metadata)) {
+      (<any>window).Intercom('trackEvent', event);
+    } else {
+      (<any>window).Intercom('trackEvent', event, metadata);
+    }
+    return true;
   }
 }

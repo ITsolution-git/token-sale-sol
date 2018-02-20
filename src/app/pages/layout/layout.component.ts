@@ -16,6 +16,7 @@ import { UserState } from '../../store/store-data';
 import { User } from '../../shared/models/user.model';
 import { NotificationsService } from 'angular2-notifications-lite';
 import { environment } from '../../../environments/environment.prod';
+import * as Moment from 'moment';
 
 @Component({
   selector: 'app-layout',
@@ -95,10 +96,23 @@ export class LayoutComponent implements OnInit, AfterViewInit {
       if (this.walletAddress !== res) {
         this.updateWalletAddress(res);
         this.userService.retriveUser(res).subscribe(user => {
+          const currentUser = user[0];
           if (user.length) {
-            this.updateNickName(user[0].nick);
-            const {email, id} = user[0];
-            this.loadIntercom(email, id);
+            const {nick, email, id} = currentUser;
+            const metadata = {
+              created_at: Moment().unix(),
+            };
+            const customData =  {
+              registered_metamask: true,
+              registered_metamask_at: Moment().unix(),
+              gzr_balance: currentUser.gzr.amount || 0,
+              items_owned: currentUser.owns.length,
+              nickname: nick,
+              'wallet-id': id
+            };
+            this.updateNickName(nick);
+            this.updateUser(nick, email, id, customData);
+            this.eventTrack('registered-metamask', metadata);
           }
         });
       }
@@ -111,7 +125,11 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
     this.metaMaskService.gzrBalanceObservable$.subscribe(res => {
       if (this.gzrBalance !== res) {
+        const customData =  {
+          gzr_balance: res || 0
+        };
         this.updateGZRBalance(res);
+        this.updateCustomData(customData);
       }
     });
 
@@ -191,25 +209,38 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
   initIntercom() {
     (<any>window).Intercom('boot', {
-      app_id: 'pjrvbrtn'
+      app_id: environment.INTERCOM_APP_ID.toString(),
     });
   }
 
-  loadIntercom(email, userId) {
-    (<any>window).Intercom('boot', {
-      app_id: environment.INTERCOM_APP_ID,
-      custom_launcher_selector: '#IntercomDefaultWidget',
-      email: email,
-      user_id: userId,
-      created_at: Date.now(),
-   });
+  updateUser(name, email, userId, customData) {
+    (<any>window).Intercom('update', {
+        name: name,
+        email: email,
+        user_id: userId,
+        created_at: Moment().unix(),
+        custom_data: customData
+    });
+    return true;
   }
 
-  updateIntercom(email, userId) {
-    (<any>window).Intercom('update', {email: email, user_id: userId});
+  updateCustomData(customData) {
+    (<any>window).Intercom('update', {
+        custom_data: customData
+    });
+    return true;
   }
 
   updateIntercomRefresh() {
     (<any>window).Intercom('update');
+  }
+
+  eventTrack(event, metadata) {
+    if (!(metadata)) {
+      (<any>window).Intercom('trackEvent', event);
+    } else {
+      (<any>window).Intercom('trackEvent', event, metadata);
+    }
+    return true;
   }
 }
