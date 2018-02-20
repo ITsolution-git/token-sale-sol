@@ -70,6 +70,10 @@ export class MetaMaskService {
 
   loadMetaObservable: any;
   loadMetaSubscription$: Subscription = new Subscription();
+
+  checkTxStatusObservable: any;
+  checkTxStatusSusbscription$: Subscription = new Subscription();
+
   subscribed = false;
 
   constructor(
@@ -215,6 +219,36 @@ export class MetaMaskService {
     this.status = message;
   }
 
+  checkTransactionStatus(transactionId) {
+    this.checkTxStatusObservable = Observable.interval(3000);
+    return new Promise((resolve, reject) => {
+      this.checkTxStatusSusbscription$ = this.checkTxStatusObservable.subscribe(() => {
+        this.checkTransaction(transactionId, resolve, reject);
+      });
+    });
+  }
+
+  checkTransaction(txId, resolve, reject) {
+    this.web3.eth.getTransactionReceipt(txId, (err, res) => {
+      if (err) {
+        reject(err);
+      }else {
+        if (res == null) {
+          this.transactionId = txId;
+          this.transactionIdSubject.next(this.transactionId);
+          return;
+        } else if (res.status === 1) {
+          resolve({ 'success': true, 'transaction': txId });
+          this.checkTxStatusSusbscription$.unsubscribe();
+        } else {
+          resolve({ 'success': false, 'transaction': txId });
+          this.checkTxStatusSusbscription$.unsubscribe();
+        }
+        this.refreshBalance();
+      }
+    });
+  }
+
   TransferEthToBuyGzr(ethValue, gzrValue) {
     let gzr;
     return new Promise((resolve, reject) => {
@@ -228,10 +262,7 @@ export class MetaMaskService {
             if (error) {
               reject({'failure': true});
             } else {
-              resolve({ 'success': true, 'transaction': transactionId });
-              this.transactionId = transactionId;
-              this.transactionIdSubject.next(this.transactionId);
-              this.refreshBalance();
+              resolve({'success': true, 'transaction': transactionId});
             }
           });
         })

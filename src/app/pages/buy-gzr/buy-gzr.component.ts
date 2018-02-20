@@ -9,6 +9,7 @@ import { ApplicationState } from '../../store/application-state';
 import { UserState } from '../../store/store-data';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
+import { ValidNetworkModalComponent } from '../../shared/components/valid-network/valid-network.component';
 import { MetaMaskService } from '../../shared/services/MetaMaskService/meta-mask.service';
 import { UPDATE_TRANSACTION_ID } from './../../store/actions/user.actions';
 
@@ -35,6 +36,7 @@ export class BuyGzrComponent implements OnInit {
   userState: Observable<UserState>;
   installed = true;
   unlocked = true;
+  validNetwork = false;
 
   isFromModal = false;
   isMobile = false;
@@ -90,6 +92,12 @@ export class BuyGzrComponent implements OnInit {
         this.metaMaskService.unloadAccountInfo();
       });
 
+      this.metaMaskService.validNetworkObservable$.subscribe(status => {
+        if (this.validNetwork !== status) {
+          this.validNetwork = status;
+        }
+      });
+
       this.eventSource.debounceTime(300).subscribe(state => {
         this.isFromModal = state.showAddressForm;
       });
@@ -97,6 +105,7 @@ export class BuyGzrComponent implements OnInit {
       this.event$.subscribe((state) => {
         this.installed = state.installed;
         this.unlocked = state.unlocked;
+        this.validNetwork = state.validNetwork;
       });
     }
   }
@@ -132,10 +141,12 @@ export class BuyGzrComponent implements OnInit {
         this.bsModalRef = this.modalService.show(InstallMaskModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
       } else if (!this.unlocked) {
         this.bsModalRef = this.modalService.show(LockedModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
+      } else if (!this.validNetwork) {
+        this.bsModalRef = this.modalService.show(ValidNetworkModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
       } else {
         this.metaMaskService.TransferEthToBuyGzr(this.ethValue, this.gzrValue)
         .then((res) => {
-          if (res['success']) {
+          if (res['success'] === true) {
             this.updateTransactionId(res['transaction']);
             setTimeout(() => {
               this.router.navigate(['/thank-you']);
@@ -166,5 +177,5 @@ export class BuyGzrComponent implements OnInit {
     }
     this.slideValue = this.ethValue;
     this.gzrValue = this.ethValue * this.cashRate;
-  }
+  }  
 }

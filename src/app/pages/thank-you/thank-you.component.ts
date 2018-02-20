@@ -16,6 +16,8 @@ export class ThankYouComponent implements OnInit {
 
   public transactionId: any;
   userState: Observable<UserState>;
+  showSpinner = true;
+  subscribed = false;
 
   constructor(
     private metaMaskService: MetaMaskService,
@@ -31,6 +33,13 @@ export class ThankYouComponent implements OnInit {
     this.userState.subscribe(state => {
       if (state.transactionId !== '') {
         this.transactionId = state.transactionId;
+        if (this.subscribed === false) {
+          this.subscribed = true;
+          this.metaMaskService.checkTransactionStatus(this.transactionId)
+          .then(res => {
+            this.showSpinner = false;
+          });
+        }
       } else {
         this.navigateToBuyGzr();
       }
@@ -39,5 +48,9 @@ export class ThankYouComponent implements OnInit {
 
   navigateToBuyGzr() {
     this.router.navigate(['/buy-gzr']);
+  }
+
+  updateIntercom(metaData) {
+    (<any>window).Intercom('trackEvent', true ,metaData);
   }
 }

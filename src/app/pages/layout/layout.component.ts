@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ValidNetworkModalComponent } from '../../shared/components/valid-network/valid-network.component';
@@ -51,6 +52,8 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   nickNameStr = 'nickName';
   walletStr = 'walletAddress';
 
+  event$: Subject<any> = new Subject<any>();
+
   constructor(
     public intercom: Intercom,
     private metaMaskService: MetaMaskService,
@@ -67,13 +70,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     this.metaMaskService.getAccountInfo();
     this.userState.subscribe(state => {
       if (state) {
-        this.installed = state.installed;
-        this.unlocked = state.unlocked;
-        this.walletAddress = state.walletAddress;
-        this.balance = state.balance;
-        this.gzrBalance = state.gzrBalance;
-        this.nickName = state.nickName;
-        this.validNetwork = state.validNetwork;
+        this.event$.next(state);
       }
     });
     this.metaMaskService.installedObservable$.subscribe(status => {
@@ -128,6 +125,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
       if (!status && !this.bsModalRef) {
           this.bsModalRef = this.modalService.show(ValidNetworkModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
+          this.metaMaskService.unloadAccountInfo();
       }
     });
 
@@ -143,6 +141,16 @@ export class LayoutComponent implements OnInit, AfterViewInit {
               maxLength: 10
           }
       );
+    });
+
+    this.event$.subscribe((state) => {
+      this.installed = state.installed;
+      this.unlocked = state.unlocked;
+      this.walletAddress = state.walletAddress;
+      this.balance = state.balance;
+      this.gzrBalance = state.gzrBalance;
+      this.nickName = state.nickName;
+      this.validNetwork = state.validNetwork;
     });
   }
 
