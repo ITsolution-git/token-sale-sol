@@ -85,7 +85,7 @@ export class HeaderComponent implements OnInit {
             if (resp.length) {
               const user_ = resp[0];
               this.nickName = user_.nick;
-              if (user_.nick != null) this.nickDisplay = user_.nick.slice(0, 10);
+              if (user_.nick != null) { this.nickDisplay = user_.nick.slice(0, 10); }
               this.authService.login(this.walletAddress);
               this.isAuthenticated = true;
               setTimeout(() => {
@@ -102,7 +102,7 @@ export class HeaderComponent implements OnInit {
         this.unlocked = state.unlocked;
         this.balance = state.balance;
         this.nickName = state.nickName;
-        if (state.nickName != null) this.nickDisplay = state.nickName.slice(0, 10);
+        if (state.nickName != null) { this.nickDisplay = state.nickName.slice(0, 10); }
         this.installed = state.installed;
         this.gzrBalance = state.gzrBalance;
       }
