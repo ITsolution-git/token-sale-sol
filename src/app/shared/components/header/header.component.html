@@ -44,16 +44,16 @@
       </div>
       <div class="col-md-6 d-flex justify-content-end align-items-center p-0">
         <div id="open-treasure" (click)="navgiateToTreasure()" class="d-inline-flex btn-treasure align-items-center custom-button">
-          <img id="open-treasure" (click)="navgiateToTreasure()" class="button-image" src="/assets/icons/icon-treasure.png">
+          <img id="open-treasure" (click)="navgiateToTreasure()" class="button-image" src="/assets/icons/icon-treasure.png" alt="treasure icon">
           <span id="open-treasure" (click)="navgiateToTreasure()" class="menu-text">Open Treasure</span>
         </div>
         <div id="gzr-balance-header" (click)="navgiateToBuyGizer()" class="d-inline-flex btn-gizer-amount align-items-center custom-button">
-          <img id="gzr-balance-header" (click)="navgiateToBuyGizer()" src="/assets/icons/icon-gizer.png">
+          <img id="gzr-balance-header" (click)="navgiateToBuyGizer()" src="/assets/icons/icon-gizer.png" alt="gizer coin">
           <span id="gzr-balance-header" *ngIf="isAuthenticated" class="menu-text" (click)="navgiateToBuyGizer()">{{gzrBalance | number}} GZR</span>
           <span id="gzr-balance-header" *ngIf="!isAuthenticated" class="menu-text" (click)="navgiateToBuyGizer()">0 GZR</span>
         </div>
         <div class="d-inline-flex btn-user-info align-items-center custom-button">
-          <img src="/assets/icons/icon-user.png">
+          <img src="/assets/icons/icon-user.png" alt="user">
           <span id="myprofile-header" *ngIf="isAuthenticated" class="menu-text" (click)="logout()">{{nickName.slice(0, 10)}}</span>
           <span id="register-metamask-header" *ngIf="!isAuthenticated" class="menu-text" (click)="login()">Register</span>
         </div>
@@ -72,7 +72,7 @@
         <ul class="navbar-nav mr-auto">
           <li *ngFor="let menuItem of menuItems"
             class="nav-item">
-            <img *ngIf="menuItem.title === 'Home'" class="icon-home" src="/assets/icons/icon-home.png">
+            <img *ngIf="menuItem.title === 'Home'" class="icon-home" src="/assets/icons/icon-home.png" alt="home">
             <a id="home-navbar" *ngIf="menuItem.title === 'Home'" class="nav-item nav-link nav-home" [routerLink]="[menuItem.path]" fragment="home" routerLinkActive="router-active" [routerLinkActiveOptions]="{exact: true}">{{menuItem.title}}</a>            
             <a *ngIf="menuItem.title !== 'Home'" [id]="menuItem.id" class="nav-item nav-link" routerLinkActive="router-active" [routerLinkActiveOptions]="{exact: true}" [routerLink]="[menuItem.path]">{{menuItem.title}}</a>
           </li>
@@ -86,12 +86,12 @@
   <div *ngIf="isMobile" class="mobile-menu">
     <div class="row no-gutters justify-content-between">
       <div class="col-4 px-4 py-2">
-        <a href="/"><img class="site-logo" src="/assets/images/img-logo.png"></a>
+        <a href="/"><img class="site-logo" src="/assets/images/img-logo.png" alt="site logo"></a>
       </div>
       <div class="col-2 pr-3 pt-1">
         <button class="navbar-toggler" type="button" (click)="onMenuToggle()">
           <span *ngIf="!toggled" class="navbar-toggler-icon"><i class="fa fa-bars fa-2x" aria-hidden="true"></i></span>
-          <span *ngIf="toggled" class="navbar-toggler-icon"><img class="menu-close" src="/assets/icons/icon-menu-close.png"></span>
+          <span *ngIf="toggled" class="navbar-toggler-icon"><img class="menu-close" src="/assets/icons/icon-menu-close.png" alt="close"></span>
         </button>
       </div>
     </div>
