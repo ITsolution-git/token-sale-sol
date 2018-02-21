@@ -58,7 +58,7 @@ export class MetaMaskComponent implements OnInit {
   }
 
   navigateToSaveAccount() {
-    // this.router.navigate(['/save-account']);
+    this.router.navigate(['/save-account']);
   }
 
   navigateToFAQ() {
