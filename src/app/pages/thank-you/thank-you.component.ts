@@ -56,8 +56,13 @@ export class ThankYouComponent implements OnInit {
               'gzr_received': gzrValue,
               'purchased_at': (new Date()).getTime()
             };
+            const customData =  {
+              purchased_gzr: gzrValue,
+              last_purchased_at: (new Date()).getTime()
+            };
+            this.eventTrack('purchased-gzr', metaData);
+            this.updateUser(customData);
             this.updatePostBack(res['transaction'], ethValue, gzrValue, 'ETH', 'GZR');
-            this.updateIntercom(metaData);
             const txData = {
               'tx_id': res['transaction'],
               'eth': ethValue,
@@ -77,8 +82,20 @@ export class ThankYouComponent implements OnInit {
     this.router.navigate(['/buy-gzr']);
   }
 
-  updateIntercom(metaData) {
-    (<any>window).Intercom('trackEvent', 'purchased-gzr' , metaData);
+  updateUser(customData) {
+    (<any>window).Intercom('update', {
+        custom_data: customData
+    });
+    return true;
+  }
+
+  eventTrack(event, metadata) {
+    if (!(metadata)) {
+      (<any>window).Intercom('trackEvent', event);
+    } else {
+      (<any>window).Intercom('trackEvent', event, metadata);
+    }
+    return true;
   }
 
   updatePostBack(afid, afprice, custom_field1, custom_field2, custom_field3) {

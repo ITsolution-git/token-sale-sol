@@ -68,6 +68,9 @@ export class MetaMaskService {
   accountSubject = new Subject<any>();
   accountObservable$ = this.accountSubject.asObservable();
 
+  treasureTransactionSubject = new Subject<any>();
+  treasureTransactionObservable$ = this.treasureTransactionSubject.asObservable();
+
   loadMetaObservable: any;
   loadMetaSubscription$: Subscription = new Subscription();
 
@@ -350,7 +353,9 @@ export class MetaMaskService {
   }
 
   getItem(tokenContract) {
-      return tokenContract.spendGZRToGetAnItem({from: this.account});
+    tokenContract.spendGZRToGetAnItem({from: this.account}).then(res => {
+      this.treasureTransactionSubject.next(res);
+    });
   }
 
 
