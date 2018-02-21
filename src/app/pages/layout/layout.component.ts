@@ -17,7 +17,6 @@ import { UserState } from '../../store/store-data';
 import { User } from '../../shared/models/user.model';
 import { NotificationsService } from 'angular2-notifications-lite';
 import { environment } from '../../../environments/environment.prod';
-import * as Moment from 'moment';
 
 @Component({
   selector: 'app-layout',
@@ -97,11 +96,11 @@ export class LayoutComponent implements OnInit, AfterViewInit {
           if (user.length) {
             const {nick, email, id} = currentUser;
             const metadata = {
-              created_at: Moment().unix(),
+              created_at: (new Date()).getTime(),
             };
             const customData =  {
               registered_metamask: true,
-              registered_metamask_at: Moment().unix(),
+              registered_metamask_at: (new Date()).getTime(),
               gzr_balance: currentUser.gzr.amount || 0,
               items_owned: currentUser.owns.length,
               nickname: nick,
@@ -220,7 +219,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
         name: name,
         email: email,
         user_id: userId,
-        created_at: Moment().unix(),
+        created_at: (new Date()).getTime(),
         custom_data: customData
     });
     return true;

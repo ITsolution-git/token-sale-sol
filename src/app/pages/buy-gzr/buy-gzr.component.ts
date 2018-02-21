@@ -14,7 +14,6 @@ import { Subject } from 'rxjs/Subject';
 import { ValidNetworkModalComponent } from '../../shared/components/valid-network/valid-network.component';
 import { MetaMaskService } from '../../shared/services/MetaMaskService/meta-mask.service';
 import { UPDATE_TRANSACTION_ID } from './../../store/actions/user.actions';
-import * as Moment from 'moment';
 
 declare const $: any;
 
@@ -191,5 +190,14 @@ export class BuyGzrComponent implements OnInit {
     }
     this.slideValue = this.ethValue;
     this.gzrValue = this.ethValue * this.cashRate;
+  }
+
+  eventTrack(event, metadata) {
+    if (!(metadata)) {
+      (<any>window).Intercom('trackEvent', event);
+    } else {
+      (<any>window).Intercom('trackEvent', event, metadata);
+    }
+    return true;
   }
 }
