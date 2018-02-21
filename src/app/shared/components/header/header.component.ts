@@ -43,6 +43,7 @@ export class HeaderComponent implements OnInit {
   gzrBalance: number;
   toggled = false;
   users: User[] = [];
+  saveUserIDStr = 'user_id';
 
   config = {
     animated: true,
@@ -88,6 +89,7 @@ export class HeaderComponent implements OnInit {
               this.isAuthenticated = true;
               setTimeout(() => {
                 this.metaMaskService.getAccountInfo();
+                this.localStorage.store(this.saveUserIDStr, user_.id);
                 this.UpdateNickName(user_.nick);
               }, 500);
             } else {

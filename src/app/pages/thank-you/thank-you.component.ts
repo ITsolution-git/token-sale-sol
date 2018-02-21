@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { LocalStorageService } from 'ngx-webstorage';
+
 import { MetaMaskService } from '../../shared/services/MetaMaskService/meta-mask.service';
 import { ApplicationState } from '../../store/application-state';
+import { UserService } from '../../shared/services/UserService/user.service';
 import { UserState } from '../../store/store-data';
 import { UPDATE_TRANSACTION_ID } from './../../store/actions/user.actions';
 
@@ -18,11 +21,16 @@ export class ThankYouComponent implements OnInit {
   userState: Observable<UserState>;
   showSpinner = true;
   subscribed = false;
+  saveUserIDStr = 'user_id';
+  ethValueStr = 'purchasedEthValue';
+  gzrValueStr = 'purchasedGZRValue';
 
   constructor(
     private metaMaskService: MetaMaskService,
+    private localStorage: LocalStorageService,
     private router: Router,
-    private store: Store<ApplicationState>
+    private store: Store<ApplicationState>,
+    private userService: UserService
   ) {
     this.userState = this.store.select('userState');
   }
@@ -38,6 +46,25 @@ export class ThankYouComponent implements OnInit {
           this.metaMaskService.checkTransactionStatus(this.transactionId)
           .then(res => {
             this.showSpinner = false;
+
+            const ethValue = this.localStorage.retrieve(this.ethValueStr),
+                gzrValue = this.localStorage.retrieve(this.gzrValueStr);
+
+            const metaData = {
+              'transaction_id': res['transaction'],
+              'ether_spent': ethValue,
+              'gzr_received': gzrValue,
+              'purchased_at': (new Date()).getTime()
+            };
+            this.updatePostBack(res['transaction'], ethValue, gzrValue, 'ETH', 'GZR');
+            this.updateIntercom(metaData);
+            const txData = {
+              'tx_id': res['transaction'],
+              'eth': ethValue,
+              'gzr': gzrValue ,
+              'confirmed_at': (new Date()).getTime()
+            };
+            this.saveUserTransaction(txData);
           });
         }
       } else {
@@ -51,6 +78,34 @@ export class ThankYouComponent implements OnInit {
   }
 
   updateIntercom(metaData) {
-    (<any>window).Intercom('trackEvent', true ,metaData);
+    (<any>window).Intercom('trackEvent', 'purchased-gzr' , metaData);
+  }
+
+  updatePostBack(afid, afprice, custom_field1, custom_field2, custom_field3) {
+    let pixel = '';
+
+    if (typeof afid !== 'undefined') {
+      pixel += '&afid=' + afid;
+    }
+
+    if (typeof afprice !== 'undefined') {
+      pixel += '&afprice=' + afprice;
+    }
+
+    pixel += '&custom_field1' + '=' +  custom_field1;
+    pixel += '&custom_field2' + '=' +  custom_field2;
+    pixel += '&custom_field3' + '=' +  custom_field3;
+
+    pixel = pixel ? '?' + pixel.substr(1) : '';
+    const img = document.createElement('img');
+    img.src = '//gizer.icoref.link/success.php' + pixel;
+    img.alt = '';
+    img.style.cssText = 'position:absolute; top=-9999px; width:1px; height:1px; border:0';
+    document.body.appendChild(img);
+  }
+
+  saveUserTransaction(txData) {
+    const userId = this.localStorage.retrieve(this.saveUserIDStr);
+    this.userService.saveTransaction(userId, txData).subscribe(res => { });
   }
 }

@@ -122,11 +122,6 @@ export class LayoutComponent implements OnInit, AfterViewInit {
       if (this.validNetwork !== status) {
         this.updateNetworkStatus(status);
       }
-
-      if (!status && !this.bsModalRef) {
-          this.bsModalRef = this.modalService.show(ValidNetworkModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
-          this.metaMaskService.unloadAccountInfo();
-      }
     });
 
     this.metaMaskService.signTransactionPendingObservable$.subscribe(signTransaction => {

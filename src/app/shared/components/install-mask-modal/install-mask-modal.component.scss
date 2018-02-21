@@ -1,4 +1,17 @@
 .install-mask-modal {
+    .install-mask-header {
+        width: 50%;
+        text-align: left;
+        float: left;
+        font-size: 18px;
+        font-family: "Century Gothic";
+        color: #0b0c14;
+
+        p {
+            margin: 0;
+        }
+    }
+
     .modal-title {
         font-size: 30px;
         font-family: "Century Gothic Bold";

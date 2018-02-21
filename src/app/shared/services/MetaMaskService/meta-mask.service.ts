@@ -75,6 +75,8 @@ export class MetaMaskService {
   checkTxStatusSusbscription$: Subscription = new Subscription();
 
   subscribed = false;
+  purchasedEtherValue = 0;
+  purchasedGZRValue = 0;
 
   constructor(
     private _ngZone: NgZone,
@@ -232,16 +234,16 @@ export class MetaMaskService {
     this.web3.eth.getTransactionReceipt(txId, (err, res) => {
       if (err) {
         reject(err);
-      }else {
+      } else {
         if (res == null) {
           this.transactionId = txId;
           this.transactionIdSubject.next(this.transactionId);
           return;
         } else if (res.status === 1) {
-          resolve({ 'success': true, 'transaction': txId });
+          resolve({ 'success': true, 'transaction': txId, 'etherValue': this.purchasedEtherValue, 'gzrValue': this.purchasedGZRValue });
           this.checkTxStatusSusbscription$.unsubscribe();
         } else {
-          resolve({ 'success': false, 'transaction': txId });
+          resolve({ 'success': false, 'transaction': txId, 'etherValue': this.purchasedEtherValue, 'gzrValue': this.purchasedGZRValue });
           this.checkTxStatusSusbscription$.unsubscribe();
         }
         this.refreshBalance();
