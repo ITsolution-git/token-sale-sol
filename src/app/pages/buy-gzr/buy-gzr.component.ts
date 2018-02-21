@@ -191,5 +191,5 @@ export class BuyGzrComponent implements OnInit {
     }
     this.slideValue = this.ethValue;
     this.gzrValue = this.ethValue * this.cashRate;
-  }  
+  }
 }
