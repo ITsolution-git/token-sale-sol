@@ -29,4 +29,13 @@ export class UserService {
       null
     );
   }
+
+  saveTransaction(userId, txData) {
+   return this.http.put(
+     this.apiRoutingService.saveTxUrl(userId),
+     txData,
+     false,
+     null
+   );
+  }
 }

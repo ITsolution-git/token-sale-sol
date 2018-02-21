@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ValidNetworkModalComponent } from '../../shared/components/valid-network/valid-network.component';
@@ -16,7 +17,6 @@ import { UserState } from '../../store/store-data';
 import { User } from '../../shared/models/user.model';
 import { NotificationsService } from 'angular2-notifications-lite';
 import { environment } from '../../../environments/environment.prod';
-import * as Moment from 'moment';
 
 @Component({
   selector: 'app-layout',
@@ -52,6 +52,8 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   nickNameStr = 'nickName';
   walletStr = 'walletAddress';
 
+  event$: Subject<any> = new Subject<any>();
+
   constructor(
     public intercom: Intercom,
     private metaMaskService: MetaMaskService,
@@ -68,13 +70,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     this.metaMaskService.getAccountInfo();
     this.userState.subscribe(state => {
       if (state) {
-        this.installed = state.installed;
-        this.unlocked = state.unlocked;
-        this.walletAddress = state.walletAddress;
-        this.balance = state.balance;
-        this.gzrBalance = state.gzrBalance;
-        this.nickName = state.nickName;
-        this.validNetwork = state.validNetwork;
+        this.event$.next(state);
       }
     });
     this.metaMaskService.installedObservable$.subscribe(status => {
@@ -100,11 +96,11 @@ export class LayoutComponent implements OnInit, AfterViewInit {
           if (user.length) {
             const {nick, email, id} = currentUser;
             const metadata = {
-              created_at: Moment().unix(),
+              created_at: (new Date()).getTime(),
             };
             const customData =  {
               registered_metamask: true,
-              registered_metamask_at: Moment().unix(),
+              registered_metamask_at: (new Date()).getTime(),
               gzr_balance: currentUser.gzr.amount || 0,
               items_owned: currentUser.owns.length,
               nickname: nick,
@@ -142,10 +138,6 @@ export class LayoutComponent implements OnInit, AfterViewInit {
       if (this.validNetwork !== status) {
         this.updateNetworkStatus(status);
       }
-
-      if (!status && !this.bsModalRef) {
-          this.bsModalRef = this.modalService.show(ValidNetworkModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
-      }
     });
 
     this.metaMaskService.signTransactionPendingObservable$.subscribe(signTransaction => {
@@ -160,6 +152,16 @@ export class LayoutComponent implements OnInit, AfterViewInit {
               maxLength: 10
           }
       );
+    });
+
+    this.event$.subscribe((state) => {
+      this.installed = state.installed;
+      this.unlocked = state.unlocked;
+      this.walletAddress = state.walletAddress;
+      this.balance = state.balance;
+      this.gzrBalance = state.gzrBalance;
+      this.nickName = state.nickName;
+      this.validNetwork = state.validNetwork;
     });
   }
 
@@ -217,7 +219,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
         name: name,
         email: email,
         user_id: userId,
-        created_at: Moment().unix(),
+        created_at: (new Date()).getTime(),
         custom_data: customData
     });
     return true;

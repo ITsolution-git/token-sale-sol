@@ -10,7 +10,6 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ProfileModalComponent } from '../profile-modal/profile-modal.component';
 import { WaitingTreasureModalComponent } from '../waiting-treasure-modal/waiting-treasure-modal.component';
 import { WaitingItemComponent } from '../waiting-item/waiting-item.component';
-import * as Moment from 'moment';
 
 @Component({
   selector: 'app-treasure',
@@ -87,12 +86,12 @@ export class TreasureComponent implements OnInit {
                 'transaction-id': res.tx,
                 'item-id': '74143b3842ff373eb111d12f1f497611',
                 price: amount,
-                opened_at: Moment().unix(),
+                opened_at: (new Date()).getTime(),
               };
               const customData =  {
                 opened_treasure: true,
                 items_owned: 1,
-                last_opened_treasure_at: Moment().unix(),
+                last_opened_treasure_at: (new Date()).getTime(),
               };
               this.updateUser(customData);
               this.eventTrack('opened-treasure', metadata);

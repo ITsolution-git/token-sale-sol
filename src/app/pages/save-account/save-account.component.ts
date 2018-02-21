@@ -10,7 +10,6 @@ import { ApplicationState } from '../../store/application-state';
 import { Observable } from 'rxjs/Observable';
 import { UserState } from '../../store/store-data';
 import { UPDATE_NICK_NAME } from '../../store/actions/user.actions';
-import * as Moment from 'moment';
 
 @Component({
   selector: 'app-save-account',
@@ -115,11 +114,11 @@ export class SaveAccountComponent implements OnInit {
             if (user.length > 0) {
               const {nick, email, id} = currentUser;
               const metadata = {
-                created_at: Moment().unix(),
+                created_at: (new Date()).getTime(),
               };
               const customData = {
                 registered_metamask: true,
-                registered_metamask_at: Moment().unix(),
+                registered_metamask_at: (new Date()).getTime(),
                 gzr_balance: currentUser.gzr.amount || 0,
                 items_owned: currentUser.owns.length,
                 nickname: nick,
@@ -152,7 +151,7 @@ export class SaveAccountComponent implements OnInit {
         name: name,
         email: email,
         user_id: userId,
-        created_at: Moment().unix(),
+        created_at: (new Date()).getTime(),
         custom_data: customData
     });
     return true;
