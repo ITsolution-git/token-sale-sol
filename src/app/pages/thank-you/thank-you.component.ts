@@ -54,20 +54,20 @@ export class ThankYouComponent implements OnInit {
               'transaction_id': res['transaction'],
               'ether_spent': ethValue,
               'gzr_received': gzrValue,
-              'purchased_at': (new Date()).getTime()
+              'purchase_date': (new Date()).getTime() / 1000
             };
             const customData =  {
               purchased_gzr: gzrValue,
-              last_purchased_at: (new Date()).getTime()
+              last_purchased_at: (new Date()).getTime() / 1000
             };
             this.eventTrack('purchased-gzr', metaData);
             this.updateUser(customData);
-            this.updatePostBack(res['transaction'], ethValue, gzrValue, 'ETH', 'GZR');
+            this.updatePostBack(res['transaction'], gzrValue, ethValue, 'ETH', 'GZR');
             const txData = {
               'tx_id': res['transaction'],
               'eth': ethValue,
               'gzr': gzrValue ,
-              'confirmed_at': (new Date()).getTime()
+              'confirmed_at': (new Date()).getTime() / 1000
             };
             this.saveUserTransaction(txData);
           });
