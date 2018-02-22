@@ -13,12 +13,13 @@ import { ApplicationState } from '../../../store/application-state';
 
 declare var Math;
 
+declare const $: any;
 @Component({
   selector: 'app-treasure-modal',
   templateUrl: './opening-treasure-modal.component.html',
   styleUrls: ['./opening-treasure-modal.component.scss']
 })
-export class TreasureModalComponent implements OnInit {
+export class OpeningTreasureModalComponent implements OnInit {
   chest: any;
   item: any;
   chest_model: Chest;
@@ -26,6 +27,8 @@ export class TreasureModalComponent implements OnInit {
   userState: Observable<UserState>;
   walletAddress: String;
   user: User;
+
+  isMobile = false;
 
   constructor(
     public bsModalRef: BsModalRef,
@@ -70,6 +73,9 @@ export class TreasureModalComponent implements OnInit {
         }
       }
     });
+
+    this.isMobile = this.isMobileView();
+
   }
 
   openChest() {
@@ -122,7 +128,11 @@ export class TreasureModalComponent implements OnInit {
   addRay(index) {
     const div = document.createElement('div');
     div.classList.add('chest__card-ray',  'chest__card-ray--' + index);
-    this.chest.querySelector('.chest__card-rays').appendChild(div);
+    if (this.chest.querySelector('.chest__card-rays')!=null){
+      this.chest.querySelector('.chest__card-rays')
+      .appendChild(div);
+
+    }
   }
 
   addParticle() {
@@ -141,8 +151,9 @@ export class TreasureModalComponent implements OnInit {
 
     div.style.transform = transform;
     div.setAttribute('data-final-position', transform);
-
-    this.chest.querySelector('.chest__card-particles').appendChild(div);
+    if(this.chest.querySelector('.chest__card-particles')!= null) {
+      this.chest.querySelector('.chest__card-particles').appendChild(div);
+    }
 
     setTimeout(() => {
         div.style.transform = 'translate3d(0, 0, 0) rotate(' + rotate + 'deg)';
@@ -168,13 +179,17 @@ export class TreasureModalComponent implements OnInit {
   }
 
   removeParticles() {
-    this.chest.querySelector('.chest__card-particles').innerHTML = '';
+    if(this.chest.querySelector('.chest__card-particles')!= null) {
+      this.chest.querySelector('.chest__card-particles').innerHTML = '';
+    }
   }
 
   closeChest() {
     if (this.chest !== undefined) {
       this.chest.classList.remove('chest--opened', 'chest--finished');
-      this.chest.querySelector('.chest__card-rays').innerHTML = '';
+      if(this.chest.querySelector('.chest__card-rays')!= null) {
+        this.chest.querySelector('.chest__card-rays').innerHTML = '';
+      }
     }
 
     this.bsModalRef.hide();
@@ -186,6 +201,15 @@ export class TreasureModalComponent implements OnInit {
     } else {
       (<any>window).Intercom('trackEvent', event, metadata);
     }
+  } 
+
+  isMobileView() {
+    if ($(window).width() > 425) {
+        return false;
+    }
     return true;
   }
+
+
+
 }

@@ -376,15 +376,15 @@ export class MetaMaskService {
   }
 
   approveTokenSend(tokenContract, amount) {
-      return tokenContract.approve(tokenContract.address, amount, {from: this.account});
+      return tokenContract.approve(tokenContract.address, amount, {from: this.account, gas: 40000});
   }
 
   getItem(tokenContract) {
-    tokenContract.spendGZRToGetAnItem({from: this.account}).then(res => {
+    tokenContract.spendGZRToGetAnItem({from: this.account, gas: 40000}).then(res => {
       this.treasureTransactionSubject.next(res);
     });
   }
 
-
+  
 
 }

@@ -116,9 +116,10 @@ export class TreasureComponent implements OnInit {
               };
               this.updateUser(customData);
               this.eventTrack('opened-treasure', metadata);
-              this.bsModalRef.hide();
             });
-            this.bsModalRef = this.modalService.show(WaitingItemComponent);
+            setTimeout(() => {
+              this.router.navigate(['/generate-item']);
+            }, 3000); 
           });
       });
   }
