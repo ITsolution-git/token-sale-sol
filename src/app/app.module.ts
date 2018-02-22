@@ -30,7 +30,7 @@ import { INITIAL_APPLICATION_STATE } from './store/application-state';
 import { userReducer } from './store/reducers/user.reducer';
 import { WaitingTreasureModalComponent } from './shared/components/waiting-treasure-modal/waiting-treasure-modal.component';
 import { WaitingItemComponent } from './shared/components/waiting-item/waiting-item.component';
-import { TreasureItemModalComponent } from './shared/components/treasure-item/treasure-item.component';
+import { TreasureModalComponent } from './shared/components/opening-treasure-modal/opening-treasure-modal.component';
 
 
 export const reducers = {
@@ -45,7 +45,7 @@ export const reducers = {
     ValidNetworkModalComponent,
     WaitingTreasureModalComponent,
     WaitingItemComponent,
-    TreasureItemModalComponent
+    TreasureModalComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +75,7 @@ export const reducers = {
     ValidNetworkModalComponent,
     WaitingTreasureModalComponent,
     WaitingItemComponent,
-    TreasureItemModalComponent
+    TreasureModalComponent
   ],
   bootstrap: [AppComponent],
 })
