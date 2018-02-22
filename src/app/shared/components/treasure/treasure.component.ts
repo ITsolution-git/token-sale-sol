@@ -46,6 +46,7 @@ export class TreasureComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.eventTrack('viewed-open-treasure-page', null);
     this.metaMaskService.getAccountInfo();
 
     this.userState.subscribe(state => {
@@ -72,9 +73,6 @@ export class TreasureComponent implements OnInit {
 
   openTreasureModal() {
     const amount = 1;
-
-
-
     this.metaMaskService.getTokenContract()
       .then(ctc => {
         this.tokenContract = ctc;
@@ -83,8 +81,40 @@ export class TreasureComponent implements OnInit {
           .then(ctr => {
             this.itemGenerationContract = ctr;
             this.metaMaskService.getItem(this.itemGenerationContract);
+            this.metaMaskService.treasureTransactionObservable$.subscribe(res => {
+              const metadata = {
+                'transaction-id': res.tx,
+                'item-id': '74143b3842ff373eb111d12f1f497611',
+                price: amount,
+                opened_at: (new Date()).getTime(),
+              };
+              const customData =  {
+                opened_treasure: true,
+                items_owned: 1,
+                last_opened_treasure_at: (new Date()).getTime(),
+              };
+              this.updateUser(customData);
+              this.eventTrack('opened-treasure', metadata);
+              this.bsModalRef.hide();
+            });
             this.bsModalRef = this.modalService.show(WaitingItemComponent);
           });
       });
+  }
+
+  updateUser(customData) {
+    (<any>window).Intercom('update', {
+        custom_data: customData
+    });
+    return true;
+  }
+
+  eventTrack(event, metadata) {
+    if (!(metadata)) {
+      (<any>window).Intercom('trackEvent', event);
+    } else {
+      (<any>window).Intercom('trackEvent', event, metadata);
+    }
+    return true;
   }
 }

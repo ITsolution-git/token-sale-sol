@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ValidNetworkModalComponent } from '../../shared/components/valid-network/valid-network.component';
@@ -51,6 +52,8 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   nickNameStr = 'nickName';
   walletStr = 'walletAddress';
 
+  event$: Subject<any> = new Subject<any>();
+
   constructor(
     public intercom: Intercom,
     private metaMaskService: MetaMaskService,
@@ -67,13 +70,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     this.metaMaskService.getAccountInfo();
     this.userState.subscribe(state => {
       if (state) {
-        this.installed = state.installed;
-        this.unlocked = state.unlocked;
-        this.walletAddress = state.walletAddress;
-        this.balance = state.balance;
-        this.gzrBalance = state.gzrBalance;
-        this.nickName = state.nickName;
-        this.validNetwork = state.validNetwork;
+        this.event$.next(state);
       }
     });
     this.metaMaskService.installedObservable$.subscribe(status => {
@@ -95,10 +92,22 @@ export class LayoutComponent implements OnInit, AfterViewInit {
       if (this.walletAddress !== res) {
         this.updateWalletAddress(res);
         this.userService.retriveUser(res).subscribe(user => {
+          const currentUser = user[0];
           if (user.length) {
-            this.updateNickName(user[0].nick);
-            const {email, id} = user[0];
-            this.loadIntercom(email, id);
+            const {nick, email, id} = currentUser;
+            const metadata = {
+              created_at: (new Date()).getTime(),
+            };
+            const customData =  {
+              registered_metamask: true,
+              registered_metamask_at: (new Date()).getTime(),
+              gzr_balance: currentUser.gzr.amount || 0,
+              items_owned: currentUser.owns.length,
+              nickname: nick,
+              'wallet-id': id
+            };
+            this.updateNickName(nick);
+            this.updateUser(nick, email, id, customData);
           }
         });
       }
@@ -111,7 +120,11 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
     this.metaMaskService.gzrBalanceObservable$.subscribe(res => {
       if (this.gzrBalance !== res) {
+        const customData =  {
+          gzr_balance: res || 0
+        };
         this.updateGZRBalance(res);
+        this.updateCustomData(customData);
       }
     });
 
@@ -124,10 +137,6 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     this.metaMaskService.validNetworkObservable$.subscribe(status => {
       if (this.validNetwork !== status) {
         this.updateNetworkStatus(status);
-      }
-
-      if (!status && !this.bsModalRef) {
-          this.bsModalRef = this.modalService.show(ValidNetworkModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
       }
     });
 
@@ -143,6 +152,16 @@ export class LayoutComponent implements OnInit, AfterViewInit {
               maxLength: 10
           }
       );
+    });
+
+    this.event$.subscribe((state) => {
+      this.installed = state.installed;
+      this.unlocked = state.unlocked;
+      this.walletAddress = state.walletAddress;
+      this.balance = state.balance;
+      this.gzrBalance = state.gzrBalance;
+      this.nickName = state.nickName;
+      this.validNetwork = state.validNetwork;
     });
   }
 
@@ -191,25 +210,26 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
   initIntercom() {
     (<any>window).Intercom('boot', {
-      app_id: 'pjrvbrtn'
+      app_id: environment.INTERCOM_APP_ID,
     });
   }
 
-  loadIntercom(email, userId) {
-    (<any>window).Intercom('boot', {
-      app_id: environment.INTERCOM_APP_ID,
-      custom_launcher_selector: '#IntercomDefaultWidget',
-      email: email,
-      user_id: userId,
-      created_at: Date.now(),
-   });
+  updateUser(name, email, userId, customData) {
+    (<any>window).Intercom('update', {
+        name: name,
+        email: email,
+        user_id: userId,
+        created_at: (new Date()).getTime(),
+        custom_data: customData
+    });
+    return true;
   }
 
-  updateIntercom(email, userId) {
-    (<any>window).Intercom('update', {email: email, user_id: userId});
+  updateCustomData(customData) {
+    (<any>window).Intercom('update', {
+        custom_data: customData
+    });
+    return true;
   }
 
-  updateIntercomRefresh() {
-    (<any>window).Intercom('update');
-  }
 }

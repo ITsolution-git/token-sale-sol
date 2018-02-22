@@ -15,7 +15,7 @@
             <div *ngIf="isAccepted && showAddress" class="address-block">
               <div class="position-relative">
                 <input class="txt-value-input w-100 pl-3 mb-3" value="0x90dCdC0AD9813ba963D54ADcCFA9091f4dd2925B" type="text" readonly>
-                <span id="copy-wallet-address" class="copy-icon"><img class="pr-1" src="/assets/icons/icon-copy.png">Copy</span>
+                <span id="copy-wallet-address" class="copy-icon"><img class="pr-1" src="/assets/icons/icon-copy.png" alt="copy icon">Copy</span>
               </div>
               <!-- <div class="separator">
                 <span class="line"></span>
@@ -23,7 +23,7 @@
               </div> -->
               <!-- <div class="position-relative">
                 <input class="txt-value-input w-100 pl-3 mb-3" placeholder="gizergaming.eth" type="text" readonly>
-                <span class="copy-icon"><img class="pr-1" src="/assets/icons/icon-copy.png">Copy</span>
+                <span class="copy-icon"><img class="pr-1" src="/assets/icons/icon-copy.png" alt="copy icon">Copy</span>
               </div> -->
             </div>
             <div *ngIf="!showAddress" class="buy-gzr-wrapper border border-secondary p-3 w-100">
@@ -52,7 +52,7 @@
                   (keyup.enter)="updateSliderValue(ethValue)"
                   (blur)="updateSliderValue(ethValue)"
                 >
-                <span class="icons"><img src="/assets/icons/icon-etherum-buy.png"></span>
+                <span class="icons"><img src="/assets/icons/icon-etherum-buy.png" alt="ethereum icon"></span>
               </div>
               <ion-range-slider #ethSlider
                 id="eth-slider"
@@ -75,7 +75,7 @@
               <div class="w-100">
                 <p class="text-label mt-3">I will receive (GZR)</p>
                 <input [(ngModel)]="gzrValue" class="txt-value-input pl-3 mb-3" type="text" readonly>
-                <span class="icons-1"><img src="/assets/icons/icon-gizer-small-buy.png"></span>
+                <span class="icons-1"><img src="/assets/icons/icon-gizer-small-buy.png" alt="gizer coin icon"></span>
               </div>
               
               <div *ngIf="!isFromModal && !this.isMobile" class="check-terms pb-5">

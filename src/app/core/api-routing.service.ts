@@ -24,6 +24,10 @@ export class ApiRoutingService {
     return this.baseUrl + '/item/' + id;
   }
 
+  saveTxUrl(id) {
+    return this.baseUrl + '/user/' + id + '/transactions';
+  }
+
   getMetaCoinUrl() {
     return '/contracts/MetaCoin.json';
   }

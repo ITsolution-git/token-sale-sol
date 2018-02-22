@@ -6,5 +6,5 @@
 export const environment = {
   production: false,
   BASE_API_URL: 'http://api-dev.gizer.me',
-  INTERCOM_APP_ID: 'pjrvbrtn'
+  INTERCOM_APP_ID: 'e46tjta5'
 };

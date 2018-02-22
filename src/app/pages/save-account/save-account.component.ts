@@ -31,6 +31,8 @@ export class SaveAccountComponent implements OnInit {
   loaded = false;
   saveNikNameStr = 'nickName';
   saveWalletStr = 'walletAddress';
+  strRootURL = '/';
+
   constructor(
     private fb: FormBuilder,
     private localStorage: LocalStorageService,
@@ -100,17 +102,35 @@ export class SaveAccountComponent implements OnInit {
               'id': result['account']
           }
         };
-        this.authService.login();
         setTimeout(() => {
           this.metaMaskService.getAccountInfo();
-          this.UpdateNickName(this.nickName);
           this.localStorage.store(this.saveNikNameStr, this.nickName);
           this.localStorage.store(this.saveWalletStr, this.walletAddress);
         }, 500);
-
         this.userService.registerUser(data)
-        .subscribe(
-        );
+        .subscribe(() => {
+          this.userService.retriveUser(this.walletAddress).subscribe(user => {
+            const currentUser = user[0];
+            if (user.length > 0) {
+              const {nick, email, id} = currentUser;
+              const metadata = {
+                created_at: (new Date()).getTime(),
+              };
+              const customData = {
+                registered_metamask: true,
+                registered_metamask_at: (new Date()).getTime(),
+                gzr_balance: currentUser.gzr.amount || 0,
+                items_owned: currentUser.owns.length,
+                nickname: nick,
+                'wallet-id': id
+              };
+              this.UpdateNickName(nick);
+              this.updateUser(nick, email, id, customData);
+              this.eventTrack('registered-metamask', metadata);
+              this.router.navigate([this.strRootURL]);
+            }
+          });
+        });
       })
       .catch(error => {
         this.isEmailed = false;
@@ -124,5 +144,25 @@ export class SaveAccountComponent implements OnInit {
 
   navigateToMetaMask() {
     this.router.navigate(['/meta-mask']);
+  }
+
+  updateUser(name, email, userId, customData) {
+    (<any>window).Intercom('update', {
+        name: name,
+        email: email,
+        user_id: userId,
+        created_at: (new Date()).getTime(),
+        custom_data: customData
+    });
+    return true;
+  }
+
+  eventTrack(event, metadata) {
+    if (!(metadata)) {
+      (<any>window).Intercom('trackEvent', event);
+    } else {
+      (<any>window).Intercom('trackEvent', event, metadata);
+    }
+    return true;
   }
 }

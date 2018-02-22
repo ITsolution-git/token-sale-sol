@@ -39,10 +39,12 @@ export class HeaderComponent implements OnInit {
   unlocked = false;
   balance: number;
   nickName: String;
+  nickDisplay: string;
   installed = false;
   gzrBalance: number;
   toggled = false;
   users: User[] = [];
+  saveUserIDStr = 'user_id';
 
   config = {
     animated: true,
@@ -84,10 +86,12 @@ export class HeaderComponent implements OnInit {
             if (resp.length) {
               const user_ = resp[0];
               this.nickName = user_.nick;
+              if (user_.nick != null) { this.nickDisplay = user_.nick.slice(0, 10); }
               this.authService.login(this.walletAddress);
               this.isAuthenticated = true;
               setTimeout(() => {
                 this.metaMaskService.getAccountInfo();
+                this.localStorage.store(this.saveUserIDStr, user_.id);
                 this.UpdateNickName(user_.nick);
               }, 500);
             } else {
@@ -100,6 +104,7 @@ export class HeaderComponent implements OnInit {
         this.unlocked = state.unlocked;
         this.balance = state.balance;
         this.nickName = state.nickName;
+        if (state.nickName != null) { this.nickDisplay = state.nickName.slice(0, 10); }
         this.installed = state.installed;
         this.gzrBalance = state.gzrBalance;
       }
@@ -161,6 +166,7 @@ export class HeaderComponent implements OnInit {
   }
 
   navigateToTokenSection() {
+    this.eventTrack('viewed-what-is-gzr-page', null);
     this.router.navigate([''], {fragment: 'whatsgizer'});
   }
 
@@ -208,5 +214,14 @@ export class HeaderComponent implements OnInit {
       js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11';
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
+  }
+
+  eventTrack(event, metadata) {
+    if (!(metadata)) {
+      (<any>window).Intercom('trackEvent', event);
+    } else {
+      (<any>window).Intercom('trackEvent', event, metadata);
+    }
+    return true;
   }
 }

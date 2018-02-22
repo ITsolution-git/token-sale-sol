@@ -1,4 +1,21 @@
 .install-meta {
+    .gizer-mask {
+        width: 100%;
+    }
+
+    .install-mask-header {
+        width: 80%;
+        text-align: left;
+        float: left;
+        font-size: 21px;
+        font-weight: bold;
+        font-family: "Century Gothic";
+        color: #ffc107;
+
+        p {
+            margin: 0;
+        }
+    }
     .title {
         h2 {
             font-size: 30px;

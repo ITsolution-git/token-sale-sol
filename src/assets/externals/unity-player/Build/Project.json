@@ -1,6 +1,6 @@
 {
 "TOTAL_MEMORY": 1073741824,
-"dataUrl": "http://api-dev.gizer.me/images/resource/Project.data.unityweb",
+"dataUrl": "Project.data.unityweb",
 "asmCodeUrl": "Project.asm.code.unityweb",
 "asmMemoryUrl": "Project.asm.memory.unityweb",
 "asmFrameworkUrl": "Project.asm.framework.unityweb",
