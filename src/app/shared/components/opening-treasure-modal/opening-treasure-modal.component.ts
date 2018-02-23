@@ -14,13 +14,26 @@ declare var Math;
 })
 export class TreasureModalComponent implements OnInit {
   chest: any;
-  item: Item;
+  item: any;
 
   constructor(
     public bsModalRef: BsModalRef,
     private chestService: ChestService,
     private itemService: ItemService    
-  ) { }
+  ) { 
+  	this.item = {
+  		resources: {
+  			icons: [''],
+  			images: [''],
+  			videos: [''],
+  			model: ['']
+  		},
+  		meta: {
+  			name: '',
+  			rarity: ''
+  		}
+  	}
+  }
 
   ngOnInit() {
     const cId = 'eeeceb748b383a08a398e260d4a34b91';
