@@ -19,20 +19,20 @@ export class TreasureModalComponent implements OnInit {
   constructor(
     public bsModalRef: BsModalRef,
     private chestService: ChestService,
-    private itemService: ItemService    
-  ) { 
-  	this.item = {
-  		resources: {
-  			icons: [''],
-  			images: [''],
-  			videos: [''],
-  			model: ['']
-  		},
-  		meta: {
-  			name: '',
-  			rarity: ''
-  		}
-  	}
+    private itemService: ItemService
+  ) {
+    this.item = {
+      resources: {
+        icons: [''],
+        images: [''],
+        videos: [''],
+        model: ['']
+      },
+      meta: {
+        name: '',
+        rarity: ''
+      }
+    };
   }
 
   ngOnInit() {
@@ -41,7 +41,7 @@ export class TreasureModalComponent implements OnInit {
       if (c.items.length > 0) {
         this.itemService.getItem(c.items[0]).subscribe(item => {
           this.item = item;
-        });                  
+        });
       }
     });
   }
@@ -125,12 +125,11 @@ export class TreasureModalComponent implements OnInit {
   }
 
   closeChest() {
-    debugger;
-    if (this.chest != undefined) {
+    if (this.chest !== undefined) {
       this.chest.classList.remove('chest--opened', 'chest--finished');
       this.chest.querySelector('.chest__card-rays').innerHTML = '';
     }
-    
+
     this.bsModalRef.hide();
   }
 }
