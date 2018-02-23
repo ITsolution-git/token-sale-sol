@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TreasureModalComponent } from './treasure-modal.component';
+import { TreasureModalComponent } from './opening-treasure-modal.component';
 
 describe('TreasureModalComponent', () => {
   let component: TreasureModalComponent;

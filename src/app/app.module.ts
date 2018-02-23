@@ -30,6 +30,8 @@ import { INITIAL_APPLICATION_STATE } from './store/application-state';
 import { userReducer } from './store/reducers/user.reducer';
 import { WaitingTreasureModalComponent } from './shared/components/waiting-treasure-modal/waiting-treasure-modal.component';
 import { WaitingItemComponent } from './shared/components/waiting-item/waiting-item.component';
+import { TreasureModalComponent } from './shared/components/opening-treasure-modal/opening-treasure-modal.component';
+import { ChestService } from './shared/services/ChestService/chest.service';
 
 
 export const reducers = {
@@ -44,6 +46,7 @@ export const reducers = {
     ValidNetworkModalComponent,
     WaitingTreasureModalComponent,
     WaitingItemComponent,
+    TreasureModalComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +68,8 @@ export const reducers = {
     ApiRoutingService,
     AuthGuard,
     AuthService,
-    NgSpinningPreloader
+    NgSpinningPreloader,
+    ChestService
   ],
   entryComponents: [
     LockedModalComponent,
@@ -73,6 +77,7 @@ export const reducers = {
     ValidNetworkModalComponent,
     WaitingTreasureModalComponent,
     WaitingItemComponent,
+    TreasureModalComponent
   ],
   bootstrap: [AppComponent],
 })
