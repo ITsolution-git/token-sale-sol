@@ -18,10 +18,6 @@ declare var window: any;
 @Injectable()
 export class MetaMaskService {
 
-
-
-
-
   GzrToken = Contract(GZRArtifacts);
   StandardToken = Contract(StandardTokenArtifacts);
   GZRTokenToItemGeneration = Contract(GZRTokenToItemGenerationArtifacts);
@@ -418,6 +414,7 @@ export class MetaMaskService {
           return instance.spendGZRToGetAnItem({from: this.account, gas: 41000})
         })
         .then((t) => {
+          this.treasureTransactionSubject.next(t);
           resolve(t);
         })
         .catch(e => {

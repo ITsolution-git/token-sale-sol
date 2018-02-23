@@ -12,7 +12,7 @@ export class ChestService {
 
   getChest(id) {
     return this.http.get(
-      this.apiRoutingService.getChestUrl(id),
+      this.apiRoutingService.getChestUrlFromID(id),
       {},
       true,
       null
@@ -21,17 +21,33 @@ export class ChestService {
 
   unlockChest(id, data) {
     return this.http.patch(
-      this.apiRoutingService.getChestUrl(id),
+      this.apiRoutingService.getChestUrlFromID(id),
       data,
       true,
       null
     );
   }
 
-  getChestDataFromID(id) {
-    return this.http.get(
-      this.apiRoutingService.getChestDataFromID(id),
-      {},
+
+  createChest() {
+    return this.http.put(this.apiRoutingService.getChestUrl(),
+      {
+        "collection": "The Founders Edition",
+        "price": 1
+      },
+      true,
+      null
+    );
+  }
+
+  updateChest(chest,user, transaction) {
+    return this.http.patch(
+      this.apiRoutingService.getChestUrlFromID(chest),
+      {
+        "user": user,
+        "status": "pending",
+        "transaction_id" : transaction
+      },
       true,
       null
     );

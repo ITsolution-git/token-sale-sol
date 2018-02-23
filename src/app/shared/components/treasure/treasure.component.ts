@@ -1,17 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+
 import { Store } from '@ngrx/store';
 import { ApplicationState } from '../../../store/application-state';
 import { UserState } from '../../../store/store-data';
+
 import { MetaMaskService } from '../../services/MetaMaskService/meta-mask.service';
+import { ChestService } from '../../services/ChestService/chest.service';
+import { ItemService } from '../../services/ItemService/item.service';
+import { UserService } from '../../services/UserService/user.service';
+
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ProfileModalComponent } from '../profile-modal/profile-modal.component';
 import { WaitingTreasureModalComponent } from '../waiting-treasure-modal/waiting-treasure-modal.component';
 import { WaitingItemComponent } from '../waiting-item/waiting-item.component';
+
 import { ValidNetworkModalComponent } from '../valid-network/valid-network.component';
 import { LockedModalComponent } from '../locked-modal/locked-modal.component';
+import { OpeningTreasureModalComponent } from '../opening-treasure-modal/opening-treasure-modal.component';
+import { LocalStorageService } from 'ngx-webstorage';
 
 @Component({
   selector: 'app-treasure',
@@ -32,7 +41,7 @@ export class TreasureComponent implements OnInit {
     animated: true,
     keyboard: true,
     backdrop: true,
-    ignoreBackdropClick: false
+    ignoreBackdropClick: false,
   };
   tokenContract: {};
   standardContract: {};
@@ -47,6 +56,11 @@ export class TreasureComponent implements OnInit {
     private store: Store<ApplicationState>,
     private metaMaskService: MetaMaskService,
     private modalService: BsModalService,
+    private localStorage: LocalStorageService,
+    private userService: UserService,
+    private itemService: ItemService,
+    private chestService: ChestService,
+
   ) {
     this.userState = this.store.select('userState');
   }
@@ -98,6 +112,10 @@ export class TreasureComponent implements OnInit {
   openTreasureModal() {
     const amount = 1;
 
+    let chest = this.chestService.createChest();
+    
+
+
     this.metaMaskService.approveGZRSpending(amount)
     .then(res => {
     })
@@ -112,7 +130,9 @@ export class TreasureComponent implements OnInit {
     .then(res => {
       console.log(res);
       this.bsModalRef = this.modalService.show(OpeningTreasureModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
-      
+      let user = this.userService.retriveUser(this.walletAddress);
+      this.chestService.updateChest(chest,user,res);
+
       this.metaMaskService.treasureTransactionObservable$.subscribe(res => {
         const metadata = {
           'transaction-id': res.tx,
