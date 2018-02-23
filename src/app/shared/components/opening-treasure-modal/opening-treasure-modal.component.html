@@ -12,12 +12,12 @@
           <div class="chest__light"></div>
           <button type="button" class="chest__card">
               <div class="chest__card-body">
-                  <img src="assets/images/item.png" class="chest__card-img" alt="item">
+                  <img [src]='item.resources.icons[0]' class="chest__card-img" alt="item">
                   <div class="chest__card-text">
-                      Super Sledge
+                      {{ item.meta.name }}
                   </div>
                   <div class="chest__card-badge">
-                      <img src="assets/images/badge.png" alt="badge">
+                      <img src="assets/images/img-item-type-{{ item.meta.rarity.toLowerCase() }}.png" alt="badge">
                   </div>
               </div>
           </button>

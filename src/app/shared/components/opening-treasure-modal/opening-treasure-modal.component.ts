@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap';
+import { ChestService } from '../../services/ChestService/chest.service';
+import { Chest } from '../../models/chest.model';
+import { ItemService } from '../../services/ItemService/item.service';
+import { Item } from '../../models/item.model';
+
 declare var Math;
 
 @Component({
@@ -8,15 +13,24 @@ declare var Math;
   styleUrls: ['./opening-treasure-modal.component.scss']
 })
 export class TreasureModalComponent implements OnInit {
-
   chest: any;
+  item: Item;
 
   constructor(
-    public bsModalRef: BsModalRef
+    public bsModalRef: BsModalRef,
+    private chestService: ChestService,
+    private itemService: ItemService    
   ) { }
 
   ngOnInit() {
-
+    const cId = 'eeeceb748b383a08a398e260d4a34b91';
+    this.chestService.getChest(cId).subscribe((c: Chest) => {
+      if (c.items.length > 0) {
+        this.itemService.getItem(c.items[0]).subscribe(item => {
+          this.item = item;
+        });                  
+      }
+    });
   }
 
   openChest() {

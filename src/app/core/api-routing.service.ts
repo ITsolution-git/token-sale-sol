@@ -32,8 +32,8 @@ export class ApiRoutingService {
     return '/contracts/MetaCoin.json';
   }
 
-  getChestUrl() {
-    return '../../../assets/chestId.json';
+  getChestUrl(id) {
+    return this.baseUrl + '/chest/' + id;
   }
 
   getChestDataFromID(id) {

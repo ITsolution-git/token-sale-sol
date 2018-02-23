@@ -10,9 +10,9 @@ export class ChestService {
     private apiRoutingService: ApiRoutingService
   ) { }
 
-  getChest() {
+  getChest(id) {
     return this.http.get(
-      this.apiRoutingService.getChestUrl(),
+      this.apiRoutingService.getChestUrl(id),
       {},
       true,
       null
