@@ -19,7 +19,7 @@ export class WaitingItemComponent implements OnInit {
   }
 
   openTreasureItem() {
-    this.bsModalRef = this.modalService.show(TreasureModalComponent);
+    this.bsModalRef = this.modalService.show(TreasureModalComponent, {ignoreBackdropClick: true});
   }
 
 }
