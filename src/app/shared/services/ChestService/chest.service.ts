@@ -19,6 +19,15 @@ export class ChestService {
     );
   }
 
+  unlockChest(id, data) {
+    return this.http.patch(
+      this.apiRoutingService.getChestUrl(id),
+      data,
+      true,
+      null
+    );
+  }
+
   getChestDataFromID(id) {
     return this.http.get(
       this.apiRoutingService.getChestDataFromID(id),
