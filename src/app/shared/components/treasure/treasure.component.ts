@@ -20,6 +20,8 @@ import { LockedModalComponent } from '../locked-modal/locked-modal.component';
 })
 export class TreasureComponent implements OnInit {
   userState: Observable<UserState>;
+  GZRInstance$: Observable<any>;
+  ItemsInstance$: Observable<any>;
   walletAddress: String;
   unlocked = false;
   balance: number;
@@ -62,6 +64,7 @@ export class TreasureComponent implements OnInit {
         this.validNetwork = state.validNetwork;
       }
     });
+
   }
 
   openTreasure() {
@@ -94,35 +97,43 @@ export class TreasureComponent implements OnInit {
 
   openTreasureModal() {
     const amount = 1;
-    this.metaMaskService.getTokenContract()
-      .then(ctc => {
-        this.tokenContract = ctc;
-        this.metaMaskService.approveTokenSend(this.tokenContract, amount);
-        this.metaMaskService.getItemGenerationContract()
-          .then(ctr => {
-            this.itemGenerationContract = ctr;
-            this.metaMaskService.getItem(this.itemGenerationContract);
-            this.metaMaskService.treasureTransactionObservable$.subscribe(res => {
-              const metadata = {
-                'transaction-id': res.tx,
-                'item-id': '74143b3842ff373eb111d12f1f497611',
-                price: amount,
-                opened_at: (new Date()).getTime(),
-              };
-              const customData =  {
-                opened_treasure: true,
-                items_owned: 1,
-                last_opened_treasure_at: (new Date()).getTime(),
-              };
-              this.updateUser(customData);
-              this.eventTrack('opened-treasure', metadata);
-            });
-            setTimeout(() => {
-              this.router.navigate(['/generate-item']);
-            }, 3000); 
-          });
-      });
-  }
+
+    this.metaMaskService.approveGZRSpending(amount)
+    .then(res => {
+    })
+    .catch((error) => {
+    });
+
+    setTimeout(() => {
+      this.router.navigate(['/generate-item']);
+    }, 3000);
+
+    this.metaMaskService.generateItem()
+    .then(res => {
+      console.log(res);
+      this.bsModalRef = this.modalService.show(OpeningTreasureModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
+      
+      this.metaMaskService.treasureTransactionObservable$.subscribe(res => {
+        const metadata = {
+          'transaction-id': res.tx,
+          'item-id': '74143b3842ff373eb111d12f1f497611',
+          price: amount,
+          opened_at: (new Date()).getTime(),
+        };
+        const customData =  {
+          opened_treasure: true,
+          items_owned: 1,
+          last_opened_treasure_at: (new Date()).getTime(),
+        };
+        this.updateUser(customData);
+        this.eventTrack('opened-treasure', metadata);
+      })
+      
+    })
+    .catch((error) => {
+    });
+  }   
+
 
   updateUser(customData) {
     (<any>window).Intercom('update', {
