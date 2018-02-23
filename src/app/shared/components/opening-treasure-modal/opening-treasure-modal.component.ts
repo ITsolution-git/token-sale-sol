@@ -112,11 +112,12 @@ export class TreasureModalComponent implements OnInit {
   }
 
   closeChest() {
-  	  if (this.chest != undefined) {
-	      this.chest.classList.remove('chest--opened', 'chest--finished');
-	      this.chest.querySelector('.chest__card-rays').innerHTML = '';
-  	  }
-  	  
-      this.bsModalRef.hide();
+    debugger;
+    if (this.chest != undefined) {
+      this.chest.classList.remove('chest--opened', 'chest--finished');
+      this.chest.querySelector('.chest__card-rays').innerHTML = '';
+    }
+    
+    this.bsModalRef.hide();
   }
 }
