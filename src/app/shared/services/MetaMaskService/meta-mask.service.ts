@@ -340,29 +340,6 @@ export class MetaMaskService {
     });
   }
 
-  sendCoin(amount) {
-    if (this.validNetwork === false) {
-      return;
-    }
-    let meta, standard;
-    this.setStatus('Initiating transaction... (please wait)');
-    this.StandardToken
-    .deployed()
-    .then(ins => {
-      standard = ins;
-      return standard.approve(standard.address, 1, {from: this.account});
-    })
-    .then((tx, error) => {
-      return  this.GZRTokenToItemGeneration.deployed();
-    })
-    .then(instance => {
-      meta = instance;
-      return meta.spendGZRToGetAnItem({from: this.account});
-    })
-    .then(tx => {
-    });
-  }
-
 
   getTokenContract() {
     if (this.validNetwork === false) {
@@ -392,7 +369,7 @@ export class MetaMaskService {
       this.getTokenContract()
         .then(ins => {
           gzr = ins;
-          return this.getItemsContract();
+          return this.getItemGenerationContract();
         })
         .then(instance =>{
           return gzr.approve(instance.address, amount, {from: this.account, gas: 41000});
@@ -409,7 +386,7 @@ export class MetaMaskService {
   generateItem(){
     let gzr;
     return new Promise((resolve, reject) => {
-      this.getItemsContract()
+      this.getItemGenerationContract()
         .then(instance => {
           return instance.spendGZRToGetAnItem({from: this.account, gas: 41000})
         })
@@ -422,60 +399,5 @@ export class MetaMaskService {
         });
     })
   } 
-
-
-
-  // getTokenContract() {
-  //   return this.GzrToken.deployed();
-  // }
-
-  // getItemsContract() {
-  //   return this.GZRTokenToItemGeneration.deployed();
-  // }
-
-  // approveGZRSpending(amount){
-  //   let gzr;
-  //   return new Promise((resolve, reject) => {
-  //     this.getTokenContract()
-  //       .then(ins => {
-  //         gzr = ins;
-  //         return this.getItemsContract();
-  //       })
-  //       .then(instance =>{
-  //         gzr.approve(instance.address, amount, {from: this.account, gas: 41000});
-  //         }, (error, transactionId) => {
-  //           if (error) {
-  //             reject({'failure': true});
-  //           } else {
-  //             resolve( transactionId);
-  //           }
-  //         });
-  //       })
-  //       .catch(e => {
-  //         this.setStatus('Error in GZR approval');
-  //       });
-  // }
-
-  // generateItem(){
-  //   let gzr;
-  //   return new Promise((resolve, reject) => {
-  //     this.getItemsContract()
-  //       .then(instance => {
-  //         return instance.spendGZRToGetAnItem({from: this.account, gas: 41000})
-  //         .then((error, transactionId) => {
-  //           if (error) {
-  //             reject({'failure': true});
-  //           } else {
-  //             this.treasureTransactionSubject.next(transactionId);
-  //             resolve(transactionId);
-  //           }
-  //         })
-        
-  //       })
-  //       .catch(e => {
-  //         this.setStatus('Error in GZR approval');
-  //       });
-  //   })
-  // }  
 
 }

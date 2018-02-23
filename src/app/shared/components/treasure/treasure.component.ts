@@ -43,13 +43,8 @@ export class TreasureComponent implements OnInit {
     backdrop: true,
     ignoreBackdropClick: false,
   };
-  tokenContract: {};
-  standardContract: {};
-  itemGenerationContract: {};
-
 
   bsModalRef: BsModalRef;
-
 
   constructor(
     private router: Router,
@@ -114,8 +109,6 @@ export class TreasureComponent implements OnInit {
 
     let chest = this.chestService.createChest();
     
-
-
     this.metaMaskService.approveGZRSpending(amount)
     .then(res => {
     })
