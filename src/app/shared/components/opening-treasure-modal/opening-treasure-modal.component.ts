@@ -22,7 +22,7 @@ export class TreasureModalComponent implements OnInit {
   chest: any;
   item: any;
   chest_model: Chest;
-  cId: string = 'eeeceb748b383a08a398e260d4a34b91'; 
+  cId = 'eeeceb748b383a08a398e260d4a34b91';
   userState: Observable<UserState>;
   walletAddress: String;
   user: User;
@@ -32,21 +32,21 @@ export class TreasureModalComponent implements OnInit {
     private chestService: ChestService,
     private itemService: ItemService,
     private userService: UserService,
-    private store: Store<ApplicationState>,    
-  ) { 
-  	this.item = {
-  		resources: {
-  			icons: [''],
-  			images: [''],
-  			videos: [''],
-  			model: ['']
-  		},
-  		meta: {
-  			name: '',
-  			rarity: ''
-  		}
-    }
-    this.userState = this.store.select('userState');
+    private store: Store<ApplicationState>,
+  ) {
+      this.item = {
+        resources: {
+          icons: [''],
+          images: [''],
+          videos: [''],
+          model: ['']
+        },
+        meta: {
+          name: '',
+          rarity: ''
+        }
+      };
+      this.userState = this.store.select('userState');
   }
 
   ngOnInit() {
@@ -55,7 +55,7 @@ export class TreasureModalComponent implements OnInit {
       if (c.items.length > 0) {
         this.itemService.getItem(c.items[0]).subscribe(item => {
           this.item = item;
-        });                  
+        });
       }
     });
 
@@ -76,8 +76,8 @@ export class TreasureModalComponent implements OnInit {
     this.chestService.unlockChest(this.cId, { status: 'unlocked' }).subscribe((c: Chest) => {
     });
 
-    let updated_owns = { "owns": this.user.owns };
-    let idx = updated_owns.owns.indexOf(`chest/${this.chest_model.id}`);
+    const updated_owns = { 'owns': this.user.owns };
+    const idx = updated_owns.owns.indexOf(`chest/${this.chest_model.id}`);
     if (idx > -1) {
       updated_owns.owns[idx] = `item/${this.item.id}`;
     } else {
@@ -92,9 +92,9 @@ export class TreasureModalComponent implements OnInit {
       'item_id': this.item.id,
       'open_date': (new Date()).getTime() / 1000
     };
-    
+
     this.eventTrack('opened-treasure', metaData);
-  
+
     this.chest = document.querySelector('.chest');
 
     if (this.chest.classList.contains('chest--opened')) {
@@ -172,11 +172,11 @@ export class TreasureModalComponent implements OnInit {
   }
 
   closeChest() {
-    if (this.chest != undefined) {
+    if (this.chest !== undefined) {
       this.chest.classList.remove('chest--opened', 'chest--finished');
       this.chest.querySelector('.chest__card-rays').innerHTML = '';
     }
-    
+
     this.bsModalRef.hide();
   }
 
@@ -187,5 +187,5 @@ export class TreasureModalComponent implements OnInit {
       (<any>window).Intercom('trackEvent', event, metadata);
     }
     return true;
-  }  
+  }
 }

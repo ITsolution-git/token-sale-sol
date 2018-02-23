@@ -25,9 +25,9 @@ export class ChestService {
       data,
       true,
       null
-    )
+    );
   }
-  
+
   getChestDataFromID(id) {
     return this.http.get(
       this.apiRoutingService.getChestDataFromID(id),
