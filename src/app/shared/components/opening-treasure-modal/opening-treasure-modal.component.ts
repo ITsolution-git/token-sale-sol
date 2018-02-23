@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap';
 declare var Math;
 
@@ -98,8 +98,11 @@ export class TreasureModalComponent implements OnInit {
   }
 
   closeChest() {
-      this.chest.classList.remove('chest--opened', 'chest--finished');
-      this.chest.querySelector('.chest__card-rays').innerHTML = '';
+  	  if (this.chest != undefined) {
+	      this.chest.classList.remove('chest--opened', 'chest--finished');
+	      this.chest.querySelector('.chest__card-rays').innerHTML = '';
+  	  }
+  	  
       this.bsModalRef.hide();
   }
 }
