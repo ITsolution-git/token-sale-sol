@@ -5,7 +5,9 @@ export class Chest {
     price: number;
     status: string;
     user: string;
-    items: [string];
+    items: string[];
+    transaction_id: string;
+    
     constructor() {
         this.id = '40003646-ebda-11e7-8c3f-9a214cf093ae';
         this.name = 'Chest0001';

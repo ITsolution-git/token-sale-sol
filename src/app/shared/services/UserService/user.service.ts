@@ -30,6 +30,15 @@ export class UserService {
     );
   }
 
+  updateUser(userId, data) {
+    return this.http.patch(
+      this.apiRoutingService.getUserUrl(userId),
+      data,
+      false,
+      null
+    );
+  }
+
   saveTransaction(userId, txData) {
    return this.http.put(
      this.apiRoutingService.saveTxUrl(userId),
