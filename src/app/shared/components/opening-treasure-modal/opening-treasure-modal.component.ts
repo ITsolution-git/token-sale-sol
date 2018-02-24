@@ -65,7 +65,7 @@ export class OpeningTreasureModalComponent implements OnInit {
     this.userState.subscribe(state => {
       if (state) {
         if (state.walletAddress && state.walletAddress !== this.walletAddress ) {
-          this.userService.retriveUser(state.walletAddress).subscribe((resp: User[]) => {
+          this.userService.retrieveUser(state.walletAddress).subscribe((resp: User[]) => {
             if (resp.length) {
               this.user = resp[0];
             }
