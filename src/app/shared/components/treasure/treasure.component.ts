@@ -1,17 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+
 import { Store } from '@ngrx/store';
 import { ApplicationState } from '../../../store/application-state';
 import { UserState } from '../../../store/store-data';
+
 import { MetaMaskService } from '../../services/MetaMaskService/meta-mask.service';
+import { ChestService } from '../../services/ChestService/chest.service';
+import { ItemService } from '../../services/ItemService/item.service';
+import { UserService } from '../../services/UserService/user.service';
+
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ProfileModalComponent } from '../profile-modal/profile-modal.component';
 import { WaitingTreasureModalComponent } from '../waiting-treasure-modal/waiting-treasure-modal.component';
-import { WaitingItemComponent } from '../waiting-item/waiting-item.component';
+
 import { ValidNetworkModalComponent } from '../valid-network/valid-network.component';
 import { LockedModalComponent } from '../locked-modal/locked-modal.component';
+import { OpeningTreasureModalComponent } from '../opening-treasure-modal/opening-treasure-modal.component';
+import { LocalStorageService } from 'ngx-webstorage';
+
+export interface TransactionReceipt {
+  tx: string
+  transactionIndex: number
+  blockHash: string
+  blockNumber: number
+}
+
 
 @Component({
   selector: 'app-treasure',
@@ -20,6 +36,8 @@ import { LockedModalComponent } from '../locked-modal/locked-modal.component';
 })
 export class TreasureComponent implements OnInit {
   userState: Observable<UserState>;
+  GZRInstance$: Observable<any>;
+  ItemsInstance$: Observable<any>;
   walletAddress: String;
   unlocked = false;
   balance: number;
@@ -30,21 +48,23 @@ export class TreasureComponent implements OnInit {
     animated: true,
     keyboard: true,
     backdrop: true,
-    ignoreBackdropClick: false
+    ignoreBackdropClick: false,
   };
-  tokenContract: {};
-  standardContract: {};
-  itemGenerationContract: {};
+
 
 
   bsModalRef: BsModalRef;
-
 
   constructor(
     private router: Router,
     private store: Store<ApplicationState>,
     private metaMaskService: MetaMaskService,
     private modalService: BsModalService,
+    private localStorage: LocalStorageService,
+    private userService: UserService,
+    private itemService: ItemService,
+    private chestService: ChestService,
+
   ) {
     this.userState = this.store.select('userState');
   }
@@ -62,6 +82,7 @@ export class TreasureComponent implements OnInit {
         this.validNetwork = state.validNetwork;
       }
     });
+
   }
 
   openTreasure() {
@@ -94,34 +115,58 @@ export class TreasureComponent implements OnInit {
 
   openTreasureModal() {
     const amount = 1;
-    this.metaMaskService.getTokenContract()
-      .then(ctc => {
-        this.tokenContract = ctc;
-        this.metaMaskService.approveTokenSend(this.tokenContract, amount);
-        this.metaMaskService.getItemGenerationContract()
-          .then(ctr => {
-            this.itemGenerationContract = ctr;
-            this.metaMaskService.getItem(this.itemGenerationContract);
-            this.metaMaskService.treasureTransactionObservable$.subscribe(res => {
-              const metadata = {
-                'transaction-id': res.tx,
-                'item-id': '74143b3842ff373eb111d12f1f497611',
-                price: amount,
-                opened_at: (new Date()).getTime(),
-              };
-              const customData =  {
-                opened_treasure: true,
-                items_owned: 1,
-                last_opened_treasure_at: (new Date()).getTime(),
-              };
-              this.updateUser(customData);
-              this.eventTrack('opened-treasure', metadata);
-              this.bsModalRef.hide();
-            });
-            this.bsModalRef = this.modalService.show(WaitingItemComponent);
-          });
-      });
-  }
+    let chestID : string;
+    let userID: string;
+    let owns: string[]= [];
+    
+    this.metaMaskService.approveGZRSpending(amount)
+    .then(res => {
+    })
+    .catch((error) => {
+    });
+    
+    this.chestService.createChest()
+    .flatMap( c => {
+      console.log("chest ", c);
+      chestID = c.id;
+      return  this.userService.retrieveUser(this.walletAddress)
+    })
+    .flatMap(u => {
+      userID = u[0].id;
+      owns = u[0].owns;
+      console.log("user ", u);
+      console.log("owns", owns);
+      console.log("id", userID);
+
+      return this.metaMaskService.generateItem()
+    })
+    .flatMap( (tr) => {
+      console.log("from generate item ",tr);
+      this.router.navigate(['/generate-item']);
+      return this.chestService.updateChest(chestID,userID,tr)
+    })
+    .subscribe( c => {
+      owns[owns.length] = chestID;
+      this.userService.updateUserOwnership(userID,owns);
+    })
+    
+    this.metaMaskService.treasureTransactionObservable$.subscribe(res => {
+      const metadata = {
+        'transaction-id': res,
+        'item-id': '74143b3842ff373eb111d12f1f497611',
+        price: amount,
+        opened_at: (new Date()).getTime(),
+      };
+      const customData =  {
+        opened_treasure: true,
+        items_owned: 1,
+        last_opened_treasure_at: (new Date()).getTime(),
+      };
+      this.updateUser(customData);
+      this.eventTrack('opened-treasure', metadata);
+    }) 
+
+  }   
 
   updateUser(customData) {
     (<any>window).Intercom('update', {

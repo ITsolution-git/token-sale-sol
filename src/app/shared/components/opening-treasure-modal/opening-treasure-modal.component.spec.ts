@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TreasureModalComponent } from './opening-treasure-modal.component';
+import { OpeningTreasureModalComponent } from './opening-treasure-modal.component';
 
 describe('TreasureModalComponent', () => {
-  let component: TreasureModalComponent;
-  let fixture: ComponentFixture<TreasureModalComponent>;
+  let component: OpeningTreasureModalComponent;
+  let fixture: ComponentFixture<OpeningTreasureModalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TreasureModalComponent ]
+      declarations: [ OpeningTreasureModalComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TreasureModalComponent);
+    fixture = TestBed.createComponent(OpeningTreasureModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
