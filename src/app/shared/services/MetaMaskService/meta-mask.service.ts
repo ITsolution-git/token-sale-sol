@@ -108,9 +108,9 @@ export class MetaMaskService {
 
   loadMetaCoin() {
     this.checkAndInstantiateWeb3()
-    .then(() => {
+    .then((status: boolean) => {
       this.onReady();
-      this.validNetwork = true;
+      this.validNetwork = status;
       this.validNetworkSubject.next(this.validNetwork);
     })
     .catch(() => {
@@ -122,17 +122,22 @@ export class MetaMaskService {
   checkAndInstantiateWeb3() {
     return new Promise((resolve, reject) => {
       if (typeof window.web3 !== 'undefined') {
+        this.installed = true;
+        this.installedSubject.next(this.installed);
+        this.web3 = new Web3(window.web3.currentProvider);
+
         window.web3.version.getNetwork((err, netId) => {
           switch (netId) {
             case '3':
-              this.web3 = new Web3(window.web3.currentProvider);
               resolve(true);
               break;
             default:
-              reject(false);
+              resolve(false);
           }
         });
       } else {
+        this.installed = false;
+        this.installedSubject.next(this.installed);
         reject(false);
       }
     });
@@ -144,11 +149,7 @@ export class MetaMaskService {
     this.GZRTokenToItemGeneration.setProvider(this.web3.currentProvider);
 
     this.web3.eth.getAccounts((err, accs) => {
-      if (err != null) {
-        this.installed = false;
-        this.installedSubject.next(this.installed);
-        return;
-      }
+
       this.installed = true;
       this.installedSubject.next(this.installed);
 
@@ -198,6 +199,9 @@ export class MetaMaskService {
   }
 
   balanceOf(address) {
+    if (this.validNetwork === false) {
+      return;
+    }
     return this.GzrToken.deployed()
       .then(instance => {
         this.contractAddress = instance.address;
@@ -207,6 +211,9 @@ export class MetaMaskService {
   }
 
   refreshBalance() {
+    if (this.validNetwork === false) {
+      return;
+    }
     this.getBalance(this.account)
       .then(balance => {
         this.balance = parseFloat(balance.toString());
@@ -255,6 +262,10 @@ export class MetaMaskService {
   }
 
   TransferEthToBuyGzr(ethValue, gzrValue) {
+    if (this.validNetwork === false) {
+      return;
+    }
+
     let gzr;
     return new Promise((resolve, reject) => {
       this.GzrToken
@@ -279,6 +290,10 @@ export class MetaMaskService {
   }
 
   SignInTransaction() {
+    if (this.validNetwork === false) {
+      return;
+    }
+
     let gzr;
     return new Promise((resolve, reject) => {
       this.GzrToken
@@ -318,6 +333,9 @@ export class MetaMaskService {
   }
 
   sendCoin(amount) {
+    if (this.validNetwork === false) {
+      return;
+    }
     let meta, standard;
     this.setStatus('Initiating transaction... (please wait)');
     this.StandardToken
@@ -338,13 +356,22 @@ export class MetaMaskService {
   }
 
   getTokenContract() {
+    if (this.validNetwork === false) {
+      return;
+    }
     return this.StandardToken.deployed();
   }
 
    getStandardContract() {
+    if (this.validNetwork === false) {
+      return;
+    }
     return this.GZRTokenToItemGeneration.deployed();
   }
    getItemGenerationContract() {
+    if (this.validNetwork === false) {
+      return;
+    }
     return this.GZRTokenToItemGeneration.deployed();
   }
 

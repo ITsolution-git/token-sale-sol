@@ -10,6 +10,8 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ProfileModalComponent } from '../profile-modal/profile-modal.component';
 import { WaitingTreasureModalComponent } from '../waiting-treasure-modal/waiting-treasure-modal.component';
 import { WaitingItemComponent } from '../waiting-item/waiting-item.component';
+import { ValidNetworkModalComponent } from '../valid-network/valid-network.component';
+import { LockedModalComponent } from '../locked-modal/locked-modal.component';
 
 @Component({
   selector: 'app-treasure',
@@ -22,6 +24,8 @@ export class TreasureComponent implements OnInit {
   unlocked = false;
   balance: number;
   installed = false;
+  validNetwork = true;
+
   config = {
     animated: true,
     keyboard: true,
@@ -55,15 +59,32 @@ export class TreasureComponent implements OnInit {
         this.unlocked = state.unlocked;
         this.balance = state.balance;
         this.installed = state.installed;
+        this.validNetwork = state.validNetwork;
       }
     });
   }
 
   openTreasure() {
-    if (this.unlocked && this.installed) {
+    if (this.unlocked && this.installed && this.validNetwork) {
       this.openTreasureModal();
-    } else {
+    } else if (this.installed === false ) {
       this.navigateToInstallMeta();
+    } else if (this.unlocked === false ) {
+      this.showModal();
+    } else if (this.validNetwork === false) {
+      this.showModal();
+    }
+  }
+
+  showModal() {
+    if (this.unlocked === false) {
+      this.bsModalRef = this.modalService.show(LockedModalComponent,
+        Object.assign({}, this.config, { class: 'gray modal-lg modal-center' }));
+    }
+
+    if (this.validNetwork === false) {
+      this.bsModalRef = this.modalService.show(ValidNetworkModalComponent,
+        Object.assign({}, this.config, { class: 'gray modal-lg modal-center' }));
     }
   }
 
