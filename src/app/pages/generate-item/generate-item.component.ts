@@ -53,11 +53,11 @@ export class GenerateItemComponent implements OnInit, AfterViewInit {
   ) {
 
   }
-  
+
   ngOnInit() {
     for (let i = 0; i < this.numAnimations; i++) {
       const ease = new RoughEase({
-        template:  Linear.easeInOut,
+        template: Linear.easeInOut,
         strength: this.random(1, 3),
         points: this.random(50, 100),
         taper: 'both',
@@ -66,9 +66,9 @@ export class GenerateItemComponent implements OnInit, AfterViewInit {
       });
       this.eases.push(ease);
     }
-    
+
   }
-  
+
   ngAfterViewInit() {
     this.textures = window.document.querySelectorAll('.star');
     this.main = window.document.querySelector('.main-canvas');
@@ -80,21 +80,21 @@ export class GenerateItemComponent implements OnInit, AfterViewInit {
     this.smoke = window.document.querySelector('.smoke');
     this.smallBubbles = window.document.getElementsByClassName('small-bubble');
     this.smallSmoke = window.document.querySelector('.smallSmoke');
-    
+
     for (let i = 0; i < this.numStars; i++) {
       this.stars.push(this.createStar());
     }
     this.main.appendChild(this.frag);
-    TweenMax.staggerTo(this.coins, 7,  {left: '100%', ease: Power1.easeOut, repeat: -1}, 2);
-    TweenMax.staggerTo(this.chests, 5,  {left: '90%', delay: 5, ease: SlowMo.ease.config(0.7, 0.7, false), repeat: -1}, 2.5);
-    TweenMax.staggerTo(this.gears, 1,  {rotation: 360, ease: Linear.easeNone, repeat: -1}, 0.1);
-    
-    
-    
+    TweenMax.staggerTo(this.coins, 7, { left: '100%', ease: Power1.easeOut, repeat: -1 }, 2);
+    TweenMax.staggerTo(this.chests, 5, { left: '90%', delay: 5, ease: SlowMo.ease.config(0.7, 0.7, false), repeat: -1 }, 2.5);
+    TweenMax.staggerTo(this.gears, 1, { rotation: 360, ease: Linear.easeNone, repeat: -1 }, 0.1);
+
+
+
     this.createSmoke();
     this.createSmallSmoke();
   }
-  
+
   createSmoke() {
     const startY = 200;
     const endY = 0;
@@ -103,8 +103,8 @@ export class GenerateItemComponent implements OnInit, AfterViewInit {
       const sizeIndex = parseInt(this.random(0, 2), 0);
       const bubble = this.bubbles[sizeIndex].cloneNode(true);
       const speed = 5;
-      tl.set(bubble, {y: startY}, 0);
-      tl.to(bubble, speed, {y: endY, x: this.random(0, 150), scale: 2, opacity: 0, repeatDelay: 0.1, repeat: -1}, Math.random() * 5);
+      tl.set(bubble, { y: startY }, 0);
+      tl.to(bubble, speed, { y: endY, x: this.random(0, 150), scale: 2, opacity: 0, repeatDelay: 0.1, repeat: -1 }, Math.random() * 5);
       this.smoke.appendChild(bubble);
     }
   }
@@ -117,8 +117,8 @@ export class GenerateItemComponent implements OnInit, AfterViewInit {
       const sizeIndex = parseInt(this.random(0, 2), 0);
       const bubble = this.smallBubbles[sizeIndex].cloneNode(true);
       const speed = 6;
-      tl.set(bubble, {y: startY}, 0);
-      tl.to(bubble, speed, {y: endY, x: 0, scale: 2, opacity: 0, repeatDelay: 0, repeat: -1}, Math.random() * 3);
+      tl.set(bubble, { y: startY }, 0);
+      tl.to(bubble, speed, { y: endY, x: 0, scale: 2, opacity: 0, repeatDelay: 0, repeat: -1 }, Math.random() * 3);
       this.smallSmoke.appendChild(bubble);
     }
   }
@@ -170,7 +170,7 @@ export class GenerateItemComponent implements OnInit, AfterViewInit {
     return min + (max - min) * Math.random();
   }
 
-  openItem(){
+  openItem() {
     this.bsModalRef = this.modalService.show(OpeningTreasureModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
   }
 }
