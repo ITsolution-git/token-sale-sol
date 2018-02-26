@@ -5,7 +5,7 @@ import { environment } from '../../environments/environment';
 export class ApiRoutingService {
   private baseUrl = environment.BASE_API_URL;
 
-  constructor() {}
+  constructor() { }
 
   getItemsUrl() {
     return this.baseUrl + '/item';
@@ -37,13 +37,13 @@ export class ApiRoutingService {
   }
 
   getChestUrlFromID(id) {
-     return this.baseUrl + '/chest/' + id;
+    return this.baseUrl + '/chest/' + id;
   }
 
   getUsersUrl() {
     return this.baseUrl + '/user';
-  } 
-  
+  }
+
   getUserUrlFromID(id) {
     return this.baseUrl + '/user/' + id;
   }
