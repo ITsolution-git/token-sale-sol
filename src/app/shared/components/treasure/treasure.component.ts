@@ -117,39 +117,84 @@ export class TreasureComponent implements OnInit {
     const amount = 1;
     let chestID: string;
     let userID: string;
-    let owns: string[] = [];
+    // let owns: string[] = [];
 
-    this.metaMaskService.approveGZRSpending(amount)
-      .then(res => {
-      })
-      .catch((error) => {
-      });
+    // this.metaMaskService.approveGZRSpending(amount)
+    //   .then(res => {
+    //   })
+    //   .catch((error) => {
+    //   });
+
+    // this.chestService.createChest()
+    //   .flatMap(c => {
+    //     console.log('chest ', c);
+    //     chestID = c.id;
+    //     return this.userService.retrieveUser(this.walletAddress);
+    //   })
+    //   .flatMap(u => {
+    //     userID = u[0].id;
+    //     owns = u[0].owns;
+    //     console.log('user ', u);
+    //     console.log('owns', owns);
+    //     console.log('id', userID);
+
+    //     return this.metaMaskService.generateItem();
+    //   })
+    //   .flatMap((tr) => {
+    //     console.log('from generate item ', tr);
+    //     this.router.navigate(['/generate-item']);
+    //     return this.chestService.updateChest(chestID, userID, tr);
+    //   })
+    //   .subscribe(c => {
+    //     owns[owns.length] = chestID;
+    //     this.userService.updateUserOwnership(userID, owns);
+    //   });
+
+    let txID: string;
+
+
+    // this.metaMaskService.approveGZRSpending(amount)
+    // .then(res => {
+    // })
+    // .catch((error) => {
+    // });
 
     this.chestService.createChest()
-      .flatMap(c => {
-        console.log('chest ', c);
-        chestID = c.id;
-        return this.userService.retrieveUser(this.walletAddress);
-      })
-      .flatMap(u => {
-        userID = u[0].id;
-        owns = u[0].owns;
-        console.log('user ', u);
-        console.log('owns', owns);
-        console.log('id', userID);
+    .flatMap( c => {
+      console.log("chest ", c);
+      chestID = c.id;
+      return this.userState
+    })
+    .flatMap( usr => {
+      console.log("wallet",usr.walletAddress)
+      return this.userService.retrieveUser(usr.walletAddress)
+    })
+    .subscribe(u => {
+      userID = u[0].id;
+      console.log("user ", u);
+      var dat = {
+        "owns": [
+        "Item/1234",
+        "Item/1234444",
+        "Chest/1234567890"
+        ]};
+       this.userService.updateUser(userID,dat);
+      // u[0].owns[u[0].owns.length]= "chest/"+chestID;
+      // this.userService.updateUser(userID,u[0]);
 
-        return this.metaMaskService.generateItem();
-      })
-      .flatMap((tr) => {
-        console.log('from generate item ', tr);
-        this.router.navigate(['/generate-item']);
-        return this.chestService.updateChest(chestID, userID, tr);
-      })
-      .subscribe(c => {
-        owns[owns.length] = chestID;
-        this.userService.updateUserOwnership(userID, owns);
-      });
+      // return this.metaMaskService.generateItem()
+    })
+    // .flatMap( (tr) => {
+    //   console.log("ID from generate item ",tr);
+    //   this.router.navigate(['/generate-item']);
+    //   return this.chestService.updateChest(chestID,userID,tr)
+    // })
+    // .subscribe( c => {
+    //   owns.push("chest/"+chestID);
+    //   this.userService.updateUser(userID,owns);
 
+    // })
+    
     this.metaMaskService.treasureTransactionObservable$.subscribe(res => {
       const metadata = {
         'transaction-id': res,
