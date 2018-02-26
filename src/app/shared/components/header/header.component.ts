@@ -96,6 +96,7 @@ export class HeaderComponent implements OnInit {
               }, 500);
             } else {
               this.isAuthenticated = false;
+              this.localStorage.clear(this.saveUserIDStr);
             }
           });
         }

@@ -45,6 +45,7 @@ export class BuyGzrComponent implements OnInit {
   isBuyClicked = false;
   ethValueStr = 'purchasedEthValue';
   gzrValueStr = 'purchasedGZRValue';
+  saveUserIDStr = 'user_id';
 
   bsModalRef: BsModalRef;
 
@@ -85,6 +86,12 @@ export class BuyGzrComponent implements OnInit {
   ngOnInit() {
     this.isMobile = this.isMobileView();
     this.eventTrack('viewed-buy-gzr-page', null);
+
+    const userId = this.localStorage.retrieve(this.saveUserIDStr);
+    if (!userId) {
+      this.router.navigate(['/save-account']);
+    }
+
     if (this.isMobile) {
       this.installed = false;
       this.unlocked = false;
