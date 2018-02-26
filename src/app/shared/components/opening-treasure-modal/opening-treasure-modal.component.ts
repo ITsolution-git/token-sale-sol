@@ -37,19 +37,19 @@ export class OpeningTreasureModalComponent implements OnInit {
     private userService: UserService,
     private store: Store<ApplicationState>,
   ) {
-      this.item = {
-        resources: {
-          icons: [''],
-          images: [''],
-          videos: [''],
-          model: ['']
-        },
-        meta: {
-          name: '',
-          rarity: ''
-        }
-      };
-      this.userState = this.store.select('userState');
+    this.item = {
+      resources: {
+        icons: [''],
+        images: [''],
+        videos: [''],
+        model: ['']
+      },
+      meta: {
+        name: '',
+        rarity: ''
+      }
+    };
+    this.userState = this.store.select('userState');
   }
 
   ngOnInit() {
@@ -64,7 +64,7 @@ export class OpeningTreasureModalComponent implements OnInit {
 
     this.userState.subscribe(state => {
       if (state) {
-        if (state.walletAddress && state.walletAddress !== this.walletAddress ) {
+        if (state.walletAddress && state.walletAddress !== this.walletAddress) {
           this.userService.retrieveUser(state.walletAddress).subscribe((resp: User[]) => {
             if (resp.length) {
               this.user = resp[0];
@@ -90,7 +90,7 @@ export class OpeningTreasureModalComponent implements OnInit {
       updated_owns.owns.push(`item/${this.item.id}`);
     }
 
-    this.userService.updateUser(this.user.id, updated_owns).subscribe(c => {});
+    this.userService.updateUser(this.user.id, updated_owns).subscribe(c => { });
 
     const metaData = {
       price: 1,
@@ -110,27 +110,27 @@ export class OpeningTreasureModalComponent implements OnInit {
     this.chest.classList.add('chest--opened');
 
     for (let i = 1; i < 11; i++) {
-        this.addRay(i);
+      this.addRay(i);
     }
 
     const t = setInterval(() => this.addParticle(), 20);
 
     setTimeout(() => {
-        clearInterval(t);
+      clearInterval(t);
     }, 1000);
     setTimeout(() => this.runParticlesBackwards(), 1800);
     setTimeout(() => {
-        this.chest.classList.add('chest--finished');
+      this.chest.classList.add('chest--finished');
     }, 1950);
     setTimeout(() => this.removeParticles(), 3000);
   }
 
   addRay(index) {
     const div = document.createElement('div');
-    div.classList.add('chest__card-ray',  'chest__card-ray--' + index);
-    if (this.chest.querySelector('.chest__card-rays')!=null){
+    div.classList.add('chest__card-ray', 'chest__card-ray--' + index);
+    if (this.chest.querySelector('.chest__card-rays') != null) {
       this.chest.querySelector('.chest__card-rays')
-      .appendChild(div);
+        .appendChild(div);
 
     }
   }
@@ -151,35 +151,35 @@ export class OpeningTreasureModalComponent implements OnInit {
 
     div.style.transform = transform;
     div.setAttribute('data-final-position', transform);
-    if(this.chest.querySelector('.chest__card-particles')!= null) {
+    if (this.chest.querySelector('.chest__card-particles') != null) {
       this.chest.querySelector('.chest__card-particles').appendChild(div);
     }
 
     setTimeout(() => {
-        div.style.transform = 'translate3d(0, 0, 0) rotate(' + rotate + 'deg)';
-        div.style.opacity = '0';
+      div.style.transform = 'translate3d(0, 0, 0) rotate(' + rotate + 'deg)';
+      div.style.opacity = '0';
     }, 50);
   }
 
   runParticlesBackwards() {
     Array.prototype.slice
-        .call(this.chest.querySelectorAll('.chest__card-particle'))
-        .forEach((div) => {
-            const transform = div.getAttribute('data-final-position');
+      .call(this.chest.querySelectorAll('.chest__card-particle'))
+      .forEach((div) => {
+        const transform = div.getAttribute('data-final-position');
 
-            div.style.transition = 'none';
-            div.style.opacity = 1;
+        div.style.transition = 'none';
+        div.style.opacity = 1;
 
-            setTimeout(() => {
-                div.style.transition = 'transform .5s ease-in, opacity .3s .3s linear';
-                div.style.transform = transform;
-                div.style.opacity = 0;
-            }, 10);
-        });
+        setTimeout(() => {
+          div.style.transition = 'transform .5s ease-in, opacity .3s .3s linear';
+          div.style.transform = transform;
+          div.style.opacity = 0;
+        }, 10);
+      });
   }
 
   removeParticles() {
-    if(this.chest.querySelector('.chest__card-particles')!= null) {
+    if (this.chest.querySelector('.chest__card-particles') != null) {
       this.chest.querySelector('.chest__card-particles').innerHTML = '';
     }
   }
@@ -187,7 +187,7 @@ export class OpeningTreasureModalComponent implements OnInit {
   closeChest() {
     if (this.chest !== undefined) {
       this.chest.classList.remove('chest--opened', 'chest--finished');
-      if(this.chest.querySelector('.chest__card-rays')!= null) {
+      if (this.chest.querySelector('.chest__card-rays') != null) {
         this.chest.querySelector('.chest__card-rays').innerHTML = '';
       }
     }
@@ -201,11 +201,11 @@ export class OpeningTreasureModalComponent implements OnInit {
     } else {
       (<any>window).Intercom('trackEvent', event, metadata);
     }
-  } 
+  }
 
   isMobileView() {
     if ($(window).width() > 425) {
-        return false;
+      return false;
     }
     return true;
   }
