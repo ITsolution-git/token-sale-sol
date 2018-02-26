@@ -109,7 +109,7 @@ export class SaveAccountComponent implements OnInit {
         }, 500);
         this.userService.registerUser(data)
         .subscribe(() => {
-          this.userService.retriveUser(this.walletAddress).subscribe(user => {
+          this.userService.retrieveUser(this.walletAddress).subscribe(user => {
             const currentUser = user[0];
             if (user.length > 0) {
               const {nick, email, id} = currentUser;

@@ -91,7 +91,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     this.metaMaskService.accountObservable$.subscribe(res => {
       if (this.walletAddress !== res) {
         this.updateWalletAddress(res);
-        this.userService.retriveUser(res).subscribe(user => {
+        this.userService.retrieveUser(res).subscribe(user => {
           const currentUser = user[0];
           if (user.length) {
             const {nick, email, id} = currentUser;
@@ -166,7 +166,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.userService.retriveUser(this.walletAddress).subscribe(user => {
+    this.userService.retrieveUser(this.walletAddress).subscribe(user => {
       this.updateNickName(user.nick);
     });
   }
