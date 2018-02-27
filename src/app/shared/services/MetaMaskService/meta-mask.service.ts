@@ -348,19 +348,6 @@ export class MetaMaskService {
     return this.StandardToken.deployed();
   }
 
-  getStandardContract() {
-    if (this.validNetwork === false) {
-      return;
-    }
-    return this.GZRTokenToItemGeneration.deployed();
-  }
-  getItemGenerationContract() {
-    if (this.validNetwork === false) {
-      return;
-    }
-    return this.GZRTokenToItemGeneration.deployed();
-  }
-
   getItemContract() {
 
     return this.GZRTokenToItemGeneration.deployed();
@@ -374,7 +361,7 @@ export class MetaMaskService {
       this.getTokenContract()
         .then(ins => {
           gzr = ins;
-          return this.getItemGenerationContract();
+          return this.getItemContract();
         })
         .then(instance => {
           return gzr.approve(instance.address, amount, { from: this.account, gas: 41000 });
@@ -383,7 +370,7 @@ export class MetaMaskService {
           resolve(t);
         })
         .catch(e => {
-          console.log("in item approve GZRSpending : ", e)
+          console.log('in item approve GZRSpending : ', e );
           this.setStatus('Error in GZR approval');
         });
     });
@@ -416,9 +403,9 @@ export class MetaMaskService {
       })
       .catch(e => {
         reject({'failure': true});
-        console.log("Error in receipt reception", e)
+        console.log('Error in receipt reception', e);
       });
-    })
+    });
   }
 
 
