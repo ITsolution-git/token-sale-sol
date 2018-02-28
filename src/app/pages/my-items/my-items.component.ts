@@ -9,6 +9,7 @@ import { UserState } from '../../store/store-data';
 import { MetaMaskService } from '../../shared/services/MetaMaskService/meta-mask.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { AuthService } from '../../core/services/auth.service';
 import { LockedModalComponent } from '../../shared/components/locked-modal/locked-modal.component';
 
 const unityProgress = UnityProgress;
@@ -42,6 +43,7 @@ export class MyItemsComponent implements OnInit {
     private itemService: ItemService,
     private domSanitizer: DomSanitizer,
     private metaMaskService: MetaMaskService,
+    private authService: AuthService,
     private router: Router,
     private modalService: BsModalService,
     private store: Store<ApplicationState>
@@ -52,8 +54,10 @@ export class MyItemsComponent implements OnInit {
       if (state.installed === false) {
         this.router.navigate(['/meta-mask']);
       }
-      this.unlocked = state.unlocked;
-      this.showModals();
+      if (this.authService.checkLogin()) {
+        this.unlocked = state.unlocked;
+        this.showModals();
+      }
     });
   }
 
