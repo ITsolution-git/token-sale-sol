@@ -32,23 +32,23 @@ export class ChestService {
   createChest() {
     return this.http.put(this.apiRoutingService.getChestUrl(),
       {
-        "collection": "The Founders Edition",
-        "price": 1
+        'collection': 'The Founders Edition',
+        'price': 1
       },
       true,
       null
     );
   }
 
-  updateChest(chest,userID, transaction) {
-    console.log("update chest", this.apiRoutingService.getChestUrlFromID(chest), transaction);
+  updateChest(chest, userID, transaction) {
+    console.log('update chest', this.apiRoutingService.getChestUrlFromID(chest), transaction);
 
     return this.http.patch(
       this.apiRoutingService.getChestUrlFromID(chest),
       {
-        "user": userID,
-        "status": "pending",
-        "transaction_id" : transaction
+        'user': userID,
+        'status': 'pending',
+        'transaction_id' : transaction
       },
       true,
       null

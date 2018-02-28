@@ -22,10 +22,10 @@ import { OpeningTreasureModalComponent } from '../opening-treasure-modal/opening
 import { LocalStorageService } from 'ngx-webstorage';
 
 export interface TransactionReceipt {
-  tx: string
-  transactionIndex: number
-  blockHash: string
-  blockNumber: number
+  tx: string;
+  transactionIndex: number;
+  blockHash: string;
+  blockNumber: number;
 }
 
 
@@ -88,9 +88,9 @@ export class TreasureComponent implements OnInit {
   openTreasure() {
     if (this.unlocked && this.installed && this.validNetwork) {
       this.openTreasureModal();
-    } else if (this.installed === false ) {
+    } else if (this.installed === false) {
       this.navigateToInstallMeta();
-    } else if (this.unlocked === false ) {
+    } else if (this.unlocked === false) {
       this.showModal();
     } else if (this.validNetwork === false) {
       this.showModal();
@@ -115,41 +115,41 @@ export class TreasureComponent implements OnInit {
 
   openTreasureModal() {
     const amount = 1;
-    let chestID : string;
+    let chestID: string;
     let userID: string;
-    let owns: string[]= [];
-    
-    this.metaMaskService.approveGZRSpending(amount)
-    .then(res => {
-    })
-    .catch((error) => {
-    });
-    
-    this.chestService.createChest()
-    .flatMap( c => {
-      console.log("chest ", c);
-      chestID = c.id;
-      return  this.userService.retrieveUser(this.walletAddress)
-    })
-    .flatMap(u => {
-      userID = u[0].id;
-      owns = u[0].owns;
-      console.log("user ", u);
-      console.log("owns", owns);
-      console.log("id", userID);
+    let owns: string[] = [];
 
-      return this.metaMaskService.generateItem()
-    })
-    .flatMap( (tr) => {
-      console.log("from generate item ",tr);
-      this.router.navigate(['/generate-item']);
-      return this.chestService.updateChest(chestID,userID,tr)
-    })
-    .subscribe( c => {
-      owns[owns.length] = chestID;
-      this.userService.updateUserOwnership(userID,owns);
-    })
-    
+    this.metaMaskService.approveGZRSpending(amount)
+      .then(res => {
+      })
+      .catch((error) => {
+      });
+
+    this.chestService.createChest()
+      .flatMap(c => {
+        console.log('chest ', c);
+        chestID = c.id;
+        return this.userService.retrieveUser(this.walletAddress);
+      })
+      .flatMap(u => {
+        userID = u[0].id;
+        owns = u[0].owns;
+        console.log('user ', u);
+        console.log('owns', owns);
+        console.log('id', userID);
+
+        return this.metaMaskService.generateItem();
+      })
+      .flatMap((tr) => {
+        console.log('from generate item ', tr);
+        this.router.navigate(['/generate-item']);
+        return this.chestService.updateChest(chestID, userID, tr);
+      })
+      .subscribe(c => {
+        owns[owns.length] = chestID;
+        this.userService.updateUserOwnership(userID, owns);
+      });
+
     this.metaMaskService.treasureTransactionObservable$.subscribe(res => {
       const metadata = {
         'transaction-id': res,
@@ -157,20 +157,20 @@ export class TreasureComponent implements OnInit {
         price: amount,
         opened_at: (new Date()).getTime(),
       };
-      const customData =  {
+      const customData = {
         opened_treasure: true,
         items_owned: 1,
         last_opened_treasure_at: (new Date()).getTime(),
       };
       this.updateUser(customData);
       this.eventTrack('opened-treasure', metadata);
-    }) 
+    });
 
-  }   
+  }
 
   updateUser(customData) {
     (<any>window).Intercom('update', {
-        custom_data: customData
+      custom_data: customData
     });
     return true;
   }

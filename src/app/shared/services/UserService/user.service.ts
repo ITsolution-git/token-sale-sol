@@ -49,7 +49,6 @@ export class UserService {
   }
 
   updateUserOwnership(userId, ownsData) {
-    console.log("update ownership", this.apiRoutingService.getUserUrlFromID(userId), ownsData);
     return this.http.patch(
       this.apiRoutingService.getUserUrlFromID(userId),
       ownsData,
