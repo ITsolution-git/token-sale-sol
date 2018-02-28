@@ -12,7 +12,7 @@ export class SelfService extends UserService {
     }
 
     public get(): UserInterface {
-        if (this.self.id != null) return this.self;
+        if (this.self.id != null) { return this.self; }
 
     }
 }

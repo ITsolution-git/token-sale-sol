@@ -15,8 +15,8 @@ export interface UserInterface {
  interests: Array<string>;
  gzr: Gzr;
  boosts: number;
- avatar: avatar;
- social: Array<socialItem>;
+ avatar: Avatar;
+ social: Array<SocialItem>;
  knows: Array<string>;
  owns: Array<string>;
 }
@@ -33,12 +33,12 @@ interface Gzr {
     amount: number;
 }
 
-interface avatar {
+interface Avatar {
     type: string;
     url: string;
 }
 
-interface socialItem {
+interface SocialItem {
     name: string;
     url: string;
 }
