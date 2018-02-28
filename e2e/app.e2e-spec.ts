@@ -1,4 +1,5 @@
 import { AppPage } from './app.po';
+import { browser } from 'protractor';
 
 
 
@@ -24,20 +25,13 @@ describe('Running end to end  HomePage Test Suite', () => {
         expect(label).toEqual('Open Treasure');
       });
     });
+
+    // it('clicks on rifle item', () => {
+    //     browser.wait(() => {
+    //       return homePage.getRifleItemCard().click().then(() => true);
+    //     }).then(() => {
+    //       expect(homePage.getRifleTitle()).toBe('Heavy Cal Sniper Rifle');
+    //     });
+    // });
   });
 });
-
-
-
-// describe('gizer.web App', () => {
-//   let page: AppPage;
-
-//   beforeEach(() => {
-//     page = new AppPage();
-//   });
-
-//   it('should display welcome message', () => {
-//     page.navigateTo();
-//     expect(page.getParagraphText()).toEqual('Open Treasure');
-//   });
-// });
