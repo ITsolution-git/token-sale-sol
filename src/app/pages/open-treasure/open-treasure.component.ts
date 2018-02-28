@@ -11,6 +11,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { LockedModalComponent } from '../../shared/components/locked-modal/locked-modal.component';
 import { AuthService } from '../../core/services/auth.service';
+import { LocalStorageService } from 'ngx-webstorage';
 
 @Component({
   selector: 'app-open-treasure',
@@ -22,6 +23,7 @@ export class OpenTreasureComponent implements OnInit {
   userState: Observable<UserState>;
   bsModalRef: BsModalRef;
   unlocked = true;
+  saveUserIDStr = 'user_id';
 
   config = {
     animated: true,
@@ -35,6 +37,7 @@ export class OpenTreasureComponent implements OnInit {
     private metaMaskService: MetaMaskService,
     private authService: AuthService,
     private router: Router,
+    private localStorage: LocalStorageService,
     private modalService: BsModalService,
     private store: Store<ApplicationState>
   ) {
@@ -53,11 +56,14 @@ export class OpenTreasureComponent implements OnInit {
   }
 
   ngOnInit() {
+    const userId = this.localStorage.retrieve(this.saveUserIDStr);
+    if (!userId) {
+      this.router.navigate(['/save-account']);
+    }
+
     const cid = 'eeeceb748b383a08a398e260d4a34b91';
     this.chestService.getChest(cid).subscribe(cId => {
-      this.chestService.getChestDataFromID(cId).subscribe(c => {
-        this.chest = c;
-      });
+        this.chest = cId;
     });
   }
 

@@ -11,6 +11,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { AuthService } from '../../core/services/auth.service';
 import { LockedModalComponent } from '../../shared/components/locked-modal/locked-modal.component';
+import { LocalStorageService } from 'ngx-webstorage';
 
 const unityProgress = UnityProgress;
 const unityLoader = UnityLoader;
@@ -31,6 +32,7 @@ export class MyItemsComponent implements OnInit {
   userState: Observable<UserState>;
   bsModalRef: BsModalRef;
   unlocked = true;
+  saveUserIDStr = 'user_id';
 
   config = {
     animated: true,
@@ -45,6 +47,7 @@ export class MyItemsComponent implements OnInit {
     private metaMaskService: MetaMaskService,
     private authService: AuthService,
     private router: Router,
+    private localStorage: LocalStorageService,
     private modalService: BsModalService,
     private store: Store<ApplicationState>
   ) {
@@ -62,6 +65,11 @@ export class MyItemsComponent implements OnInit {
   }
 
   ngOnInit() {
+    const userId = this.localStorage.retrieve(this.saveUserIDStr);
+    if (!userId) {
+      this.router.navigate(['/save-account']);
+    }
+
     this.isMobile = this.isMobileView();
     this.gameInstance = UnityLoader.instantiate(this.container, this.projectURL, {onProgress: unityProgress});
   }

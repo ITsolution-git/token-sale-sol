@@ -8,6 +8,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 export class AuthService {
   private isLoggedIn = new Subject<boolean>();
   isLoggedIn$ = this.isLoggedIn.asObservable();
+  saveUserIDStr = 'user_id';
 
   constructor(
     private router: Router,
@@ -27,6 +28,7 @@ export class AuthService {
 
   logout() {
     this.isLoggedIn.next(false);
+    this.localStorage.clear(this.saveUserIDStr);
     this.router.navigate(['/meta-mask']);
   }
 
