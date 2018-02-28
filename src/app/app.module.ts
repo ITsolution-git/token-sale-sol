@@ -31,6 +31,8 @@ import { userReducer } from './store/reducers/user.reducer';
 import { WaitingTreasureModalComponent } from './shared/components/waiting-treasure-modal/waiting-treasure-modal.component';
 import { ChestService } from './shared/services/ChestService/chest.service';
 import { OpeningTreasureModalComponent } from './shared/components/opening-treasure-modal/opening-treasure-modal.component';
+import { UserLocalstorageRepository } from './shared/services/UserService/user.localstorage.repository.service';
+import { LocalStoragePersistance } from './core/localstorage.persistance.service';
 
 
 export const reducers = {
@@ -67,6 +69,8 @@ export const reducers = {
     AuthGuard,
     AuthService,
     NgSpinningPreloader,
+    LocalStoragePersistance,
+    UserLocalstorageRepository,
     ChestService
   ],
   entryComponents: [

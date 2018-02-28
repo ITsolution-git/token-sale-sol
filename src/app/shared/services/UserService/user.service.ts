@@ -3,13 +3,15 @@ import { HttpHelperService } from '../../../core/http-helper.service';
 import { ApiRoutingService } from '../../../core/api-routing.service';
 import { User } from '../../models/user.model';
 import { Observable } from 'rxjs/Observable';
+import { UserLocalstorageRepository } from './user.localstorage.repository.service';
 
 @Injectable()
 export class UserService {
 
   constructor(
     private http: HttpHelperService,
-    private apiRoutingService: ApiRoutingService
+    private apiRoutingService: ApiRoutingService,
+    private userLocalStorageRepository: UserLocalstorageRepository
   ) { }
 
   registerUser(data) {
@@ -31,6 +33,7 @@ export class UserService {
   }
 
   updateUser(userId, data) {
+    this.userLocalStorageRepository.setUserId(userId);
     return this.http.patch(
       this.apiRoutingService.getUserUrl(userId),
       data,
