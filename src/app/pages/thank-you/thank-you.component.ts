@@ -43,22 +43,23 @@ export class ThankYouComponent implements OnInit {
         this.transactionId = state.transactionId;
         if (this.subscribed === false) {
           this.subscribed = true;
+          const ethValue = this.localStorage.retrieve(this.ethValueStr),
+              gzrValue = this.localStorage.retrieve(this.gzrValueStr);
+
           this.metaMaskService.checkTransactionStatus(this.transactionId)
           .then(res => {
             this.showSpinner = false;
-
-            const ethValue = this.localStorage.retrieve(this.ethValueStr),
-                gzrValue = this.localStorage.retrieve(this.gzrValueStr);
-
             const metaData = {
               'transaction_id': res['transaction'],
               'ether_spent': ethValue,
               'gzr_received': gzrValue,
-              'purchase_date': (new Date()).getTime() / 1000
+              'purchase_date': Math.ceil((new Date()).getTime() / 1000)
             };
             const customData =  {
-              purchased_gzr: gzrValue,
-              last_purchased_at: (new Date()).getTime() / 1000
+              'purchased-gzr': true,
+              'total_gzr_purchased': gzrValue,
+              'total_ether_spent': ethValue,
+              last_purchased_at: Math.ceil((new Date()).getTime() / 1000)
             };
             this.eventTrack('purchased-gzr', metaData);
             this.updateUser(customData);
@@ -67,9 +68,16 @@ export class ThankYouComponent implements OnInit {
               'tx_id': res['transaction'],
               'eth': ethValue,
               'gzr': gzrValue ,
-              'confirmed_at': (new Date()).getTime() / 1000
+              'confirmed_at': Math.ceil((new Date()).getTime() / 1000)
             };
             this.saveUserTransaction(txData);
+          }, err => {
+            const customData =  {
+              'purchased-gzr': false,
+              gzr: 0,
+              eth: 0
+            };
+            this.updateUser(customData);
           });
         }
       } else {

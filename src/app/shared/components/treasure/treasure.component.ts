@@ -155,15 +155,24 @@ export class TreasureComponent implements OnInit {
         'transaction-id': res,
         'item-id': '74143b3842ff373eb111d12f1f497611',
         price: amount,
-        opened_at: (new Date()).getTime(),
+        opened_date: Math.ceil((new Date()).getTime() / 1000),
       };
       const customData = {
         opened_treasure: true,
         items_owned: 1,
-        last_opened_treasure_at: (new Date()).getTime(),
+        last_opened_treasure_at: Math.ceil((new Date()).getTime() / 1000),
       };
       this.updateUser(customData);
       this.eventTrack('opened-treasure', metadata);
+    },
+    error => {
+      if (error) {
+        const customData = {
+          opened_treasure: false,
+          items_owned: 0
+        };
+        this.updateUser(customData);
+      }
     });
 
   }

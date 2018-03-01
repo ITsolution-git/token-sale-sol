@@ -9,7 +9,7 @@ import { Store } from '@ngrx/store';
 import { ApplicationState } from '../../store/application-state';
 import { Observable } from 'rxjs/Observable';
 import { UserState } from '../../store/store-data';
-import { UPDATE_NICK_NAME } from '../../store/actions/user.actions';
+import { UPDATE_NICK_NAME, UPDATE_SIGNUP } from '../../store/actions/user.actions';
 
 @Component({
   selector: 'app-save-account',
@@ -114,22 +114,32 @@ export class SaveAccountComponent implements OnInit {
             if (user.length > 0) {
               const {nick, email, id} = currentUser;
               const metadata = {
-                created_at: (new Date()).getTime(),
+                created_date: Math.ceil((new Date(currentUser.created_at)).getTime() / 1000),
               };
               const customData = {
                 registered_metamask: true,
-                registered_metamask_at: (new Date()).getTime(),
+                registered_metamask_at: Math.ceil((new Date(currentUser.created_at)).getTime() / 1000),
                 gzr_balance: currentUser.gzr.amount || 0,
                 items_owned: currentUser.owns.length,
                 nickname: nick,
                 'wallet-id': id
               };
-              this.UpdateNickName(nick);
+              this.UpdateNickNameAndSignup(nick);
               this.updateUser(nick, email, id, customData);
               this.eventTrack('registered-metamask', metadata);
               this.router.navigate([this.strRootURL]);
             }
           });
+        }, error => {
+          const customData = {
+            registered_metamask: false,
+            gzr_balance: 0,
+            items_owned: 0,
+            nickname: '',
+            'wallet-id': this.walletAddress
+          };
+
+          this.updateUser(this.nickName, this.email, this.walletAddress , customData);
         });
       })
       .catch(error => {
@@ -138,8 +148,9 @@ export class SaveAccountComponent implements OnInit {
     }, 3000);
   }
 
-  UpdateNickName(data) {
+  UpdateNickNameAndSignup(data) {
     this.store.dispatch({type: UPDATE_NICK_NAME, payload: data});
+    this.store.dispatch({type: UPDATE_SIGNUP, payload: true});
   }
 
   navigateToMetaMask() {
@@ -151,7 +162,7 @@ export class SaveAccountComponent implements OnInit {
         name: name,
         email: email,
         user_id: userId,
-        created_at: (new Date()).getTime(),
+        created_at: Math.ceil((new Date()).getTime() / 1000),
         custom_data: customData
     });
     return true;

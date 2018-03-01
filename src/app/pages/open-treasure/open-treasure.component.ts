@@ -10,6 +10,7 @@ import { MetaMaskService } from '../../shared/services/MetaMaskService/meta-mask
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { LockedModalComponent } from '../../shared/components/locked-modal/locked-modal.component';
+import { AuthService } from '../../core/services/auth.service';
 import { LocalStorageService } from 'ngx-webstorage';
 
 @Component({
@@ -34,6 +35,7 @@ export class OpenTreasureComponent implements OnInit {
   constructor(
     private chestService: ChestService,
     private metaMaskService: MetaMaskService,
+    private authService: AuthService,
     private router: Router,
     private localStorage: LocalStorageService,
     private modalService: BsModalService,
@@ -45,8 +47,10 @@ export class OpenTreasureComponent implements OnInit {
       if (state.installed === false) {
         this.router.navigate(['/meta-mask']);
       }
-      this.unlocked = state.unlocked;
-      this.showModals();
+      if (this.authService.checkLogin()) {
+        this.unlocked = state.unlocked;
+        this.showModals();
+      }
     });
   }
 

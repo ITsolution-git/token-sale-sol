@@ -25,7 +25,10 @@
                     </div>
                   </div>
                   <div class="content text-center">
-                    <p class="description">Your transaction has been broadcasted to the blockchain and is waiting to be mined. Once your transaction has been confirmed, you will automatically receive GZR to your wallet.</p>
+                    <p *ngIf="!showSpinner" class="description">
+                      Your transaction has been mined and is now confirmed. You will automatically receive your GZR momentarily. It's time for you to go open some treasure!
+                    </p>
+                    <p *ngIf="showSpinner" class="description">Your transaction has been broadcasted to the blockchain and is waiting to be mined. Once your transaction has been confirmed, you will automatically receive GZR to your wallet.</p>
                     <p class="description">Transaction {{transactionId}}</p>
                     <p class="description mt-1">You can view your transaction on etherscan by <br> <a href="https://ropsten.etherscan.io/tx/{{transactionId}}" target="_blank" class="link">clicking here</a></p>
                   </div>

@@ -22,6 +22,7 @@ export class AuthService {
 
   login(wallet: String = '') {
     this.isLoggedIn.next(true);
+    this.localStorage.store('token', 'token');
     this.router.navigate(['/']);
   }
 
@@ -29,5 +30,13 @@ export class AuthService {
     this.isLoggedIn.next(false);
     this.localStorage.clear(this.saveUserIDStr);
     this.router.navigate(['/meta-mask']);
+  }
+
+  checkLogin() {
+    if (!this.localStorage.retrieve('token')) {
+      this.router.navigate(['/save-account']);
+      return false;
+    }
+    return true;
   }
 }
