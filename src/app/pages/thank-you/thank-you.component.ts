@@ -54,11 +54,12 @@ export class ThankYouComponent implements OnInit {
               'transaction_id': res['transaction'],
               'ether_spent': ethValue,
               'gzr_received': gzrValue,
-              'purchase_date': (new Date()).getTime() / 1000
+              'purchase_date': Math.ceil((new Date()).getTime() / 1000)
             };
             const customData =  {
-              purchased_gzr: gzrValue,
-              last_purchased_at: (new Date()).getTime() / 1000
+              gzr: gzrValue,
+              eth: ethValue,
+              last_purchased_at: Math.ceil((new Date()).getTime() / 1000)
             };
             this.eventTrack('purchased-gzr', metaData);
             this.updateUser(customData);
@@ -67,7 +68,7 @@ export class ThankYouComponent implements OnInit {
               'tx_id': res['transaction'],
               'eth': ethValue,
               'gzr': gzrValue ,
-              'confirmed_at': (new Date()).getTime() / 1000
+              'confirmed_at': Math.ceil((new Date()).getTime() / 1000)
             };
             this.saveUserTransaction(txData);
           });

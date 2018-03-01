@@ -32,7 +32,7 @@ export class AuthService {
     this.router.navigate(['/meta-mask']);
   }
 
-  checkLogin() {    
+  checkLogin() {
     if (!this.localStorage.retrieve('token')) {
       this.router.navigate(['/save-account']);
       return false;

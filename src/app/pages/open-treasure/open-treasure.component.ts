@@ -47,7 +47,6 @@ export class OpenTreasureComponent implements OnInit {
       if (state.installed === false) {
         this.router.navigate(['/meta-mask']);
       }
-      debugger
       if (this.authService.checkLogin()) {
         this.unlocked = state.unlocked;
         this.showModals();

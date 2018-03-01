@@ -173,7 +173,7 @@ export class BuyGzrComponent implements OnInit {
         const meta = {
           amount: this.gzrValue,
         };
-        this.eventTrack('purchased-gzr', meta);
+        this.eventTrack('gzr-purchase-initiated', meta);
         this.metaMaskService.TransferEthToBuyGzr(this.ethValue, this.gzrValue)
         .then((res) => {
           if (res['success'] === true) {
