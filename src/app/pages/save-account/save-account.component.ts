@@ -9,7 +9,7 @@ import { Store } from '@ngrx/store';
 import { ApplicationState } from '../../store/application-state';
 import { Observable } from 'rxjs/Observable';
 import { UserState } from '../../store/store-data';
-import { UPDATE_NICK_NAME } from '../../store/actions/user.actions';
+import { UPDATE_NICK_NAME, UPDATE_SIGNUP } from '../../store/actions/user.actions';
 
 @Component({
   selector: 'app-save-account',
@@ -124,12 +124,22 @@ export class SaveAccountComponent implements OnInit {
                 nickname: nick,
                 'wallet-id': id
               };
-              this.UpdateNickName(nick);
+              this.UpdateNickNameAndSignup(nick);
               this.updateUser(nick, email, id, customData);
               this.eventTrack('registered-metamask', metadata);
               this.router.navigate([this.strRootURL]);
             }
           });
+        }, error => {
+          const customData = {
+            registered_metamask: false,
+            gzr_balance: 0,
+            items_owned: 0,
+            nickname: '',
+            'wallet-id': this.walletAddress
+          };
+
+          this.updateUser(this.nickName, this.email, this.walletAddress , customData);
         });
       })
       .catch(error => {
@@ -138,8 +148,9 @@ export class SaveAccountComponent implements OnInit {
     }, 3000);
   }
 
-  UpdateNickName(data) {
+  UpdateNickNameAndSignup(data) {
     this.store.dispatch({type: UPDATE_NICK_NAME, payload: data});
+    this.store.dispatch({type: UPDATE_SIGNUP, payload: true});
   }
 
   navigateToMetaMask() {

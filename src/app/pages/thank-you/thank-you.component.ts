@@ -43,13 +43,12 @@ export class ThankYouComponent implements OnInit {
         this.transactionId = state.transactionId;
         if (this.subscribed === false) {
           this.subscribed = true;
+          const ethValue = this.localStorage.retrieve(this.ethValueStr),
+              gzrValue = this.localStorage.retrieve(this.gzrValueStr);
+
           this.metaMaskService.checkTransactionStatus(this.transactionId)
           .then(res => {
             this.showSpinner = false;
-
-            const ethValue = this.localStorage.retrieve(this.ethValueStr),
-                gzrValue = this.localStorage.retrieve(this.gzrValueStr);
-
             const metaData = {
               'transaction_id': res['transaction'],
               'ether_spent': ethValue,
@@ -57,6 +56,7 @@ export class ThankYouComponent implements OnInit {
               'purchase_date': Math.ceil((new Date()).getTime() / 1000)
             };
             const customData =  {
+              'purchased-gzr': true,
               gzr: gzrValue,
               eth: ethValue,
               last_purchased_at: Math.ceil((new Date()).getTime() / 1000)
@@ -71,6 +71,14 @@ export class ThankYouComponent implements OnInit {
               'confirmed_at': Math.ceil((new Date()).getTime() / 1000)
             };
             this.saveUserTransaction(txData);
+          }, err => {
+            const customData =  {
+              'purchased-gzr': false,
+              gzr: gzrValue,
+              eth: ethValue,
+              last_purchased_at: Math.ceil((new Date()).getTime() / 1000)
+            };
+            this.updateUser(customData);
           });
         }
       } else {

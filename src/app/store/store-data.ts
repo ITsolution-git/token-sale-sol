@@ -8,6 +8,7 @@ export interface UserState {
     nickName: String;
     transactionId: String;
     validNetwork: boolean;
+    signup: boolean;
 }
 
 export const INITIAL_USER_STATE: UserState = {
@@ -19,5 +20,6 @@ export const INITIAL_USER_STATE: UserState = {
     gzrBalance: 0,
     nickName: '',
     transactionId: '',
-    validNetwork: true
+    validNetwork: true,
+    signup: false
 };

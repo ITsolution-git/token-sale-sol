@@ -101,6 +101,10 @@ export class HeaderComponent implements OnInit {
           });
         }
 
+        if (state.signup === true) {
+          this.isAuthenticated = true;
+        }
+
         this.walletAddress = state.walletAddress;
         this.unlocked = state.unlocked;
         this.balance = state.balance;

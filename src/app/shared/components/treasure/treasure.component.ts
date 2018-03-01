@@ -164,6 +164,15 @@ export class TreasureComponent implements OnInit {
       };
       this.updateUser(customData);
       this.eventTrack('opened-treasure', metadata);
+    },
+    error => {
+      if (error) {
+        const customData = {
+          opened_treasure: false,
+          items_owned: 0
+        };
+        this.updateUser(customData);
+      }
     });
 
   }
