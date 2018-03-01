@@ -57,8 +57,8 @@ export class ThankYouComponent implements OnInit {
             };
             const customData =  {
               'purchased-gzr': true,
-              gzr: gzrValue,
-              eth: ethValue,
+              'total_gzr_purchased': gzrValue,
+              'total_ether_spent': ethValue,
               last_purchased_at: Math.ceil((new Date()).getTime() / 1000)
             };
             this.eventTrack('purchased-gzr', metaData);
