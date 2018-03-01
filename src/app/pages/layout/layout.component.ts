@@ -17,6 +17,7 @@ import { UserState } from '../../store/store-data';
 import { User } from '../../shared/models/user.model';
 import { NotificationsService } from 'angular2-notifications-lite';
 import { environment } from '../../../environments/environment.prod';
+import { UserLocalstorageRepository } from '../../shared/services/UserService/user.localstorage.repository.service';
 
 @Component({
   selector: 'app-layout',
@@ -61,6 +62,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     private store: Store<ApplicationState>,
     private notificationService: NotificationsService,
     private modalService: BsModalService,
+    private userLocalstorageRepository: UserLocalstorageRepository
   ) {
     this.userState = this.store.select('userState');
   }
@@ -95,6 +97,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
           const currentUser = user[0];
           if (user.length) {
             const {nick, email, id} = currentUser;
+            this.userLocalstorageRepository.setUserId(id);
             const metadata = {
               created_at: (new Date()).getTime(),
             };
