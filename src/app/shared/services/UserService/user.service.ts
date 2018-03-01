@@ -25,8 +25,17 @@ export class UserService {
 
   retrieveUser(walletAddress) {
     return this.http.get(
-      this.apiRoutingService.getUsersUrl(),
-      {wallet: walletAddress},
+      this.apiRoutingService.getUsersUrl() + '?wallet=' + walletAddress,
+      {},
+      false,
+      null
+    );
+  }
+
+  retrieveUserID(userID) {
+    return this.http.get(
+      this.apiRoutingService.getUserUrl(userID),
+      {},
       false,
       null
     );
@@ -50,13 +59,4 @@ export class UserService {
      null
    );
   }
-
-  updateUserOwnership(userId, ownsData) {
-    return this.http.patch(
-      this.apiRoutingService.getUserUrlFromID(userId),
-      ownsData,
-      false,
-      null
-    );
-   }
 }
