@@ -44,6 +44,10 @@ export class ApiRoutingService {
     return this.baseUrl + '/user';
   }
 
+  getUserUrlFromID(id) {
+    return this.baseUrl + '/user/' + id;
+  }
+
   getUserUrl(userId) {
     return this.baseUrl + '/user/' + userId;
   }
