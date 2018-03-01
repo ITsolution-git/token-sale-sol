@@ -74,9 +74,8 @@ export class ThankYouComponent implements OnInit {
           }, err => {
             const customData =  {
               'purchased-gzr': false,
-              gzr: gzrValue,
-              eth: ethValue,
-              last_purchased_at: Math.ceil((new Date()).getTime() / 1000)
+              gzr: 0,
+              eth: 0
             };
             this.updateUser(customData);
           });
