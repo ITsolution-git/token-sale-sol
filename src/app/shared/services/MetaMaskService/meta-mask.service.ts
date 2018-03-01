@@ -348,8 +348,16 @@ export class MetaMaskService {
     return this.StandardToken.deployed();
   }
 
-  getItemContract() {
-
+  getStandardContract() {
+    if (this.validNetwork === false) {
+      return;
+    }
+    return this.GZRTokenToItemGeneration.deployed();
+  }
+  getItemGenerationContract() {
+    if (this.validNetwork === false) {
+      return;
+    }
     return this.GZRTokenToItemGeneration.deployed();
   }
 
@@ -361,7 +369,7 @@ export class MetaMaskService {
       this.getTokenContract()
         .then(ins => {
           gzr = ins;
-          return this.getItemContract();
+          return this.getItemGenerationContract();
         })
         .then(instance => {
           return gzr.approve(instance.address, amount, { from: this.account, gas: 41000 });
@@ -370,7 +378,6 @@ export class MetaMaskService {
           resolve(t);
         })
         .catch(e => {
-          console.log('in item approve GZRSpending : ', e );
           this.setStatus('Error in GZR approval');
         });
     });
@@ -378,7 +385,7 @@ export class MetaMaskService {
 
   generateItem() {
     return new Promise((resolve, reject) => {
-      this.getItemContract()
+      this.getItemGenerationContract()
         .then(instance => {
           return instance.spendGZRToGetAnItem.sendTransaction({
             from: this.account, gas: 41000, to: instance.address
@@ -394,19 +401,5 @@ export class MetaMaskService {
         });
     });
   }
-
-  getReceipt(transactionID) {
-    return new Promise((resolve, reject) => {
-      this.web3.eth.getTransactionReceipt(transactionID)
-      .then(res => {
-        resolve(res);
-      })
-      .catch(e => {
-        reject({'failure': true});
-        console.log('Error in receipt reception', e);
-      });
-    });
-  }
-
 
 }
