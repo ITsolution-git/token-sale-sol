@@ -148,6 +148,9 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.isAuthenticated = false;
     this.authService.logout();
+    (<any>window).Intercom('boot', {
+      app_id: 'e46tjta5'
+    });
   }
 
   onMenuToggle() {
