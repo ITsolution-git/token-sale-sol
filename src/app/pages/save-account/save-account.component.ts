@@ -31,6 +31,7 @@ export class SaveAccountComponent implements OnInit {
   loaded = false;
   saveNikNameStr = 'nickName';
   saveWalletStr = 'walletAddress';
+  saveUserIDStr = 'user_id';
   strRootURL = '/';
 
   constructor(
@@ -54,6 +55,10 @@ export class SaveAccountComponent implements OnInit {
       if (state) {
         if (!state.unlocked) {
           this.navigateToMetaMask();
+        }
+        const userId = this.localStorage.retrieve(this.saveUserIDStr);
+        if (userId) {
+          this.navigateToHome();
         }
         if (this.walletAddress !== state.walletAddress) {
           this.walletAddress = state.walletAddress;
@@ -155,6 +160,10 @@ export class SaveAccountComponent implements OnInit {
 
   navigateToMetaMask() {
     this.router.navigate(['/meta-mask']);
+  }
+
+  navigateToHome() {
+    this.router.navigate(['/']);
   }
 
   updateUser(name, email, userId, customData) {
