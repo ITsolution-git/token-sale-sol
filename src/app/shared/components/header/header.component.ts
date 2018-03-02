@@ -87,11 +87,11 @@ export class HeaderComponent implements OnInit {
               const user_ = resp[0];
               this.nickName = user_.nick;
               if (user_.nick != null) { this.nickDisplay = user_.nick.slice(0, 10); }
+              this.localStorage.store(this.saveUserIDStr, user_.id);
               this.authService.login(this.walletAddress);
               this.isAuthenticated = true;
               setTimeout(() => {
                 this.metaMaskService.getAccountInfo();
-                this.localStorage.store(this.saveUserIDStr, user_.id);
                 this.UpdateNickName(user_.nick);
               }, 500);
             } else {

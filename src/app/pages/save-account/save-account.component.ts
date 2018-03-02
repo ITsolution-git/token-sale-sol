@@ -56,10 +56,12 @@ export class SaveAccountComponent implements OnInit {
         if (!state.unlocked) {
           this.navigateToMetaMask();
         }
-        const userId = this.localStorage.retrieve(this.saveUserIDStr);
-        if (userId) {
-          this.navigateToHome();
-        }
+        setTimeout(() => {
+          const userId = this.localStorage.retrieve(this.saveUserIDStr);
+          if (userId) {
+            this.navigateToHome();
+          }
+        }, 500);
         if (this.walletAddress !== state.walletAddress) {
           this.walletAddress = state.walletAddress;
           this.accountInfo.setValue({
@@ -129,6 +131,8 @@ export class SaveAccountComponent implements OnInit {
                 nickname: nick,
                 'wallet-id': id
               };
+              this.localStorage.store(this.saveUserIDStr, id);
+              this.authService.login(this.walletAddress);
               this.UpdateNickNameAndSignup(nick);
               this.updateUser(nick, email, id, customData);
               this.eventTrack('registered-metamask', metadata);
