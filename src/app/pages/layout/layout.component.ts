@@ -99,11 +99,11 @@ export class LayoutComponent implements OnInit, AfterViewInit {
             const {nick, email, id} = currentUser;
             this.userLocalstorageRepository.setUserId(id);
             const metadata = {
-              created_at: Math.ceil((new Date()).getTime() / 1000),
+              created_at: Math.ceil((new Date(currentUser.created_at)).getTime() / 1000),
             };
             const customData =  {
               registered_metamask: true,
-              registered_metamask_at: Math.ceil((new Date()).getTime() / 1000),
+              registered_metamask_at: Math.ceil((new Date(currentUser.created_at)).getTime() / 1000),
               gzr_balance: currentUser.gzr.amount || 0,
               items_owned: currentUser.owns.length,
               nickname: nick,
