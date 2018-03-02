@@ -33,7 +33,7 @@ export class AuthService {
   }
 
   checkLogin() {
-    if (!this.localStorage.retrieve('token')) {
+    if (!this.localStorage.retrieve(this.saveUserIDStr)) {
       this.router.navigate(['/save-account']);
       return false;
     }
