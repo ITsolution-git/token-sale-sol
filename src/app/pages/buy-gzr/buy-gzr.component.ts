@@ -87,11 +87,6 @@ export class BuyGzrComponent implements OnInit {
     this.isMobile = this.isMobileView();
     this.eventTrack('viewed-buy-gzr-page', null);
 
-    const userId = this.localStorage.retrieve(this.saveUserIDStr);
-    if (!userId) {
-      this.router.navigate(['/save-account']);
-    }
-
     if (this.isMobile) {
       this.installed = false;
       this.unlocked = false;
@@ -154,6 +149,13 @@ export class BuyGzrComponent implements OnInit {
       this.bsModalRef = this.modalService.show(LockedModalComponent,
         Object.assign({}, this.config, { class: 'gray modal-lg modal-center' }));
     }
+
+    setTimeout(() => {
+      const userId = this.localStorage.retrieve(this.saveUserIDStr);
+      if (!userId && this.unlocked) {
+        this.router.navigate(['/save-account']);
+      }
+    }, 800);
   }
 
   openModalWithComponent() {

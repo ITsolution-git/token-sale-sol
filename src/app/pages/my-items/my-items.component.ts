@@ -65,11 +65,6 @@ export class MyItemsComponent implements OnInit {
   }
 
   ngOnInit() {
-    const userId = this.localStorage.retrieve(this.saveUserIDStr);
-    if (!userId) {
-      this.router.navigate(['/save-account']);
-    }
-
     this.isMobile = this.isMobileView();
     this.gameInstance = UnityLoader.instantiate(this.container, this.projectURL, {onProgress: unityProgress});
   }
@@ -90,6 +85,11 @@ export class MyItemsComponent implements OnInit {
     if (this.unlocked === false && !this.bsModalRef) {
       this.bsModalRef = this.modalService.show(LockedModalComponent,
         Object.assign({}, this.config, { class: 'gray modal-lg modal-center' }));
+    }
+
+    const userId = this.localStorage.retrieve(this.saveUserIDStr);
+    if (!userId && this.unlocked) {
+      this.router.navigate(['/save-account']);
     }
   }
 }
