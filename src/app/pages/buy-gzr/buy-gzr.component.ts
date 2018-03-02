@@ -152,7 +152,7 @@ export class BuyGzrComponent implements OnInit {
 
     setTimeout(() => {
       const userId = this.localStorage.retrieve(this.saveUserIDStr);
-      if (!userId && this.unlocked) {
+      if (!userId && this.unlocked && this.installed) {
         this.router.navigate(['/save-account']);
       }
     }, 800);

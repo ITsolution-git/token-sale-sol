@@ -23,6 +23,7 @@ export class OpenTreasureComponent implements OnInit {
   userState: Observable<UserState>;
   bsModalRef: BsModalRef;
   unlocked = true;
+  installed = false;
   saveUserIDStr = 'user_id';
 
   config = {
@@ -44,12 +45,14 @@ export class OpenTreasureComponent implements OnInit {
     this.userState = this.store.select('userState');
     this.metaMaskService.getAccountInfo();
     this.userState.subscribe(state => {
+      this.installed = state.installed;
       if (state.installed === false) {
         this.router.navigate(['/meta-mask']);
-      }
-      if (this.authService.checkLogin()) {
-        this.unlocked = state.unlocked;
-        this.showModals();
+      } else {
+        if (this.authService.checkLogin()) {
+          this.unlocked = state.unlocked;
+          this.showModals();
+        }
       }
     });
   }
@@ -68,7 +71,7 @@ export class OpenTreasureComponent implements OnInit {
     }
 
     const userId = this.localStorage.retrieve(this.saveUserIDStr);
-    if (!userId && this.unlocked) {
+    if (!userId && this.unlocked && this.installed) {
       this.router.navigate(['/save-account']);
     }
   }
