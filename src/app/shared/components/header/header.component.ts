@@ -16,6 +16,7 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { stat } from 'fs';
 import { User } from '../../models/user.model';
+import { environment } from '../../../../environments/environment.prod';
 import { UPDATE_NICK_NAME } from '../../../store/actions/user.actions';
 
 declare const $: any;
