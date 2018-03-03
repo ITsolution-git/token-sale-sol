@@ -68,7 +68,7 @@ export class ThankYouComponent implements OnInit {
               'tx_id': res['transaction'],
               'eth': ethValue,
               'gzr': gzrValue ,
-              'confirmed_at': Math.ceil((new Date()).getTime() / 1000)
+              'confirmed_at': new Date().toISOString()
             };
             this.saveUserTransaction(txData);
           }, err => {
