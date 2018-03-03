@@ -82,6 +82,7 @@ export class HeaderComponent implements OnInit {
     this.userState.subscribe(state => {
       if (state) {
         if (state.walletAddress && state.walletAddress !== this.walletAddress ) {
+          this.initIntercom();
           this.userService.retrieveUser(state.walletAddress).subscribe((resp: User[]) => {
             if (resp.length) {
               const user_ = resp[0];
@@ -228,5 +229,11 @@ export class HeaderComponent implements OnInit {
       (<any>window).Intercom('trackEvent', event, metadata);
     }
     return true;
+  }
+
+  initIntercom() {
+    (<any>window).Intercom('boot', {
+      app_id: environment.INTERCOM_APP_ID,
+    });
   }
 }
