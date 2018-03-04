@@ -101,16 +101,55 @@ export class LayoutComponent implements OnInit, AfterViewInit {
             const metadata = {
               created_at: Math.ceil((new Date(currentUser.created_at)).getTime() / 1000),
             };
+
+            let purchased_gzr = false,
+                total_gzr_purchased = 0,
+                total_ether_spent = 0,
+                opened_treasure = false,
+                last_purchased_at = 0,
+                last_opened_treasure_at = 0;
+
+            if (currentUser.transactions.length > 0) {
+              purchased_gzr = true;
+
+              currentUser.transactions.map(tx => {
+                total_gzr_purchased += tx.gzr;
+                total_ether_spent += tx.eth;
+              });
+              const lastTx = currentUser.transactions.slice(-1).pop();
+              last_purchased_at = Math.ceil((new Date(lastTx['confirmed_at'])).getTime() / 1000);
+            }
+
+            if (currentUser.owns.length > 0) {
+              opened_treasure = true;
+              last_opened_treasure_at = 0;
+            }
+
             const customData =  {
               registered_metamask: true,
               registered_metamask_at: Math.ceil((new Date(currentUser.created_at)).getTime() / 1000),
               gzr_balance: currentUser.gzr.amount || 0,
               items_owned: currentUser.owns.length,
               nickname: nick,
-              'wallet-id': id
+              'wallet-id': id,
+              opened_treasure: opened_treasure,
+              purchased_gzr: purchased_gzr,
+              total_gzr_purchased: total_gzr_purchased,
+              total_ether_spent: total_ether_spent,
+              last_purchased_at: last_purchased_at
             };
+
+            if (last_purchased_at !== 0) {
+              customData['last_purchased_at'] = last_purchased_at;
+            }
+
             this.updateNickName(nick);
             this.updateUser(nick, email, id, customData);
+          } else {
+            const customData = {
+              registered_metamask: false
+            };
+            this.updateUser('', '', '', customData);
           }
         });
       }
