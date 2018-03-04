@@ -139,7 +139,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
               last_purchased_at: last_purchased_at
             };
 
-            if (last_purchased_at != 0) {
+            if (last_purchased_at !== 0) {
               customData['last_purchased_at'] = last_purchased_at;
             }
 
