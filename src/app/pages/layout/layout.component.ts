@@ -106,8 +106,8 @@ export class LayoutComponent implements OnInit, AfterViewInit {
                 total_gzr_purchased = 0,
                 total_ether_spent = 0,
                 opened_treasure = false,
-                last_purchased_at = '',
-                last_opened_treasure_at = '';
+                last_purchased_at = 0,
+                last_opened_treasure_at = 0;
 
             if (currentUser.transactions.length > 0) {
               purchased_gzr = true;
@@ -117,12 +117,12 @@ export class LayoutComponent implements OnInit, AfterViewInit {
                 total_ether_spent += tx.eth;
               });
               const lastTx = currentUser.transactions.slice(-1).pop();
-              last_purchased_at = Math.ceil((new Date(lastTx['confirmed_at'])).getTime() / 1000).toString();
+              last_purchased_at = Math.ceil((new Date(lastTx['confirmed_at'])).getTime() / 1000);
             }
 
             if (currentUser.owns.length > 0) {
               opened_treasure = true;
-              last_opened_treasure_at = '';
+              last_opened_treasure_at = 0;
             }
 
             const customData =  {
@@ -133,12 +133,16 @@ export class LayoutComponent implements OnInit, AfterViewInit {
               nickname: nick,
               'wallet-id': id,
               opened_treasure: opened_treasure,
-              last_opened_treasure_at: last_opened_treasure_at,
               purchased_gzr: purchased_gzr,
               total_gzr_purchased: total_gzr_purchased,
               total_ether_spent: total_ether_spent,
               last_purchased_at: last_purchased_at
             };
+
+            if (last_purchased_at != 0) {
+              customData['last_purchased_at'] = last_purchased_at;
+            }
+
             this.updateNickName(nick);
             this.updateUser(nick, email, id, customData);
           } else {
