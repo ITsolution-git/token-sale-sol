@@ -56,7 +56,7 @@ export class ThankYouComponent implements OnInit {
               'purchase_date': Math.ceil((new Date()).getTime() / 1000)
             };
             const customData =  {
-              'purchased-gzr': true,
+              'purchased_gzr': true,
               'total_gzr_purchased': gzrValue,
               'total_ether_spent': ethValue,
               last_purchased_at: Math.ceil((new Date()).getTime() / 1000)
@@ -73,7 +73,7 @@ export class ThankYouComponent implements OnInit {
             this.saveUserTransaction(txData);
           }, err => {
             const customData =  {
-              'purchased-gzr': false,
+              'purchased_gzr': false,
               gzr: 0,
               eth: 0
             };
