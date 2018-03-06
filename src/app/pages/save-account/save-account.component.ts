@@ -98,6 +98,11 @@ export class SaveAccountComponent implements OnInit {
     this.isEmailed = true;
     this.isValidEmail = true;
     this.isSaving = true;
+
+    setTimeout(() => {
+      this.isNotSaving = true;
+    }, 6000);
+
     setTimeout(() => {
       this.metaMaskService.SignInTransaction()
       .then(result => {
@@ -187,7 +192,6 @@ export class SaveAccountComponent implements OnInit {
       })
       .catch(error => {
         this.isEmailed = false;
-        this.isNotSaving = true;
       });
     }, 3000);
   }
