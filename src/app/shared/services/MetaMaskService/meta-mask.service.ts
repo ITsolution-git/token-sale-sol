@@ -10,12 +10,17 @@ import { Subscription } from 'rxjs/Subscription';
 import Tx from 'ethereumjs-tx';
 
 const GZRArtifacts = require('../../../../../build/contracts/GizerToken.json');
+const StandardTokenArtifacts = require('../../../../../build/contracts/StandardToken.json');
+const GZRTokenToItemGenerationArtifacts = require('../../../../../build/contracts/GZRTokenToItemGeneration.json');
 
 declare var window: any;
 
 @Injectable()
 export class MetaMaskService {
+
   GzrToken = Contract(GZRArtifacts);
+  StandardToken = Contract(StandardTokenArtifacts);
+  GZRTokenToItemGeneration = Contract(GZRTokenToItemGenerationArtifacts);
 
   accounts: any;
   web3: any;
@@ -49,12 +54,40 @@ export class MetaMaskService {
   installedSubject = new Subject<boolean>();
   installedObservable$ = this.installedSubject.asObservable();
 
+  validNetwork = false;
+  validNetworkSubject = new Subject<boolean>();
+  validNetworkObservable$ = this.validNetworkSubject.asObservable();
+
+  signTransactionPending = 0;
+  signTransactionPendingSubject = new Subject<number>();
+  signTransactionPendingObservable$ = this.signTransactionPendingSubject.asObservable();
+
+  buyGZRTransaction = 0;
+  buyGZRTransactionSubject = new Subject<number>();
+  buyGZRTransactionObservable$ = this.buyGZRTransactionSubject.asObservable();
+
   accountSubject = new Subject<any>();
   accountObservable$ = this.accountSubject.asObservable();
 
+  treasureTransactionSubject = new Subject<any>();
+  treasureTransactionObservable$ = this.treasureTransactionSubject.asObservable();
+
+  GZRContractInstanceSubject = new Subject<any>();
+  GZRContractInstance$ = this.GZRContractInstanceSubject.asObservable();
+
+  ItemsContractInstanceSubject = new Subject<any>();
+  ItemsContractInstance$ = this.ItemsContractInstanceSubject.asObservable();
+
+
   loadMetaObservable: any;
   loadMetaSubscription$: Subscription = new Subscription();
+
+  checkTxStatusObservable: any;
+  checkTxStatusSusbscription$: Subscription = new Subscription();
+
   subscribed = false;
+  purchasedEtherValue = 0;
+  purchasedGZRValue = 0;
 
   constructor(
     private _ngZone: NgZone,
@@ -82,29 +115,49 @@ export class MetaMaskService {
   }
 
   loadMetaCoin() {
-    this.checkAndInstantiateWeb3();
-    this.onReady();
+    this.checkAndInstantiateWeb3()
+      .then((status: boolean) => {
+        this.onReady();
+        this.validNetwork = status;
+        this.validNetworkSubject.next(this.validNetwork);
+      })
+      .catch(() => {
+        this.validNetwork = false;
+        this.validNetworkSubject.next(this.validNetwork);
+      });
   }
 
   checkAndInstantiateWeb3() {
-    if (typeof window.web3 !== 'undefined') {
-      this.web3 = new Web3(window.web3.currentProvider);
-    } else {
-      this.web3 = new Web3(
-        new Web3.providers.HttpProvider('http://localhost:8545')
-      );
-    }
+    return new Promise((resolve, reject) => {
+      if (typeof window.web3 !== 'undefined') {
+        this.installed = true;
+        this.installedSubject.next(this.installed);
+        this.web3 = new Web3(window.web3.currentProvider);
+
+        window.web3.version.getNetwork((err, netId) => {
+          switch (netId) {
+            case '3':
+              resolve(true);
+              break;
+            default:
+              resolve(false);
+          }
+        });
+      } else {
+        this.installed = false;
+        this.installedSubject.next(this.installed);
+        reject(false);
+      }
+    });
   }
 
   onReady() {
     this.GzrToken.setProvider(this.web3.currentProvider);
+    this.StandardToken.setProvider(this.web3.currentProvider);
+    this.GZRTokenToItemGeneration.setProvider(this.web3.currentProvider);
 
     this.web3.eth.getAccounts((err, accs) => {
-      if (err != null) {
-        this.installed = false;
-        this.installedSubject.next(this.installed);
-        return;
-      }
+
       this.installed = true;
       this.installedSubject.next(this.installed);
 
@@ -154,6 +207,9 @@ export class MetaMaskService {
   }
 
   balanceOf(address) {
+    if (this.validNetwork === false) {
+      return;
+    }
     return this.GzrToken.deployed()
       .then(instance => {
         this.contractAddress = instance.address;
@@ -163,6 +219,9 @@ export class MetaMaskService {
   }
 
   refreshBalance() {
+    if (this.validNetwork === false) {
+      return;
+    }
     this.getBalance(this.account)
       .then(balance => {
         this.balance = parseFloat(balance.toString());
@@ -180,7 +239,41 @@ export class MetaMaskService {
     this.status = message;
   }
 
+  checkTransactionStatus(transactionId) {
+    this.checkTxStatusObservable = Observable.interval(3000);
+    return new Promise((resolve, reject) => {
+      this.checkTxStatusSusbscription$ = this.checkTxStatusObservable.subscribe(() => {
+        this.checkTransaction(transactionId, resolve, reject);
+      });
+    });
+  }
+
+  checkTransaction(txId, resolve, reject) {
+    this.web3.eth.getTransactionReceipt(txId, (err, res) => {
+      if (err) {
+        reject(err);
+      } else {
+        if (res == null) {
+          this.transactionId = txId;
+          this.transactionIdSubject.next(this.transactionId);
+          return;
+        } else if (res.status === 1) {
+          resolve({ 'success': true, 'transaction': txId, 'etherValue': this.purchasedEtherValue, 'gzrValue': this.purchasedGZRValue });
+          this.checkTxStatusSusbscription$.unsubscribe();
+        } else {
+          resolve({ 'success': false, 'transaction': txId, 'etherValue': this.purchasedEtherValue, 'gzrValue': this.purchasedGZRValue });
+          this.checkTxStatusSusbscription$.unsubscribe();
+        }
+        this.refreshBalance();
+      }
+    });
+  }
+
   TransferEthToBuyGzr(ethValue, gzrValue) {
+    if (this.validNetwork === false) {
+      return;
+    }
+
     let gzr;
     return new Promise((resolve, reject) => {
       this.GzrToken
@@ -191,12 +284,9 @@ export class MetaMaskService {
             from: this.account, to: this.contractAddress, value: this.web3.toWei(ethValue, 'ether')
           }, (error, transactionId) => {
             if (error) {
-              reject({'failure': true});
+              reject({ 'failure': true });
             } else {
               resolve({ 'success': true, 'transaction': transactionId });
-              this.transactionId = transactionId;
-              this.transactionIdSubject.next(this.transactionId);
-              this.refreshBalance();
             }
           });
         })
@@ -208,6 +298,10 @@ export class MetaMaskService {
   }
 
   SignInTransaction() {
+    if (this.validNetwork === false) {
+      return;
+    }
+
     let gzr;
     return new Promise((resolve, reject) => {
       this.GzrToken
@@ -221,7 +315,8 @@ export class MetaMaskService {
                 'failure': true
               });
             } else {
-
+              this.signTransactionPending = this.signTransactionPending + 1;
+              this.signTransactionPendingSubject.next(this.signTransactionPending);
               gzr.balanceOf(this.account)
                 .then((value) => {
                   resolve({
@@ -245,21 +340,66 @@ export class MetaMaskService {
     });
   }
 
-  sendCoin(amount) {
-    let meta;
-       this.setStatus('Initiating transaction... (please wait)');
-    this.GzrToken
-      .deployed()
-      .then(instance => {
-        meta = instance;
-        meta.transfer(this.contractAddress, amount, { from: this.account })
-          .then((error, transactionId) => {
-            this.setStatus('Transaction complete!');
-            this.refreshBalance();
-          });
-      })
-      .catch(e => {
-        this.setStatus('Error sending coin; see log.');
-      });
+
+  getTokenContract() {
+    if (this.validNetwork === false) {
+      return;
+    }
+    return this.StandardToken.deployed();
   }
+
+  getStandardContract() {
+    if (this.validNetwork === false) {
+      return;
+    }
+    return this.GZRTokenToItemGeneration.deployed();
+  }
+  getItemGenerationContract() {
+    if (this.validNetwork === false) {
+      return;
+    }
+    return this.GZRTokenToItemGeneration.deployed();
+  }
+
+
+
+  approveGZRSpending(amount) {
+    let gzr;
+    return new Promise((resolve, reject) => {
+      this.getTokenContract()
+        .then(ins => {
+          gzr = ins;
+          return this.getItemGenerationContract();
+        })
+        .then(instance => {
+          return gzr.approve(instance.address, amount, { from: this.account, gas: 41000 });
+        })
+        .then(t => {
+          resolve(t);
+        })
+        .catch(e => {
+          this.setStatus('Error in GZR approval');
+        });
+    });
+  }
+
+  generateItem() {
+    return new Promise((resolve, reject) => {
+      this.getItemGenerationContract()
+        .then(instance => {
+          return instance.spendGZRToGetAnItem.sendTransaction({
+            from: this.account, gas: 41000, to: instance.address
+          });
+        })
+        .then(tx => {
+          this.treasureTransactionSubject.next(tx);
+          resolve(tx);
+        })
+        .catch(e => {
+          reject({ 'failure': true });
+          this.setStatus('Error in item generation');
+        });
+    });
+  }
+
 }

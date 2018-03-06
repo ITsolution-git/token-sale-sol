@@ -5,14 +5,27 @@ import { environment } from '../../environments/environment';
 export class ApiRoutingService {
   private baseUrl = environment.BASE_API_URL;
 
-  constructor() {}
+  constructor() { }
 
   getItemsUrl() {
     return this.baseUrl + '/item';
   }
 
+  getItemsUrl_ID(ids) {
+    let url = this.baseUrl + '/item?limit=0';
+    for (const id of ids) {
+      url += '&list[]=' + id;
+    }
+
+    return url;
+  }
+
   getItemUrl(id) {
     return this.baseUrl + '/item/' + id;
+  }
+
+  saveTxUrl(id) {
+    return this.baseUrl + '/user/' + id + '/transactions';
   }
 
   getMetaCoinUrl() {
@@ -20,19 +33,23 @@ export class ApiRoutingService {
   }
 
   getChestUrl() {
-    return '../../../assets/chestId.json';
+    return this.baseUrl + '/chest';
   }
 
-  getChestDataFromID(id) {
-    return '../../../assets/chest.json';
+  getChestUrlFromID(id) {
+    return this.baseUrl + '/chest/' + id;
   }
 
   getUsersUrl() {
     return this.baseUrl + '/user';
   }
 
-  getUserUrl(address) {
-    return this.baseUrl + '/user/' + address;
+  getUserUrlFromID(id) {
+    return this.baseUrl + '/user/' + id;
+  }
+
+  getUserUrl(userId) {
+    return this.baseUrl + '/user/' + userId;
   }
 
   loadUnityPlayerUrl() {

@@ -8,28 +8,35 @@ import { LocalStorageService } from 'ngx-webstorage';
 export class AuthService {
   private isLoggedIn = new Subject<boolean>();
   isLoggedIn$ = this.isLoggedIn.asObservable();
+  saveUserIDStr = 'user_id';
 
   constructor(
     private router: Router,
     private localStorage: LocalStorageService,
   ) {
-    const token = this.localStorage.retrieve('token');
-    if (token) { this.isLoggedIn.next(true); }
   }
 
   setLoginFlag(flag: boolean) {
     this.isLoggedIn.next(flag);
   }
 
-  login() {
+  login(wallet: String = '') {
     this.isLoggedIn.next(true);
-    this.localStorage.store('token', 'afgeFb596hHHHPlKEgnzafSFcceR3xXCfiUvHKAVvb25IZn8pZiqFxtFoBVxzfA');
+    this.localStorage.store('token', 'token');
     this.router.navigate(['/']);
   }
 
   logout() {
     this.isLoggedIn.next(false);
-    this.localStorage.clear('token');
+    this.localStorage.clear(this.saveUserIDStr);
     this.router.navigate(['/meta-mask']);
+  }
+
+  checkLogin() {
+    if (!this.localStorage.retrieve(this.saveUserIDStr)) {
+      this.router.navigate(['/save-account']);
+      return false;
+    }
+    return true;
   }
 }

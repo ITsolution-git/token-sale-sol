@@ -57,15 +57,25 @@
         color: #7777a9;
     }
     .item-list {
+        position: relative;
+        justify-content: center;
+        display: flex;
         .item-area {
-            width: 95%;
+            width: 93%;
             display: inline-block;
+        }
+        .arrow-left {
+            position: absolute;
+            left: -5px;
+        }
+        .arrow-right {
+            position: absolute;
+            right: 35px;
         }
         .arrow {
             display: inline-block;
             height: 100%;
             vertical-align: top;
-            position: relative;
             text-align: center;
             .arrow-padding {
                 cursor: pointer;

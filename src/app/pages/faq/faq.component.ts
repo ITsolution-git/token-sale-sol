@@ -20,14 +20,27 @@ export class FaqComponent implements OnInit {
     selling: false,
     unlock: false,
     reach: false,
+    ggiditem: false,
+    founder: false,
+    gzrtoken: false
   };
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
+    this.eventTrack('viewed-faq-page', null);
   }
 
   stopCollapse(event: any) {
     event.stopPropagation();
+  }
+
+  eventTrack(event, metadata) {
+    if (!(metadata)) {
+      (<any>window).Intercom('trackEvent', event);
+    } else {
+      (<any>window).Intercom('trackEvent', event, metadata);
+    }
+    return true;
   }
 }

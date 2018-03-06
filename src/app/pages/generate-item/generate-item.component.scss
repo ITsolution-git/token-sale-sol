@@ -1,0 +1,131 @@
+.generate-item-page {
+    .main-canvas {
+        height: 0;
+    }
+
+    .star-canvas {
+        display: none;
+    }
+
+    .title {
+        font-size: 30px;
+        font-family: "Century Gothic Bold";
+        color: #ffffff;
+    }
+
+    .description {
+        font-size: 18px;
+        font-family: "Century Gothic";
+        color: #ffffff36;
+    }
+
+    .img-factory-wrapper {
+        position: relative;
+        height: 478px;
+
+        .img-factory {
+            z-index: 1001;
+            position: absolute;
+            left: calc(50% - 337px);
+            top: 0;
+        }
+
+        .gizer-coin {
+            left: -50px;
+            z-index: 999;
+        }
+
+        .chest {
+            bottom: 0;
+        }
+
+        .gear-wrapper {
+            top: 3px;
+        }
+        .smoke {
+            position: absolute;
+            top: -5%;
+            right: 48%;
+        }
+        .smokeList {
+            display: none;
+        }
+
+        .bubble{
+            border-radius: 50%;
+            position: absolute;
+        }
+        
+        .smallBubble{
+            width:80px;
+            height:80px;
+            background-color:#fffff0;
+        }
+        
+        .mediumBubble{
+            width:120px;
+            height:120px;
+            background-color:#ffffff;
+        }
+        
+        .largeBubble{
+            width:160px;
+            height:160px;
+            background-color:#fff;
+        }
+
+        .smallSmoke {
+            position: absolute;
+            top: -10%;
+            left: calc(50% - 80px);
+        }
+        .smallSmokeList {
+            display: none;
+        }
+        
+        .small-circle{
+            width:50px;
+            height:50px;
+            background-color:#fffff0;
+        }
+
+        .small-bubble{
+            border-radius: 50%;
+            position: absolute;
+
+        }
+        
+
+        .flow-wrapper {
+            position: absolute;
+            left: 0;
+            bottom: 78px;
+            z-index: 1000;
+        }
+
+        .conveyor-wrapper {
+            height: 37px;
+            position: absolute;
+            left: 0;
+            bottom: 40px;
+            z-index: 1000;
+        }
+    }
+
+    .background-block {
+        background-color: #323c46;
+        margin-top: -40px;
+
+        .btn-go-back {
+            cursor: pointer;
+            border-style: solid;
+            border-width: 2px;
+            border-color: rgb(189, 189, 189);
+            border-radius: 7px;
+            padding: 10px 40px;
+            font-size: 15px;
+            font-family: "Century Gothic Bold";
+            color: #1095d3;
+        }
+    }
+}

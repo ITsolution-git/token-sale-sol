@@ -5,10 +5,13 @@ import { LockedModalComponent } from '../../shared/components/locked-modal/locke
 import { InstallMaskModalComponent } from '../../shared/components/install-mask-modal/install-mask-modal.component';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
+import { LocalStorageService } from 'ngx-webstorage';
+
 import { ApplicationState } from '../../store/application-state';
 import { UserState } from '../../store/store-data';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
+import { ValidNetworkModalComponent } from '../../shared/components/valid-network/valid-network.component';
 import { MetaMaskService } from '../../shared/services/MetaMaskService/meta-mask.service';
 import { UPDATE_TRANSACTION_ID } from './../../store/actions/user.actions';
 
@@ -35,10 +38,14 @@ export class BuyGzrComponent implements OnInit {
   userState: Observable<UserState>;
   installed = true;
   unlocked = true;
+  validNetwork = true;
 
   isFromModal = false;
   isMobile = false;
   isBuyClicked = false;
+  ethValueStr = 'purchasedEthValue';
+  gzrValueStr = 'purchasedGZRValue';
+  saveUserIDStr = 'user_id';
 
   bsModalRef: BsModalRef;
 
@@ -56,36 +63,48 @@ export class BuyGzrComponent implements OnInit {
     private modalService: BsModalService,
     private router: Router,
     private metaMaskService: MetaMaskService,
+    private localStorage: LocalStorageService,
     private store: Store<ApplicationState>
   ) {
     this.userState = this.store.select('userState');
+    this.metaMaskService.getAccountInfo();
+    this.userState.subscribe(state => {
+      if (state) {
+        this.installed = state.installed;
+        if (state.installed === null) {
+          this.metaMaskService.unloadAccountInfo();
+          this.metaMaskService.getAccountInfo();
+        } else {
+          this.unlocked = state.unlocked;
+          this.validNetwork = state.validNetwork;
+          this.showInstalledModal();
+        }
+      }
+    });
   }
 
   ngOnInit() {
     this.isMobile = this.isMobileView();
+    this.eventTrack('viewed-buy-gzr-page', null);
+
     if (this.isMobile) {
       this.installed = false;
       this.unlocked = false;
       this.bsModalRef = this.modalService.show(LockedModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
     } else {
-      this.userState.subscribe(state => {
-        if (state) {
-          this.event$.next(state);
-        }
-      });
-      this.metaMaskService.getAccountInfo();
       this.metaMaskService.installedObservable$.take(1).subscribe(status => {
         this.installed = status;
-        if (!status) {
-          this.bsModalRef = this.modalService.show(InstallMaskModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
-        }
         this.metaMaskService.unloadAccountInfo();
       });
       this.metaMaskService.getAccountInfo();
       this.metaMaskService.unlockedObservable$.take(1).subscribe(status => {
         this.unlocked = status;
-        if (!status) {
-          this.bsModalRef = this.modalService.show(LockedModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
+        this.metaMaskService.unloadAccountInfo();
+      });
+      this.metaMaskService.getAccountInfo();
+      this.metaMaskService.validNetworkObservable$.subscribe(status => {
+        if (this.validNetwork !== status) {
+          this.validNetwork = status;
         }
         this.metaMaskService.unloadAccountInfo();
       });
@@ -94,10 +113,6 @@ export class BuyGzrComponent implements OnInit {
         this.isFromModal = state.showAddressForm;
       });
 
-      this.event$.subscribe((state) => {
-        this.installed = state.installed;
-        this.unlocked = state.unlocked;
-      });
     }
   }
 
@@ -124,20 +139,50 @@ export class BuyGzrComponent implements OnInit {
     }
   }
 
+  showInstalledModal() {
+    if (this.installed === false && !this.bsModalRef) {
+      this.bsModalRef = this.modalService.show(InstallMaskModalComponent,
+        Object.assign({}, this.config, { class: 'gray modal-lg' }));
+    }
+
+    if (this.unlocked === false && !this.bsModalRef) {
+      this.bsModalRef = this.modalService.show(LockedModalComponent,
+        Object.assign({}, this.config, { class: 'gray modal-lg modal-center' }));
+    }
+
+    setTimeout(() => {
+      const userId = this.localStorage.retrieve(this.saveUserIDStr);
+      if (!userId && this.unlocked && this.installed) {
+        this.router.navigate(['/save-account']);
+      }
+    }, 800);
+  }
+
   openModalWithComponent() {
     if (!this.isAccepted) {
       this.isBuyClicked = true;
     } else {
       if (!this.installed) {
-        this.bsModalRef = this.modalService.show(InstallMaskModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
+        this.bsModalRef = this.modalService.show(InstallMaskModalComponent,
+          Object.assign({}, this.config, { class: 'gray modal-lg' }));
       } else if (!this.unlocked) {
-        this.bsModalRef = this.modalService.show(LockedModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
+        this.bsModalRef = this.modalService.show(LockedModalComponent,
+          Object.assign({}, this.config, { class: 'gray modal-lg modal-center' }));
+      } else if (!this.validNetwork) {
+        this.bsModalRef = this.modalService.show(ValidNetworkModalComponent,
+          Object.assign({}, this.config, { class: 'gray modal-lg modal-center' }));
       } else {
+        const meta = {
+          amount: this.gzrValue,
+        };
+        this.eventTrack('gzr-purchase-initiated', meta);
         this.metaMaskService.TransferEthToBuyGzr(this.ethValue, this.gzrValue)
         .then((res) => {
-          if (res['success']) {
+          if (res['success'] === true) {
             this.updateTransactionId(res['transaction']);
             setTimeout(() => {
+              this.localStorage.store(this.ethValueStr, this.ethValue);
+              this.localStorage.store(this.gzrValueStr, this.gzrValue);
               this.router.navigate(['/thank-you']);
             }, 1000);
           }
@@ -166,5 +211,14 @@ export class BuyGzrComponent implements OnInit {
     }
     this.slideValue = this.ethValue;
     this.gzrValue = this.ethValue * this.cashRate;
+  }
+
+  eventTrack(event, metadata) {
+    if (!(metadata)) {
+      (<any>window).Intercom('trackEvent', event);
+    } else {
+      (<any>window).Intercom('trackEvent', event, metadata);
+    }
+    return true;
   }
 }

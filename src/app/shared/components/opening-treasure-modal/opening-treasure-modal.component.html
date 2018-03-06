@@ -1,0 +1,28 @@
+<div class="treasure-modal">
+  <div class="treasure-modal__header">
+      <button type="button" class="treasure-modal__close" (click)="closeChest()" >&times;</button>
+      <img src="assets/images/gizer-logo.png" alt="logo">
+      <img src="assets/images/open-text.png" alt="open">
+  </div>
+  <div class="treasure-modal__content">
+      <div class="treasure-modal__chest" (click)="openChest()">
+          <div class="chest__body"></div>
+          <div class="chest__lid-closed"></div>
+          <div class="chest__lid-opened"></div>
+          <div class="chest__light"></div>
+          <button type="button" class="chest__card">
+              <div class="chest__card-body">
+                  <img [src]='item.resources.icons[0]' class="chest__card-img" alt="item">
+                  <div class="chest__card-text">
+                      {{ item.meta.name }}
+                  </div>
+                  <div class="chest__card-badge">
+                      <img src="assets/images/img-item-type-{{ item.meta.rarity.toLowerCase() }}.png" alt="badge">
+                  </div>
+              </div>
+          </button>
+          <div class="chest__card-rays"></div>
+          <div class="chest__card-particles"></div>
+      </div>
+  </div>
+</div>

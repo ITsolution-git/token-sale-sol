@@ -11,6 +11,8 @@ import { ModalModule } from 'ngx-bootstrap';
 import { Angulartics2Module } from 'angulartics2';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { Angulartics2GoogleTagManager } from 'angulartics2/gtm';
+import { SimpleNotificationsModule } from 'angular2-notifications-lite';
+import { IntercomModule } from 'ng-intercom';
 
 import { AuthGuard } from './shared';
 import { AppComponent } from './app.component';
@@ -22,10 +24,16 @@ import { HttpHelperService } from './core/http-helper.service';
 
 import { LockedModalComponent } from './shared/components/locked-modal/locked-modal.component';
 import { InstallMaskModalComponent } from './shared/components/install-mask-modal/install-mask-modal.component';
-import { ProfileModalComponent } from './shared/components/profile-modal/profile-modal.component';
+import { ValidNetworkModalComponent } from './shared/components/valid-network/valid-network.component';
 
 import { INITIAL_APPLICATION_STATE } from './store/application-state';
 import { userReducer } from './store/reducers/user.reducer';
+import { WaitingTreasureModalComponent } from './shared/components/waiting-treasure-modal/waiting-treasure-modal.component';
+import { ChestService } from './shared/services/ChestService/chest.service';
+import { OpeningTreasureModalComponent } from './shared/components/opening-treasure-modal/opening-treasure-modal.component';
+import { UserLocalstorageRepository } from './shared/services/UserService/user.localstorage.repository.service';
+import { LocalStoragePersistance } from './core/localstorage.persistance.service';
+
 
 export const reducers = {
   userState: userReducer
@@ -36,7 +44,9 @@ export const reducers = {
     AppComponent,
     LockedModalComponent,
     InstallMaskModalComponent,
-    ProfileModalComponent
+    ValidNetworkModalComponent,
+    WaitingTreasureModalComponent,
+    OpeningTreasureModalComponent
   ],
   imports: [
     BrowserModule,
@@ -46,22 +56,29 @@ export const reducers = {
     AppRoutingModule,
     Ng2Webstorage,
     LayoutModule,
+    SimpleNotificationsModule.forRoot(),
     ModalModule.forRoot(),
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({maxAge: 25}),
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics, Angulartics2GoogleTagManager]),
+    IntercomModule.forRoot()
   ],
   providers: [
     HttpHelperService,
     ApiRoutingService,
     AuthGuard,
     AuthService,
-    NgSpinningPreloader
+    NgSpinningPreloader,
+    LocalStoragePersistance,
+    UserLocalstorageRepository,
+    ChestService
   ],
   entryComponents: [
     LockedModalComponent,
     InstallMaskModalComponent,
-    ProfileModalComponent
+    ValidNetworkModalComponent,
+    WaitingTreasureModalComponent,
+    OpeningTreasureModalComponent
   ],
   bootstrap: [AppComponent],
 })

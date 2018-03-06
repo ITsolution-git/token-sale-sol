@@ -1,0 +1,300 @@
+.treasure-modal {
+    position: fixed;
+    z-index: 100;
+    top: 2.5%;
+    bottom: 2.5%;
+    right: 2.5%;
+    left: 2.5%;
+    box-sizing: border-box;
+    width: 95vw;
+    max-width: 950px;
+    height: 95vh;
+    padding: 0 10px 10px 10px;
+    border-radius: 10px;
+    max-height: 950px;
+    overflow: hidden;
+    background-color: #01acfe;
+    background-image: url('/assets/images/treasure-modal-bg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+.treasure-modal__header {
+    position: relative;
+    padding-top: 2vh;
+}
+.treasure-modal__header img {
+    display: block;
+    margin: 0 auto 2vh auto;
+}
+.treasure-modal__close {
+    position: absolute;
+    top: 1vh;
+    left: 1vh;
+    border: none;
+    font-size: 6vh;
+    line-height: 1;
+    color: #fff;
+    background: none;
+    cursor: pointer;
+}
+.treasure-modal__content {
+    height: 80vh;
+}
+.treasure-modal__chest {
+    position: relative;
+    width: 42.7vh;
+    max-width: 427px;
+    height: 80vh;
+    max-height: 800px;
+    margin: 0 auto;
+}
+.chest__body {
+    position: absolute;
+    z-index: 3;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 40%;
+    background-image: url('/assets/images/chest-body.png');
+    background-repeat: no-repeat;
+    background-position: 50% 100%;
+    background-size: 100% auto;
+    cursor: pointer;
+}
+.chest__lid-closed,
+.chest__lid-opened,
+.chest__light {
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    bottom: 28%;
+    left: 0;
+    height: 28%;
+    background-repeat: no-repeat;
+    background-position: 50% 100%;
+    background-size: 100% auto;
+    transition: opacity .2s;
+}
+.chest__lid-closed {
+    background-image: url('/assets/images/chest-lid-closed.png');
+}
+.chest__lid-opened {
+    background-image: url('/assets/images/chest-lid-opened.png');
+    opacity: 0;
+}
+.chest__light {
+    bottom: 4.3%;
+    margin-left: -1%;
+    height: 38.75%;
+    background-image: url('/assets/images/chest-light.png');
+    transition: opacity 2s;
+    opacity: 0;
+}
+
+.chest__card {
+    position: absolute;
+    z-index: 2;
+    bottom: 0;
+    left: 50%;
+    margin-left: -23.38%;
+    min-width: 170px;
+    width: 47.77%;
+    min-height: 236px;
+    height: 35.375%;
+    border: none;
+    background: none;
+    transition: margin-bottom 2s ease-out, opacity .1s .1s;
+    opacity: 0;
+    font-family: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+@media (max-height: 830px) {
+    .chest__card {
+        margin-left: -85px;
+    }
+}
+.chest__card-body {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    border-radius: 16px;
+    background-color: #1c1e33;
+    background-image: url('/assets/images/card-bg.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    transform: rotateY(0) scale(.7);
+    transition: transform 2s ease-in;
+}
+.chest__card-body:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #1c1e33;
+    transition: opacity .1s .2s;
+}
+.chest__card-img {
+    display: block;
+    margin: 7% auto;
+    max-height: 50%;
+}
+.chest__card-text {
+    display: block;
+    margin: 7% 0;
+    text-align: center;
+    color: #fff;
+}
+.chest__card-badge {
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    max-width: 80%;
+}
+.chest__card-rays {
+    position: absolute;
+    bottom: 77.5%;
+    left: 50%;
+    z-index: 1;
+    transform-style: preserve-3d;
+    transform: translateZ(-200px) perspective(120px);
+    animation-name: rotateRays;
+    animation-duration: 60s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+.chest__card-ray {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: 50% 0;
+    transform-style: preserve-3d;
+}
+.chest__card-ray:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -10px;
+    width: 20px;
+    height: 140px;
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,.5) 35%, rgba(255,255,255,0) 100%);
+    transform-origin: 50% 0;
+    transform: rotateX(40deg);
+}
+.chest__card-ray--1 { transform: rotateZ(36deg); }
+.chest__card-ray--2 { transform: rotateZ(72deg); }
+.chest__card-ray--3 { transform: rotateZ(108deg); }
+.chest__card-ray--4 { transform: rotateZ(144deg); }
+.chest__card-ray--5 { transform: rotateZ(180deg); }
+.chest__card-ray--6 { transform: rotateZ(216deg); }
+.chest__card-ray--7 { transform: rotateZ(252deg); }
+.chest__card-ray--8 { transform: rotateZ(288deg); }
+.chest__card-ray--9 { transform: rotateZ(324deg); }
+.chest__card-ray--10 { transform: rotateZ(360deg); }
+
+.chest__card-particles {
+    position: absolute;
+    bottom: 83.75%;
+    left: 50%;
+    z-index: 1;
+    transform-style: preserve-3d;
+    transform: translateZ(-200px) perspective(120px);
+}
+
+.chest__card-particle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    background-image: linear-gradient(to bottom, rgba(255,200,200,0) 0%, rgba(255,200,200,1) 50%, rgba(255,200,200,0) 100%);
+    transition: transform 1s ease-in, opacity .2s .8s;
+    transform-origin: 50% 50%;
+}
+
+
+.chest--opened .chest__body,
+.chest--opened .chest__lid-closed,
+.chest--opened .chest__lid-opened,
+.chest--opened .chest__light
+ {
+    animation-name: jumping-chest;
+    animation-duration: .2s;
+    animation-timing-function: ease-out;
+    animation-direction: alternate;
+    animation-iteration-count: 2;
+}
+.chest--opened .chest__lid-closed {
+    opacity: 0;
+}
+.chest--opened .chest__lid-opened,
+.chest--opened .chest__light {
+    opacity: 1;
+}
+.chest--opened .chest__light {
+    z-index: 4;
+}
+.chest--opened .chest__card {
+    bottom: 40.25%;
+    margin-bottom: 20.5%;
+    opacity: 1;
+}
+.chest--opened .chest__card-body {
+    transform: rotateY(calc(360deg * 5)) scale(1);
+}
+.chest--finished .chest__card-body:after {
+    display: none;
+}
+.chest--finished .chest__card-ray {
+    display: block;
+}
+
+.chest:not(.chest--opened):not(.chest--finished) .chest__body:hover,
+.chest:not(.chest--opened):not(.chest--finished) .chest__body:hover ~ .chest__lid-closed {
+    animation-name: shake;
+    animation-duration: .15s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes jumping-chest {
+    0% {
+        transform: translateY(0);
+    }
+    90% {
+        transform: translateY(-30px);
+    }
+    100% {
+        transform: translateY(-30px);
+    }
+}
+@keyframes rotateRays {
+    0% {
+        transform: translateZ(-200px) rotate(0) perspective(120px);
+    }
+    100% {
+        transform: translateZ(-200px) rotate(360deg) perspective(120px);
+    }
+}
+@keyframes shake {
+    0% {
+        transform: translate3d(0,0,0);
+    }
+    25% {
+        transform: translate3d(-5px,-5px,0);
+    }
+    50% {
+        transform: translate3d(0,0,0);
+    }
+    75% {
+        transform: translate3d(5px,-5px,0);
+    }
+    100% {
+        transform: translate3d(0,0,0);
+    }
+}

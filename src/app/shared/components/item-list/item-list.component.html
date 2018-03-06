@@ -4,13 +4,13 @@
       <p *ngIf="!isMobile">Just Released</p>
       <p *ngIf="isMobile" class="text-center">Other Items from This Treasure</p>
       <div *ngIf="isMobile && showNavigation" class="arrow-left arrow pl-2">
-        <span class="arrow-padding" (click)="loadPrevWeapons()">
-          <img src="/assets/icons/icon-smaller-than.png">
+        <span id="viewmore_itemsavailable" class="arrow-padding" (click)="loadPrevWeapons()">
+          <img src="/assets/icons/icon-smaller-than.png" alt="left">
         </span>
       </div>
       <div *ngIf="isMobile && showNavigation" class="arrow-right arrow pl-2">
-        <span class="arrow-padding" (click)="loadNextWeapons()">
-          <img src="/assets/icons/icon-greater-than.png">
+        <span id="viewmore_itemsavailable" class="arrow-padding" (click)="loadNextWeapons()">
+          <img src="/assets/icons/icon-greater-than.png" alt="right">
         </span>
       </div>
     </div>
@@ -18,20 +18,20 @@
       <app-item
         class="item-wrapper"
         *ngFor="let item of items"
-        [id]="item.id"
+        [itemId]="item.id"
         [itemImageLink]="item.resources.icons[0]"
         [itemName]="item.meta.name"
         [rarity]="item.meta.rarity"
         >
       </app-item>
       <div *ngIf="!isMobile && showNavigation" class="arrow-left arrow pl-2">
-        <span class="arrow-padding" (click)="loadPrevWeapons()">
-          <img src="/assets/icons/icon-smaller-than.png">
+        <span id="viewmore_itemsavailable" class="arrow-padding" (click)="loadPrevWeapons()">
+          <img src="/assets/icons/icon-smaller-than.png" alt="left">
         </span>
       </div>
       <div *ngIf="!isMobile && showNavigation" class="arrow-right arrow pl-2">
-        <span class="arrow-padding" (click)="loadNextWeapons()">
-          <img src="/assets/icons/icon-greater-than.png">
+        <span id="viewmore_itemsavailable" class="arrow-padding" (click)="loadNextWeapons()">
+          <img src="/assets/icons/icon-greater-than.png" alt="right">
         </span>
       </div>
     </div>

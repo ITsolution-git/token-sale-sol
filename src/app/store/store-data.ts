@@ -7,15 +7,19 @@ export interface UserState {
     gzrBalance: number;
     nickName: String;
     transactionId: String;
+    validNetwork: boolean;
+    signup: boolean;
 }
 
 export const INITIAL_USER_STATE: UserState = {
-    installed: null,
+    installed: true,
     unlocked: true,
     showAddressForm: false,
     walletAddress: '',
     balance: 0,
     gzrBalance: 0,
     nickName: '',
-    transactionId: ''
+    transactionId: '',
+    validNetwork: true,
+    signup: false
 };

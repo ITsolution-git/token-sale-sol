@@ -1,11 +1,12 @@
 .header-section {
     top: 0px;
     position: fixed;
-    z-index: 1;
+    z-index: 999;
     text-align: center;
     display: block;
     width: 100%;
     background-color: #1c1e33;
+
     .router-active {
         background: linear-gradient(to top, rgba(44, 221, 251, 0.5), transparent, transparent);
         border-bottom: solid 2px #2cddfb;

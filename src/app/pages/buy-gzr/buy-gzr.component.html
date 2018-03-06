@@ -9,21 +9,20 @@
           <div class="send-ether-block border border-secondary p-3 w-100">
             <div class="title-wrapper text-center pt-2 pb-4">
               <h4>Send Ether to the address below</h4>
-              <p class="warn">*Do not send ETH from an exchange</p>
             </div>
             <div *ngIf="isAccepted && showAddress" class="address-block">
               <div class="position-relative">
-                <input class="txt-value-input w-100 pl-3 mb-3" placeholder="0x90dw90fh382hfsjenf032ru9oafj3092fh" type="text" readonly>
-                <span class="copy-icon"><img class="pr-1" src="/assets/icons/icon-copy.png">Copy</span>
+                <input class="txt-value-input w-100 pl-3 mb-3" value="0x90dCdC0AD9813ba963D54ADcCFA9091f4dd2925B" type="text" readonly>
+                <span id="copy-wallet-address" class="copy-icon"><img class="pr-1" src="/assets/icons/icon-copy.png" alt="copy icon">Copy</span>
               </div>
-              <div class="separator">
+              <!-- <div class="separator">
                 <span class="line"></span>
                 <span class="text">or</span>
-              </div>
-              <div class="position-relative">
+              </div> -->
+              <!-- <div class="position-relative">
                 <input class="txt-value-input w-100 pl-3 mb-3" placeholder="gizergaming.eth" type="text" readonly>
-                <span class="copy-icon"><img class="pr-1" src="/assets/icons/icon-copy.png">Copy</span>
-              </div>
+                <span class="copy-icon"><img class="pr-1" src="/assets/icons/icon-copy.png" alt="copy icon">Copy</span>
+              </div> -->
             </div>
             <div *ngIf="!showAddress" class="buy-gzr-wrapper border border-secondary p-3 w-100">
               <div class="check-terms pb-4">
@@ -31,7 +30,7 @@
                   <input [(ngModel)]="isAccepted" class="terms-checkbox" id="terms-checkbox" type="checkbox">
                   <label for="terms-checkbox"></label>
                 </span>
-                <span class="text-label">I have read the Gzr <a href="#" class="link">Whitepaper</a> and I accept the <a href="#" class="ml-4 link terms" >Terms & Conditions</a></span>
+                <span class="text-label">I have read and accept the <a routerLink="/terms-and-conditions" class="link terms" >Terms & Conditions</a></span>
               </div>
               <div class="buy-now mb-3" (click)="showAddressForm()">
                 <span class="btn-buy-now">Show Me the Contract Address</span>
@@ -51,9 +50,10 @@
                   (keyup.enter)="updateSliderValue(ethValue)"
                   (blur)="updateSliderValue(ethValue)"
                 >
-                <span class="icons"><img src="/assets/icons/icon-etherum-buy.png"></span>
+                <span class="icons"><img src="/assets/icons/icon-etherum-buy.png" alt="ethereum icon"></span>
               </div>
-              <ion-range-slider #sliderElement
+              <ion-range-slider #ethSlider
+                id="eth-slider"
                 type="single"
                 min="0"
                 max="500"
@@ -73,7 +73,7 @@
               <div class="w-100">
                 <p class="text-label mt-3">I will receive (GZR)</p>
                 <input [(ngModel)]="gzrValue" class="txt-value-input pl-3 mb-3" type="text" readonly>
-                <span class="icons-1"><img src="/assets/icons/icon-gizer-small-buy.png"></span>
+                <span class="icons-1"><img src="/assets/icons/icon-gizer-small-buy.png" alt="gizer coin icon"></span>
               </div>
               
               <div *ngIf="!isFromModal && !this.isMobile" class="check-terms pb-5">
@@ -81,7 +81,7 @@
                   <input [(ngModel)]="isAccepted" class="terms-checkbox" id="terms-checkbox" type="checkbox">
                   <label for="terms-checkbox"></label>
                 </span>
-                <span class="text-label">I have read the Gzr <a href="#" class="link">Whitepaper</a> and I accept the <a href="#" class="ml-4 link terms" >Terms & Conditions</a></span>
+                <span class="text-label">I have read and accept the <a routerLink="/terms-and-conditions" class="link terms" target="_blank">Terms & Conditions</a></span>
 
                 <p *ngIf="!isAccepted && isBuyClicked" class="text-label text-danger">You need to accept terms & conditions first</p>
               </div>
@@ -99,13 +99,13 @@
                     <p class="strong-text">The price of GZR is 1000 GZR per 1 ETH.</p>
                 </li>
                 <li>
-                    <p class="description-text">Only ETH payment are accepted</p>
+                    <p class="description-text">Only ETH payments are accepted</p>
                 </li>
                 <li>
-                    <p class="description-text">Enter the amount of ETH you want to spend, accept the Terms & Conditions and then click Buy Now. A MetaMask transaction will be generated for you automatically. Click Accept in order to confirm your purchase of GZR and send ETH to our smart contract.</p>
+                    <p class="description-text">Enter the amount of ETH you want to spend, accept the Terms & Conditions and then click Buy Now. A MetaMask transaction will be generated for you automatically. Click Accept in order to confirm your purchase of GZR.</p>
                 </li>
                 <li>
-                    <p class="description-text">You will receive GZR within 6 confirmation on your ETH Transaction.</p>
+                    <p class="description-text">You will receive GZR within 6 confirmations on your ETH Transaction.</p>
                 </li>
                 <li>
                     <p class="description-text">Minimum purchase is 10 GZR (0.01 ETH)</p>

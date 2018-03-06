@@ -7,11 +7,28 @@
             </div>
             <div class="row justify-content-center pb-3">
                 <div class="description-block border border-secondary p-3 w-100">
-                  <div class="img-wrapper text-center mt-4 mb-4">
+                  <div *ngIf="!showSpinner" class="img-wrapper text-center mt-4 mb-4">
                     <img src="/assets/images/img-thankyou-check.png">
                   </div>
+
+                  <div *ngIf="showSpinner" class="img-wrapper text-center mt-4 mb-4">
+                    <div class="breeding-rhombus-spinner">
+                      <div class="rhombus child-1"></div>
+                      <div class="rhombus child-2"></div>
+                      <div class="rhombus child-3"></div>
+                      <div class="rhombus child-4"></div>
+                      <div class="rhombus child-5"></div>
+                      <div class="rhombus child-6"></div>
+                      <div class="rhombus child-7"></div>
+                      <div class="rhombus child-8"></div>
+                      <div class="rhombus big"></div>
+                    </div>
+                  </div>
                   <div class="content text-center">
-                    <p class="description">Your transaction has been broadcasted to the blockchain and is waiting to be mined. Once your transaction has been confirmed, you will automatically receive GZR to your wallet.</p>
+                    <p *ngIf="!showSpinner" class="description">
+                      Your transaction has been mined and is now confirmed. You will automatically receive your GZR momentarily. It's time for you to go open some treasure!
+                    </p>
+                    <p *ngIf="showSpinner" class="description">Your transaction has been broadcasted to the blockchain and is waiting to be mined. Once your transaction has been confirmed, you will automatically receive GZR to your wallet.</p>
                     <p class="description">Transaction {{transactionId}}</p>
                     <p class="description mt-1">You can view your transaction on etherscan by <br> <a href="https://ropsten.etherscan.io/tx/{{transactionId}}" target="_blank" class="link">clicking here</a></p>
                   </div>

@@ -8,11 +8,16 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ProfileModalComponent } from '../profile-modal/profile-modal.component';
 
 import { AuthService } from '../../../core/services/auth.service';
+import { UserService } from '../../services/UserService/user.service';
 import { MetaMaskService } from '../../services/MetaMaskService/meta-mask.service';
 import { ApplicationState } from '../../../store/application-state';
 import { UserState } from '../../../store/store-data';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
+import { stat } from 'fs';
+import { User } from '../../models/user.model';
+import { environment } from '../../../../environments/environment.prod';
+import { UPDATE_NICK_NAME } from '../../../store/actions/user.actions';
 
 declare const $: any;
 
@@ -35,10 +40,12 @@ export class HeaderComponent implements OnInit {
   unlocked = false;
   balance: number;
   nickName: String;
-  displayNick: string;
+  nickDisplay: string;
   installed = false;
   gzrBalance: number;
   toggled = false;
+  users: User[] = [];
+  saveUserIDStr = 'user_id';
 
   config = {
     animated: true,
@@ -56,6 +63,7 @@ export class HeaderComponent implements OnInit {
     private store: Store<ApplicationState>,
     private metaMaskService: MetaMaskService,
     private modalService: BsModalService,
+    private userService: UserService
   ) {
     this.initTwitterWidget();
     this.initFacebookWidget();
@@ -74,11 +82,36 @@ export class HeaderComponent implements OnInit {
 
     this.userState.subscribe(state => {
       if (state) {
+        if (state.walletAddress && state.walletAddress !== this.walletAddress ) {
+          this.initIntercom();
+          this.userService.retrieveUser(state.walletAddress).subscribe((resp: User[]) => {
+            if (resp.length) {
+              const user_ = resp[0];
+              this.nickName = user_.nick;
+              if (user_.nick != null) { this.nickDisplay = user_.nick.slice(0, 10); }
+              this.localStorage.store(this.saveUserIDStr, user_.id);
+              this.authService.login(this.walletAddress);
+              this.isAuthenticated = true;
+              setTimeout(() => {
+                this.metaMaskService.getAccountInfo();
+                this.UpdateNickName(user_.nick);
+              }, 500);
+            } else {
+              this.isAuthenticated = false;
+              this.localStorage.clear(this.saveUserIDStr);
+            }
+          });
+        }
+
+        if (state.signup === true) {
+          this.isAuthenticated = true;
+        }
+
         this.walletAddress = state.walletAddress;
         this.unlocked = state.unlocked;
         this.balance = state.balance;
         this.nickName = state.nickName;
-        this.displayNick = state.nickName.slice(0, 10);
+        if (state.nickName != null) { this.nickDisplay = state.nickName.slice(0, 10); }
         this.installed = state.installed;
         this.gzrBalance = state.gzrBalance;
       }
@@ -88,14 +121,10 @@ export class HeaderComponent implements OnInit {
 
   init() {
     this.isMobile = this.isMobileMenu();
-    const token = this.localStorage.retrieve('token');
-    if (token) {
-      this.isAuthenticated = true;
-    } else {
-      this.authService.isLoggedIn$.subscribe(flag => {
-        this.isAuthenticated = flag;
-      });
-    }
+  }
+
+  UpdateNickName(data) {
+    this.store.dispatch({type: UPDATE_NICK_NAME, payload: data});
   }
 
   isMobileMenu() {
@@ -144,6 +173,7 @@ export class HeaderComponent implements OnInit {
   }
 
   navigateToTokenSection() {
+    this.eventTrack('viewed-what-is-gzr-page', null);
     this.router.navigate([''], {fragment: 'whatsgizer'});
   }
 
@@ -191,5 +221,20 @@ export class HeaderComponent implements OnInit {
       js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11';
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
+  }
+
+  eventTrack(event, metadata) {
+    if (!(metadata)) {
+      (<any>window).Intercom('trackEvent', event);
+    } else {
+      (<any>window).Intercom('trackEvent', event, metadata);
+    }
+    return true;
+  }
+
+  initIntercom() {
+    (<any>window).Intercom('boot', {
+      app_id: environment.INTERCOM_APP_ID,
+    });
   }
 }

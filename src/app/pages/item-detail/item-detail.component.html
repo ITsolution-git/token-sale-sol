@@ -25,10 +25,9 @@
           </div>
         <div class="description p-md-4 pl-md-5">
           <div class="type-gallery pb-3 pl-2 pl-md-0">
-            <img *ngFor="let image of typeImages" class="pr-2 pr-md-3" src="{{image}}">
+            <img *ngFor="let image of typeImages" class="pr-2 pr-md-3" src="{{image}}" alt="item type image">
           </div>
           <p>{{detailItem.meta.description}}</p>
-          <p>{{detailItem.meta.origin}}</p>
         </div>
       </div>
     </div>
@@ -42,13 +41,13 @@
       </div>
       <div class="col-md-6">
         <div class="treasure-image d-flex h-100 p-3 align-items-center justify-content-center">
-          <img class="shake-little treasure align-top mr-2 mr-md-4" src="/assets/images/img-item-treasure-box.png">
+          <img class="shake-slow treasure align-top mr-2 mr-md-4" src="/assets/images/img-item-treasure-box.png" alt="treasure box image">
           <div class="open-treasure-button-deco d-inline-block align-bottom pt-4 pb-2 px-4 pt-md-5 pb-md-4 px-md-4">
             <div class="open-treasure-button-img mb-2">
-              <img src="/assets/images/btn-open-treasure-small.png" (click)="navigateToTreasure()">
+              <img src="/assets/images/btn-open-treasure-small.png" (click)="navigateToTreasure()" alt="button open treasure">
             </div>
             <div class="gizer-price text-center">
-              <img src="/assets/icons/icon-gizer-tiny.png">
+              <img src="/assets/icons/icon-gizer-tiny.png" alt="gizer small icon image">
               <span class="gizer-price align-middle pl-1">1</span>
             </div>
           </div>
@@ -71,9 +70,14 @@
             >
           </app-item>
         </div>
-        <div *ngIf="!isMobile" class="arrow pl-2">
+        <div *ngIf="!isMobile" class="arrow-right arrow pl-2">
           <span class="arrow-padding" (click)="loadNextWeapons()" >
-            <img src="/assets/icons/icon-greater-than.png">
+            <img src="/assets/icons/icon-greater-than.png" alt="next item">
+          </span>
+        </div>
+        <div *ngIf="!isMobile" class="arrow-left arrow pl-2">
+          <span id="viewmore_itemsavailable" class="arrow-padding" (click)="loadPrevWeapons()">
+            <img src="/assets/icons/icon-smaller-than.png" alt="previous item">
           </span>
         </div>
       </div>

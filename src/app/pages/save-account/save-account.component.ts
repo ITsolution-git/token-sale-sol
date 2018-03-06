@@ -9,7 +9,7 @@ import { Store } from '@ngrx/store';
 import { ApplicationState } from '../../store/application-state';
 import { Observable } from 'rxjs/Observable';
 import { UserState } from '../../store/store-data';
-import { UPDATE_NICK_NAME } from '../../store/actions/user.actions';
+import { UPDATE_NICK_NAME, UPDATE_SIGNUP } from '../../store/actions/user.actions';
 
 @Component({
   selector: 'app-save-account',
@@ -29,6 +29,10 @@ export class SaveAccountComponent implements OnInit {
   nickName: String = '';
   isSaving = false;
   loaded = false;
+  saveNikNameStr = 'nickName';
+  saveWalletStr = 'walletAddress';
+  saveUserIDStr = 'user_id';
+  strRootURL = '/';
 
   constructor(
     private fb: FormBuilder,
@@ -52,6 +56,12 @@ export class SaveAccountComponent implements OnInit {
         if (!state.unlocked) {
           this.navigateToMetaMask();
         }
+        setTimeout(() => {
+          const userId = this.localStorage.retrieve(this.saveUserIDStr);
+          if (userId) {
+            this.navigateToHome();
+          }
+        }, 500);
         if (this.walletAddress !== state.walletAddress) {
           this.walletAddress = state.walletAddress;
           this.accountInfo.setValue({
@@ -88,7 +98,6 @@ export class SaveAccountComponent implements OnInit {
     this.isValidEmail = true;
     this.isSaving = true;
     setTimeout(() => {
-      this.UpdateNickName(this.nickName);
       this.metaMaskService.SignInTransaction()
       .then(result => {
         const data = {
@@ -100,18 +109,77 @@ export class SaveAccountComponent implements OnInit {
               'id': result['account']
           }
         };
-        this.authService.login();
         setTimeout(() => {
           this.metaMaskService.getAccountInfo();
-          this.UpdateNickName(this.nickName);
+          this.localStorage.store(this.saveNikNameStr, this.nickName);
+          this.localStorage.store(this.saveWalletStr, this.walletAddress);
         }, 500);
-
         this.userService.registerUser(data)
-        .subscribe(
-          // tslint:disable-next-line:no-shadowed-variable
-          result => console.log(result),
-          error =>  console.log(error)
-        );
+        .subscribe(() => {
+          this.userService.retrieveUser(this.walletAddress).subscribe(user => {
+            const currentUser = user[0];
+            if (user.length > 0) {
+              const {nick, email, id} = currentUser;
+              const metadata = {
+                created_date: Math.ceil((new Date(currentUser.created_at)).getTime() / 1000),
+              };
+
+              let purchased_gzr = false,
+                  total_gzr_purchased = 0,
+                  total_ether_spent = 0,
+                  opened_treasure = false,
+                  last_purchased_at = '',
+                  last_opened_treasure_at = '';
+
+              if (currentUser.transactions.length > 0) {
+                purchased_gzr = true;
+
+                currentUser.transactions.map(tx => {
+                  total_gzr_purchased += tx.gzr;
+                  total_ether_spent += tx.eth;
+                });
+                const lastTx = currentUser.transactions.slice(-1).pop();
+                last_purchased_at = Math.ceil((new Date(lastTx['confirmed_at'])).getTime() / 1000).toString();
+              }
+
+              if (currentUser.owns.length > 0) {
+                opened_treasure = true;
+                last_opened_treasure_at = '';
+              }
+
+              const customData = {
+                registered_metamask: true,
+                registered_metamask_at: Math.ceil((new Date(currentUser.created_at)).getTime() / 1000),
+                gzr_balance: currentUser.gzr.amount || 0,
+                items_owned: currentUser.owns.length,
+                nickname: nick,
+                'wallet-id': id,
+                opened_treasure: opened_treasure,
+                last_opened_treasure_at: last_opened_treasure_at,
+                purchased_gzr: purchased_gzr,
+                total_gzr_purchased: total_gzr_purchased,
+                total_ether_spent: total_ether_spent,
+                last_purchased_at: last_purchased_at
+              };
+              this.localStorage.store(this.saveUserIDStr, id);
+              this.authService.login(this.walletAddress);
+              this.UpdateNickNameAndSignup(nick);
+              this.updateUser(nick, email, id, customData);
+              this.eventTrack('registered-metamask', metadata);
+              this.router.navigate([this.strRootURL]);
+            }
+          });
+        }, error => {
+          const customData = {
+            registered_metamask: false,
+            gzr_balance: 0,
+            items_owned: 0,
+            nickname: '',
+            'wallet-id': this.walletAddress
+          };
+
+          this.updateUser(this.nickName, this.email, this.walletAddress , customData);
+        });
       })
       .catch(error => {
         this.isEmailed = false;
@@ -119,11 +187,36 @@ export class SaveAccountComponent implements OnInit {
     }, 3000);
   }
 
-  UpdateNickName(data) {
+  UpdateNickNameAndSignup(data) {
     this.store.dispatch({type: UPDATE_NICK_NAME, payload: data});
+    this.store.dispatch({type: UPDATE_SIGNUP, payload: true});
   }
 
   navigateToMetaMask() {
     this.router.navigate(['/meta-mask']);
+  }
+
+  navigateToHome() {
+    this.router.navigate(['/']);
+  }
+
+  updateUser(name, email, userId, customData) {
+    (<any>window).Intercom('update', {
+        name: name,
+        email: email,
+        user_id: userId,
+        created_at: Math.ceil((new Date()).getTime() / 1000),
+        custom_data: customData
+    });
+    return true;
+  }
+
+  eventTrack(event, metadata) {
+    if (!(metadata)) {
+      (<any>window).Intercom('trackEvent', event);
+    } else {
+      (<any>window).Intercom('trackEvent', event, metadata);
+    }
+    return true;
   }
 }
