@@ -8,9 +8,11 @@ import { ApplicationState } from '../../store/application-state';
 import { UserState } from '../../store/store-data';
 import { MetaMaskService } from '../../shared/services/MetaMaskService/meta-mask.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { UserService } from '../../shared/services/UserService/user.service';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { AuthService } from '../../core/services/auth.service';
 import { LockedModalComponent } from '../../shared/components/locked-modal/locked-modal.component';
+import { User } from '../../shared/models/user.model';
 import { LocalStorageService } from 'ngx-webstorage';
 
 const unityProgress = UnityProgress;
@@ -34,6 +36,10 @@ export class MyItemsComponent implements OnInit {
   unlocked = true;
   installed = false;
   saveUserIDStr = 'user_id';
+  user: Object = {
+    owns: []
+  };
+  walletAddress: String;
 
   config = {
     animated: true,
@@ -49,6 +55,7 @@ export class MyItemsComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private localStorage: LocalStorageService,
+    private userService: UserService,
     private modalService: BsModalService,
     private store: Store<ApplicationState>
   ) {
@@ -62,6 +69,18 @@ export class MyItemsComponent implements OnInit {
         if (this.authService.checkLogin()) {
           this.unlocked = state.unlocked;
           this.showModals();
+        }
+      }
+
+      if (state) {
+        if (state.walletAddress && state.walletAddress !== this.walletAddress) {
+          const tAddress = "0x8f5a130e1ddd05a9911471ec02d41f47e99e1686";
+          // tAddress = state.walletAddress;
+          this.userService.retrieveUser(tAddress).subscribe((resp: User[]) => {
+            if (resp.length) {
+              this.user = resp[0];
+            }
+          });
         }
       }
     });
