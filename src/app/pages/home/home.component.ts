@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       }
     });
 
-    this.itemService.getItems(10, 1).subscribe((res: Item[]) => {      
+    this.itemService.getItems().subscribe((res: Item[]) => {      
       this.itemService.getItems_by_IDs(res[0].current.similar).subscribe((resp: Item[]) => {        
         this.items = resp;
       });

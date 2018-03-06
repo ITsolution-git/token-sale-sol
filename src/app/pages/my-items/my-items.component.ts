@@ -14,6 +14,7 @@ import { AuthService } from '../../core/services/auth.service';
 import { LockedModalComponent } from '../../shared/components/locked-modal/locked-modal.component';
 import { User } from '../../shared/models/user.model';
 import { LocalStorageService } from 'ngx-webstorage';
+import { Item } from '../../shared/models/item.model';
 
 const unityProgress = UnityProgress;
 const unityLoader = UnityLoader;
@@ -35,10 +36,8 @@ export class MyItemsComponent implements OnInit {
   bsModalRef: BsModalRef;
   unlocked = true;
   installed = false;
+  items: Item[] = [];
   saveUserIDStr = 'user_id';
-  user: Object = {
-    owns: []
-  };
   walletAddress: String;
 
   config = {
@@ -78,7 +77,15 @@ export class MyItemsComponent implements OnInit {
           // tAddress = state.walletAddress;
           this.userService.retrieveUser(tAddress).subscribe((resp: User[]) => {
             if (resp.length) {
-              this.user = resp[0];
+              let mineIds = [],
+                  owns = resp[0].owns;
+              
+              for (let i = 0; i < owns.length; i++) {
+                mineIds.push(owns[i].substr(5));
+              }
+              this.itemService.getItems_by_IDs(mineIds).subscribe((resp: Item[]) => {        
+                this.items = resp;
+              });
             }
           });
         }

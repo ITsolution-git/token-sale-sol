@@ -6,7 +6,11 @@
     <hr class="separator"/>
     <div class="inventory-item-list pt-md-4">
       <h4 class="gallery-title pb-md-3">You Can Unlock</h4>
-      <app-item-list [showTitle]="false" [itemCountToShow]="4"></app-item-list>
+      <app-item-list 
+        [showTitle]="false" 
+        [itemCountToShow]="4"
+        [items]="items">
+      </app-item-list>
     </div>
   </div>
 </div>

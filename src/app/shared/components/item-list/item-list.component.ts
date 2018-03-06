@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, HostListener } from '@angular/core';
-import { ItemService } from '../../services/ItemService/item.service';
 import { Item } from '../../models/item.model';
 
 declare const $: any;
@@ -14,7 +13,6 @@ export class ItemListComponent implements OnInit {
   @Input() showTitle = true;
   @Input() showNavigation = true;
   @Input() itemCountToShow = 10;
-  @Input() showMine = false;
   isMobile = false;
   _items: Item[];
   counter = 0;
@@ -23,7 +21,6 @@ export class ItemListComponent implements OnInit {
   totalPage = 10;
 
   constructor(
-    private itemService: ItemService,
   ) {
   }
 
@@ -31,7 +28,7 @@ export class ItemListComponent implements OnInit {
     // transform value for display
     return this._items.slice((this.page - 1) * this.limit, this.page * this.limit);
   }
-
+  
   @Input()
   set items(items: Item[]) {
     this._items = items;
