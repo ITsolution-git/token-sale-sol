@@ -27,6 +27,7 @@ export class SaveAccountComponent implements OnInit {
   // tslint:disable-next-line:max-line-length
   emailValidationExpression: any = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   nickName: String = '';
+  isNotSaving = false;
   isSaving = false;
   loaded = false;
   saveNikNameStr = 'nickName';
@@ -128,8 +129,8 @@ export class SaveAccountComponent implements OnInit {
                   total_gzr_purchased = 0,
                   total_ether_spent = 0,
                   opened_treasure = false,
-                  last_purchased_at = '',
-                  last_opened_treasure_at = '';
+                  last_purchased_at = 0,
+                  last_opened_treasure_at = 0;
 
               if (currentUser.transactions.length > 0) {
                 purchased_gzr = true;
@@ -139,15 +140,15 @@ export class SaveAccountComponent implements OnInit {
                   total_ether_spent += tx.eth;
                 });
                 const lastTx = currentUser.transactions.slice(-1).pop();
-                last_purchased_at = Math.ceil((new Date(lastTx['confirmed_at'])).getTime() / 1000).toString();
+                last_purchased_at = Math.ceil((new Date(lastTx['confirmed_at'])).getTime() / 1000);
               }
 
               if (currentUser.owns.length > 0) {
                 opened_treasure = true;
-                last_opened_treasure_at = '';
+                last_opened_treasure_at = 0;
               }
 
-              const customData = {
+              const customData =  {
                 registered_metamask: true,
                 registered_metamask_at: Math.ceil((new Date(currentUser.created_at)).getTime() / 1000),
                 gzr_balance: currentUser.gzr.amount || 0,
@@ -155,12 +156,15 @@ export class SaveAccountComponent implements OnInit {
                 nickname: nick,
                 'wallet-id': id,
                 opened_treasure: opened_treasure,
-                last_opened_treasure_at: last_opened_treasure_at,
                 purchased_gzr: purchased_gzr,
                 total_gzr_purchased: total_gzr_purchased,
                 total_ether_spent: total_ether_spent,
                 last_purchased_at: last_purchased_at
               };
+
+              if (last_purchased_at !== 0) {
+                customData['last_purchased_at'] = last_purchased_at;
+              }
               this.localStorage.store(this.saveUserIDStr, id);
               this.authService.login(this.walletAddress);
               this.UpdateNickNameAndSignup(nick);
@@ -183,6 +187,7 @@ export class SaveAccountComponent implements OnInit {
       })
       .catch(error => {
         this.isEmailed = false;
+        this.isNotSaving = true;
       });
     }, 3000);
   }
