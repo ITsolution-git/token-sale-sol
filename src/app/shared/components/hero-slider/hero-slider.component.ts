@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProfileModalComponent } from '../profile-modal/profile-modal.component';
-
 
 declare const $: any;
 
