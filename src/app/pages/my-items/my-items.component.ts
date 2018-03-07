@@ -3,6 +3,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ItemService } from '../../shared/services/ItemService/item.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Meta, Title } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 import { ApplicationState } from '../../store/application-state';
 import { UserState } from '../../store/store-data';
@@ -50,8 +51,12 @@ export class MyItemsComponent implements OnInit {
     private router: Router,
     private localStorage: LocalStorageService,
     private modalService: BsModalService,
-    private store: Store<ApplicationState>
+    private store: Store<ApplicationState>,
+    meta: Meta,
+    title: Title
   ) {
+    title.setTitle('My Items | Gizer Token Sale');
+
     this.userState = this.store.select('userState');
     this.metaMaskService.getAccountInfo();
     this.userState.subscribe(state => {

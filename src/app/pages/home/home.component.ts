@@ -1,5 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Meta, Title } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-home',
@@ -8,7 +10,25 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class HomeComponent implements OnInit, AfterViewInit {
   private fragment: string;
-  constructor(private route: ActivatedRoute) {
+  constructor(
+    private route: ActivatedRoute,
+    meta: Meta,
+    title: Title
+    ) {
+    title.setTitle('Homepage | Gizer Token Sale');
+
+    meta.addTags([
+      {
+        name: 'description',
+        content: `Immortalize your identity on the Ethereum blockchain. \
+        Use GZR tokens to unlock scarce digital collectibles for your profile. \
+        Compete in thousands and tournaments and create your eSports legacy.`
+      },
+      {
+        property: 'og:image',
+        content: 'http://api-dev.gizer.me/images/resource/5a9df8aa80e5f_og-image.png'
+      }
+    ]);
   }
 
   ngOnInit() {

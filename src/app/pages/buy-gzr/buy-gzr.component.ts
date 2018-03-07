@@ -6,6 +6,7 @@ import { InstallMaskModalComponent } from '../../shared/components/install-mask-
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { LocalStorageService } from 'ngx-webstorage';
+import { Meta, Title } from '@angular/platform-browser';
 
 import { ApplicationState } from '../../store/application-state';
 import { UserState } from '../../store/store-data';
@@ -64,8 +65,13 @@ export class BuyGzrComponent implements OnInit {
     private router: Router,
     private metaMaskService: MetaMaskService,
     private localStorage: LocalStorageService,
-    private store: Store<ApplicationState>
+    private store: Store<ApplicationState>,
+    meta: Meta,
+    title: Title
   ) {
+
+    title.setTitle('Buy GZR | Gizer Token Sale');
+
     this.userState = this.store.select('userState');
     this.metaMaskService.getAccountInfo();
     this.userState.subscribe(state => {

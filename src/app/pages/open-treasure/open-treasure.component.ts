@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChestService } from '../../shared/services/ChestService/chest.service';
 import { Chest } from '../../shared/models/chest.model';
 import { Router } from '@angular/router';
+import { Meta, Title } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { ApplicationState } from '../../store/application-state';
@@ -40,8 +41,12 @@ export class OpenTreasureComponent implements OnInit {
     private router: Router,
     private localStorage: LocalStorageService,
     private modalService: BsModalService,
-    private store: Store<ApplicationState>
+    private store: Store<ApplicationState>,
+    public meta: Meta,
+    public title: Title
   ) {
+    title.setTitle('Open The Founders Treasure | Gizer Token Sale');
+
     this.userState = this.store.select('userState');
     this.metaMaskService.getAccountInfo();
     this.userState.subscribe(state => {

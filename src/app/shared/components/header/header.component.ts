@@ -5,7 +5,6 @@ import { LocalStorageService } from 'ngx-webstorage';
 
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { ProfileModalComponent } from '../profile-modal/profile-modal.component';
 
 import { AuthService } from '../../../core/services/auth.service';
 import { UserService } from '../../services/UserService/user.service';
@@ -175,10 +174,6 @@ export class HeaderComponent implements OnInit {
   navigateToTokenSection() {
     this.eventTrack('viewed-what-is-gzr-page', null);
     this.router.navigate([''], {fragment: 'whatsgizer'});
-  }
-
-  showProfileModal() {
-    this.bsModalRef = this.modalService.show(ProfileModalComponent, Object.assign({}, this.config, { class: 'gray modal-md' }));
   }
 
   public get menuIcon(): string {
