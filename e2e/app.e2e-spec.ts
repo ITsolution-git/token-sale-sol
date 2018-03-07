@@ -12,7 +12,7 @@ describe('Running end to end  HomePage Test Suite', () => {
 
     it('should have right title', () => {
       homePage.getPageTitle().then((title: string) => {
-        expect(title).toEqual('Gizer Tokensale');
+        expect(title).toEqual('Homepage | Gizer Token Sale');
       });
     });
 
