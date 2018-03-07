@@ -4,7 +4,8 @@ import { FaqComponent } from './faq.component';
 
 const routes: Routes = [
   {
-    path: '', component: FaqComponent
+    path: '',
+    component: FaqComponent
   }
 ];
 

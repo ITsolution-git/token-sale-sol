@@ -3,7 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { BuyGzrComponent } from './buy-gzr.component';
 
 const routes: Routes = [
-    { path: '', component: BuyGzrComponent }
+    {
+        path: '',
+        component: BuyGzrComponent
+    }
 ];
 
 @NgModule({

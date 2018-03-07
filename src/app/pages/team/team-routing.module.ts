@@ -4,7 +4,8 @@ import { TeamComponent } from './team.component';
 
 const routes: Routes = [
   {
-    path: '', component: TeamComponent
+    path: '',
+    component: TeamComponent
   }
 ];
 

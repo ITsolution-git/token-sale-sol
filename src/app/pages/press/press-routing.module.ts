@@ -4,7 +4,8 @@ import { PressComponent } from './press.component';
 
 const routes: Routes = [
   {
-    path: '', component: PressComponent
+    path: '',
+    component: PressComponent
   }
 ];
 

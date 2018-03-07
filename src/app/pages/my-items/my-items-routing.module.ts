@@ -4,7 +4,8 @@ import { MyItemsComponent } from './my-items.component';
 
 const routes: Routes = [
   {
-    path: '', component: MyItemsComponent
+    path: '',
+    component: MyItemsComponent
   }
 ];
 

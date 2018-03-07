@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-partners',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PartnersComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    meta: Meta,
+    title: Title
+  ) {
+    title.setTitle('Partnerships | Gizer Token Sale');
+  }
+
 
   ngOnInit() {
   }

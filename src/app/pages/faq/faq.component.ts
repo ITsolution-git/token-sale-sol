@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-faq',
@@ -25,7 +26,12 @@ export class FaqComponent implements OnInit {
     gzrtoken: false
   };
 
-  constructor() {}
+  constructor(
+    meta: Meta,
+    title: Title
+  ) {
+    title.setTitle('FAQ | Gizer Token Sale');
+  }
 
   ngOnInit() {
     this.eventTrack('viewed-faq-page', null);

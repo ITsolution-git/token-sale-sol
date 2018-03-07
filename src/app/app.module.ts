@@ -34,7 +34,6 @@ import { OpeningTreasureModalComponent } from './shared/components/opening-treas
 import { UserLocalstorageRepository } from './shared/services/UserService/user.localstorage.repository.service';
 import { LocalStoragePersistance } from './core/localstorage.persistance.service';
 
-
 export const reducers = {
   userState: userReducer
 };
@@ -61,7 +60,7 @@ export const reducers = {
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({maxAge: 25}),
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics, Angulartics2GoogleTagManager]),
-    IntercomModule.forRoot()
+    IntercomModule.forRoot(),
   ],
   providers: [
     HttpHelperService,

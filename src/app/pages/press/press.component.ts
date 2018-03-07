@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Meta, Title } from '@angular/platform-browser';
 
 declare const $: any;
 
@@ -12,8 +13,13 @@ export class PressComponent implements OnInit {
 
   isMobile = false;
   form: FormGroup;
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    meta: Meta,
+    title: Title
+  ) {
     this.createForm();
+    title.setTitle('In the Press | Gizer Token Sale');
   }
 
   ngOnInit() {
