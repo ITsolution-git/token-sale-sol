@@ -1,6 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { NgSpinningPreloader } from 'ng2-spinning-preloader';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { Angulartics2GoogleTagManager } from 'angulartics2/gtm';
 import { Meta, Title } from '@angular/platform-browser';
@@ -15,11 +14,10 @@ interface AppState {
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent implements AfterViewInit {
+export class AppComponent {
 
   constructor(
     private store: Store<AppState>,
-    private ngSpinningPreloader: NgSpinningPreloader,
     angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
     angulartics2GoogleTagManager: Angulartics2GoogleTagManager,
     meta: Meta,
@@ -38,9 +36,5 @@ export class AppComponent implements AfterViewInit {
         content: 'http://api-dev.gizer.me/images/resource/5a9df8aa80e5f_og-image.png'
       }
     ]);
-  }
-
-  ngAfterViewInit() {
-    this.ngSpinningPreloader.stop();
   }
 }
