@@ -12,12 +12,12 @@ describe('Running end to end  HomePage Test Suite', () => {
 
     it('should have right title', () => {
       homePage.getPageTitle().then((title: string) => {
-        expect(title).toEqual('Gizer Tokensale');
+        expect(title).toMatch('Homepage | Gizer Token Sale');
       });
     });
 
     it('contains paragraph', () => {
-      expect(homePage.getJustReleasedParagraph()).toBe('Just Released');
+      expect(homePage.getJustReleasedParagraph()).toMatch('Just Released');
     });
 
     it('display: Open Treasure', () => {
