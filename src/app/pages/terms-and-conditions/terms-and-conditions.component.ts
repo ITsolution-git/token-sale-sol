@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-terms-and-conditions',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TermsAndConditionsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    meta: Meta,
+    title: Title
+  ) {
+    title.setTitle('Terms and Conditions | Gizer Token Sale');
+  }
 
   ngOnInit() {
   }

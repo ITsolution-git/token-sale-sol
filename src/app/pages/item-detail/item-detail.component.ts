@@ -6,10 +6,10 @@ import { Observable } from 'rxjs/Observable';
 import { ParamMap } from '@angular/router/src/shared';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { title, shareImageUrl, viaUrl, hashTags } from './item-detail.meta';
+import { Meta, Title } from '@angular/platform-browser';
 
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { ProfileModalComponent } from '../../shared/components/profile-modal/profile-modal.component';
 
 declare const $: any;
 
@@ -51,6 +51,8 @@ export class ItemDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private domSanitizer: DomSanitizer,
     private modalService: BsModalService,
+    public metaTag: Meta,
+    public titleTag: Title
   ) { }
 
   ngOnInit() {
@@ -74,6 +76,11 @@ export class ItemDetailComponent implements OnInit {
     this.detailItem$.subscribe(item => {
       this.detailItem = item;
       this.detailItem['safeUrl'] = this.addAutoStart(item.resources.videos[0]);
+      this.titleTag.setTitle(`${item.meta.name} | Gizer Token Sale`);
+      this.metaTag.addTags([
+        { name: 'description', content: item.meta.description },
+        { property: 'og:image', content: item.resources.icons[0] }
+      ]);
       this.setItemRarity(item.meta.rarity);
     });
   }

@@ -6,6 +6,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ValidNetworkModalComponent } from '../../shared/components/valid-network/valid-network.component';
 import { LocalStorageService } from 'ngx-webstorage';
+import { NgSpinningPreloader } from 'ng2-spinning-preloader';
 import { Intercom } from 'ng-intercom';
 
 import { MetaMaskService } from '../../shared/services/MetaMaskService/meta-mask.service';
@@ -62,6 +63,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     private store: Store<ApplicationState>,
     private notificationService: NotificationsService,
     private modalService: BsModalService,
+    private ngSpinningPreloader: NgSpinningPreloader,
     private userLocalstorageRepository: UserLocalstorageRepository
   ) {
     this.userState = this.store.select('userState');
@@ -76,6 +78,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
       }
     });
     this.metaMaskService.installedObservable$.subscribe(status => {
+      this.stopPreloading();
       if (!status) {
         this.updateInstallStatus(status);
         this.metaMaskService.unloadAccountInfo();
@@ -85,12 +88,13 @@ export class LayoutComponent implements OnInit, AfterViewInit {
       }
     });
     this.metaMaskService.unlockedObservable$.subscribe(status => {
-
+      this.stopPreloading();
       if (this.unlocked !== status) {
         this.updateLockStatus(status);
       }
     });
     this.metaMaskService.accountObservable$.subscribe(res => {
+      this.stopPreloading();
       if (this.walletAddress !== res) {
         this.updateWalletAddress(res);
         this.userService.retrieveUser(res).subscribe(user => {
@@ -272,6 +276,10 @@ export class LayoutComponent implements OnInit, AfterViewInit {
         custom_data: customData
     });
     return true;
+  }
+
+  stopPreloading() {
+    this.ngSpinningPreloader.stop();
   }
 
 }

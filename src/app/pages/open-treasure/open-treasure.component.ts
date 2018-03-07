@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChestService } from '../../shared/services/ChestService/chest.service';
 import { Chest } from '../../shared/models/chest.model';
 import { Router } from '@angular/router';
+import { Meta, Title } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { ApplicationState } from '../../store/application-state';
@@ -12,6 +13,8 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { LockedModalComponent } from '../../shared/components/locked-modal/locked-modal.component';
 import { AuthService } from '../../core/services/auth.service';
 import { LocalStorageService } from 'ngx-webstorage';
+import { ItemService } from '../../shared/services/ItemService/item.service';
+import { Item } from '../../shared/models/item.model';
 
 @Component({
   selector: 'app-open-treasure',
@@ -25,6 +28,7 @@ export class OpenTreasureComponent implements OnInit {
   unlocked = true;
   installed = false;
   saveUserIDStr = 'user_id';
+  items: Item[] = [];
 
   config = {
     animated: true,
@@ -40,8 +44,13 @@ export class OpenTreasureComponent implements OnInit {
     private router: Router,
     private localStorage: LocalStorageService,
     private modalService: BsModalService,
-    private store: Store<ApplicationState>
+    private store: Store<ApplicationState>,
+    public meta: Meta,
+    public title: Title,
+    private itemService: ItemService
   ) {
+    title.setTitle('Open The Founders Treasure | Gizer Token Sale');
+
     this.userState = this.store.select('userState');
     this.metaMaskService.getAccountInfo();
     this.userState.subscribe(state => {
@@ -61,6 +70,12 @@ export class OpenTreasureComponent implements OnInit {
     const cid = 'eeeceb748b383a08a398e260d4a34b91';
     this.chestService.getChest(cid).subscribe(cId => {
         this.chest = cId;
+    });
+
+    this.itemService.getItems(10, 1).subscribe((res: Item[]) => {
+      this.itemService.getItems_by_IDs(res[0].current.similar).subscribe((resp: Item[]) => {
+        this.items = resp;
+      });
     });
   }
 

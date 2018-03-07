@@ -3,15 +3,19 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ItemService } from '../../shared/services/ItemService/item.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Meta, Title } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 import { ApplicationState } from '../../store/application-state';
 import { UserState } from '../../store/store-data';
 import { MetaMaskService } from '../../shared/services/MetaMaskService/meta-mask.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { UserService } from '../../shared/services/UserService/user.service';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { AuthService } from '../../core/services/auth.service';
 import { LockedModalComponent } from '../../shared/components/locked-modal/locked-modal.component';
+import { User } from '../../shared/models/user.model';
 import { LocalStorageService } from 'ngx-webstorage';
+import { Item } from '../../shared/models/item.model';
 
 const unityProgress = UnityProgress;
 const unityLoader = UnityLoader;
@@ -33,7 +37,9 @@ export class MyItemsComponent implements OnInit {
   bsModalRef: BsModalRef;
   unlocked = true;
   installed = false;
+  items: Item[] = [];
   saveUserIDStr = 'user_id';
+  walletAddress: String;
 
   config = {
     animated: true,
@@ -49,9 +55,14 @@ export class MyItemsComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private localStorage: LocalStorageService,
+    private userService: UserService,
     private modalService: BsModalService,
-    private store: Store<ApplicationState>
+    private store: Store<ApplicationState>,
+    meta: Meta,
+    title: Title
   ) {
+    title.setTitle('My Items | Gizer Token Sale');
+
     this.userState = this.store.select('userState');
     this.metaMaskService.getAccountInfo();
     this.userState.subscribe(state => {
@@ -62,6 +73,28 @@ export class MyItemsComponent implements OnInit {
         if (this.authService.checkLogin()) {
           this.unlocked = state.unlocked;
           this.showModals();
+        }
+      }
+
+      if (state) {
+        if (state.walletAddress && state.walletAddress !== this.walletAddress) {
+          const tAddress = state.walletAddress;
+          this.userService.retrieveUser(tAddress).subscribe((resp: User[]) => {
+            if (resp.length) {
+              const mineIds = [],
+                    owns = resp[0].owns;
+              this.items = [];
+
+              if (owns.length > 0) {
+                for (let i = 0; i < owns.length; i++) {
+                  mineIds.push(owns[i].substr(5));
+                }
+                this.itemService.getItems_by_IDs(mineIds).subscribe((res: Item[]) => {
+                  this.items = res;
+                });
+              }
+            }
+          });
         }
       }
     });
@@ -82,6 +115,10 @@ export class MyItemsComponent implements OnInit {
         return false;
     }
     return true;
+  }
+
+  navgiateToTreasure() {
+    this.router.navigate(['/open-treasure']);
   }
 
   showModals() {
