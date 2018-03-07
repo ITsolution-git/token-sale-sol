@@ -94,4 +94,18 @@
         font-family: "Century Gothic Bold";
         color: #7777a9;
     }
+    .no-item {
+        margin-top: 45px;
+    }
+    .btn-treasure {
+        border: solid 1px cyan;
+        border-radius: 10px;
+        padding: 0px 15px 7px 15px;
+        margin: 40px 0 80px;
+        .btn-title {
+            color: white;
+            padding-top: 5px;
+            padding-left: 5px;
+        }
+    }
 }

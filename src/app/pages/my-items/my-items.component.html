@@ -30,11 +30,23 @@
       </div>
     </div>
     <div class="row justify-content-center">
-      <app-item-list
+      <app-item-list *ngIf="items.length"
         [showTitle]="false"
         [showNavigation]="false"
+        [items]="items"
+        style="width: 100%;"
       >
       </app-item-list>
+      <div *ngIf="!items.length">
+        <div class="text-center"><img src="/assets/images/sad.png" alt="sad icon"></div>
+        <div class="block-header no-item">You have no items, go open some treasure!</div>
+        <div class="text-center">
+          <div id="open-treasure" (click)="navgiateToTreasure()" class="d-inline-flex btn-treasure align-items-center custom-button">
+            <img id="open-treasure" (click)="navgiateToTreasure()" class="button-image" src="/assets/icons/icon-treasure.png" alt="treasure icon">
+            <span id="open-treasure" (click)="navgiateToTreasure()" class="menu-text btn-title">Open Treasure</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

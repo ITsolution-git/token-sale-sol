@@ -1,7 +1,8 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
-
+import { ItemService } from '../../shared/services/ItemService/item.service';
+import { Item } from '../../shared/models/item.model';
 
 @Component({
   selector: 'app-home',
@@ -9,12 +10,14 @@ import { Meta, Title } from '@angular/platform-browser';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, AfterViewInit {
+  items: Item[] = [];
   private fragment: string;
   constructor(
     private route: ActivatedRoute,
+    private itemService: ItemService,
     meta: Meta,
     title: Title
-    ) {
+  ) {
     title.setTitle('Homepage | Gizer Token Sale');
 
     meta.addTags([
@@ -39,6 +42,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
       } else if (fragment === 'whatsgizer') {
         window.scrollTo(0, 1670);
       }
+    });
+
+    this.itemService.getItems().subscribe((res: Item[]) => {
+      this.itemService.getItems_by_IDs(res[0].current.similar).subscribe((resp: Item[]) => {
+        this.items = resp;
+      });
     });
   }
 
