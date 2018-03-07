@@ -28,14 +28,14 @@ export class ItemListComponent implements OnInit {
     // transform value for display
     return this._items.slice((this.page - 1) * this.limit, this.page * this.limit);
   }
-  
+
   @Input()
   set items(items: Item[]) {
     this._items = items;
   }
 
   ngOnInit() {
-    this.isMobile = this.isMobileView();    
+    this.isMobile = this.isMobileView();
   }
 
   loadNextWeapons() {

@@ -73,19 +73,21 @@ export class MyItemsComponent implements OnInit {
 
       if (state) {
         if (state.walletAddress && state.walletAddress !== this.walletAddress) {
-          const tAddress = "0x8f5a130e1ddd05a9911471ec02d41f47e99e1686";
-          // tAddress = state.walletAddress;
+          const tAddress = state.walletAddress;
           this.userService.retrieveUser(tAddress).subscribe((resp: User[]) => {
             if (resp.length) {
-              let mineIds = [],
-                  owns = resp[0].owns;
-              
-              for (let i = 0; i < owns.length; i++) {
-                mineIds.push(owns[i].substr(5));
+              const mineIds = [],
+                    owns = resp[0].owns;
+              this.items = [];
+
+              if (owns.length > 0) {
+                for (let i = 0; i < owns.length; i++) {
+                  mineIds.push(owns[i].substr(5));
+                }
+                this.itemService.getItems_by_IDs(mineIds).subscribe((res: Item[]) => {
+                  this.items = res;
+                });
               }
-              this.itemService.getItems_by_IDs(mineIds).subscribe((resp: Item[]) => {        
-                this.items = resp;
-              });
             }
           });
         }
@@ -108,6 +110,10 @@ export class MyItemsComponent implements OnInit {
         return false;
     }
     return true;
+  }
+
+  navgiateToTreasure() {
+    this.router.navigate(['/open-treasure']);
   }
 
   showModals() {

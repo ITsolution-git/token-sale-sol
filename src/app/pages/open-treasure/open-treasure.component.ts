@@ -67,11 +67,11 @@ export class OpenTreasureComponent implements OnInit {
         this.chest = cId;
     });
 
-    this.itemService.getItems(10, 1).subscribe((res: Item[]) => {      
-      this.itemService.getItems_by_IDs(res[0].current.similar).subscribe((resp: Item[]) => {        
+    this.itemService.getItems(10, 1).subscribe((res: Item[]) => {
+      this.itemService.getItems_by_IDs(res[0].current.similar).subscribe((resp: Item[]) => {
         this.items = resp;
       });
-    });    
+    });
   }
 
   showModals() {
