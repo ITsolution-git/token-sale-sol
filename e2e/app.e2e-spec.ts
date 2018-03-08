@@ -17,7 +17,7 @@ describe('Running end to end  HomePage Test Suite', () => {
     });
 
     it('contains paragraph', () => {
-      expect(homePage.getJustReleasedParagraph()).toEqual('Just Released');
+      expect(homePage.getJustReleasedParagraph()).toMatch('Just Released');
     });
 
     it('display: Open Treasure', () => {
