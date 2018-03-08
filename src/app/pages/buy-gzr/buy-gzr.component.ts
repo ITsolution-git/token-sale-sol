@@ -83,6 +83,7 @@ export class BuyGzrComponent implements OnInit {
         } else {
           this.unlocked = state.unlocked;
           this.validNetwork = state.validNetwork;
+          this.isMobile = this.isMobileView();
           this.showInstalledModal();
         }
       }
@@ -146,6 +147,11 @@ export class BuyGzrComponent implements OnInit {
   }
 
   showInstalledModal() {
+    if (this.isMobile) {
+      return;
+    }
+
+
     if (this.installed === false && !this.bsModalRef) {
       this.bsModalRef = this.modalService.show(InstallMaskModalComponent,
         Object.assign({}, this.config, { class: 'gray modal-lg' }));

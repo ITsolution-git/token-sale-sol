@@ -191,7 +191,7 @@ export class SaveAccountComponent implements OnInit {
         });
       })
       .catch(error => {
-        
+
       });
     }, 3000);
   }
