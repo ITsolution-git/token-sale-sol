@@ -9,6 +9,7 @@ export class AuthService {
   private isLoggedIn = new Subject<boolean>();
   isLoggedIn$ = this.isLoggedIn.asObservable();
   saveUserIDStr = 'user_id';
+  walletAddressStr = 'walletaddress';
 
   constructor(
     private router: Router,
@@ -29,6 +30,7 @@ export class AuthService {
   logout() {
     this.isLoggedIn.next(false);
     this.localStorage.clear(this.saveUserIDStr);
+    this.localStorage.clear(this.walletAddressStr);
     this.router.navigate(['/meta-mask']);
   }
 

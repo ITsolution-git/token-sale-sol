@@ -56,14 +56,14 @@
     </div>
     <div class="row no-gutters p-3 mb-5 border border-secondary">
       <div class="w-100 p-md-3">
-        <p class="into-text">Other items from this Treasure</p>
+        <p class="into-text">Other items from {{collection}}</p>
       </div>
       <div class="item-list w-100">
         <div class="item-area">
           <app-item
             class="item-wrapper"
             *ngFor="let item of items"
-            [id]="item.id"
+            [itemId]="item.id"
             [itemImageLink]="item.resources.icons[0]"
             [itemName]="item.meta.name"
             [rarity]="item.meta.rarity"
