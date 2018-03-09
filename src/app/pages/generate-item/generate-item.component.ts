@@ -4,6 +4,11 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { OpeningTreasureModalComponent } from '../../shared/components/opening-treasure-modal/opening-treasure-modal.component';
 
+import { MetaMaskService } from '../../shared/services/MetaMaskService/meta-mask.service';
+import { Observable } from 'rxjs/Observable';
+// import { UserService } from '../../shared/services/UserService/user.service';
+// import { UserState } from '../../store/store-data';
+
 @Component({
   selector: 'app-generate-item',
   templateUrl: './generate-item.component.html',
@@ -50,8 +55,10 @@ export class GenerateItemComponent implements OnInit, AfterViewInit {
 
   constructor(
     private modalService: BsModalService,
-  ) {
+    private metaMaskService: MetaMaskService,
 
+  ) {    
+    // this.userState = this.store.select('userState');
   }
 
   ngOnInit() {
@@ -66,6 +73,10 @@ export class GenerateItemComponent implements OnInit, AfterViewInit {
       });
       this.eases.push(ease);
     }
+
+    // this.userState.subscribe(state => {
+    //   if (state.transactionId !== '') {
+    //     this.transactionId = state.transactionId;
 
   }
 
@@ -172,5 +183,17 @@ export class GenerateItemComponent implements OnInit, AfterViewInit {
 
   openItem() {
     this.bsModalRef = this.modalService.show(OpeningTreasureModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
+  }
+
+  checkTransaction() {
+    // console.log("check transaction")
+
+    // this.metaMaskService.treasureTransactionObservable$
+    // .subscribe(tx => {
+    //   this.metaMaskService.getTransactionReceiptMined(tx, 1000)
+    //   .then(res=>{
+    //     console.log(res);
+    //   })
+    // })
   }
 }

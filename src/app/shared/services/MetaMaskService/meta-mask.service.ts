@@ -78,6 +78,9 @@ export class MetaMaskService {
   ItemsContractInstanceSubject = new Subject<any>();
   ItemsContractInstance$ = this.ItemsContractInstanceSubject.asObservable();
 
+  LastItemSubject = new Subject<any>();
+  LastItem$ = this.LastItemSubject.asObservable();
+
 
   loadMetaObservable: any;
   loadMetaSubscription$: Subscription = new Subscription();
@@ -343,18 +346,10 @@ export class MetaMaskService {
 
 
   getTokenContract() {
-    // if (this.validNetwork === false) {
-    //   return;
-    // }
+
     return this.GizerToken.deployed();
   }
 
-  getStandardContract() {
-    if (this.validNetwork === false) {
-      return;
-    }
-    return this.GizerItems.deployed();
-  }
   getItemGenerationContract() {
     if (this.validNetwork === false) {
       return;
@@ -366,8 +361,6 @@ export class MetaMaskService {
 
     return this.GizerItems.deployed();
   }
-
-
 
   approveGZRSpending(amount) {
     let gzr;
@@ -408,37 +401,7 @@ export class MetaMaskService {
     });
   }
 
-
-  // watchMint(wallet) {
-  //   return new Promise((resolve, reject) => {
-  //     this.getTokenContract()
-  //       .then(instance => {
-  //         let event = instance.MintToken({wallet})
-
-
-
-  //       })
-  //       .catch(e => {
-  //         this.setStatus('Error in watch mint');
-  //         reject({ 'failure': true , 'message': e});
-  //       });
-  //   });
-  // }
-
-  // getReceipt(transactionID) {
-  //   return new Promise((resolve, reject) => {
-  //     this.web3.eth.getTransactionReceipt(transactionID, console.log(rr); 
-  //     .then(res => {
-  //       resolve(res);
-  //     })
-  //     .catch(e => {
-  //       console.log('Error in receipt reception', e );
-  //       reject({'failure': true});
-  //     });
-  //   });
-  // }
-
-  getTransactionReceipt(txHash, interval) {
+  getItemFromTransaction(txHash, interval) {
     const transactionReceiptAsync = (resolve, reject) => {
       this.web3.eth.getTransactionReceipt(txHash, (error, receipt) => {
             if (error) {
@@ -448,37 +411,21 @@ export class MetaMaskService {
                     () => transactionReceiptAsync(resolve, reject),
                     interval ? interval : 500);
             } else {
-                resolve(receipt);
+                const idx = this.web3.toAscii(receipt.logs[1].data);
+                const uuid = this.web3.toAscii(receipt.logs[1].topics[3]);
+                this.LastItemSubject.next({'idx': idx  , 'uuid': uuid});
+                resolve(
+                  uuid
+                );
             }
         });
     };
 
-    // if (Array.isArray(txHash)) {
-    //     return Promise.all(txHash.map(
-    //         oneTxHash => this.web3.eth.getTransactionReceiptMined(oneTxHash, interval)));
-    // } else
-     if (typeof txHash === "string") {
+    if (typeof txHash === 'string') {
         return new Promise(transactionReceiptAsync);
     } else {
-        throw new Error("Invalid Type: " + txHash);
+        throw new Error('Invalid Type: ' + txHash);
     }
-  };
-
-  // getURI(idx) {
-  //   return new Promise((resolve, reject) => {
-  //     this.getItemContract()
-  //     .then(instance => {
-  //       return instance.deedUri.sendTransaction({
-  //         from: this.account, gas: 277000, to: instance.address
-  //       });
-  //     })
-  //     .catch(e => {
-  //       console.log('Error in receipt reception', e );
-  //       reject({'failure': true});
-  //     });
-  //   });
-  // }
-
-  get
+  }
 
 }

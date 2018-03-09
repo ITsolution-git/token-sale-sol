@@ -41,8 +41,6 @@ export class ChestService {
   }
 
   updateChest(chest, userID, transaction) {
-    console.log('update chest', this.apiRoutingService.getChestUrlFromID(chest), transaction);
-
     return this.http.patch(
       this.apiRoutingService.getChestUrlFromID(chest),
       {
@@ -50,6 +48,17 @@ export class ChestService {
         'status': 'pending',
         'transaction_id' : transaction
       },
+      true,
+      null
+    );
+  }
+  addItemToChest(chest, item) {
+    return this.http.patch(
+      this.apiRoutingService.getChestUrlFromID(chest),
+      {
+        'status': 'pending',
+        'items': [item]
+     },
       true,
       null
     );

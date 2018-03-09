@@ -116,31 +116,30 @@ export class TreasureComponent implements OnInit {
     const amount = 1;
     let chestID: string;
     let userID: string;
-    let txID: string;
 
     this.chestService.createChest()
     .flatMap( c => {
-      console.log('chest', c);
       chestID = c.id;
       return this.userService.retrieveUser(this.walletAddress);
     })
     .flatMap(u => {
       userID = u[0].id;
-      console.log(u[0].owns)
       u[0].owns.push('Chest/' + chestID);
       const ownsData = {'owns': u[0].owns};
-      console.log('user', u);
-      this.userService.updateUser(userID, ownsData);
-      return this.userService.retrieveUser(this.walletAddress)
+      return this.userService.updateUser(userID, ownsData);
     })
     .flatMap(u => {
-      console.log("user after", u)
       return this.metaMaskService.generateItem();
     })
-    .subscribe(tr => {
-      console.log('from generate item ', tr);
+    .flatMap(tr => {
       this.router.navigate(['/generate-item']);
       this.chestService.updateChest(chestID, userID, tr);
+      return this.metaMaskService.getItemFromTransaction(tr, 1000)  ;
+    })
+    .subscribe(item => {
+      this.chestService.addItemToChest(chestID, item);
+
+      this.bsModalRef = this.modalService.show(OpeningTreasureModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
     });
 
 
