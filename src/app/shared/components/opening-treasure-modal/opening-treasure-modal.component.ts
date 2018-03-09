@@ -191,7 +191,6 @@ export class OpeningTreasureModalComponent implements OnInit {
         this.chest.querySelector('.chest__card-rays').innerHTML = '';
       }
     }
-
     this.bsModalRef.hide();
   }
 
@@ -209,7 +208,5 @@ export class OpeningTreasureModalComponent implements OnInit {
     }
     return true;
   }
-
-
 
 }

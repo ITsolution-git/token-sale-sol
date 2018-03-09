@@ -350,36 +350,9 @@ export class MetaMaskService {
     return this.GizerToken.deployed();
   }
 
-  getItemGenerationContract() {
-    if (this.validNetwork === false) {
-      return;
-    }
-    return this.GizerItems.deployed();
-  }
-
   getItemContract() {
 
     return this.GizerItems.deployed();
-  }
-
-  approveGZRSpending(amount) {
-    let gzr;
-    return new Promise((resolve, reject) => {
-      this.getTokenContract()
-        .then(ins => {
-          gzr = ins;
-          return this.getItemGenerationContract();
-        })
-        .then(instance => {
-          return gzr.approve(instance.address, amount, { from: this.account, gas: 41000 });
-        })
-        .then(t => {
-          resolve(t);
-        })
-        .catch(e => {
-          this.setStatus('Error in GZR approval');
-        });
-    });
   }
 
   generateItem() {

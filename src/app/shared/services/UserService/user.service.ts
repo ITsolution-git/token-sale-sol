@@ -34,7 +34,6 @@ export class UserService {
 
   updateUser(userId, data) {
     this.userLocalStorageRepository.setUserId(userId);
-    console.log("UpdateUser : ", this.apiRoutingService.getUserUrl(userId), " with ", data)
     return this.http.patch(
       this.apiRoutingService.getUserUrl(userId),
       data
@@ -49,6 +48,4 @@ export class UserService {
      null
    );
   }
-
-
 }
