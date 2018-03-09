@@ -11,16 +11,16 @@ import Tx from 'ethereumjs-tx';
 
 const GZRArtifacts = require('../../../../../build/contracts/GizerToken.json');
 const StandardTokenArtifacts = require('../../../../../build/contracts/StandardToken.json');
-const GZRTokenToItemGenerationArtifacts = require('../../../../../build/contracts/GZRTokenToItemGeneration.json');
+const GizerItemsArtifacts = require('../../../../../build/contracts/GizerItems.json');
 
 declare var window: any;
 
 @Injectable()
 export class MetaMaskService {
 
-  GzrToken = Contract(GZRArtifacts);
+  GizerToken = Contract(GZRArtifacts);
   StandardToken = Contract(StandardTokenArtifacts);
-  GZRTokenToItemGeneration = Contract(GZRTokenToItemGenerationArtifacts);
+  GizerItems = Contract(GizerItemsArtifacts);
 
   accounts: any;
   web3: any;
@@ -152,9 +152,9 @@ export class MetaMaskService {
   }
 
   onReady() {
-    this.GzrToken.setProvider(this.web3.currentProvider);
+    this.GizerToken.setProvider(this.web3.currentProvider);
     this.StandardToken.setProvider(this.web3.currentProvider);
-    this.GZRTokenToItemGeneration.setProvider(this.web3.currentProvider);
+    this.GizerItems.setProvider(this.web3.currentProvider);
 
     this.web3.eth.getAccounts((err, accs) => {
 
@@ -178,7 +178,7 @@ export class MetaMaskService {
 
   createGZR() {
     let gzr;
-    return this.GzrToken
+    return this.GizerToken
       .deployed()
       .then(instance => {
         gzr = instance;
@@ -210,7 +210,7 @@ export class MetaMaskService {
     if (this.validNetwork === false) {
       return;
     }
-    return this.GzrToken.deployed()
+    return this.GizerToken.deployed()
       .then(instance => {
         this.contractAddress = instance.address;
         this.contractAddressSubject.next(this.contractAddress);
@@ -276,7 +276,7 @@ export class MetaMaskService {
 
     let gzr;
     return new Promise((resolve, reject) => {
-      this.GzrToken
+      this.GizerToken
         .deployed()
         .then(instance => {
           gzr = instance;
@@ -304,7 +304,7 @@ export class MetaMaskService {
 
     let gzr;
     return new Promise((resolve, reject) => {
-      this.GzrToken
+      this.GizerToken
         .deployed()
         .then(instance => {
           gzr = instance;
@@ -343,23 +343,28 @@ export class MetaMaskService {
 
 
   getTokenContract() {
-    if (this.validNetwork === false) {
-      return;
-    }
-    return this.StandardToken.deployed();
+    // if (this.validNetwork === false) {
+    //   return;
+    // }
+    return this.GizerToken.deployed();
   }
 
   getStandardContract() {
     if (this.validNetwork === false) {
       return;
     }
-    return this.GZRTokenToItemGeneration.deployed();
+    return this.GizerItems.deployed();
   }
   getItemGenerationContract() {
     if (this.validNetwork === false) {
       return;
     }
-    return this.GZRTokenToItemGeneration.deployed();
+    return this.GizerItems.deployed();
+  }
+
+  getItemContract() {
+
+    return this.GizerItems.deployed();
   }
 
 
@@ -386,10 +391,10 @@ export class MetaMaskService {
 
   generateItem() {
     return new Promise((resolve, reject) => {
-      this.getItemGenerationContract()
+      this.getTokenContract()
         .then(instance => {
-          return instance.spendGZRToGetAnItem.sendTransaction({
-            from: this.account, gas: 41000, to: instance.address
+          return instance.buyItem.sendTransaction({
+            from: this.account, gas: 280000, to: instance.address
           });
         })
         .then(tx => {
@@ -397,10 +402,83 @@ export class MetaMaskService {
           resolve(tx);
         })
         .catch(e => {
-          reject({ 'failure': true });
           this.setStatus('Error in item generation');
+          reject({ 'failure': true , 'message': e});
         });
     });
   }
+
+
+  // watchMint(wallet) {
+  //   return new Promise((resolve, reject) => {
+  //     this.getTokenContract()
+  //       .then(instance => {
+  //         let event = instance.MintToken({wallet})
+
+
+
+  //       })
+  //       .catch(e => {
+  //         this.setStatus('Error in watch mint');
+  //         reject({ 'failure': true , 'message': e});
+  //       });
+  //   });
+  // }
+
+  // getReceipt(transactionID) {
+  //   return new Promise((resolve, reject) => {
+  //     this.web3.eth.getTransactionReceipt(transactionID, console.log(rr); 
+  //     .then(res => {
+  //       resolve(res);
+  //     })
+  //     .catch(e => {
+  //       console.log('Error in receipt reception', e );
+  //       reject({'failure': true});
+  //     });
+  //   });
+  // }
+
+  getTransactionReceipt(txHash, interval) {
+    const transactionReceiptAsync = (resolve, reject) => {
+      this.web3.eth.getTransactionReceipt(txHash, (error, receipt) => {
+            if (error) {
+                reject(error);
+            } else if (receipt == null) {
+                setTimeout(
+                    () => transactionReceiptAsync(resolve, reject),
+                    interval ? interval : 500);
+            } else {
+                resolve(receipt);
+            }
+        });
+    };
+
+    // if (Array.isArray(txHash)) {
+    //     return Promise.all(txHash.map(
+    //         oneTxHash => this.web3.eth.getTransactionReceiptMined(oneTxHash, interval)));
+    // } else
+     if (typeof txHash === "string") {
+        return new Promise(transactionReceiptAsync);
+    } else {
+        throw new Error("Invalid Type: " + txHash);
+    }
+  };
+
+  // getURI(idx) {
+  //   return new Promise((resolve, reject) => {
+  //     this.getItemContract()
+  //     .then(instance => {
+  //       return instance.deedUri.sendTransaction({
+  //         from: this.account, gas: 277000, to: instance.address
+  //       });
+  //     })
+  //     .catch(e => {
+  //       console.log('Error in receipt reception', e );
+  //       reject({'failure': true});
+  //     });
+  //   });
+  // }
+
+  get
 
 }
