@@ -308,8 +308,8 @@ export class MetaMaskService {
         .deployed()
         .then(instance => {
           gzr = instance;
-		 // tslint:disable-next-line:max-line-length
-         const hex_string = this.web3.fromAscii(`The Gizer Token Sale \r\n
+		  // tslint:disable-next-line:max-line-length
+          const hex_string = this.web3.fromAscii(`The Gizer Token Sale \r\n
 PLEASE READ THIS AGREEMENT CAREFULLY. NOTE THAT SECTION 11 CONTAINS A BINDING ARBITRATION CLAUSE AND CLASS ACTION WAIVER, WHICH AFFECT YOUR LEGAL RIGHTS. IF YOU DO NOT AGREE TO THIS AGREEMENT, DO NOT PURCHASE TOKENS.
 
 Your purchase of GZR Tokens ('GZR' or 'Tokens') from Gizer Inc. ('Gizer' 'we,' 'us,' 'our,' or the 'Company') is subject to this Service Agreement and Terms of Token Sale ('Agreement'). Each of you and the Company are a 'Party,' and together are the 'Parties.' This Agreement takes effect once you deliver funds in exchange for Tokens (the 'Effective Date'). You represent to us that you are lawfully able to enter into contracts (e.g., you are not a minor). If you are entering into this Agreement for an entity, such as the company you work for, you represent to us that you have legal authority to bind that entity. Section 12 contains the definitions of certain capitalized terms used in this Agreement. Though you should read and understand this entire document before agreeing to its terms, you should pay particular attention to those terms written in ALL CAPITAL LETTERS.
