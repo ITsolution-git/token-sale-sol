@@ -322,7 +322,7 @@ export class HeaderComponent implements OnInit {
 
   setAddressFromCookie() {
     const walletAddress = this.localStorage.retrieve(this.walletAddressStr);
-    if (walletAddress !== undefined && walletAddress.length > 0) {
+    if (walletAddress !== undefined && walletAddress !== '' && walletAddress !== null) {
       this.walletAddress = walletAddress;
       this.checkUserIsExist(walletAddress);
     }
