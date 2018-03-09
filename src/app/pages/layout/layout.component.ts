@@ -16,7 +16,6 @@ import { UPDATE_VALID_NETWORK, UPDATE_WALLET_ADDRESS, UPDATE_LOCK_STATUS, UPDATE
 import { ApplicationState } from '../../store/application-state';
 import { UserState } from '../../store/store-data';
 import { User } from '../../shared/models/user.model';
-import { NotificationsService } from 'angular2-notifications-lite';
 import { environment } from '../../../environments/environment.prod';
 import { UserLocalstorageRepository } from '../../shared/services/UserService/user.localstorage.repository.service';
 
@@ -37,12 +36,6 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   nickName: String;
   validNetwork = false;
 
-  options = {
-      position: ['top', 'right'],
-      timeOut: 2000,
-      lastOnBottom: true
-  };
-
   config = {
     animated: true,
     keyboard: true,
@@ -61,7 +54,6 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     private metaMaskService: MetaMaskService,
     private userService: UserService,
     private store: Store<ApplicationState>,
-    private notificationService: NotificationsService,
     private modalService: BsModalService,
     private ngSpinningPreloader: NgSpinningPreloader,
     private userLocalstorageRepository: UserLocalstorageRepository
@@ -125,20 +117,6 @@ export class LayoutComponent implements OnInit, AfterViewInit {
       if (this.validNetwork !== status) {
         this.updateNetworkStatus(status);
       }
-    });
-
-    this.metaMaskService.signTransactionPendingObservable$.subscribe(signTransaction => {
-      this.notificationService.success(
-          'Sign To GZR',
-          'You are signing to gzr token',
-          {
-              timeOut: 3000,
-              showProgressBar: true,
-              pauseOnHover: false,
-              clickToClose: false,
-              maxLength: 10
-          }
-      );
     });
 
     this.event$.subscribe((state) => {

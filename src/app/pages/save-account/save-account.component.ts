@@ -10,6 +10,7 @@ import { ApplicationState } from '../../store/application-state';
 import { Observable } from 'rxjs/Observable';
 import { UserState } from '../../store/store-data';
 import { UPDATE_NICK_NAME, UPDATE_SIGNUP } from '../../store/actions/user.actions';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-save-account',
@@ -42,10 +43,13 @@ export class SaveAccountComponent implements OnInit {
     private authService: AuthService,
     private metaMaskService: MetaMaskService,
     private store: Store<ApplicationState>,
-    private userService: UserService
+    private userService: UserService,
+    meta: Meta,
+    title: Title
   ) {
-      this.userState = this.store.select('userState');
-      this.createForm();
+    this.userState = this.store.select('userState');
+    this.createForm();
+    title.setTitle('Save Account | Gizer Token Sale');
    }
 
 

@@ -30,6 +30,7 @@ export class ItemDetailComponent implements OnInit {
   limit = 5;
   page = 1;
   totalPage = 10;
+  collection = '';
   bsModalRef: BsModalRef;
   config = {
     animated: true,
@@ -81,6 +82,7 @@ export class ItemDetailComponent implements OnInit {
         { name: 'description', content: item.meta.description },
         { property: 'og:image', content: item.resources.icons[0] }
       ]);
+      this.collection = item.meta.collection ? item.meta.collection : 'The Founders Edition';
       this.setItemRarity(item.meta.rarity);
     });
   }
