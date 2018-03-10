@@ -308,7 +308,7 @@ export class MetaMaskService {
         .deployed()
         .then(instance => {
           gzr = instance;
-		  // tslint:disable:max-line-length
+// tslint:disable:max-line-length
           const hex_string = this.web3.fromAscii(`The Gizer Token Sale \r\n
 PLEASE READ THIS AGREEMENT CAREFULLY. NOTE THAT SECTION 11 CONTAINS A BINDING ARBITRATION CLAUSE AND CLASS ACTION WAIVER, WHICH AFFECT YOUR LEGAL RIGHTS. IF YOU DO NOT AGREE TO THIS AGREEMENT, DO NOT PURCHASE TOKENS.
 
