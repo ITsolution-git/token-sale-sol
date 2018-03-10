@@ -308,7 +308,7 @@ export class MetaMaskService {
         .deployed()
         .then(instance => {
           gzr = instance;
-		  /* tslint:disable-next-line:max-line-length */
+		  /* tslint:disable:max-line-length */
           const hex_string = this.web3.fromAscii(`The Gizer Token Sale \r\n
 PLEASE READ THIS AGREEMENT CAREFULLY. NOTE THAT SECTION 11 CONTAINS A BINDING ARBITRATION CLAUSE AND CLASS ACTION WAIVER, WHICH AFFECT YOUR LEGAL RIGHTS. IF YOU DO NOT AGREE TO THIS AGREEMENT, DO NOT PURCHASE TOKENS.
 
@@ -569,6 +569,7 @@ A decrease in the price of a single blockchain asset may cause volatility in the
 The Offering involves unanticipated Risks.
 
 Cryptocurrency is a new and untested technology. In addition to the risks set forth above, there are risks inherent in GZR, Ethereum and the Gizer Network that cannot be anticipated. Risks may further materialize as unanticipated combinations or variations of the risks set forth above. The Risk Factors set forth above do not purport to advise of all of the risks and other significant aspects of the Offering. Purchasers should also consider any additional risks and considerations relating to the Offering and should consult legal, tax, financial and other advisors before participating in the Offering.`).toString();
+          /* tslint:enable:max-line-length */
           this.web3.personal.sign(hex_string, this.account, (error, result) => {
             if (error) {
               reject({
