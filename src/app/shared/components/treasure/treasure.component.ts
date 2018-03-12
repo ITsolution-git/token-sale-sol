@@ -76,7 +76,7 @@ export class TreasureComponent implements OnInit {
   }
 
   openTreasure() {
-    this.userState.subscribe(state => {
+    this.userState.first().subscribe(state => {
       if (state) {
         this.walletAddress = state.walletAddress;
         this.unlocked = state.unlocked;

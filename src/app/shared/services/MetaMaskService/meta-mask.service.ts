@@ -10,7 +10,6 @@ import { Subscription } from 'rxjs/Subscription';
 import Tx from 'ethereumjs-tx';
 
 const GZRArtifacts = require('../../../../../build/contracts/GizerToken.json');
-const StandardTokenArtifacts = require('../../../../../build/contracts/StandardToken.json');
 const GizerItemsArtifacts = require('../../../../../build/contracts/GizerItems.json');
 
 declare var window: any;
@@ -19,10 +18,8 @@ declare var window: any;
 export class MetaMaskService {
 
   GizerToken = Contract(GZRArtifacts);
-  StandardToken = Contract(StandardTokenArtifacts);
   GizerItems = Contract(GizerItemsArtifacts);
 
-  accounts: any;
   web3: any;
 
   balance: number;
@@ -80,7 +77,6 @@ export class MetaMaskService {
 
   LastItemSubject = new Subject<any>();
   LastItem$ = this.LastItemSubject.asObservable();
-
 
   loadMetaObservable: any;
   loadMetaSubscription$: Subscription = new Subscription();
@@ -156,7 +152,6 @@ export class MetaMaskService {
 
   onReady() {
     this.GizerToken.setProvider(this.web3.currentProvider);
-    this.StandardToken.setProvider(this.web3.currentProvider);
     this.GizerItems.setProvider(this.web3.currentProvider);
 
     this.web3.eth.getAccounts((err, accs) => {
@@ -172,8 +167,7 @@ export class MetaMaskService {
 
       this.unlocked = true;
       this.unlockedSubject.next(this.unlocked);
-      this.accounts = accs;
-      this.account = this.accounts[0];
+      this.account = accs[0];
       this.accountSubject.next(this.account);
       this.refreshBalance();
     });
