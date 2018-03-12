@@ -17,6 +17,8 @@ import { WaitingTreasureModalComponent } from '../waiting-treasure-modal/waiting
 
 import { ValidNetworkModalComponent } from '../valid-network/valid-network.component';
 import { LockedModalComponent } from '../locked-modal/locked-modal.component';
+import { InsufficientFundsModalComponent } from '../insufficient-funds-modal/insufficient-funds-modal.component';
+
 import { OpeningTreasureModalComponent } from '../opening-treasure-modal/opening-treasure-modal.component';
 import { LocalStorageService } from 'ngx-webstorage';
 
@@ -35,13 +37,13 @@ export interface TransactionReceipt {
 })
 export class TreasureComponent implements OnInit {
   userState: Observable<UserState>;
-  GZRInstance$: Observable<any>;
-  ItemsInstance$: Observable<any>;
   walletAddress: String;
   unlocked = false;
   balance: number;
   installed = false;
   validNetwork = true;
+
+  buyPrice = 1;
 
   config = {
     animated: true,
@@ -71,7 +73,9 @@ export class TreasureComponent implements OnInit {
   ngOnInit() {
     this.eventTrack('viewed-open-treasure-page', null);
     this.metaMaskService.getAccountInfo();
+  }
 
+  openTreasure() {
     this.userState.subscribe(state => {
       if (state) {
         this.walletAddress = state.walletAddress;
@@ -79,41 +83,29 @@ export class TreasureComponent implements OnInit {
         this.balance = state.balance;
         this.installed = state.installed;
         this.validNetwork = state.validNetwork;
+
+        if (this.unlocked && this.installed && this.validNetwork) {
+          if (this.balance > this.buyPrice) {
+            this.generateItemProcess();
+          } else {
+            this.bsModalRef = this.modalService.show(InsufficientFundsModalComponent,
+              Object.assign({}, this.config, { class: 'gray modal-lg modal-center' }));
+          }
+        } else if (this.installed === false) {
+          this.router.navigate(['/meta-mask']);
+        } else if (this.unlocked === false) {
+          this.bsModalRef = this.modalService.show(LockedModalComponent,
+            Object.assign({}, this.config, { class: 'gray modal-lg modal-center' }));
+        } else if (this.validNetwork === false) {
+          this.bsModalRef = this.modalService.show(ValidNetworkModalComponent,
+            Object.assign({}, this.config, { class: 'gray modal-lg modal-center' }));
+        }
       }
     });
-
   }
 
-  openTreasure() {
-    if (this.unlocked && this.installed && this.validNetwork) {
-      this.openTreasureModal();
-    } else if (this.installed === false) {
-      this.navigateToInstallMeta();
-    } else if (this.unlocked === false) {
-      this.showModal();
-    } else if (this.validNetwork === false) {
-      this.showModal();
-    }
-  }
 
-  showModal() {
-    if (this.unlocked === false) {
-      this.bsModalRef = this.modalService.show(LockedModalComponent,
-        Object.assign({}, this.config, { class: 'gray modal-lg modal-center' }));
-    }
-
-    if (this.validNetwork === false) {
-      this.bsModalRef = this.modalService.show(ValidNetworkModalComponent,
-        Object.assign({}, this.config, { class: 'gray modal-lg modal-center' }));
-    }
-  }
-
-  navigateToInstallMeta() {
-    this.router.navigate(['/meta-mask']);
-  }
-
-  openTreasureModal() {
-    const amount = 1;
+  generateItemProcess() {
     let chestID: string;
     let userID: string;
     let txID;
@@ -155,7 +147,7 @@ export class TreasureComponent implements OnInit {
       const metadata = {
         'transaction-id': res,
         'item-id': '74143b3842ff373eb111d12f1f497611',
-        price: amount,
+        price: this.buyPrice,
         opened_date: Math.ceil((new Date()).getTime() / 1000),
       };
       const customData = {

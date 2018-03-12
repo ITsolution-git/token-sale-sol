@@ -23,6 +23,8 @@ import { AuthService } from './core/services/auth.service';
 import { HttpHelperService } from './core/http-helper.service';
 
 import { LockedModalComponent } from './shared/components/locked-modal/locked-modal.component';
+import { InsufficientFundsModalComponent } from './shared/components/insufficient-funds-modal/insufficient-funds-modal.component';
+
 import { InstallMaskModalComponent } from './shared/components/install-mask-modal/install-mask-modal.component';
 import { ValidNetworkModalComponent } from './shared/components/valid-network/valid-network.component';
 
@@ -42,6 +44,7 @@ export const reducers = {
   declarations: [
     AppComponent,
     LockedModalComponent,
+    InsufficientFundsModalComponent,
     InstallMaskModalComponent,
     ValidNetworkModalComponent,
     WaitingTreasureModalComponent,
@@ -74,6 +77,7 @@ export const reducers = {
   ],
   entryComponents: [
     LockedModalComponent,
+    InsufficientFundsModalComponent,
     InstallMaskModalComponent,
     ValidNetworkModalComponent,
     WaitingTreasureModalComponent,
