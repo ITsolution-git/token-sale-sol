@@ -79,7 +79,7 @@ export class OpeningTreasureModalComponent implements OnInit {
   }
 
   openChest() {
-    this.chestService.unlockChest(this.cId, { status: 'unlocked' }).subscribe((c: Chest) => {
+    this.chestService.updateChest(this.cId, { status: 'unlocked' }).subscribe((c: Chest) => {
     });
 
     const updated_owns = { 'owns': this.user.owns };

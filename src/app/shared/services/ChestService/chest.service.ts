@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHelperService } from '../../../core/http-helper.service';
 import { ApiRoutingService } from '../../../core/api-routing.service';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class ChestService {
@@ -8,7 +9,8 @@ export class ChestService {
   constructor(
     private http: HttpHelperService,
     private apiRoutingService: ApiRoutingService
-  ) { }
+  ) {
+  }
 
   getChest(id) {
     return this.http.get(
@@ -19,12 +21,10 @@ export class ChestService {
     );
   }
 
-  unlockChest(id, data) {
+  updateChest(id, data) {
     return this.http.patch(
       this.apiRoutingService.getChestUrlFromID(id),
-      data,
-      true,
-      null
+      data
     );
   }
 
@@ -34,33 +34,8 @@ export class ChestService {
       {
         'collection': 'The Founders Edition',
         'price': 1
-      },
-      true,
-      null
+      }
     );
   }
 
-  updateChest(chest, userID, transaction) {
-    return this.http.patch(
-      this.apiRoutingService.getChestUrlFromID(chest),
-      {
-        'user': userID,
-        'status': 'pending',
-        'transaction_id' : transaction
-      },
-      true,
-      null
-    );
-  }
-  addItemToChest(chest, item) {
-    return this.http.patch(
-      this.apiRoutingService.getChestUrlFromID(chest),
-      {
-        'status': 'pending',
-        'items': [item]
-     },
-      true,
-      null
-    );
-  }
 }

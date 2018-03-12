@@ -116,6 +116,7 @@ export class TreasureComponent implements OnInit {
     const amount = 1;
     let chestID: string;
     let userID: string;
+    let txID;
 
     this.chestService.createChest()
     .flatMap( c => {
@@ -126,18 +127,25 @@ export class TreasureComponent implements OnInit {
       userID = u[0].id;
       u[0].owns.push('Chest/' + chestID);
       const ownsData = {'owns': u[0].owns};
-      return this.userService.updateUser(userID, ownsData);
-    })
-    .flatMap(u => {
+      this.userService.updateUser(userID, ownsData);
       return this.metaMaskService.generateItem();
     })
-    .flatMap(tr => {
-      this.router.navigate(['/generate-item']);
-      this.chestService.updateChest(chestID, userID, tr);
-      return this.metaMaskService.getItemFromTransaction(tr, 1000)  ;
+    .flatMap (tr => {
+       this.router.navigate(['/generate-item']);
+       txID = tr;
+       return this.chestService.updateChest(chestID, {
+          'status': 'pending',
+          'user': userID,
+          'transaction_id' : tr
+      });
     })
-    .subscribe(item => {
-      this.chestService.addItemToChest(chestID, item);
+    .flatMap (res => {
+      return this.metaMaskService.getItemFromTransaction(txID, 1000);
+    })
+    .flatMap(item => {
+      return this.chestService.updateChest(chestID, {'items': [item]});
+    })
+    .subscribe( res => {
       this.metaMaskService.refreshBalance();
       this.bsModalRef = this.modalService.show(OpeningTreasureModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
     });
