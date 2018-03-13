@@ -21,6 +21,8 @@ export class MetaMaskService {
   GizerItems = Contract(GizerItemsArtifacts);
 
   web3: any;
+  web3Subject = new Subject<any>();
+  web3$ = this.web3Subject.asObservable();
 
   balance: number;
   balanceSubject = new Subject<number>();

@@ -93,7 +93,12 @@ export class TreasureComponent implements OnInit {
             Object.assign({}, this.config, { class: 'gray modal-lg modal-center' }));
         } else {
           if (this.gzrBalance > this.buyPrice) {
-            this.generateItemProcess();
+            this.metaMaskService.checkAndInstantiateWeb3().then(k => {
+              setTimeout(() => {
+                this.generateItemProcess();
+
+              }, 1000);
+            });
           } else {
             this.bsModalRef = this.modalService.show(InsufficientFundsModalComponent,
               Object.assign({}, this.config, { class: 'gray modal-lg modal-center' }));
@@ -139,7 +144,11 @@ export class TreasureComponent implements OnInit {
     .subscribe( res => {
       this.metaMaskService.refreshBalance();
       this.bsModalRef = this.modalService.show(OpeningTreasureModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
-    });
+      },
+      error => {
+        console.log(error);
+      }
+    );
 
 
     this.metaMaskService.treasureTransactionObservable$.subscribe(res => {
