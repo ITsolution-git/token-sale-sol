@@ -13,7 +13,6 @@ import { UserService } from '../../services/UserService/user.service';
 
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { WaitingTreasureModalComponent } from '../waiting-treasure-modal/waiting-treasure-modal.component';
 
 import { ValidNetworkModalComponent } from '../valid-network/valid-network.component';
 import { LockedModalComponent } from '../locked-modal/locked-modal.component';

@@ -30,7 +30,6 @@ import { ValidNetworkModalComponent } from './shared/components/valid-network/va
 
 import { INITIAL_APPLICATION_STATE } from './store/application-state';
 import { userReducer } from './store/reducers/user.reducer';
-import { WaitingTreasureModalComponent } from './shared/components/waiting-treasure-modal/waiting-treasure-modal.component';
 import { ChestService } from './shared/services/ChestService/chest.service';
 import { OpeningTreasureModalComponent } from './shared/components/opening-treasure-modal/opening-treasure-modal.component';
 import { UserLocalstorageRepository } from './shared/services/UserService/user.localstorage.repository.service';
@@ -47,7 +46,6 @@ export const reducers = {
     InsufficientFundsModalComponent,
     InstallMaskModalComponent,
     ValidNetworkModalComponent,
-    WaitingTreasureModalComponent,
     OpeningTreasureModalComponent
   ],
   imports: [
@@ -80,7 +78,6 @@ export const reducers = {
     InsufficientFundsModalComponent,
     InstallMaskModalComponent,
     ValidNetworkModalComponent,
-    WaitingTreasureModalComponent,
     OpeningTreasureModalComponent
   ],
   bootstrap: [AppComponent],
