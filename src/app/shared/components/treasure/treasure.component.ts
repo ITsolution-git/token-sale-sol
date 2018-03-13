@@ -39,7 +39,7 @@ export class TreasureComponent implements OnInit {
   userState: Observable<UserState>;
   walletAddress: String;
   unlocked = false;
-  balance: number;
+  gzrBalance: number;
   installed = false;
   validNetwork = true;
 
@@ -72,7 +72,6 @@ export class TreasureComponent implements OnInit {
 
   ngOnInit() {
     this.eventTrack('viewed-open-treasure-page', null);
-    this.metaMaskService.getAccountInfo();
   }
 
   openTreasure() {
@@ -80,18 +79,11 @@ export class TreasureComponent implements OnInit {
       if (state) {
         this.walletAddress = state.walletAddress;
         this.unlocked = state.unlocked;
-        this.balance = state.balance;
+        this.gzrBalance = state.gzrBalance;
         this.installed = state.installed;
         this.validNetwork = state.validNetwork;
 
-        if (this.unlocked && this.installed && this.validNetwork) {
-          if (this.balance > this.buyPrice) {
-            this.generateItemProcess();
-          } else {
-            this.bsModalRef = this.modalService.show(InsufficientFundsModalComponent,
-              Object.assign({}, this.config, { class: 'gray modal-lg modal-center' }));
-          }
-        } else if (this.installed === false) {
+        if (this.installed === false) {
           this.router.navigate(['/meta-mask']);
         } else if (this.unlocked === false) {
           this.bsModalRef = this.modalService.show(LockedModalComponent,
@@ -99,6 +91,13 @@ export class TreasureComponent implements OnInit {
         } else if (this.validNetwork === false) {
           this.bsModalRef = this.modalService.show(ValidNetworkModalComponent,
             Object.assign({}, this.config, { class: 'gray modal-lg modal-center' }));
+        } else {
+          if (this.gzrBalance > this.buyPrice) {
+            this.generateItemProcess();
+          } else {
+            this.bsModalRef = this.modalService.show(InsufficientFundsModalComponent,
+              Object.assign({}, this.config, { class: 'gray modal-lg modal-center' }));
+          }
         }
       }
     });
