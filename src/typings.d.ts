@@ -1,6 +1,6 @@
 /* SystemJS module definition */
 declare var module: NodeModule;
-declare var require: NodeRequire;
+declare var require: any;
 declare var UnityLoader: any;
 
 interface NodeModule {
