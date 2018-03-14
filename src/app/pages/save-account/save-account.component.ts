@@ -179,7 +179,6 @@ export class SaveAccountComponent implements OnInit {
                 purchased_gzr: purchased_gzr,
                 total_gzr_purchased: total_gzr_purchased,
                 total_ether_spent: total_ether_spent,
-                last_purchased_at: last_purchased_at
               };
 
               if (last_purchased_at !== 0) {
