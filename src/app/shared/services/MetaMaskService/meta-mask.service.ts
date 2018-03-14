@@ -7,7 +7,6 @@ import Contract from 'truffle-contract';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
-import Tx from 'ethereumjs-tx';
 
 const GZRArtifacts = require('../../../../../build/contracts/GizerToken.json');
 const StandardTokenArtifacts = require('../../../../../build/contracts/StandardToken.json');
