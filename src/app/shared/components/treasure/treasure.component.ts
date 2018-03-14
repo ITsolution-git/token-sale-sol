@@ -47,11 +47,9 @@ export class TreasureComponent implements OnInit {
   config = {
     animated: true,
     keyboard: true,
-    backdrop: true,
-    ignoreBackdropClick: false,
+    backdrop: 'static',
+    ignoreBackdropClick: true,
   };
-
-
 
   bsModalRef: BsModalRef;
 

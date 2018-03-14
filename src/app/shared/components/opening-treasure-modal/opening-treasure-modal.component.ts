@@ -17,8 +17,7 @@ declare var Math;
 declare const $: any;
 @Component({
   selector: 'app-treasure-modal',
-  templateUrl: './opening-treasure-modal.component.html',
-  styleUrls: ['./opening-treasure-modal.component.scss']
+  templateUrl: './opening-treasure-modal.component.html'
 })
 export class OpeningTreasureModalComponent implements OnInit {
   chest: any;
@@ -52,13 +51,11 @@ export class OpeningTreasureModalComponent implements OnInit {
       }
     };
     this.userState = this.store.select('userState');
-    this.cId = 'eeeceb748b383a08a398e260d4a34b91';       
   }
 
   ngOnInit() {
-    // this.cId = this.localStorage.retrieve('chestId');
+    this.cId = this.localStorage.retrieve('chestId');
     this.chestService.getChest(this.cId).subscribe((c: Chest) => {
-      debugger
       this.chest_model = c;
       if (c.items.length > 0) {
         this.itemService.getItem(c.items[0]).subscribe(item => {
@@ -66,7 +63,7 @@ export class OpeningTreasureModalComponent implements OnInit {
         });
       }
     });
-  
+
     this.userState.subscribe(state => {
       if (state) {
         if (state.walletAddress && state.walletAddress !== this.walletAddress) {
@@ -78,10 +75,6 @@ export class OpeningTreasureModalComponent implements OnInit {
         }
       }
     });
-
-    this.chestService.chestId$.subscribe(res => {
-      debugger
-    }); 
 
     this.isMobile = this.isMobileView();
   }
@@ -109,7 +102,7 @@ export class OpeningTreasureModalComponent implements OnInit {
 
     this.eventTrack('opened-treasure', metaData);
 
-    this.chest = document.querySelector('.chest');
+    this.chest = document.querySelector('.treasure-modal__chest');
 
     if (this.chest.classList.contains('chest--opened')) {
       return;
@@ -135,12 +128,8 @@ export class OpeningTreasureModalComponent implements OnInit {
 
   addRay(index) {
     const div = document.createElement('div');
-    div.classList.add('chest__card-ray', 'chest__card-ray--' + index);
-    if (this.chest.querySelector('.chest__card-rays') != null) {
-      this.chest.querySelector('.chest__card-rays')
-        .appendChild(div);
-
-    }
+    div.classList.add('chest__card-ray',  'chest__card-ray--' + index);
+    this.chest.querySelector('.chest__card-rays').appendChild(div);
   }
 
   addParticle() {
