@@ -142,6 +142,7 @@ export class TreasureComponent implements OnInit {
     })
     .subscribe( res => {
       this.metaMaskService.refreshBalance();
+      this.localStorage.store('chestId', chestID);
       this.bsModalRef = this.modalService.show(OpeningTreasureModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
       },
       error => {

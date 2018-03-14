@@ -10,6 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import { User } from '../../models/user.model';
 import { Store } from '@ngrx/store';
 import { ApplicationState } from '../../../store/application-state';
+import { LocalStorageService } from 'ngx-webstorage';
 
 declare var Math;
 
@@ -23,7 +24,7 @@ export class OpeningTreasureModalComponent implements OnInit {
   chest: any;
   item: any;
   chest_model: Chest;
-  cId = 'eeeceb748b383a08a398e260d4a34b91';
+  cId: string;
   userState: Observable<UserState>;
   walletAddress: String;
   user: User;
@@ -34,6 +35,7 @@ export class OpeningTreasureModalComponent implements OnInit {
     public bsModalRef: BsModalRef,
     private chestService: ChestService,
     private itemService: ItemService,
+    private localStorage: LocalStorageService,
     private userService: UserService,
     private store: Store<ApplicationState>,
   ) {
@@ -50,10 +52,13 @@ export class OpeningTreasureModalComponent implements OnInit {
       }
     };
     this.userState = this.store.select('userState');
+    this.cId = 'eeeceb748b383a08a398e260d4a34b91';       
   }
 
   ngOnInit() {
+    // this.cId = this.localStorage.retrieve('chestId');
     this.chestService.getChest(this.cId).subscribe((c: Chest) => {
+      debugger
       this.chest_model = c;
       if (c.items.length > 0) {
         this.itemService.getItem(c.items[0]).subscribe(item => {
@@ -61,7 +66,7 @@ export class OpeningTreasureModalComponent implements OnInit {
         });
       }
     });
-
+  
     this.userState.subscribe(state => {
       if (state) {
         if (state.walletAddress && state.walletAddress !== this.walletAddress) {
@@ -74,8 +79,11 @@ export class OpeningTreasureModalComponent implements OnInit {
       }
     });
 
-    this.isMobile = this.isMobileView();
+    this.chestService.chestId$.subscribe(res => {
+      debugger
+    }); 
 
+    this.isMobile = this.isMobileView();
   }
 
   openChest() {
