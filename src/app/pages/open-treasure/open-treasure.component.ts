@@ -67,16 +67,16 @@ export class OpenTreasureComponent implements OnInit {
   }
 
   ngOnInit() {
-    const cid = 'eeeceb748b383a08a398e260d4a34b91';
-    this.chestService.getChest(cid).subscribe(cId => {
-        this.chest = cId;
-    });
+    // const cid = 'eeeceb748b383a08a398e260d4a34b91';
+    // this.chestService.getChest(cid).subscribe(cId => {
+    //     this.chest = cId;
+    // });
 
-    this.itemService.getItems(10, 1).subscribe((res: Item[]) => {
-      this.itemService.getItems_by_IDs(res[0].current.similar).subscribe((resp: Item[]) => {
-        this.items = resp;
-      });
-    });
+    // this.itemService.getItems(10, 1).subscribe((res: Item[]) => {
+    //   this.itemService.getItems_by_IDs(res[0].current.similar).subscribe((resp: Item[]) => {
+    //     this.items = resp;
+    //   });
+    // });
   }
 
   showModals() {
