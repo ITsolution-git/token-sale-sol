@@ -23,12 +23,13 @@ import { AuthService } from './core/services/auth.service';
 import { HttpHelperService } from './core/http-helper.service';
 
 import { LockedModalComponent } from './shared/components/locked-modal/locked-modal.component';
+import { InsufficientFundsModalComponent } from './shared/components/insufficient-funds-modal/insufficient-funds-modal.component';
+
 import { InstallMaskModalComponent } from './shared/components/install-mask-modal/install-mask-modal.component';
 import { ValidNetworkModalComponent } from './shared/components/valid-network/valid-network.component';
 
 import { INITIAL_APPLICATION_STATE } from './store/application-state';
 import { userReducer } from './store/reducers/user.reducer';
-import { WaitingTreasureModalComponent } from './shared/components/waiting-treasure-modal/waiting-treasure-modal.component';
 import { ChestService } from './shared/services/ChestService/chest.service';
 import { OpeningTreasureModalComponent } from './shared/components/opening-treasure-modal/opening-treasure-modal.component';
 import { UserLocalstorageRepository } from './shared/services/UserService/user.localstorage.repository.service';
@@ -42,9 +43,9 @@ export const reducers = {
   declarations: [
     AppComponent,
     LockedModalComponent,
+    InsufficientFundsModalComponent,
     InstallMaskModalComponent,
     ValidNetworkModalComponent,
-    WaitingTreasureModalComponent,
     OpeningTreasureModalComponent
   ],
   imports: [
@@ -74,9 +75,9 @@ export const reducers = {
   ],
   entryComponents: [
     LockedModalComponent,
+    InsufficientFundsModalComponent,
     InstallMaskModalComponent,
     ValidNetworkModalComponent,
-    WaitingTreasureModalComponent,
     OpeningTreasureModalComponent
   ],
   bootstrap: [AppComponent],

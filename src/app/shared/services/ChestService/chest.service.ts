@@ -1,14 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpHelperService } from '../../../core/http-helper.service';
 import { ApiRoutingService } from '../../../core/api-routing.service';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class ChestService {
+  chestId = new Subject<string>();
+  chestId$ = this.chestId.asObservable();
 
   constructor(
     private http: HttpHelperService,
     private apiRoutingService: ApiRoutingService
-  ) { }
+  ) {
+  }
+
+  setChestId(id) {
+    this.chestId.next(id);
+  }
 
   getChest(id) {
     return this.http.get(
@@ -19,39 +28,20 @@ export class ChestService {
     );
   }
 
-  unlockChest(id, data) {
+  updateChest(id, data) {
     return this.http.patch(
       this.apiRoutingService.getChestUrlFromID(id),
-      data,
-      true,
-      null
+      data
     );
   }
-
 
   createChest() {
     return this.http.put(this.apiRoutingService.getChestUrl(),
       {
         'collection': 'The Founders Edition',
         'price': 1
-      },
-      true,
-      null
+      }
     );
   }
 
-  updateChest(chest, userID, transaction) {
-    console.log('update chest', this.apiRoutingService.getChestUrlFromID(chest), transaction);
-
-    return this.http.patch(
-      this.apiRoutingService.getChestUrlFromID(chest),
-      {
-        'user': userID,
-        'status': 'pending',
-        'transaction_id' : transaction
-      },
-      true,
-      null
-    );
-  }
 }

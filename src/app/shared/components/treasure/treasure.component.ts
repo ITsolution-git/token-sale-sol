@@ -13,10 +13,11 @@ import { UserService } from '../../services/UserService/user.service';
 
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { WaitingTreasureModalComponent } from '../waiting-treasure-modal/waiting-treasure-modal.component';
 
 import { ValidNetworkModalComponent } from '../valid-network/valid-network.component';
 import { LockedModalComponent } from '../locked-modal/locked-modal.component';
+import { InsufficientFundsModalComponent } from '../insufficient-funds-modal/insufficient-funds-modal.component';
+
 import { OpeningTreasureModalComponent } from '../opening-treasure-modal/opening-treasure-modal.component';
 import { LocalStorageService } from 'ngx-webstorage';
 
@@ -35,22 +36,20 @@ export interface TransactionReceipt {
 })
 export class TreasureComponent implements OnInit {
   userState: Observable<UserState>;
-  GZRInstance$: Observable<any>;
-  ItemsInstance$: Observable<any>;
   walletAddress: String;
   unlocked = false;
-  balance: number;
+  gzrBalance: number;
   installed = false;
   validNetwork = true;
+
+  buyPrice = 1;
 
   config = {
     animated: true,
     keyboard: true,
-    backdrop: true,
-    ignoreBackdropClick: false,
+    backdrop: 'static',
+    ignoreBackdropClick: true,
   };
-
-
 
   bsModalRef: BsModalRef;
 
@@ -70,90 +69,91 @@ export class TreasureComponent implements OnInit {
 
   ngOnInit() {
     this.eventTrack('viewed-open-treasure-page', null);
-    this.metaMaskService.getAccountInfo();
-
-    this.userState.subscribe(state => {
-      if (state) {
-        this.walletAddress = state.walletAddress;
-        this.unlocked = state.unlocked;
-        this.balance = state.balance;
-        this.installed = state.installed;
-        this.validNetwork = state.validNetwork;
-      }
-    });
-
   }
 
   openTreasure() {
-    if (this.unlocked && this.installed && this.validNetwork) {
-      this.openTreasureModal();
-    } else if (this.installed === false) {
-      this.navigateToInstallMeta();
-    } else if (this.unlocked === false) {
-      this.showModal();
-    } else if (this.validNetwork === false) {
-      this.showModal();
-    }
+    this.userState.first().subscribe(state => {
+      if (state) {
+        this.walletAddress = state.walletAddress;
+        this.unlocked = state.unlocked;
+        this.gzrBalance = state.gzrBalance;
+        this.installed = state.installed;
+        this.validNetwork = state.validNetwork;
+
+        if (this.installed === false) {
+          this.router.navigate(['/meta-mask']);
+        } else if (this.unlocked === false) {
+          this.bsModalRef = this.modalService.show(LockedModalComponent,
+            Object.assign({}, this.config, { class: 'gray modal-lg modal-center' }));
+        } else if (this.validNetwork === false) {
+          this.bsModalRef = this.modalService.show(ValidNetworkModalComponent,
+            Object.assign({}, this.config, { class: 'gray modal-lg modal-center' }));
+        } else {
+          if (this.gzrBalance >= this.buyPrice) {
+            this.metaMaskService.checkAndInstantiateWeb3().then(k => {
+              setTimeout(() => {
+                this.generateItemProcess();
+
+              }, 1500);
+            });
+          } else {
+            this.bsModalRef = this.modalService.show(InsufficientFundsModalComponent,
+              Object.assign({}, this.config, { class: 'gray modal-lg modal-center' }));
+          }
+        }
+      }
+    });
   }
 
-  showModal() {
-    if (this.unlocked === false) {
-      this.bsModalRef = this.modalService.show(LockedModalComponent,
-        Object.assign({}, this.config, { class: 'gray modal-lg modal-center' }));
-    }
 
-    if (this.validNetwork === false) {
-      this.bsModalRef = this.modalService.show(ValidNetworkModalComponent,
-        Object.assign({}, this.config, { class: 'gray modal-lg modal-center' }));
-    }
-  }
-
-  navigateToInstallMeta() {
-    this.router.navigate(['/meta-mask']);
-  }
-
-  openTreasureModal() {
-    const amount = 1;
+  generateItemProcess() {
     let chestID: string;
     let userID: string;
-    let owns: string[] = [];
-
-    this.metaMaskService.approveGZRSpending(amount)
-      .then(res => {
-      })
-      .catch((error) => {
-      });
+    let txID;
 
     this.chestService.createChest()
-      .flatMap(c => {
-        console.log('chest ', c);
-        chestID = c.id;
-        return this.userService.retrieveUser(this.walletAddress);
-      })
-      .flatMap(u => {
-        userID = u[0].id;
-        owns = u[0].owns;
-        console.log('user ', u);
-        console.log('owns', owns);
-        console.log('id', userID);
-
-        return this.metaMaskService.generateItem();
-      })
-      .flatMap((tr) => {
-        console.log('from generate item ', tr);
-        this.router.navigate(['/generate-item']);
-        return this.chestService.updateChest(chestID, userID, tr);
-      })
-      .subscribe(c => {
-        owns[owns.length] = chestID;
-        this.userService.updateUserOwnership(userID, owns);
+    .flatMap( c => {
+      chestID = c.id;
+      return this.userService.retrieveUser(this.walletAddress);
+    })
+    .flatMap(u => {
+      userID = u[0].id;
+      u[0].owns.push('Chest/' + chestID);
+      const ownsData = {'owns': u[0].owns};
+      this.userService.updateUser(userID, ownsData);
+      return this.metaMaskService.generateItem();
+    })
+    .flatMap (tr => {
+       this.router.navigate(['/generate-item']);
+       txID = tr;
+       return this.chestService.updateChest(chestID, {
+          'status': 'pending',
+          'user': userID,
+          'transaction_id' : tr
       });
+    })
+    .flatMap (res => {
+      return this.metaMaskService.getItemFromTransaction(txID, 1000);
+    })
+    .flatMap(item => {
+      return this.chestService.updateChest(chestID, {'items': [item]});
+    })
+    .subscribe( res => {
+      this.metaMaskService.refreshBalance();
+      this.localStorage.store('chestId', chestID);
+      this.bsModalRef = this.modalService.show(OpeningTreasureModalComponent, Object.assign({}, this.config, { class: 'gray modal-lg' }));
+      },
+      error => {
+        console.log(error);
+      }
+    );
+
 
     this.metaMaskService.treasureTransactionObservable$.subscribe(res => {
       const metadata = {
         'transaction-id': res,
         'item-id': '74143b3842ff373eb111d12f1f497611',
-        price: amount,
+        price: this.buyPrice,
         opened_date: Math.ceil((new Date()).getTime() / 1000),
       };
       const customData = {

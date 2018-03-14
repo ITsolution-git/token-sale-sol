@@ -25,8 +25,8 @@ export class UserService {
 
   retrieveUser(walletAddress) {
     return this.http.get(
-      this.apiRoutingService.getUsersUrl(),
-      {wallet: walletAddress},
+      this.apiRoutingService.getUsersUrl() + '?wallet=' + walletAddress,
+      {},
       false,
       null
     );
@@ -36,9 +36,7 @@ export class UserService {
     this.userLocalStorageRepository.setUserId(userId);
     return this.http.patch(
       this.apiRoutingService.getUserUrl(userId),
-      data,
-      false,
-      null
+      data
     );
   }
 
@@ -50,13 +48,4 @@ export class UserService {
      null
    );
   }
-
-  updateUserOwnership(userId, ownsData) {
-    return this.http.patch(
-      this.apiRoutingService.getUserUrlFromID(userId),
-      ownsData,
-      false,
-      null
-    );
-   }
 }

@@ -10,20 +10,20 @@ import { Observable } from 'rxjs/Observable';
 import { User } from '../../models/user.model';
 import { Store } from '@ngrx/store';
 import { ApplicationState } from '../../../store/application-state';
+import { LocalStorageService } from 'ngx-webstorage';
 
 declare var Math;
 
 declare const $: any;
 @Component({
   selector: 'app-treasure-modal',
-  templateUrl: './opening-treasure-modal.component.html',
-  styleUrls: ['./opening-treasure-modal.component.scss']
+  templateUrl: './opening-treasure-modal.component.html'
 })
 export class OpeningTreasureModalComponent implements OnInit {
   chest: any;
   item: any;
   chest_model: Chest;
-  cId = 'eeeceb748b383a08a398e260d4a34b91';
+  cId: string;
   userState: Observable<UserState>;
   walletAddress: String;
   user: User;
@@ -34,6 +34,7 @@ export class OpeningTreasureModalComponent implements OnInit {
     public bsModalRef: BsModalRef,
     private chestService: ChestService,
     private itemService: ItemService,
+    private localStorage: LocalStorageService,
     private userService: UserService,
     private store: Store<ApplicationState>,
   ) {
@@ -53,6 +54,7 @@ export class OpeningTreasureModalComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.cId = this.localStorage.retrieve('chestId');
     this.chestService.getChest(this.cId).subscribe((c: Chest) => {
       this.chest_model = c;
       if (c.items.length > 0) {
@@ -75,11 +77,10 @@ export class OpeningTreasureModalComponent implements OnInit {
     });
 
     this.isMobile = this.isMobileView();
-
   }
 
   openChest() {
-    this.chestService.unlockChest(this.cId, { status: 'unlocked' }).subscribe((c: Chest) => {
+    this.chestService.updateChest(this.cId, { status: 'unlocked' }).subscribe((c: Chest) => {
     });
 
     const updated_owns = { 'owns': this.user.owns };
@@ -101,7 +102,7 @@ export class OpeningTreasureModalComponent implements OnInit {
 
     this.eventTrack('opened-treasure', metaData);
 
-    this.chest = document.querySelector('.chest');
+    this.chest = document.querySelector('.treasure-modal__chest');
 
     if (this.chest.classList.contains('chest--opened')) {
       return;
@@ -127,12 +128,8 @@ export class OpeningTreasureModalComponent implements OnInit {
 
   addRay(index) {
     const div = document.createElement('div');
-    div.classList.add('chest__card-ray', 'chest__card-ray--' + index);
-    if (this.chest.querySelector('.chest__card-rays') != null) {
-      this.chest.querySelector('.chest__card-rays')
-        .appendChild(div);
-
-    }
+    div.classList.add('chest__card-ray',  'chest__card-ray--' + index);
+    this.chest.querySelector('.chest__card-rays').appendChild(div);
   }
 
   addParticle() {
@@ -191,7 +188,6 @@ export class OpeningTreasureModalComponent implements OnInit {
         this.chest.querySelector('.chest__card-rays').innerHTML = '';
       }
     }
-
     this.bsModalRef.hide();
   }
 
@@ -209,7 +205,5 @@ export class OpeningTreasureModalComponent implements OnInit {
     }
     return true;
   }
-
-
 
 }

@@ -9,20 +9,19 @@ import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 
 const GZRArtifacts = require('../../../../../build/contracts/GizerToken.json');
-const StandardTokenArtifacts = require('../../../../../build/contracts/StandardToken.json');
-const GZRTokenToItemGenerationArtifacts = require('../../../../../build/contracts/GZRTokenToItemGeneration.json');
+const GizerItemsArtifacts = require('../../../../../build/contracts/GizerItems.json');
 
 declare var window: any;
 
 @Injectable()
 export class MetaMaskService {
 
-  GzrToken = Contract(GZRArtifacts);
-  StandardToken = Contract(StandardTokenArtifacts);
-  GZRTokenToItemGeneration = Contract(GZRTokenToItemGenerationArtifacts);
+  GizerToken = Contract(GZRArtifacts);
+  GizerItems = Contract(GizerItemsArtifacts);
 
-  accounts: any;
   web3: any;
+  web3Subject = new Subject<any>();
+  web3$ = this.web3Subject.asObservable();
 
   balance: number;
   balanceSubject = new Subject<number>();
@@ -77,6 +76,9 @@ export class MetaMaskService {
   ItemsContractInstanceSubject = new Subject<any>();
   ItemsContractInstance$ = this.ItemsContractInstanceSubject.asObservable();
 
+  LastItem;
+  LastItemSubject = new Subject<any>();
+  LastItem$ = this.LastItemSubject.asObservable();
 
   loadMetaObservable: any;
   loadMetaSubscription$: Subscription = new Subscription();
@@ -151,9 +153,8 @@ export class MetaMaskService {
   }
 
   onReady() {
-    this.GzrToken.setProvider(this.web3.currentProvider);
-    this.StandardToken.setProvider(this.web3.currentProvider);
-    this.GZRTokenToItemGeneration.setProvider(this.web3.currentProvider);
+    this.GizerToken.setProvider(this.web3.currentProvider);
+    this.GizerItems.setProvider(this.web3.currentProvider);
 
     this.web3.eth.getAccounts((err, accs) => {
 
@@ -168,8 +169,7 @@ export class MetaMaskService {
 
       this.unlocked = true;
       this.unlockedSubject.next(this.unlocked);
-      this.accounts = accs;
-      this.account = this.accounts[0];
+      this.account = accs[0];
       this.accountSubject.next(this.account);
       this.refreshBalance();
     });
@@ -177,7 +177,7 @@ export class MetaMaskService {
 
   createGZR() {
     let gzr;
-    return this.GzrToken
+    return this.GizerToken
       .deployed()
       .then(instance => {
         gzr = instance;
@@ -209,7 +209,7 @@ export class MetaMaskService {
     if (this.validNetwork === false) {
       return;
     }
-    return this.GzrToken.deployed()
+    return this.GizerToken.deployed()
       .then(instance => {
         this.contractAddress = instance.address;
         this.contractAddressSubject.next(this.contractAddress);
@@ -275,7 +275,7 @@ export class MetaMaskService {
 
     let gzr;
     return new Promise((resolve, reject) => {
-      this.GzrToken
+      this.GizerToken
         .deployed()
         .then(instance => {
           gzr = instance;
@@ -303,7 +303,7 @@ export class MetaMaskService {
 
     let gzr;
     return new Promise((resolve, reject) => {
-      this.GzrToken
+      this.GizerToken
         .deployed()
         .then(instance => {
           gzr = instance;
@@ -602,53 +602,21 @@ Cryptocurrency is a new and untested technology. In addition to the risks set fo
 
 
   getTokenContract() {
-    if (this.validNetwork === false) {
-      return;
-    }
-    return this.StandardToken.deployed();
+
+    return this.GizerToken.deployed();
   }
 
-  getStandardContract() {
-    if (this.validNetwork === false) {
-      return;
-    }
-    return this.GZRTokenToItemGeneration.deployed();
-  }
-  getItemGenerationContract() {
-    if (this.validNetwork === false) {
-      return;
-    }
-    return this.GZRTokenToItemGeneration.deployed();
-  }
+  getItemContract() {
 
-
-
-  approveGZRSpending(amount) {
-    let gzr;
-    return new Promise((resolve, reject) => {
-      this.getTokenContract()
-        .then(ins => {
-          gzr = ins;
-          return this.getItemGenerationContract();
-        })
-        .then(instance => {
-          return gzr.approve(instance.address, amount, { from: this.account, gas: 41000 });
-        })
-        .then(t => {
-          resolve(t);
-        })
-        .catch(e => {
-          this.setStatus('Error in GZR approval');
-        });
-    });
+    return this.GizerItems.deployed();
   }
 
   generateItem() {
     return new Promise((resolve, reject) => {
-      this.getItemGenerationContract()
+      this.getTokenContract()
         .then(instance => {
-          return instance.spendGZRToGetAnItem.sendTransaction({
-            from: this.account, gas: 41000, to: instance.address
+          return instance.buyItem.sendTransaction({
+            from: this.account, gas: 280000, to: instance.address
           });
         })
         .then(tx => {
@@ -656,10 +624,42 @@ Cryptocurrency is a new and untested technology. In addition to the risks set fo
           resolve(tx);
         })
         .catch(e => {
-          reject({ 'failure': true });
           this.setStatus('Error in item generation');
+          reject({ 'failure': true , 'message': e});
         });
     });
+  }
+
+  getItemFromTransaction(txHash, interval) {
+    const transactionReceiptAsync = (resolve, reject) => {
+      this.web3.eth.getTransactionReceipt(txHash, (error, receipt) => {
+            if (error) {
+                reject(error);
+            } else if (receipt == null) {
+                setTimeout(
+                    () => transactionReceiptAsync(resolve, reject),
+                    interval ? interval : 500);
+            } else {
+                const idx = this.web3.toAscii(receipt.logs[1].data);
+                const uuid = this.web3.toAscii(receipt.logs[1].topics[3]);
+                this.LastItem = uuid;
+                this.LastItemSubject.next({'idx': idx  , 'uuid': uuid});
+                resolve(
+                  uuid
+                );
+            }
+        });
+    };
+
+    if (typeof txHash === 'string') {
+        return new Promise(transactionReceiptAsync);
+    } else {
+        throw new Error('Invalid Type: ' + txHash);
+    }
+  }
+
+  getLastItemInfo(): Observable<any> {
+    return this.LastItemSubject.asObservable();
   }
 
 }
