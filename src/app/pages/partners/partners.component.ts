@@ -17,6 +17,16 @@ export class PartnersComponent implements OnInit {
 
 
   ngOnInit() {
+    this.eventTrack('viewed-partners-page', null);
+  }
+
+  eventTrack(event, metadata) {
+    if (!(metadata)) {
+      (<any>window).Intercom('trackEvent', event);
+    } else {
+      (<any>window).Intercom('trackEvent', event, metadata);
+    }
+    return true;
   }
 
 }
