@@ -11,6 +11,8 @@ import { Observable } from 'rxjs/Observable';
 import { UserState } from '../../store/store-data';
 import { UPDATE_NICK_NAME, UPDATE_SIGNUP } from '../../store/actions/user.actions';
 import { Meta, Title } from '@angular/platform-browser';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 @Component({
   selector: 'app-save-account',
@@ -35,6 +37,15 @@ export class SaveAccountComponent implements OnInit {
   saveWalletStr = 'walletAddress';
   saveUserIDStr = 'user_id';
   strRootURL = '/';
+
+  bsModalRef: BsModalRef;
+
+  config = {
+    animated: true,
+    keyboard: true,
+    backdrop: true,
+    ignoreBackdropClick: false
+  };
 
   constructor(
     private fb: FormBuilder,
@@ -231,5 +242,20 @@ export class SaveAccountComponent implements OnInit {
       (<any>window).Intercom('trackEvent', event, metadata);
     }
     return true;
+  }
+
+  onRefresh() {
+    this.metaMaskService.getAccountInfo();
+
+    this.router.routeReuseStrategy.shouldReuseRoute = function() { return false; };
+
+    const currentUrl = this.router.url + '?';
+
+    this.router.navigateByUrl(currentUrl)
+      .then(() => {
+        this.router.navigated = false;
+        this.router.navigate([this.router.url]);
+      });
+
   }
 }
