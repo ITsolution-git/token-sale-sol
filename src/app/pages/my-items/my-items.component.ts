@@ -28,7 +28,7 @@ declare const $: any;
   styleUrls: ['./my-items.component.scss']
 })
 export class MyItemsComponent implements OnInit {
-  projectURL = './../../../assets/externals/unity-player/Build/Project.json';
+  projectURL = './../../../assets/externals/unity-player/Build/Final Build.json';
   container = 'gameContainer';
   isMobile = false;
   gameInstance: any;
