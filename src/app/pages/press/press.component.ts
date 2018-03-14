@@ -24,6 +24,7 @@ export class PressComponent implements OnInit {
 
   ngOnInit() {
     this.isMobile = this.isMobileView();
+    this.eventTrack('viewed-press-page', null);
   }
 
   @HostListener('window:resize', ['$event'])
@@ -57,5 +58,14 @@ export class PressComponent implements OnInit {
     const formRequest = { name, email, message, date, html };
     // TODO: Need Email API to send form data
     this.form.reset();
+  }
+
+  eventTrack(event, metadata) {
+    if (!(metadata)) {
+      (<any>window).Intercom('trackEvent', event);
+    } else {
+      (<any>window).Intercom('trackEvent', event, metadata);
+    }
+    return true;
   }
 }
