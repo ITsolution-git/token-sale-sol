@@ -84,6 +84,7 @@ export class BuyGzrComponent implements OnInit {
           this.unlocked = state.unlocked;
           this.validNetwork = state.validNetwork;
           this.isMobile = this.isMobileView();
+          this.isFromModal = state.showAddressForm;
           this.showInstalledModal();
         }
       }
