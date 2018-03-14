@@ -89,12 +89,12 @@ export class TreasureComponent implements OnInit {
           this.bsModalRef = this.modalService.show(ValidNetworkModalComponent,
             Object.assign({}, this.config, { class: 'gray modal-lg modal-center' }));
         } else {
-          if (this.gzrBalance > this.buyPrice) {
+          if (this.gzrBalance >= this.buyPrice) {
             this.metaMaskService.checkAndInstantiateWeb3().then(k => {
               setTimeout(() => {
                 this.generateItemProcess();
 
-              }, 1000);
+              }, 1500);
             });
           } else {
             this.bsModalRef = this.modalService.show(InsufficientFundsModalComponent,

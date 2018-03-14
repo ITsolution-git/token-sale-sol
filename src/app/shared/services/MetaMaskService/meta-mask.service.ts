@@ -77,6 +77,7 @@ export class MetaMaskService {
   ItemsContractInstanceSubject = new Subject<any>();
   ItemsContractInstance$ = this.ItemsContractInstanceSubject.asObservable();
 
+  LastItem;
   LastItemSubject = new Subject<any>();
   LastItem$ = this.LastItemSubject.asObservable();
 
@@ -382,6 +383,7 @@ export class MetaMaskService {
             } else {
                 const idx = this.web3.toAscii(receipt.logs[1].data);
                 const uuid = this.web3.toAscii(receipt.logs[1].topics[3]);
+                this.LastItem = uuid;
                 this.LastItemSubject.next({'idx': idx  , 'uuid': uuid});
                 resolve(
                   uuid
@@ -395,6 +397,10 @@ export class MetaMaskService {
     } else {
         throw new Error('Invalid Type: ' + txHash);
     }
+  }
+
+  getLastItemInfo(): Observable<any> {
+    return this.LastItemSubject.asObservable();
   }
 
 }
