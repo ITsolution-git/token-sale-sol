@@ -314,7 +314,7 @@ export class HeaderComponent implements OnInit {
         const customData = {
           registered_metamask: false
         };
-        this.updateUser('', '', '', customData);
+        this.updateCustomData(customData);
         this.isAuthenticated = false;
         this.localStorage.clear(this.saveUserIDStr);
       }

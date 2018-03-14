@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { BsModalRef } from 'ngx-bootstrap';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
@@ -22,6 +23,7 @@ export class InstallMaskModalComponent implements OnInit {
   constructor(
     private router: Router,
     private bsModalRef: BsModalRef,
+    private location: Location,
     private store: Store<ApplicationState>
   ) {
     this.userState = this.store.select('userState');
@@ -63,5 +65,6 @@ export class InstallMaskModalComponent implements OnInit {
 
   refreshMetaMask() {
     window.location.reload();
+    // this.router.navigateByUrl('/save-account')
   }
 }
