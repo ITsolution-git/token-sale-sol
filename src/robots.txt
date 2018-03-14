@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /save-account
+Disallow: /thank-you
+Disallow: /generate-item
+Disallow: /meta-mask

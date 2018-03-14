@@ -65,10 +65,14 @@ export class ThankYouComponent implements OnInit {
             this.updateUser(customData);
             this.updatePostBack(res['transaction'], gzrValue, ethValue, 'ETH', 'GZR');
             const txData = {
-              'tx_id': res['transaction'],
-              'eth': ethValue,
-              'gzr': gzrValue ,
-              'confirmed_at': new Date().toISOString()
+              transactions: [
+                {
+                  'tx_id': res['transaction'],
+                  'eth': ethValue,
+                  'gzr': gzrValue ,
+                  'confirmed_at': new Date().toISOString()
+                }
+              ]
             };
             this.saveUserTransaction(txData);
           }, err => {

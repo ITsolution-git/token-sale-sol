@@ -9,7 +9,8 @@
       "outDir": "dist",
       "assets": [
         "assets",
-        "favicon.ico"
+        "favicon.ico",
+        "robots.txt"
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -27,6 +28,8 @@
       ],
       "scripts": [
         "../node_modules/ion-rangeslider/js/ion.rangeSlider.min.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.min.js",
         "../src/assets/externals/unity-player/Build/UnityLoader.js",
         "../src/assets/externals/unity-player/TemplateData/UnityProgress.js"
       ],

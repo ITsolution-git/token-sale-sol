@@ -12,8 +12,8 @@
             </div>
             <div *ngIf="isAccepted && showAddress" class="address-block">
               <div class="position-relative">
-                <input class="txt-value-input w-100 pl-3 mb-3" value="0x90dCdC0AD9813ba963D54ADcCFA9091f4dd2925B" type="text" readonly>
-                <span id="copy-wallet-address" class="copy-icon"><img class="pr-1" src="/assets/icons/icon-copy.png" alt="copy icon">Copy</span>
+                <input class="txt-value-input w-100 pl-3 mb-3" value="0x2a7AdF03258f4F8cdA5e59D79eb0c5F496fE61E9" type="text" readonly>
+                <span id="copy-wallet-address" class="copy-icon"><img class="pr-1" src="/assets/icons/icon-copy.png" alt="copy icon" (click)="onCopy()" >Copy</span>
               </div>
               <!-- <div class="separator">
                 <span class="line"></span>

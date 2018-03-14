@@ -47,6 +47,7 @@ export class BuyGzrComponent implements OnInit {
   ethValueStr = 'purchasedEthValue';
   gzrValueStr = 'purchasedGZRValue';
   saveUserIDStr = 'user_id';
+  contractAddress = '0x2a7AdF03258f4F8cdA5e59D79eb0c5F496fE61E9';
 
   bsModalRef: BsModalRef;
 
@@ -84,6 +85,7 @@ export class BuyGzrComponent implements OnInit {
           this.unlocked = state.unlocked;
           this.validNetwork = state.validNetwork;
           this.isMobile = this.isMobileView();
+          this.isFromModal = state.showAddressForm;
           this.showInstalledModal();
         }
       }
@@ -232,5 +234,14 @@ export class BuyGzrComponent implements OnInit {
       (<any>window).Intercom('trackEvent', event, metadata);
     }
     return true;
+  }
+
+  onCopy() {
+    const aux = document.createElement('input');
+    aux.setAttribute('value', this.contractAddress);
+    document.body.appendChild(aux);
+    aux.select();
+    document.execCommand('copy');
+    document.body.removeChild(aux);
   }
 }

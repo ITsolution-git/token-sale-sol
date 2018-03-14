@@ -21,6 +21,11 @@
         text-align: left;
         -webkit-font-smoothing: antialiased;
     }
+
+    a.dropdown-item:hover {
+        background: none;
+    }
+
     .custom-button {
         cursor: pointer;
         padding: 0 8px;

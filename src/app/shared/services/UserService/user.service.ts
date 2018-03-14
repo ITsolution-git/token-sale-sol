@@ -43,8 +43,8 @@ export class UserService {
   }
 
   saveTransaction(userId, txData) {
-   return this.http.put(
-     this.apiRoutingService.saveTxUrl(userId),
+   return this.http.patch(
+     this.apiRoutingService.getUserUrlFromID(userId),
      txData,
      false,
      null
