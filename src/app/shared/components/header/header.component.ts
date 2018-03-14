@@ -13,7 +13,6 @@ import { ApplicationState } from '../../../store/application-state';
 import { UserState } from '../../../store/store-data';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
-import { stat } from 'fs';
 import { User } from '../../models/user.model';
 import { environment } from '../../../../environments/environment.prod';
 import { UserLocalstorageRepository } from '../../services/UserService/user.localstorage.repository.service';
