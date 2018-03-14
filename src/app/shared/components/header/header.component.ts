@@ -139,6 +139,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
+    this.eventTrack('asked_change_user', null);
     this.isAuthenticated = false;
     this.authService.logout();
   }
