@@ -174,7 +174,7 @@ export class SaveAccountComponent implements OnInit {
                 gzr_balance: currentUser.gzr.amount || 0,
                 items_owned: currentUser.owns.length,
                 nickname: nick,
-                'wallet-id': id,
+                'wallet-id': this.walletAddress,
                 opened_treasure: opened_treasure,
                 purchased_gzr: purchased_gzr,
                 total_gzr_purchased: total_gzr_purchased,

@@ -296,7 +296,7 @@ export class HeaderComponent implements OnInit {
           gzr_balance: user_.gzr.amount || 0,
           items_owned: user_.owns.length,
           nickname: nick,
-          'wallet-id': id,
+          'wallet-id': this.walletAddress,
           opened_treasure: opened_treasure,
           purchased_gzr: purchased_gzr,
           total_gzr_purchased: total_gzr_purchased,
