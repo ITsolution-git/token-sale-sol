@@ -163,6 +163,11 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/buy-gzr']);
   }
 
+  navgiateToFaq() {
+    this.eventTrack('asked_change_use', null);
+    this.router.navigate(['/faq']);
+  }
+
   navigateToTokenSection() {
     this.eventTrack('viewed-what-is-gzr-page', null);
     this.router.navigate([''], {fragment: 'whatsgizer'});
