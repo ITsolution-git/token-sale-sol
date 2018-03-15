@@ -11,6 +11,7 @@ import { User } from '../../models/user.model';
 import { Store } from '@ngrx/store';
 import { ApplicationState } from '../../../store/application-state';
 import { LocalStorageService } from 'ngx-webstorage';
+import { Router } from '@angular/router';
 
 declare var Math;
 
@@ -37,6 +38,7 @@ export class OpeningTreasureModalComponent implements OnInit {
     private localStorage: LocalStorageService,
     private userService: UserService,
     private store: Store<ApplicationState>,
+    private router: Router
   ) {
     this.item = {
       resources: {
@@ -206,4 +208,8 @@ export class OpeningTreasureModalComponent implements OnInit {
     return true;
   }
 
+  navigateToItemDetails() {
+    this.closeChest();
+    this.router.navigate(['/item-detail', this.item.id]);
+  }
 }

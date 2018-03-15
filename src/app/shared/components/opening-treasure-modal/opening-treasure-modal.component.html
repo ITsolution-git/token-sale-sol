@@ -10,7 +10,7 @@
           <div class="chest__lid-closed"></div>
           <div class="chest__lid-opened"></div>
           <div class="chest__light"></div>
-          <button type="button" class="chest__card">
+          <button type="button" class="chest__card" (click)="navigateToItemDetails()">
               <div class="chest__card-body">
                   <img [src]='item.resources.icons[0]' class="chest__card-img" alt="item">
                   <div class="chest__card-text">
